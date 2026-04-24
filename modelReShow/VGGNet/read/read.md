@@ -23,3 +23,14 @@ cheat:
 80epoch:
 ![alt text](image-13.png)
 ![alt text](image-14.png)
+
+
+
+AdaptiveAvgPool2d:
+30epoch:
+![alt text](image-15.png)
+![alt text](image-16.png)
+80epoch:
+![alt text](image-17.png)
+![alt text](image-18.png)
+![alt text](image-19.png)
