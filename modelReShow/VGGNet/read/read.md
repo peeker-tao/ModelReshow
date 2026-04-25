@@ -34,3 +34,12 @@ AdaptiveAvgPool2d:
 ![alt text](image-17.png)
 ![alt text](image-18.png)
 ![alt text](image-19.png)
+
+
+mean:
+30epoch:
+![alt text](image-22.png)
+![alt text](image-21.png)
+80epoch:
+![alt text](image-20.png)
+![alt text](image-23.png)
