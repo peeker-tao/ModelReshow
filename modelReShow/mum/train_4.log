@@ -1,0 +1,406 @@
+W0730 15:40:58.418000 2727149 site-packages/torch/distributed/run.py:792] 
+W0730 15:40:58.418000 2727149 site-packages/torch/distributed/run.py:792] *****************************************
+W0730 15:40:58.418000 2727149 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0730 15:40:58.418000 2727149 site-packages/torch/distributed/run.py:792] *****************************************
+[BlendedMVSDataset] 113 个场景 × 4, S∈[3,5], 452 个样本
+batch shape: torch.Size([4, 5, 3, 224, 224]) (B=4, S=5)
+参数数量: 21.3M
+[BlendedMVSDataset] 113 个场景 × 4, S∈[3,5], 452 个样本
+[BlendedMVSDataset] 113 个场景 × 4, S∈[3,5], 452 个样本
+[BlendedMVSDataset] 113 个场景 × 4, S∈[3,5], 452 个样本
+✅ Forward pass 成功! loss=1.396904, pred=torch.Size([20, 196, 768]), mask_rate=0.750
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: 3222703726 (3222703726-huazhong-university-of-science-and-technology) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: creating run
+wandb: Tracking run with wandb version 0.19.9
+wandb: Run data is saved locally in /data/data_taohy/modelReShow/mum/wandb/run-20260730_154105-3lxp7m0h
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run mum_vit_small_S3-5_steps15k
+wandb: ⭐️ View project at https://wandb.ai/3222703726-huazhong-university-of-science-and-technology/MuM
+wandb: 🚀 View run at https://wandb.ai/3222703726-huazhong-university-of-science-and-technology/MuM/runs/3lxp7m0h
+[BlendedMVSDataset] 113 个场景 × 4, S∈[3,5], 452 个样本
+设备: cuda:0, GPU数: 4, 场景数: 113, 样本数: 452, S∈[3,5], AMP=bf16
+有效 batch: 32, 总优化步数: 15000, warmup: 1000
+模型: vit_small, norm_layer: layernormbf16
+[step     50/15000] loss=0.9557 | lr=5.10e-04 | 24.1s
+[step    100/15000] loss=0.8809 | lr=1.01e-03 | 22.1s
+[step    150/15000] loss=0.8314 | lr=1.51e-03 | 21.1s
+[step    200/15000] loss=0.8321 | lr=2.01e-03 | 22.0s
+[step    250/15000] loss=0.8207 | lr=2.51e-03 | 21.6s
+[step    300/15000] loss=0.7409 | lr=3.01e-03 | 22.4s
+[step    350/15000] loss=0.7275 | lr=3.51e-03 | 21.8s
+[step    400/15000] loss=0.7026 | lr=4.01e-03 | 23.0s
+[step    450/15000] loss=0.6971 | lr=4.51e-03 | 22.9s
+[step    500/15000] loss=0.6878 | lr=5.01e-03 | 22.3s
+[step    550/15000] loss=0.7071 | lr=5.51e-03 | 22.8s
+[step    600/15000] loss=0.6595 | lr=6.01e-03 | 21.7s
+[step    650/15000] loss=0.6843 | lr=6.51e-03 | 22.7s
+[step    700/15000] loss=0.6536 | lr=7.01e-03 | 21.9s
+[step    750/15000] loss=0.6557 | lr=7.51e-03 | 22.7s
+[step    800/15000] loss=0.6534 | lr=8.01e-03 | 22.6s
+[step    850/15000] loss=0.6434 | lr=8.51e-03 | 21.9s
+[step    900/15000] loss=0.6415 | lr=9.01e-03 | 22.6s
+[step    950/15000] loss=0.6671 | lr=9.51e-03 | 22.2s
+[step   1000/15000] loss=0.6308 | lr=1.00e-02 | 22.9s
+[step   1050/15000] loss=0.6309 | lr=1.00e-02 | 22.1s
+[step   1100/15000] loss=0.6291 | lr=1.00e-02 | 22.3s
+[step   1150/15000] loss=0.6030 | lr=1.00e-02 | 23.0s
+[step   1200/15000] loss=0.6397 | lr=9.99e-03 | 22.2s
+[step   1250/15000] loss=0.5909 | lr=9.99e-03 | 22.9s
+[step   1300/15000] loss=0.6264 | lr=9.99e-03 | 22.1s
+[step   1350/15000] loss=0.6212 | lr=9.98e-03 | 22.7s
+[step   1400/15000] loss=0.5936 | lr=9.98e-03 | 22.1s
+[step   1450/15000] loss=0.6046 | lr=9.97e-03 | 22.4s
+[step   1500/15000] loss=0.6058 | lr=9.97e-03 | 22.7s
+[step   1550/15000] loss=0.5752 | lr=9.96e-03 | 22.2s
+[step   1600/15000] loss=0.5915 | lr=9.95e-03 | 22.7s
+[step   1650/15000] loss=0.5906 | lr=9.95e-03 | 22.1s
+[step   1700/15000] loss=0.5758 | lr=9.94e-03 | 22.5s
+[step   1750/15000] loss=0.5823 | lr=9.93e-03 | 21.8s
+[step   1800/15000] loss=0.5877 | lr=9.92e-03 | 23.2s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-154103_step1800.pth
+wandb: WARNING Saving files without folders. If you want to preserve subdirectories pass base_path to wandb.save, i.e. wandb.save("/mnt/folder/file.h5", base_path="/mnt")
+[step   1850/15000] loss=0.5952 | lr=9.91e-03 | 22.7s
+[step   1900/15000] loss=0.5674 | lr=9.90e-03 | 22.4s
+[step   1950/15000] loss=0.5869 | lr=9.89e-03 | 22.8s
+[step   2000/15000] loss=0.5731 | lr=9.87e-03 | 22.3s
+[step   2050/15000] loss=0.5835 | lr=9.86e-03 | 22.9s
+[step   2100/15000] loss=0.5798 | lr=9.85e-03 | 22.1s
+[step   2150/15000] loss=0.5746 | lr=9.83e-03 | 22.7s
+[step   2200/15000] loss=0.5707 | lr=9.82e-03 | 22.9s
+[step   2250/15000] loss=0.5654 | lr=9.80e-03 | 22.2s
+[step   2300/15000] loss=0.5754 | lr=9.79e-03 | 22.8s
+[step   2350/15000] loss=0.5751 | lr=9.77e-03 | 21.9s
+[step   2400/15000] loss=0.5747 | lr=9.76e-03 | 22.9s
+[step   2450/15000] loss=0.5503 | lr=9.74e-03 | 22.1s
+[step   2500/15000] loss=0.5821 | lr=9.72e-03 | 22.5s
+[step   2550/15000] loss=0.5483 | lr=9.70e-03 | 22.8s
+[step   2600/15000] loss=0.5641 | lr=9.68e-03 | 22.4s
+[step   2650/15000] loss=0.5444 | lr=9.66e-03 | 22.5s
+[step   2700/15000] loss=0.5689 | lr=9.64e-03 | 22.1s
+[step   2750/15000] loss=0.5437 | lr=9.62e-03 | 22.7s
+[step   2800/15000] loss=0.5627 | lr=9.60e-03 | 22.2s
+[step   2850/15000] loss=0.5618 | lr=9.58e-03 | 22.6s
+[step   2900/15000] loss=0.5560 | lr=9.55e-03 | 22.6s
+[step   2950/15000] loss=0.5430 | lr=9.53e-03 | 22.7s
+[step   3000/15000] loss=0.5490 | lr=9.50e-03 | 23.3s
+[step   3050/15000] loss=0.5498 | lr=9.48e-03 | 21.8s
+[step   3100/15000] loss=0.5760 | lr=9.46e-03 | 22.8s
+[step   3150/15000] loss=0.5354 | lr=9.43e-03 | 21.8s
+[step   3200/15000] loss=0.5444 | lr=9.40e-03 | 22.7s
+[step   3250/15000] loss=0.5390 | lr=9.38e-03 | 22.8s
+[step   3300/15000] loss=0.5316 | lr=9.35e-03 | 22.3s
+[step   3350/15000] loss=0.5520 | lr=9.32e-03 | 23.1s
+[step   3400/15000] loss=0.5292 | lr=9.29e-03 | 21.9s
+[step   3450/15000] loss=0.5505 | lr=9.26e-03 | 22.9s
+[step   3500/15000] loss=0.5572 | lr=9.23e-03 | 22.3s
+[step   3550/15000] loss=0.5655 | lr=9.20e-03 | 22.6s
+[step   3600/15000] loss=0.5257 | lr=9.17e-03 | 22.8s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-154103_step3600.pth
+[step   3650/15000] loss=0.5449 | lr=9.14e-03 | 22.3s
+[step   3700/15000] loss=0.5360 | lr=9.11e-03 | 22.8s
+[step   3750/15000] loss=0.5434 | lr=9.08e-03 | 22.3s
+[step   3800/15000] loss=0.5415 | lr=9.05e-03 | 22.6s
+[step   3850/15000] loss=0.5612 | lr=9.01e-03 | 21.8s
+[step   3900/15000] loss=0.5563 | lr=8.98e-03 | 22.9s
+[step   3950/15000] loss=0.5166 | lr=8.94e-03 | 22.6s
+[step   4000/15000] loss=0.5258 | lr=8.91e-03 | 22.3s
+[step   4050/15000] loss=0.5520 | lr=8.87e-03 | 22.7s
+[step   4100/15000] loss=0.5335 | lr=8.84e-03 | 22.4s
+[step   4150/15000] loss=0.5699 | lr=8.80e-03 | 22.7s
+[step   4200/15000] loss=0.5475 | lr=8.77e-03 | 21.8s
+[step   4250/15000] loss=0.5141 | lr=8.73e-03 | 22.7s
+[step   4300/15000] loss=0.5452 | lr=8.69e-03 | 22.6s
+[step   4350/15000] loss=0.5613 | lr=8.65e-03 | 21.9s
+[step   4400/15000] loss=0.5457 | lr=8.61e-03 | 22.6s
+[step   4450/15000] loss=0.5050 | lr=8.57e-03 | 21.7s
+[step   4500/15000] loss=0.5447 | lr=8.54e-03 | 22.6s
+[step   4550/15000] loss=0.5434 | lr=8.50e-03 | 21.9s
+[step   4600/15000] loss=0.5248 | lr=8.46e-03 | 23.2s
+[step   4650/15000] loss=0.5501 | lr=8.41e-03 | 22.5s
+[step   4700/15000] loss=0.5260 | lr=8.37e-03 | 22.0s
+[step   4750/15000] loss=0.5239 | lr=8.33e-03 | 22.8s
+[step   4800/15000] loss=0.5351 | lr=8.29e-03 | 22.4s
+[step   4850/15000] loss=0.5453 | lr=8.25e-03 | 22.8s
+[step   4900/15000] loss=0.5357 | lr=8.20e-03 | 21.7s
+[step   4950/15000] loss=0.5192 | lr=8.16e-03 | 22.6s
+[step   5000/15000] loss=0.5377 | lr=8.12e-03 | 22.5s
+[step   5050/15000] loss=0.5139 | lr=8.07e-03 | 21.9s
+[step   5100/15000] loss=0.5427 | lr=8.03e-03 | 22.6s
+[step   5150/15000] loss=0.5566 | lr=7.98e-03 | 21.9s
+[step   5200/15000] loss=0.5276 | lr=7.94e-03 | 22.7s
+[step   5250/15000] loss=0.5501 | lr=7.89e-03 | 22.0s
+[step   5300/15000] loss=0.5391 | lr=7.85e-03 | 22.8s
+[step   5350/15000] loss=0.5400 | lr=7.80e-03 | 22.5s
+[step   5400/15000] loss=0.5249 | lr=7.75e-03 | 22.2s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-154103_step5400.pth
+[step   5450/15000] loss=0.5225 | lr=7.71e-03 | 23.0s
+[step   5500/15000] loss=0.5345 | lr=7.66e-03 | 22.3s
+[step   5550/15000] loss=0.5373 | lr=7.61e-03 | 22.9s
+[step   5600/15000] loss=0.5352 | lr=7.56e-03 | 22.1s
+[step   5650/15000] loss=0.5214 | lr=7.52e-03 | 22.8s
+[step   5700/15000] loss=0.5245 | lr=7.47e-03 | 22.8s
+[step   5750/15000] loss=0.5399 | lr=7.42e-03 | 22.6s
+[step   5800/15000] loss=0.5246 | lr=7.37e-03 | 22.7s
+[step   5850/15000] loss=0.5371 | lr=7.32e-03 | 22.1s
+[step   5900/15000] loss=0.4993 | lr=7.27e-03 | 23.0s
+[step   5950/15000] loss=0.5443 | lr=7.22e-03 | 22.0s
+[step   6000/15000] loss=0.5292 | lr=7.17e-03 | 23.2s
+[step   6050/15000] loss=0.5093 | lr=7.12e-03 | 22.9s
+[step   6100/15000] loss=0.5498 | lr=7.07e-03 | 22.2s
+[step   6150/15000] loss=0.5228 | lr=7.02e-03 | 22.7s
+[step   6200/15000] loss=0.5260 | lr=6.97e-03 | 21.8s
+[step   6250/15000] loss=0.4983 | lr=6.91e-03 | 22.6s
+[step   6300/15000] loss=0.5102 | lr=6.86e-03 | 21.6s
+[step   6350/15000] loss=0.4995 | lr=6.81e-03 | 22.9s
+[step   6400/15000] loss=0.5072 | lr=6.76e-03 | 22.6s
+[step   6450/15000] loss=0.5017 | lr=6.70e-03 | 21.8s
+[step   6500/15000] loss=0.5392 | lr=6.65e-03 | 22.8s
+[step   6550/15000] loss=0.5223 | lr=6.60e-03 | 22.1s
+[step   6600/15000] loss=0.5161 | lr=6.55e-03 | 22.4s
+[step   6650/15000] loss=0.5365 | lr=6.49e-03 | 22.0s
+[step   6700/15000] loss=0.5311 | lr=6.44e-03 | 23.3s
+[step   6750/15000] loss=0.5125 | lr=6.38e-03 | 22.7s
+[step   6800/15000] loss=0.5275 | lr=6.33e-03 | 22.0s
+[step   6850/15000] loss=0.5111 | lr=6.28e-03 | 22.4s
+[step   6900/15000] loss=0.5199 | lr=6.22e-03 | 22.0s
+[step   6950/15000] loss=0.5399 | lr=6.17e-03 | 23.1s
+[step   7000/15000] loss=0.5431 | lr=6.11e-03 | 22.4s
+[step   7050/15000] loss=0.5204 | lr=6.06e-03 | 22.8s
+[step   7100/15000] loss=0.5186 | lr=6.00e-03 | 22.5s
+[step   7150/15000] loss=0.5116 | lr=5.95e-03 | 22.5s
+[step   7200/15000] loss=0.5290 | lr=5.89e-03 | 22.9s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-154103_step7200.pth
+[step   7250/15000] loss=0.5067 | lr=5.84e-03 | 22.5s
+[step   7300/15000] loss=0.5069 | lr=5.78e-03 | 23.1s
+[step   7350/15000] loss=0.5138 | lr=5.73e-03 | 22.1s
+[step   7400/15000] loss=0.4640 | lr=5.67e-03 | 22.8s
+[step   7450/15000] loss=0.5079 | lr=5.62e-03 | 22.6s
+[step   7500/15000] loss=0.4755 | lr=5.56e-03 | 22.0s
+[step   7550/15000] loss=0.4872 | lr=5.50e-03 | 23.5s
+[step   7600/15000] loss=0.5316 | lr=5.45e-03 | 21.8s
+[step   7650/15000] loss=0.5195 | lr=5.39e-03 | 22.9s
+[step   7700/15000] loss=0.5100 | lr=5.34e-03 | 21.9s
+[step   7750/15000] loss=0.5152 | lr=5.28e-03 | 23.1s
+[step   7800/15000] loss=0.5145 | lr=5.22e-03 | 22.7s
+[step   7850/15000] loss=0.5313 | lr=5.17e-03 | 22.0s
+[step   7900/15000] loss=0.5221 | lr=5.11e-03 | 22.8s
+[step   7950/15000] loss=0.5197 | lr=5.06e-03 | 21.9s
+[step   8000/15000] loss=0.5015 | lr=5.00e-03 | 22.8s
+[step   8050/15000] loss=0.5368 | lr=4.94e-03 | 21.9s
+[step   8100/15000] loss=0.4772 | lr=4.89e-03 | 22.4s
+[step   8150/15000] loss=0.4913 | lr=4.83e-03 | 22.7s
+[step   8200/15000] loss=0.5158 | lr=4.78e-03 | 22.2s
+[step   8250/15000] loss=0.5152 | lr=4.72e-03 | 22.8s
+[step   8300/15000] loss=0.5134 | lr=4.66e-03 | 22.0s
+[step   8350/15000] loss=0.4956 | lr=4.61e-03 | 22.7s
+[step   8400/15000] loss=0.5014 | lr=4.55e-03 | 21.9s
+[step   8450/15000] loss=0.5090 | lr=4.50e-03 | 22.7s
+[step   8500/15000] loss=0.5097 | lr=4.44e-03 | 22.6s
+[step   8550/15000] loss=0.5170 | lr=4.38e-03 | 22.1s
+[step   8600/15000] loss=0.5227 | lr=4.33e-03 | 22.6s
+[step   8650/15000] loss=0.5177 | lr=4.27e-03 | 22.2s
+[step   8700/15000] loss=0.5077 | lr=4.22e-03 | 22.5s
+[step   8750/15000] loss=0.5008 | lr=4.16e-03 | 22.0s
+[step   8800/15000] loss=0.5212 | lr=4.11e-03 | 22.7s
+[step   8850/15000] loss=0.5097 | lr=4.05e-03 | 23.2s
+[step   8900/15000] loss=0.5306 | lr=4.00e-03 | 22.0s
+[step   8950/15000] loss=0.5212 | lr=3.94e-03 | 22.7s
+[step   9000/15000] loss=0.5120 | lr=3.89e-03 | 21.9s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-154103_step9000.pth
+[step   9050/15000] loss=0.5160 | lr=3.83e-03 | 23.4s
+[step   9100/15000] loss=0.5268 | lr=3.78e-03 | 22.2s
+[step   9150/15000] loss=0.5191 | lr=3.72e-03 | 23.0s
+[step   9200/15000] loss=0.5051 | lr=3.67e-03 | 22.8s
+[step   9250/15000] loss=0.4969 | lr=3.62e-03 | 21.9s
+[step   9300/15000] loss=0.5020 | lr=3.56e-03 | 22.8s
+[step   9350/15000] loss=0.4863 | lr=3.51e-03 | 22.0s
+[step   9400/15000] loss=0.5057 | lr=3.45e-03 | 23.5s
+[step   9450/15000] loss=0.4921 | lr=3.40e-03 | 21.8s
+[step   9500/15000] loss=0.4972 | lr=3.35e-03 | 22.5s
+[step   9550/15000] loss=0.5031 | lr=3.30e-03 | 22.6s
+[step   9600/15000] loss=0.5041 | lr=3.24e-03 | 22.0s
+[step   9650/15000] loss=0.5155 | lr=3.19e-03 | 22.4s
+[step   9700/15000] loss=0.4925 | lr=3.14e-03 | 22.0s
+[step   9750/15000] loss=0.5131 | lr=3.09e-03 | 22.4s
+[step   9800/15000] loss=0.4902 | lr=3.03e-03 | 21.9s
+[step   9850/15000] loss=0.5012 | lr=2.98e-03 | 23.4s
+[step   9900/15000] loss=0.5144 | lr=2.93e-03 | 22.9s
+[step   9950/15000] loss=0.4856 | lr=2.88e-03 | 21.8s
+[step  10000/15000] loss=0.4867 | lr=2.83e-03 | 22.7s
+[step  10050/15000] loss=0.5182 | lr=2.78e-03 | 22.0s
+[step  10100/15000] loss=0.4573 | lr=2.73e-03 | 22.5s
+[step  10150/15000] loss=0.4731 | lr=2.68e-03 | 21.9s
+[step  10200/15000] loss=0.5013 | lr=2.63e-03 | 23.0s
+[step  10250/15000] loss=0.4945 | lr=2.58e-03 | 22.6s
+[step  10300/15000] loss=0.5061 | lr=2.53e-03 | 22.0s
+[step  10350/15000] loss=0.5047 | lr=2.48e-03 | 23.0s
+[step  10400/15000] loss=0.4690 | lr=2.44e-03 | 22.1s
+[step  10450/15000] loss=0.4970 | lr=2.39e-03 | 23.1s
+[step  10500/15000] loss=0.4916 | lr=2.34e-03 | 21.9s
+[step  10550/15000] loss=0.5090 | lr=2.29e-03 | 22.8s
+[step  10600/15000] loss=0.4794 | lr=2.25e-03 | 22.4s
+[step  10650/15000] loss=0.4828 | lr=2.20e-03 | 21.7s
+[step  10700/15000] loss=0.4930 | lr=2.15e-03 | 22.6s
+[step  10750/15000] loss=0.4960 | lr=2.11e-03 | 21.9s
+[step  10800/15000] loss=0.5056 | lr=2.06e-03 | 22.8s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-154103_step10800.pth
+[step  10850/15000] loss=0.5013 | lr=2.02e-03 | 22.4s
+[step  10900/15000] loss=0.4962 | lr=1.97e-03 | 23.0s
+[step  10950/15000] loss=0.4828 | lr=1.93e-03 | 22.8s
+[step  11000/15000] loss=0.4685 | lr=1.88e-03 | 22.2s
+[step  11050/15000] loss=0.4815 | lr=1.84e-03 | 22.7s
+[step  11100/15000] loss=0.4984 | lr=1.80e-03 | 22.0s
+[step  11150/15000] loss=0.5037 | lr=1.75e-03 | 22.9s
+[step  11200/15000] loss=0.4838 | lr=1.71e-03 | 22.0s
+[step  11250/15000] loss=0.4923 | lr=1.67e-03 | 22.5s
+[step  11300/15000] loss=0.5070 | lr=1.63e-03 | 22.6s
+[step  11350/15000] loss=0.4703 | lr=1.59e-03 | 22.0s
+[step  11400/15000] loss=0.5040 | lr=1.54e-03 | 22.5s
+[step  11450/15000] loss=0.4734 | lr=1.50e-03 | 22.0s
+[step  11500/15000] loss=0.4766 | lr=1.46e-03 | 22.6s
+[step  11550/15000] loss=0.4826 | lr=1.43e-03 | 21.8s
+[step  11600/15000] loss=0.4923 | lr=1.39e-03 | 23.2s
+[step  11650/15000] loss=0.5004 | lr=1.35e-03 | 22.3s
+[step  11700/15000] loss=0.4813 | lr=1.31e-03 | 21.9s
+[step  11750/15000] loss=0.4591 | lr=1.27e-03 | 22.7s
+[step  11800/15000] loss=0.4775 | lr=1.23e-03 | 21.9s
+[step  11850/15000] loss=0.4831 | lr=1.20e-03 | 23.0s
+[step  11900/15000] loss=0.4755 | lr=1.16e-03 | 22.0s
+[step  11950/15000] loss=0.5023 | lr=1.13e-03 | 23.0s
+[step  12000/15000] loss=0.4836 | lr=1.09e-03 | 22.5s
+[step  12050/15000] loss=0.4956 | lr=1.06e-03 | 22.1s
+[step  12100/15000] loss=0.4771 | lr=1.02e-03 | 22.9s
+[step  12150/15000] loss=0.5036 | lr=9.88e-04 | 22.1s
+[step  12200/15000] loss=0.4894 | lr=9.55e-04 | 23.2s
+[step  12250/15000] loss=0.4882 | lr=9.22e-04 | 21.9s
+[step  12300/15000] loss=0.4743 | lr=8.90e-04 | 22.6s
+[step  12350/15000] loss=0.4503 | lr=8.58e-04 | 22.9s
+[step  12400/15000] loss=0.4790 | lr=8.27e-04 | 22.1s
+[step  12450/15000] loss=0.4929 | lr=7.96e-04 | 22.4s
+[step  12500/15000] loss=0.4818 | lr=7.66e-04 | 22.2s
+[step  12550/15000] loss=0.4776 | lr=7.37e-04 | 22.7s
+[step  12600/15000] loss=0.4493 | lr=7.08e-04 | 21.9s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-154103_step12600.pth
+[step  12650/15000] loss=0.4978 | lr=6.79e-04 | 23.4s
+[step  12700/15000] loss=0.4855 | lr=6.51e-04 | 22.8s
+[step  12750/15000] loss=0.5025 | lr=6.24e-04 | 22.7s
+[step  12800/15000] loss=0.4731 | lr=5.97e-04 | 22.9s
+[step  12850/15000] loss=0.4555 | lr=5.71e-04 | 21.9s
+[step  12900/15000] loss=0.4843 | lr=5.45e-04 | 22.9s
+[step  12950/15000] loss=0.4787 | lr=5.20e-04 | 21.9s
+[step  13000/15000] loss=0.4802 | lr=4.95e-04 | 22.7s
+[step  13050/15000] loss=0.4960 | lr=4.71e-04 | 22.8s
+[step  13100/15000] loss=0.4897 | lr=4.48e-04 | 22.1s
+[step  13150/15000] loss=0.4823 | lr=4.25e-04 | 22.6s
+[step  13200/15000] loss=0.4783 | lr=4.02e-04 | 22.3s
+[step  13250/15000] loss=0.4646 | lr=3.81e-04 | 22.8s
+[step  13300/15000] loss=0.4776 | lr=3.59e-04 | 21.9s
+[step  13350/15000] loss=0.4826 | lr=3.39e-04 | 22.9s
+[step  13400/15000] loss=0.4822 | lr=3.19e-04 | 23.0s
+[step  13450/15000] loss=0.4679 | lr=2.99e-04 | 22.0s
+[step  13500/15000] loss=0.4698 | lr=2.81e-04 | 22.8s
+[step  13550/15000] loss=0.4755 | lr=2.62e-04 | 22.1s
+[step  13600/15000] loss=0.4680 | lr=2.45e-04 | 22.9s
+[step  13650/15000] loss=0.4589 | lr=2.28e-04 | 21.8s
+[step  13700/15000] loss=0.4872 | lr=2.11e-04 | 22.9s
+[step  13750/15000] loss=0.4846 | lr=1.95e-04 | 22.7s
+[step  13800/15000] loss=0.4707 | lr=1.80e-04 | 22.2s
+[step  13850/15000] loss=0.4834 | lr=1.66e-04 | 23.4s
+[step  13900/15000] loss=0.4630 | lr=1.52e-04 | 21.8s
+[step  13950/15000] loss=0.4390 | lr=1.38e-04 | 22.5s
+[step  14000/15000] loss=0.4482 | lr=1.25e-04 | 21.4s
+[step  14050/15000] loss=0.4551 | lr=1.13e-04 | 22.6s
+[step  14100/15000] loss=0.4807 | lr=1.02e-04 | 22.6s
+[step  14150/15000] loss=0.4699 | lr=9.07e-05 | 22.1s
+[step  14200/15000] loss=0.4670 | lr=8.04e-05 | 22.9s
+[step  14250/15000] loss=0.4879 | lr=7.06e-05 | 22.3s
+[step  14300/15000] loss=0.4685 | lr=6.16e-05 | 22.6s
+[step  14350/15000] loss=0.4701 | lr=5.31e-05 | 22.5s
+[step  14400/15000] loss=0.4500 | lr=4.53e-05 | 22.7s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-154103_step14400.pth
+[step  14450/15000] loss=0.4730 | lr=3.80e-05 | 23.3s
+[step  14500/15000] loss=0.4669 | lr=3.14e-05 | 22.7s
+[step  14550/15000] loss=0.4887 | lr=2.55e-05 | 22.9s
+[step  14600/15000] loss=0.4827 | lr=2.01e-05 | 22.0s
+[step  14650/15000] loss=0.4796 | lr=1.54e-05 | 23.0s
+[step  14700/15000] loss=0.4911 | lr=1.13e-05 | 21.8s
+[step  14750/15000] loss=0.4686 | lr=7.87e-06 | 22.9s
+[step  14800/15000] loss=0.4600 | lr=5.03e-06 | 23.1s
+[step  14850/15000] loss=0.4715 | lr=2.83e-06 | 22.0s
+[step  14900/15000] loss=0.4691 | lr=1.26e-06 | 22.8s
+[step  14950/15000] loss=0.4676 | lr=3.15e-07 | 22.5s
+[step  15000/15000] loss=0.4800 | lr=0.00e+00 | 23.0s
+  💾 Final → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-154103_final_step15000.pth
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; updating run config
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading wandb-summary.json
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 5 more)
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth; uploading checkpoints/mum_0730-154103_step5400.pth (+ 4 more)
+wandb: uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step10800.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth; uploading checkpoints/mum_0730-154103_step5400.pth (+ 3 more)
+wandb: uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step9000.pth; uploading checkpoints/mum_0730-154103_step5400.pth; uploading checkpoints/mum_0730-154103_step3600.pth (+ 2 more)
+wandb: uploading checkpoints/mum_0730-154103_step7200.pth; uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step5400.pth; uploading checkpoints/mum_0730-154103_step3600.pth; uploading checkpoints/mum_0730-154103_step12600.pth (+ 1 more)
+wandb: uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step5400.pth; uploading checkpoints/mum_0730-154103_step3600.pth; uploading checkpoints/mum_0730-154103_step12600.pth; uploading checkpoints/mum_0730-154103_final_step15000.pth
+wandb: uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step5400.pth; uploading checkpoints/mum_0730-154103_step3600.pth; uploading checkpoints/mum_0730-154103_step12600.pth; uploading checkpoints/mum_0730-154103_final_step15000.pth (+ 1 more)
+wandb: uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_step5400.pth; uploading checkpoints/mum_0730-154103_final_step15000.pth
+wandb: uploading checkpoints/mum_0730-154103_step1800.pth; uploading checkpoints/mum_0730-154103_final_step15000.pth
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading data
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth; uploading data
+wandb: uploading checkpoints/mum_0730-154103_final_step15000.pth
+wandb: uploading data
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb: train/loss █▅▅▄▅▄▃▃▃▃▂▃▂▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁
+wandb:   train/lr ▃▄▅▆██████▇▇▇▇▆▆▆▆▆▆▅▅▅▅▅▄▄▃▃▃▂▂▂▂▁▁▁▁▁▁
+wandb: train/step ▁▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▇▇▇▇▇▇▇███
+wandb: 
+wandb: Run summary:
+wandb: train/loss 0.48003
+wandb:   train/lr 0
+wandb: train/step 15000
+wandb: 
+wandb: 🚀 View run mum_vit_small_S3-5_steps15k at: https://wandb.ai/3222703726-huazhong-university-of-science-and-technology/MuM/runs/3lxp7m0h
+wandb: ⭐️ View project at: https://wandb.ai/3222703726-huazhong-university-of-science-and-technology/MuM
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 9 other file(s)
+wandb: Find logs at: ./wandb/run-20260730_154105-3lxp7m0h/logs
+🎉 训练完成!

@@ -1,0 +1,244 @@
+W0730 10:40:16.921000 2471212 site-packages/torch/distributed/run.py:792] 
+W0730 10:40:16.921000 2471212 site-packages/torch/distributed/run.py:792] *****************************************
+W0730 10:40:16.921000 2471212 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0730 10:40:16.921000 2471212 site-packages/torch/distributed/run.py:792] *****************************************
+[BlendedMVSDataset] 113 个场景 × 4, S∈[3,5], 452 个样本
+batch shape: torch.Size([4, 5, 3, 224, 224]) (B=4, S=5)
+[BlendedMVSDataset] 113 个场景 × 4, S∈[3,5], 452 个样本
+[BlendedMVSDataset] 113 个场景 × 4, S∈[3,5], 452 个样本
+[BlendedMVSDataset] 113 个场景 × 4, S∈[3,5], 452 个样本
+参数数量: 111.7M
+✅ Forward pass 成功! loss=1.401407, pred=torch.Size([20, 196, 768]), mask_rate=0.750
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+wandb: W&B API key is configured. Use `wandb login --relogin` to force relogin
+wandb: creating run
+wandb: Tracking run with wandb version 0.19.9
+wandb: Run data is saved locally in /data/data_taohy/modelReShow/mum/wandb/run-20260730_104034-vniznuu8
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run mum_vit_base_S3-5_steps50k
+wandb: ⭐️ View project at https://wandb.ai/3222703726-huazhong-university-of-science-and-technology/MuM
+wandb: 🚀 View run at https://wandb.ai/3222703726-huazhong-university-of-science-and-technology/MuM/runs/vniznuu8
+[BlendedMVSDataset] 113 个场景 × 4, S∈[3,5], 452 个样本
+/data/xyjiang/anaconda3/envs/MuM/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:227: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+/data/xyjiang/anaconda3/envs/MuM/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:227: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+/data/xyjiang/anaconda3/envs/MuM/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:227: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+/data/xyjiang/anaconda3/envs/MuM/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:227: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+🔄 从 step 25200 恢复训练 (loss=0.5210)
+设备: cuda:0, GPU数: 4, 场景数: 113, 样本数: 452, S∈[3,5], AMP=bf16
+有效 batch: 32, 总优化步数: 50000, warmup: 1000
+模型: vit_base, norm_layer: layernormbf16
+[step  25250/50000] loss=0.5317 | lr=7.62e-05 | 49.2s
+[step  25300/50000] loss=0.5370 | lr=7.60e-05 | 50.9s
+[step  25350/50000] loss=0.5160 | lr=7.57e-05 | 51.6s
+[step  25400/50000] loss=0.5238 | lr=7.55e-05 | 51.4s
+[step  25450/50000] loss=0.5399 | lr=7.52e-05 | 51.8s
+[step  25500/50000] loss=0.5217 | lr=7.50e-05 | 52.5s
+[step  25550/50000] loss=0.5365 | lr=7.48e-05 | 52.4s
+[step  25600/50000] loss=0.5282 | lr=7.45e-05 | 53.5s
+[step  25650/50000] loss=0.5121 | lr=7.43e-05 | 52.4s
+[step  25700/50000] loss=0.5064 | lr=7.40e-05 | 51.5s
+[step  25750/50000] loss=0.5315 | lr=7.38e-05 | 53.3s
+[step  25800/50000] loss=0.5121 | lr=7.36e-05 | 51.7s
+[step  25850/50000] loss=0.5408 | lr=7.33e-05 | 52.5s
+[step  25900/50000] loss=0.5146 | lr=7.31e-05 | 51.9s
+[step  25950/50000] loss=0.5239 | lr=7.28e-05 | 53.0s
+[step  26000/50000] loss=0.5160 | lr=7.26e-05 | 52.1s
+[step  26050/50000] loss=0.5187 | lr=7.24e-05 | 53.5s
+[step  26100/50000] loss=0.5135 | lr=7.21e-05 | 52.6s
+[step  26150/50000] loss=0.5488 | lr=7.19e-05 | 51.7s
+[step  26200/50000] loss=0.5121 | lr=7.16e-05 | 53.0s
+[step  26250/50000] loss=0.5184 | lr=7.14e-05 | 51.4s
+[step  26300/50000] loss=0.5230 | lr=7.12e-05 | 52.5s
+[step  26350/50000] loss=0.5100 | lr=7.09e-05 | 52.5s
+[step  26400/50000] loss=0.5398 | lr=7.07e-05 | 52.2s
+[step  26450/50000] loss=0.5050 | lr=7.04e-05 | 52.7s
+[step  26500/50000] loss=0.5276 | lr=7.02e-05 | 51.2s
+[step  26550/50000] loss=0.5332 | lr=7.00e-05 | 52.9s
+[step  26600/50000] loss=0.5141 | lr=6.97e-05 | 52.0s
+[step  26650/50000] loss=0.5241 | lr=6.95e-05 | 52.2s
+[step  26700/50000] loss=0.5295 | lr=6.92e-05 | 52.0s
+[step  26750/50000] loss=0.4981 | lr=6.90e-05 | 51.7s
+[step  26800/50000] loss=0.5046 | lr=6.88e-05 | 53.6s
+[step  26850/50000] loss=0.5298 | lr=6.85e-05 | 51.5s
+[step  26900/50000] loss=0.5238 | lr=6.83e-05 | 52.2s
+[step  26950/50000] loss=0.5163 | lr=6.80e-05 | 52.1s
+[step  27000/50000] loss=0.5241 | lr=6.78e-05 | 52.8s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-104027_step27000.pth
+wandb: WARNING Saving files without folders. If you want to preserve subdirectories pass base_path to wandb.save, i.e. wandb.save("/mnt/folder/file.h5", base_path="/mnt")
+[step  27050/50000] loss=0.5202 | lr=6.76e-05 | 54.6s
+[step  27100/50000] loss=0.4874 | lr=6.73e-05 | 51.6s
+[step  27150/50000] loss=0.5075 | lr=6.71e-05 | 53.4s
+[step  27200/50000] loss=0.5118 | lr=6.68e-05 | 51.6s
+[step  27250/50000] loss=0.5293 | lr=6.66e-05 | 52.8s
+[step  27300/50000] loss=0.5169 | lr=6.64e-05 | 51.7s
+[step  27350/50000] loss=0.5049 | lr=6.61e-05 | 52.7s
+[step  27400/50000] loss=0.5075 | lr=6.59e-05 | 51.9s
+[step  27450/50000] loss=0.5001 | lr=6.56e-05 | 52.1s
+[step  27500/50000] loss=0.5068 | lr=6.54e-05 | 52.6s
+[step  27550/50000] loss=0.5157 | lr=6.52e-05 | 51.7s
+[step  27600/50000] loss=0.5321 | lr=6.49e-05 | 52.6s
+[step  27650/50000] loss=0.4989 | lr=6.47e-05 | 51.8s
+[step  27700/50000] loss=0.5029 | lr=6.45e-05 | 52.9s
+[step  27750/50000] loss=0.5001 | lr=6.42e-05 | 53.0s
+[step  27800/50000] loss=0.5166 | lr=6.40e-05 | 51.3s
+[step  27850/50000] loss=0.4959 | lr=6.37e-05 | 52.5s
+[step  27900/50000] loss=0.5229 | lr=6.35e-05 | 51.1s
+[step  27950/50000] loss=0.4775 | lr=6.33e-05 | 53.3s
+[step  28000/50000] loss=0.5395 | lr=6.30e-05 | 52.1s
+[step  28050/50000] loss=0.5060 | lr=6.28e-05 | 51.7s
+[step  28100/50000] loss=0.5144 | lr=6.26e-05 | 52.5s
+[step  28150/50000] loss=0.5080 | lr=6.23e-05 | 52.0s
+[step  28200/50000] loss=0.5159 | lr=6.21e-05 | 52.6s
+[step  28250/50000] loss=0.5119 | lr=6.18e-05 | 52.8s
+[step  28300/50000] loss=0.5350 | lr=6.16e-05 | 52.3s
+[step  28350/50000] loss=0.5100 | lr=6.14e-05 | 51.5s
+[step  28400/50000] loss=0.5121 | lr=6.11e-05 | 52.1s
+[step  28450/50000] loss=0.5024 | lr=6.09e-05 | 53.1s
+[step  28500/50000] loss=0.5105 | lr=6.07e-05 | 51.9s
+[step  28550/50000] loss=0.5248 | lr=6.04e-05 | 52.5s
+[step  28600/50000] loss=0.4986 | lr=6.02e-05 | 51.6s
+[step  28650/50000] loss=0.5204 | lr=6.00e-05 | 52.1s
+[step  28700/50000] loss=0.5251 | lr=5.97e-05 | 51.6s
+[step  28750/50000] loss=0.5432 | lr=5.95e-05 | 53.6s
+[step  28800/50000] loss=0.4846 | lr=5.92e-05 | 52.0s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-104027_step28800.pth
+[step  28850/50000] loss=0.5161 | lr=5.90e-05 | 53.4s
+[step  28900/50000] loss=0.4906 | lr=5.88e-05 | 52.6s
+[step  28950/50000] loss=0.5040 | lr=5.85e-05 | 51.4s
+[step  29000/50000] loss=0.5155 | lr=5.83e-05 | 52.6s
+[step  29050/50000] loss=0.5326 | lr=5.81e-05 | 51.5s
+[step  29100/50000] loss=0.5279 | lr=5.78e-05 | 52.6s
+[step  29150/50000] loss=0.4873 | lr=5.76e-05 | 52.2s
+[step  29200/50000] loss=0.5038 | lr=5.74e-05 | 51.9s
+[step  29250/50000] loss=0.5108 | lr=5.71e-05 | 52.2s
+[step  29300/50000] loss=0.5190 | lr=5.69e-05 | 51.1s
+[step  29350/50000] loss=0.5465 | lr=5.67e-05 | 52.6s
+[step  29400/50000] loss=0.5125 | lr=5.64e-05 | 51.6s
+[step  29450/50000] loss=0.4874 | lr=5.62e-05 | 53.2s
+[step  29500/50000] loss=0.5127 | lr=5.60e-05 | 52.0s
+[step  29550/50000] loss=0.5363 | lr=5.57e-05 | 51.9s
+[step  29600/50000] loss=0.5266 | lr=5.55e-05 | 52.3s
+[step  29650/50000] loss=0.4887 | lr=5.53e-05 | 51.8s
+[step  29700/50000] loss=0.5128 | lr=5.50e-05 | 52.9s
+[step  29750/50000] loss=0.5108 | lr=5.48e-05 | 51.3s
+[step  29800/50000] loss=0.5056 | lr=5.46e-05 | 52.3s
+[step  29850/50000] loss=0.5258 | lr=5.44e-05 | 52.1s
+[step  29900/50000] loss=0.5088 | lr=5.41e-05 | 51.6s
+[step  29950/50000] loss=0.4983 | lr=5.39e-05 | 52.5s
+[step  30000/50000] loss=0.5149 | lr=5.37e-05 | 51.0s
+[step  30050/50000] loss=0.5203 | lr=5.34e-05 | 52.5s
+[step  30100/50000] loss=0.5184 | lr=5.32e-05 | 51.9s
+[step  30150/50000] loss=0.5062 | lr=5.30e-05 | 52.5s
+[step  30200/50000] loss=0.5222 | lr=5.27e-05 | 52.5s
+[step  30250/50000] loss=0.4915 | lr=5.25e-05 | 51.5s
+[step  30300/50000] loss=0.5185 | lr=5.23e-05 | 52.5s
+[step  30350/50000] loss=0.5406 | lr=5.21e-05 | 51.7s
+[step  30400/50000] loss=0.5002 | lr=5.18e-05 | 52.9s
+[step  30450/50000] loss=0.5325 | lr=5.16e-05 | 51.6s
+[step  30500/50000] loss=0.5295 | lr=5.14e-05 | 52.8s
+[step  30550/50000] loss=0.5334 | lr=5.11e-05 | 52.5s
+[step  30600/50000] loss=0.4986 | lr=5.09e-05 | 51.7s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-104027_step30600.pth
+[step  30650/50000] loss=0.5032 | lr=5.07e-05 | 54.5s
+[step  30700/50000] loss=0.5097 | lr=5.05e-05 | 51.8s
+[step  30750/50000] loss=0.5273 | lr=5.02e-05 | 52.2s
+[step  30800/50000] loss=0.5163 | lr=5.00e-05 | 51.8s
+[step  30850/50000] loss=0.5123 | lr=4.98e-05 | 52.5s
+[step  30900/50000] loss=0.5240 | lr=4.95e-05 | 52.4s
+[step  30950/50000] loss=0.5330 | lr=4.93e-05 | 52.2s
+[step  31000/50000] loss=0.5174 | lr=4.91e-05 | 52.9s
+[step  31050/50000] loss=0.5261 | lr=4.89e-05 | 51.6s
+[step  31100/50000] loss=0.4790 | lr=4.86e-05 | 52.5s
+[step  31150/50000] loss=0.5275 | lr=4.84e-05 | 52.1s
+[step  31200/50000] loss=0.5142 | lr=4.82e-05 | 52.6s
+[step  31250/50000] loss=0.4957 | lr=4.80e-05 | 52.0s
+[step  31300/50000] loss=0.5478 | lr=4.77e-05 | 51.3s
+[step  31350/50000] loss=0.5127 | lr=4.75e-05 | 52.2s
+[step  31400/50000] loss=0.5269 | lr=4.73e-05 | 51.5s
+[step  31450/50000] loss=0.4843 | lr=4.71e-05 | 52.4s
+[step  31500/50000] loss=0.5060 | lr=4.69e-05 | 51.3s
+[step  31550/50000] loss=0.4891 | lr=4.66e-05 | 52.1s
+[step  31600/50000] loss=0.5038 | lr=4.64e-05 | 52.7s
+[step  31650/50000] loss=0.4923 | lr=4.62e-05 | 51.6s
+[step  31700/50000] loss=0.5341 | lr=4.60e-05 | 52.4s
+[step  31750/50000] loss=0.5158 | lr=4.57e-05 | 51.8s
+[step  31800/50000] loss=0.5150 | lr=4.55e-05 | 53.3s
+[step  31850/50000] loss=0.5234 | lr=4.53e-05 | 51.8s
+[step  31900/50000] loss=0.5188 | lr=4.51e-05 | 52.8s
+[step  31950/50000] loss=0.5148 | lr=4.49e-05 | 52.2s
+[step  32000/50000] loss=0.5128 | lr=4.46e-05 | 52.4s
+[step  32050/50000] loss=0.4947 | lr=4.44e-05 | 52.0s
+[step  32100/50000] loss=0.5168 | lr=4.42e-05 | 52.1s
+[step  32150/50000] loss=0.5143 | lr=4.40e-05 | 53.3s
+[step  32200/50000] loss=0.5439 | lr=4.38e-05 | 51.4s
+[step  32250/50000] loss=0.5111 | lr=4.35e-05 | 52.3s
+[step  32300/50000] loss=0.5111 | lr=4.33e-05 | 52.0s
+[step  32350/50000] loss=0.5016 | lr=4.31e-05 | 51.7s
+[step  32400/50000] loss=0.5319 | lr=4.29e-05 | 52.2s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-104027_step32400.pth
+[step  32450/50000] loss=0.5136 | lr=4.27e-05 | 52.9s
+[step  32500/50000] loss=0.5038 | lr=4.25e-05 | 53.2s
+[step  32550/50000] loss=0.5068 | lr=4.22e-05 | 51.5s
+[step  32600/50000] loss=0.4763 | lr=4.20e-05 | 52.6s
+[step  32650/50000] loss=0.5009 | lr=4.18e-05 | 52.5s
+[step  32700/50000] loss=0.4884 | lr=4.16e-05 | 51.9s
+[step  32750/50000] loss=0.4940 | lr=4.14e-05 | 52.5s
+[step  32800/50000] loss=0.5150 | lr=4.12e-05 | 51.5s
+[step  32850/50000] loss=0.5008 | lr=4.10e-05 | 52.5s
+[step  32900/50000] loss=0.5082 | lr=4.07e-05 | 51.9s
+[step  32950/50000] loss=0.5086 | lr=4.05e-05 | 52.3s
+[step  33000/50000] loss=0.5114 | lr=4.03e-05 | 52.6s
+[step  33050/50000] loss=0.5241 | lr=4.01e-05 | 51.3s
+[step  33100/50000] loss=0.5238 | lr=3.99e-05 | 52.5s
+[step  33150/50000] loss=0.5182 | lr=3.97e-05 | 51.6s
+[step  33200/50000] loss=0.4999 | lr=3.95e-05 | 52.5s
+[step  33250/50000] loss=0.5409 | lr=3.92e-05 | 51.3s
+[step  33300/50000] loss=0.4815 | lr=3.90e-05 | 52.4s
+[step  33350/50000] loss=0.4924 | lr=3.88e-05 | 53.0s
+[step  33400/50000] loss=0.5177 | lr=3.86e-05 | 51.2s
+[step  33450/50000] loss=0.5190 | lr=3.84e-05 | 52.2s
+[step  33500/50000] loss=0.5350 | lr=3.82e-05 | 51.8s
+[step  33550/50000] loss=0.4974 | lr=3.80e-05 | 52.3s
+[step  33600/50000] loss=0.5048 | lr=3.78e-05 | 51.6s
+[step  33650/50000] loss=0.5001 | lr=3.76e-05 | 52.2s
+[step  33700/50000] loss=0.5101 | lr=3.74e-05 | 52.6s
+[step  33750/50000] loss=0.5176 | lr=3.72e-05 | 51.6s
+[step  33800/50000] loss=0.5488 | lr=3.69e-05 | 52.2s
+[step  33850/50000] loss=0.5166 | lr=3.67e-05 | 51.6s
+[step  33900/50000] loss=0.5193 | lr=3.65e-05 | 52.1s
+[step  33950/50000] loss=0.4856 | lr=3.63e-05 | 52.0s
+[step  34000/50000] loss=0.5256 | lr=3.61e-05 | 51.9s
+[step  34050/50000] loss=0.5105 | lr=3.59e-05 | 52.3s
+[step  34100/50000] loss=0.5346 | lr=3.57e-05 | 51.5s
+[step  34150/50000] loss=0.5363 | lr=3.55e-05 | 52.6s
+[step  34200/50000] loss=0.5142 | lr=3.53e-05 | 51.8s
+  💾 Checkpoint → /data/data_taohy/modelReShow/mum/checkpoints/mum_0730-104027_step34200.pth
+[step  34250/50000] loss=0.5311 | lr=3.51e-05 | 53.9s
+[step  34300/50000] loss=0.5364 | lr=3.49e-05 | 52.0s
+[step  34350/50000] loss=0.5105 | lr=3.47e-05 | 52.7s
+[step  34400/50000] loss=0.5169 | lr=3.45e-05 | 52.1s
+[step  34450/50000] loss=0.5095 | lr=3.43e-05 | 51.5s
+[step  34500/50000] loss=0.5165 | lr=3.41e-05 | 52.7s
+[step  34550/50000] loss=0.4952 | lr=3.39e-05 | 51.5s 
+[step  34600/50000] loss=0.5267 | lr=3.37e-05 | 53.0s[step  34650/50000] loss=0.5091 | lr=3.35e-05 | 52.3s
+[step  34700/50000] loss=0.4897 | lr=3.33e-05 | 52.4s
+[step  34750/50000] loss=0.5209 | lr=3.31e-05 | 52.8s
+[step  34800/50000] loss=0.5081 | lr=3.29e-05 | 52.1s
+[step  34850/50000] loss=0.5257 | lr=3.27e-05 | 52.4s
+W0730 13:28:44.671000 2471212 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2471249 closing signal SIGTERM
+W0730 13:28:44.673000 2471212 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2471251 closing signal SIGTERM
+W0730 13:28:44.674000 2471212 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2471252 closing signal SIGTERM
+E0730 13:28:44.800000 2471212 site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: -15) local_rank: 1 (pid: 2471250) of binary: /data/xyjiang/anaconda3/envs/MuM/bin/python3.10
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-07-30_13:28:44
+  host      : 10013
+  rank      : 1 (local_rank: 1)
+  exitcode  : -15 (pid: 2471250)
+  error_file: <N/A>
+  traceback : Signal 15 (SIGTERM) received by PID 2471250
+=========================================================

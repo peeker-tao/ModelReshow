@@ -1,0 +1,21 @@
+model:
+  name: vit_small
+  patch_size: 16
+  norm_layer: layernormbf16
+  drop_path_rate: 0.0
+  layerscale: null
+train:
+  steps: 60000
+  warmup_steps: 4000
+  accum_iter: 4
+  img_size: 224
+  optimizer: adamw
+  weight_decay: 0.1
+data:
+  datasets:
+    - BlendedMVSDataset:DATA_DIR=/data/data_taohy/datasets/BlendedMVS:ANNOTATION_DIR=/data/data_taohy/datasets/BlendedMVS/annotations
+  common_config:
+    img_nums:
+      - 3
+      - 5
+  num_workers: 8

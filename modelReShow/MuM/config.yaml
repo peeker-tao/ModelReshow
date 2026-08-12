@@ -1,0 +1,98 @@
+checkpoint: null
+dtype: bf16
+train:
+  steps: 60000
+  warmup_steps: 4000
+  checkpoint_steps: 2000
+  visualization_steps: 10000
+  img_size: 224
+  lr: 0.01
+  blr: 0.00015
+  min_lr: 0.0
+  seed: 1337
+  weight_decay: 0.05
+  optimizer: adamw
+  output_dir: /data/data_taohy/modelReShow/MuM
+  clip_grad_norm: 1.0
+loss:
+  mask_ratio: 0.75
+model:
+  name: vit_small
+  patch_embed: conv
+  patch_size: 16
+  norm_pix_loss: true
+  drop_path_rate: 0.0
+  layerscale: null
+  ffn_layer: mlp
+  ffn_ratio: 4.0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  norm_layer: layernormbf16
+  n_storage_tokens: 0
+  in_chans: 3
+  pos_embed_type: rope
+  pos_embed_rope_base: 100.0
+  pos_embed_rope_min_period: null
+  pos_embed_rope_max_period: null
+  pos_embed_rope_normalize_coords: separate
+  pos_embed_rope_shift_coords: null
+  pos_embed_rope_jitter_coords: null
+  pos_embed_rope_rescale_coords: null
+  pos_embed_rope_dtype: ${dtype}
+  fp8_enabled: false
+  fp8_filter: blocks
+data:
+  datasets:
+  - BlendedMVSDataset:DATA_DIR=/data/data_taohy/datasets/BlendedMVS
+  common_config:
+    aspects:
+    - 0.5
+    - 1.0
+    img_nums:
+    - 3
+    - 5
+    img_size: ${train.img_size}
+    patch_size: ${model.patch_size}
+    rescale: true
+    rescale_aug: true
+    landscape_check: true
+    debug: false
+    training: true
+    inside_random: true
+    aug_scale:
+    - 0.8
+    - 1.2
+    fix_img_num: false
+    fix_aspect_ratio: false
+  num_workers: 8
+  shuffle: true
+  pin_memory: true
+  drop_last: true
+  max_img_per_gpu: 8
+  imagenet:
+    prob: 0.0
+    dataset_path: ImageNet:split=TRAIN:root=data/imagenet:extra=./extra
+evals:
+  fast:
+    period: 25000
+    final: true
+    model_setup_script: model_loader.py
+    eval_config:
+      matchbench:
+        file: eval_matchbench.py
+        dataset: megadepth
+        dataset_path: data/megadepth
+        matcher: knn
+  slow:
+    period: 50000
+    final: true
+    model_setup_script: model_loader.py
+    eval_config:
+      matchbench:
+        file: eval_matchbench.py
+        dataset: megadepth
+        dataset_path: data/megadepth
+        matcher: linear
+launcher:
+  partition: alvis

@@ -1,0 +1,928 @@
+nohup: ignoring input
+W0730 23:19:20.022000 2889919 site-packages/torch/distributed/run.py:792] 
+W0730 23:19:20.022000 2889919 site-packages/torch/distributed/run.py:792] *****************************************
+W0730 23:19:20.022000 2889919 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0730 23:19:20.022000 2889919 site-packages/torch/distributed/run.py:792] *****************************************
+[W730 23:19:23.741501187 ProcessGroupGloo.cpp:727] Warning: Unable to resolve hostname to a (local) address. Using the loopback address as fallback. Manually set the network interface to bind to with GLOO_SOCKET_IFNAME. (function operator())
+[W730 23:19:23.897206895 ProcessGroupGloo.cpp:727] Warning: Unable to resolve hostname to a (local) address. Using the loopback address as fallback. Manually set the network interface to bind to with GLOO_SOCKET_IFNAME. (function operator())
+[W730 23:19:24.285000248 ProcessGroupGloo.cpp:727] Warning: Unable to resolve hostname to a (local) address. Using the loopback address as fallback. Manually set the network interface to bind to with GLOO_SOCKET_IFNAME. (function operator())
+[W730 23:19:24.296391901 ProcessGroupGloo.cpp:727] Warning: Unable to resolve hostname to a (local) address. Using the loopback address as fallback. Manually set the network interface to bind to with GLOO_SOCKET_IFNAME. (function operator())
+I20260730 23:19:24 2889964 dinov2 config.py:58] base_config: ssl_default_config
+config_file: mum/configs/mum.yaml
+name: mum_vits_blendedmvs
+opts: ['train.output_dir=/data/data_taohy/modelReShow/MuM/checkpoints']
+output_dir: /data/data_taohy/modelReShow/MuM/checkpoints
+track_wandb: True
+I20260730 23:19:24 2889964 dinov2 config.py:27] checkpoint: null
+dtype: bf16
+train:
+  steps: 25000
+  warmup_steps: 1000
+  checkpoint_steps: 2000
+  visualization_steps: 10000
+  img_size: 224
+  lr: null
+  blr: 0.00015
+  min_lr: 0.0
+  seed: 1337
+  weight_decay: 0.1
+  optimizer: adamw
+  output_dir: /data/data_taohy/modelReShow/MuM/checkpoints
+loss:
+  mask_ratio: 0.75
+model:
+  name: vit_small
+  patch_embed: conv
+  patch_size: 16
+  norm_pix_loss: true
+  drop_path_rate: 0.0
+  layerscale: null
+  ffn_layer: mlp
+  ffn_ratio: 4.0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  norm_layer: layernormbf16
+  n_storage_tokens: 0
+  in_chans: 3
+  pos_embed_type: rope
+  pos_embed_rope_base: 100.0
+  pos_embed_rope_min_period: null
+  pos_embed_rope_max_period: null
+  pos_embed_rope_normalize_coords: separate
+  pos_embed_rope_shift_coords: null
+  pos_embed_rope_jitter_coords: null
+  pos_embed_rope_rescale_coords: null
+  pos_embed_rope_dtype: ${dtype}
+  fp8_enabled: false
+  fp8_filter: blocks
+data:
+  datasets:
+  - BlendedMVSDataset:DATA_DIR=/data/data_taohy/datasets/BlendedMVS:ANNOTATION_DIR=/data/data_taohy/datasets/BlendedMVS/annotations
+  common_config:
+    aspects:
+    - 0.5
+    - 1.0
+    img_nums:
+    - 3
+    - 5
+    img_size: ${train.img_size}
+    patch_size: ${model.patch_size}
+    rescale: true
+    rescale_aug: true
+    landscape_check: true
+    debug: false
+    training: true
+    inside_random: true
+    aug_scale:
+    - 0.8
+    - 1.2
+    fix_img_num: false
+    fix_aspect_ratio: false
+  num_workers: 8
+  shuffle: true
+  pin_memory: true
+  drop_last: true
+  max_img_per_gpu: 64
+  imagenet:
+    prob: 0.0
+    dataset_path: ImageNet:split=TRAIN:root=data/imagenet:extra=./extra
+evals:
+  fast:
+    period: 25000
+    final: true
+    model_setup_script: model_loader.py
+    eval_config:
+      matchbench:
+        file: eval_matchbench.py
+        dataset: megadepth
+        dataset_path: data/megadepth
+        matcher: knn
+  slow:
+    period: 50000
+    final: true
+    model_setup_script: model_loader.py
+    eval_config:
+      matchbench:
+        file: eval_matchbench.py
+        dataset: megadepth
+        dataset_path: data/megadepth
+        matcher: linear
+launcher:
+  partition: alvis
+
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+wandb: Currently logged in as: 3222703726 (3222703726-huazhong-university-of-science-and-technology) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: WARNING Using a boolean value for 'reinit' is deprecated. Use 'return_previous' or 'finish_previous' instead.
+wandb: creating run
+wandb: Tracking run with wandb version 0.19.9
+wandb: Run data is saved locally in /data/data_taohy/modelReShow/MuM/wandb/run-20260730_231925-psnzmb4a
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run mum_vits_blendedmvs
+wandb: ⭐️ View project at https://wandb.ai/3222703726-huazhong-university-of-science-and-technology/MuM
+wandb: 🚀 View run at https://wandb.ai/3222703726-huazhong-university-of-science-and-technology/MuM/runs/psnzmb4a
+Ignored kwargs: {'name': 'vit_small', 'patch_embed': 'conv', 'drop_path_rate': 0.0, 'layerscale': None, 'ffn_layer': 'mlp', 'ffn_ratio': 4.0, 'qkv_bias': True, 'proj_bias': True, 'ffn_bias': True, 'pos_embed_type': 'rope', 'pos_embed_rope_base': 100.0, 'pos_embed_rope_min_period': None, 'pos_embed_rope_max_period': None, 'pos_embed_rope_normalize_coords': 'separate', 'pos_embed_rope_shift_coords': None, 'pos_embed_rope_jitter_coords': None, 'pos_embed_rope_rescale_coords': None, 'pos_embed_rope_dtype': 'bf16', 'fp8_enabled': False, 'fp8_filter': 'blocks'}
+Building dynamic dataloader with seed: 42
+Randomly sampling [3, 5] frames
+I20260730 23:19:29 2889964 root blendedmvs.py:45] BlendedMVS directory is /data/data_taohy/datasets/BlendedMVS
+I20260730 23:19:29 2889964 root blendedmvs.py:77] Training: BlendedMVS Data size: 110
+I20260730 23:19:29 2889964 root blendedmvs.py:78] Training: BlendedMVS Data length of training set: 100000
+I20260730 23:19:29 2889964 root blendedmvs.py:79] Training: BlendedMVS Frame number: 17773
+Dataset BlendedMVSDataset initialized with 17773 samples.
+Total frames across all datasets: 17773
+Model = MuMAutoEncoder(
+  (patch_embed): PatchEmbed(
+    (proj): Conv2d(3, 384, kernel_size=(16, 16), stride=(16, 16))
+    (norm): Identity()
+  )
+  (rope_embed): RopePositionEmbedding()
+  (blocks): ModuleList(
+    (0-8): 9 x SelfAttentionBlock(
+      (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+      (attn): SelfAttention(
+        (qkv): Linear(in_features=384, out_features=1152, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=384, out_features=384, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=384, out_features=1536, bias=True)
+        (act): GELU(approximate='none')
+        (fc2): Linear(in_features=1536, out_features=384, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+    )
+  )
+  (norm): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (rope_embed_decoder): RopePositionEmbedding()
+  (decoder_embed): Linear(in_features=384, out_features=256, bias=True)
+  (decoder_frame_blocks): ModuleList(
+    (0-2): 3 x SelfAttentionBlock(
+      (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+      (attn): SelfAttention(
+        (qkv): Linear(in_features=256, out_features=768, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=256, out_features=256, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=256, out_features=1024, bias=True)
+        (act): GELU(approximate='none')
+        (fc2): Linear(in_features=1024, out_features=256, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+    )
+  )
+  (decoder_global_blocks): ModuleList(
+    (0-2): 3 x SelfAttentionBlock(
+      (norm1): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+      (attn): SelfAttention(
+        (qkv): Linear(in_features=256, out_features=768, bias=True)
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=256, out_features=256, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (norm2): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=256, out_features=1024, bias=True)
+        (act): GELU(approximate='none')
+        (fc2): Linear(in_features=1024, out_features=256, bias=True)
+        (drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+    )
+  )
+  (decoder_norm): LayerNorm((256,), eps=1e-05, elementwise_affine=True)
+  (decoder_pred): Linear(in_features=256, out_features=768, bias=True)
+)
+base lr: 1.50e-04
+actual lr: 1.50e-04
+Param groups = {
+  "decay": {
+    "weight_decay": 0.1,
+    "params": [
+      "cls_token",
+      "mask_token",
+      "patch_embed.proj.weight",
+      "blocks.0.attn.qkv.weight",
+      "blocks.0.attn.proj.weight",
+      "blocks.0.mlp.fc1.weight",
+      "blocks.0.mlp.fc2.weight",
+      "blocks.1.attn.qkv.weight",
+      "blocks.1.attn.proj.weight",
+      "blocks.1.mlp.fc1.weight",
+      "blocks.1.mlp.fc2.weight",
+      "blocks.2.attn.qkv.weight",
+      "blocks.2.attn.proj.weight",
+      "blocks.2.mlp.fc1.weight",
+      "blocks.2.mlp.fc2.weight",
+      "blocks.3.attn.qkv.weight",
+      "blocks.3.attn.proj.weight",
+      "blocks.3.mlp.fc1.weight",
+      "blocks.3.mlp.fc2.weight",
+      "blocks.4.attn.qkv.weight",
+      "blocks.4.attn.proj.weight",
+      "blocks.4.mlp.fc1.weight",
+      "blocks.4.mlp.fc2.weight",
+      "blocks.5.attn.qkv.weight",
+      "blocks.5.attn.proj.weight",
+      "blocks.5.mlp.fc1.weight",
+      "blocks.5.mlp.fc2.weight",
+      "blocks.6.attn.qkv.weight",
+      "blocks.6.attn.proj.weight",
+      "blocks.6.mlp.fc1.weight",
+      "blocks.6.mlp.fc2.weight",
+      "blocks.7.attn.qkv.weight",
+      "blocks.7.attn.proj.weight",
+      "blocks.7.mlp.fc1.weight",
+      "blocks.7.mlp.fc2.weight",
+      "blocks.8.attn.qkv.weight",
+      "blocks.8.attn.proj.weight",
+      "blocks.8.mlp.fc1.weight",
+      "blocks.8.mlp.fc2.weight",
+      "decoder_embed.weight",
+      "decoder_frame_blocks.0.attn.qkv.weight",
+      "decoder_frame_blocks.0.attn.proj.weight",
+      "decoder_frame_blocks.0.mlp.fc1.weight",
+      "decoder_frame_blocks.0.mlp.fc2.weight",
+      "decoder_frame_blocks.1.attn.qkv.weight",
+      "decoder_frame_blocks.1.attn.proj.weight",
+      "decoder_frame_blocks.1.mlp.fc1.weight",
+      "decoder_frame_blocks.1.mlp.fc2.weight",
+      "decoder_frame_blocks.2.attn.qkv.weight",
+      "decoder_frame_blocks.2.attn.proj.weight",
+      "decoder_frame_blocks.2.mlp.fc1.weight",
+      "decoder_frame_blocks.2.mlp.fc2.weight",
+      "decoder_global_blocks.0.attn.qkv.weight",
+      "decoder_global_blocks.0.attn.proj.weight",
+      "decoder_global_blocks.0.mlp.fc1.weight",
+      "decoder_global_blocks.0.mlp.fc2.weight",
+      "decoder_global_blocks.1.attn.qkv.weight",
+      "decoder_global_blocks.1.attn.proj.weight",
+      "decoder_global_blocks.1.mlp.fc1.weight",
+      "decoder_global_blocks.1.mlp.fc2.weight",
+      "decoder_global_blocks.2.attn.qkv.weight",
+      "decoder_global_blocks.2.attn.proj.weight",
+      "decoder_global_blocks.2.mlp.fc1.weight",
+      "decoder_global_blocks.2.mlp.fc2.weight",
+      "decoder_pred.weight"
+    ],
+    "lr_scale": 1.0
+  },
+  "no_decay": {
+    "weight_decay": 0.0,
+    "params": [
+      "patch_embed.proj.bias",
+      "blocks.0.norm1.weight",
+      "blocks.0.norm1.bias",
+      "blocks.0.attn.qkv.bias",
+      "blocks.0.attn.proj.bias",
+      "blocks.0.norm2.weight",
+      "blocks.0.norm2.bias",
+      "blocks.0.mlp.fc1.bias",
+      "blocks.0.mlp.fc2.bias",
+      "blocks.1.norm1.weight",
+      "blocks.1.norm1.bias",
+      "blocks.1.attn.qkv.bias",
+      "blocks.1.attn.proj.bias",
+      "blocks.1.norm2.weight",
+      "blocks.1.norm2.bias",
+      "blocks.1.mlp.fc1.bias",
+      "blocks.1.mlp.fc2.bias",
+      "blocks.2.norm1.weight",
+      "blocks.2.norm1.bias",
+      "blocks.2.attn.qkv.bias",
+      "blocks.2.attn.proj.bias",
+      "blocks.2.norm2.weight",
+      "blocks.2.norm2.bias",
+      "blocks.2.mlp.fc1.bias",
+      "blocks.2.mlp.fc2.bias",
+      "blocks.3.norm1.weight",
+      "blocks.3.norm1.bias",
+      "blocks.3.attn.qkv.bias",
+      "blocks.3.attn.proj.bias",
+      "blocks.3.norm2.weight",
+      "blocks.3.norm2.bias",
+      "blocks.3.mlp.fc1.bias",
+      "blocks.3.mlp.fc2.bias",
+      "blocks.4.norm1.weight",
+      "blocks.4.norm1.bias",
+      "blocks.4.attn.qkv.bias",
+      "blocks.4.attn.proj.bias",
+      "blocks.4.norm2.weight",
+      "blocks.4.norm2.bias",
+      "blocks.4.mlp.fc1.bias",
+      "blocks.4.mlp.fc2.bias",
+      "blocks.5.norm1.weight",
+      "blocks.5.norm1.bias",
+      "blocks.5.attn.qkv.bias",
+      "blocks.5.attn.proj.bias",
+      "blocks.5.norm2.weight",
+      "blocks.5.norm2.bias",
+      "blocks.5.mlp.fc1.bias",
+      "blocks.5.mlp.fc2.bias",
+      "blocks.6.norm1.weight",
+      "blocks.6.norm1.bias",
+      "blocks.6.attn.qkv.bias",
+      "blocks.6.attn.proj.bias",
+      "blocks.6.norm2.weight",
+      "blocks.6.norm2.bias",
+      "blocks.6.mlp.fc1.bias",
+      "blocks.6.mlp.fc2.bias",
+      "blocks.7.norm1.weight",
+      "blocks.7.norm1.bias",
+      "blocks.7.attn.qkv.bias",
+      "blocks.7.attn.proj.bias",
+      "blocks.7.norm2.weight",
+      "blocks.7.norm2.bias",
+      "blocks.7.mlp.fc1.bias",
+      "blocks.7.mlp.fc2.bias",
+      "blocks.8.norm1.weight",
+      "blocks.8.norm1.bias",
+      "blocks.8.attn.qkv.bias",
+      "blocks.8.attn.proj.bias",
+      "blocks.8.norm2.weight",
+      "blocks.8.norm2.bias",
+      "blocks.8.mlp.fc1.bias",
+      "blocks.8.mlp.fc2.bias",
+      "norm.weight",
+      "norm.bias",
+      "decoder_embed.bias",
+      "decoder_frame_blocks.0.norm1.weight",
+      "decoder_frame_blocks.0.norm1.bias",
+      "decoder_frame_blocks.0.attn.qkv.bias",
+      "decoder_frame_blocks.0.attn.proj.bias",
+      "decoder_frame_blocks.0.norm2.weight",
+      "decoder_frame_blocks.0.norm2.bias",
+      "decoder_frame_blocks.0.mlp.fc1.bias",
+      "decoder_frame_blocks.0.mlp.fc2.bias",
+      "decoder_frame_blocks.1.norm1.weight",
+      "decoder_frame_blocks.1.norm1.bias",
+      "decoder_frame_blocks.1.attn.qkv.bias",
+      "decoder_frame_blocks.1.attn.proj.bias",
+      "decoder_frame_blocks.1.norm2.weight",
+      "decoder_frame_blocks.1.norm2.bias",
+      "decoder_frame_blocks.1.mlp.fc1.bias",
+      "decoder_frame_blocks.1.mlp.fc2.bias",
+      "decoder_frame_blocks.2.norm1.weight",
+      "decoder_frame_blocks.2.norm1.bias",
+      "decoder_frame_blocks.2.attn.qkv.bias",
+      "decoder_frame_blocks.2.attn.proj.bias",
+      "decoder_frame_blocks.2.norm2.weight",
+      "decoder_frame_blocks.2.norm2.bias",
+      "decoder_frame_blocks.2.mlp.fc1.bias",
+      "decoder_frame_blocks.2.mlp.fc2.bias",
+      "decoder_global_blocks.0.norm1.weight",
+      "decoder_global_blocks.0.norm1.bias",
+      "decoder_global_blocks.0.attn.qkv.bias",
+      "decoder_global_blocks.0.attn.proj.bias",
+      "decoder_global_blocks.0.norm2.weight",
+      "decoder_global_blocks.0.norm2.bias",
+      "decoder_global_blocks.0.mlp.fc1.bias",
+      "decoder_global_blocks.0.mlp.fc2.bias",
+      "decoder_global_blocks.1.norm1.weight",
+      "decoder_global_blocks.1.norm1.bias",
+      "decoder_global_blocks.1.attn.qkv.bias",
+      "decoder_global_blocks.1.attn.proj.bias",
+      "decoder_global_blocks.1.norm2.weight",
+      "decoder_global_blocks.1.norm2.bias",
+      "decoder_global_blocks.1.mlp.fc1.bias",
+      "decoder_global_blocks.1.mlp.fc2.bias",
+      "decoder_global_blocks.2.norm1.weight",
+      "decoder_global_blocks.2.norm1.bias",
+      "decoder_global_blocks.2.attn.qkv.bias",
+      "decoder_global_blocks.2.attn.proj.bias",
+      "decoder_global_blocks.2.norm2.weight",
+      "decoder_global_blocks.2.norm2.bias",
+      "decoder_global_blocks.2.mlp.fc1.bias",
+      "decoder_global_blocks.2.mlp.fc2.bias",
+      "decoder_norm.weight",
+      "decoder_norm.bias",
+      "decoder_pred.bias"
+    ],
+    "lr_scale": 1.0
+  }
+}
+Start training for 25000 steps from 0
+I20260730 23:19:34 2889964 mum utils.py:218] Training  [    0/25000]  eta: 1 day, 10:29:52  loss: 1.0938 (1.0938)  grad: 1.2207 (1.2207)  batch_size: 16.0000 (16.0000)  lr: 0.0000 (0.0000)  time: 4.967702  data: 2.642945  max mem: 3604
+I20260730 23:19:52 2889964 mum utils.py:218] Training  [   50/25000]  eta: 3:02:35  loss: 1.0253 (1.0553)  grad: 0.3704 (0.6822)  batch_size: 16.0000 (15.6667)  lr: 0.0000 (0.0000)  time: 0.350162  data: 0.000750  max mem: 3991
+I20260730 23:20:09 2889964 mum utils.py:218] Training  [  100/25000]  eta: 2:44:48  loss: 0.9622 (1.0177)  grad: 0.2349 (0.4725)  batch_size: 16.0000 (16.6436)  lr: 0.0000 (0.0000)  time: 0.356905  data: 0.000625  max mem: 3991
+I20260730 23:20:28 2889964 mum utils.py:218] Training  [  150/25000]  eta: 2:40:14  loss: 0.9148 (0.9884)  grad: 0.2248 (0.4035)  batch_size: 16.0000 (16.3179)  lr: 0.0000 (0.0000)  time: 0.372431  data: 0.000902  max mem: 3991
+I20260730 23:20:46 2889964 mum utils.py:218] Training  [  200/25000]  eta: 2:38:31  loss: 0.8591 (0.9594)  grad: 0.8103 (0.5205)  batch_size: 16.0000 (16.3930)  lr: 0.0000 (0.0000)  time: 0.379561  data: 0.000425  max mem: 3991
+I20260730 23:21:06 2889964 mum utils.py:218] Training  [  250/25000]  eta: 2:38:26  loss: 0.8295 (0.9356)  grad: 0.8742 (0.6071)  batch_size: 16.0000 (16.4701)  lr: 0.0000 (0.0000)  time: 0.394430  data: 0.002860  max mem: 3991
+I20260730 23:21:25 2889964 mum utils.py:218] Training  [  300/25000]  eta: 2:38:30  loss: 0.8142 (0.9149)  grad: 1.0830 (0.6977)  batch_size: 16.0000 (16.3488)  lr: 0.0000 (0.0000)  time: 0.383802  data: 0.000416  max mem: 3991
+I20260730 23:21:44 2889964 mum utils.py:218] Training  [  350/25000]  eta: 2:37:47  loss: 0.8010 (0.8993)  grad: 0.8199 (0.7448)  batch_size: 16.0000 (16.4815)  lr: 0.0001 (0.0000)  time: 0.377734  data: 0.000529  max mem: 3991
+I20260730 23:22:03 2889964 mum utils.py:218] Training  [  400/25000]  eta: 2:37:39  loss: 0.8022 (0.8867)  grad: 0.7810 (0.7686)  batch_size: 16.0000 (16.4040)  lr: 0.0001 (0.0000)  time: 0.376721  data: 0.000473  max mem: 3991
+I20260730 23:22:23 2889964 mum utils.py:218] Training  [  450/25000]  eta: 2:37:11  loss: 0.7779 (0.8759)  grad: 0.8481 (0.7906)  batch_size: 16.0000 (16.4678)  lr: 0.0001 (0.0000)  time: 0.380071  data: 0.000383  max mem: 3991
+I20260730 23:22:43 2889964 mum utils.py:218] Training  [  500/25000]  eta: 2:37:57  loss: 0.7678 (0.8661)  grad: 1.0098 (0.8099)  batch_size: 16.0000 (16.4551)  lr: 0.0001 (0.0000)  time: 0.409714  data: 0.000391  max mem: 3991
+I20260730 23:23:03 2889964 mum utils.py:218] Training  [  550/25000]  eta: 2:37:51  loss: 0.7636 (0.8572)  grad: 0.8423 (0.8184)  batch_size: 16.0000 (16.4174)  lr: 0.0001 (0.0000)  time: 0.381776  data: 0.000465  max mem: 3991
+I20260730 23:23:22 2889964 mum utils.py:218] Training  [  600/25000]  eta: 2:37:38  loss: 0.7470 (0.8485)  grad: 0.8002 (0.8222)  batch_size: 16.0000 (16.3894)  lr: 0.0001 (0.0000)  time: 0.384097  data: 0.000336  max mem: 3991
+I20260730 23:23:41 2889964 mum utils.py:218] Training  [  650/25000]  eta: 2:37:09  loss: 0.7310 (0.8389)  grad: 0.8458 (0.8320)  batch_size: 16.0000 (16.3548)  lr: 0.0001 (0.0000)  time: 0.382941  data: 0.000443  max mem: 3991
+I20260730 23:24:03 2889964 mum utils.py:218] Training  [  700/25000]  eta: 2:38:04  loss: 0.7311 (0.8315)  grad: 0.8346 (0.8375)  batch_size: 16.0000 (16.3680)  lr: 0.0001 (0.0001)  time: 0.427546  data: 0.000426  max mem: 3991
+I20260730 23:24:22 2889964 mum utils.py:218] Training  [  750/25000]  eta: 2:37:44  loss: 0.7301 (0.8247)  grad: 0.8316 (0.8381)  batch_size: 16.0000 (16.4035)  lr: 0.0001 (0.0001)  time: 0.387076  data: 0.000380  max mem: 3991
+I20260730 23:24:43 2889964 mum utils.py:218] Training  [  800/25000]  eta: 2:38:00  loss: 0.7136 (0.8174)  grad: 0.6888 (0.8371)  batch_size: 16.0000 (16.4170)  lr: 0.0001 (0.0001)  time: 0.436752  data: 0.000364  max mem: 3991
+I20260730 23:25:03 2889964 mum utils.py:218] Training  [  850/25000]  eta: 2:37:37  loss: 0.7193 (0.8113)  grad: 0.7851 (0.8368)  batch_size: 16.0000 (16.3901)  lr: 0.0001 (0.0001)  time: 0.389923  data: 0.000410  max mem: 3991
+I20260730 23:25:22 2889964 mum utils.py:218] Training  [  900/25000]  eta: 2:37:23  loss: 0.7054 (0.8051)  grad: 0.8210 (0.8396)  batch_size: 16.0000 (16.3452)  lr: 0.0001 (0.0001)  time: 0.399156  data: 0.000312  max mem: 3991
+I20260730 23:25:42 2889964 mum utils.py:218] Training  [  950/25000]  eta: 2:37:08  loss: 0.6923 (0.7994)  grad: 0.7848 (0.8371)  batch_size: 21.0000 (16.3659)  lr: 0.0001 (0.0001)  time: 0.393395  data: 0.000412  max mem: 3991
+I20260730 23:26:03 2889964 mum utils.py:218] Training  [ 1000/25000]  eta: 2:37:12  loss: 0.6889 (0.7945)  grad: 0.7410 (0.8354)  batch_size: 16.0000 (16.3656)  lr: 0.0001 (0.0001)  time: 0.386318  data: 0.000415  max mem: 3991
+I20260730 23:26:23 2889964 mum utils.py:218] Training  [ 1050/25000]  eta: 2:37:11  loss: 0.6852 (0.7892)  grad: 0.9183 (0.8357)  batch_size: 16.0000 (16.3853)  lr: 0.0001 (0.0001)  time: 0.394094  data: 0.000448  max mem: 3991
+I20260730 23:26:43 2889964 mum utils.py:218] Training  [ 1100/25000]  eta: 2:36:59  loss: 0.6834 (0.7842)  grad: 0.6652 (0.8296)  batch_size: 16.0000 (16.3933)  lr: 0.0001 (0.0001)  time: 0.409488  data: 0.000390  max mem: 3991
+I20260730 23:27:03 2889964 mum utils.py:218] Training  [ 1150/25000]  eta: 2:36:43  loss: 0.6593 (0.7791)  grad: 0.6090 (0.8240)  batch_size: 16.0000 (16.3988)  lr: 0.0001 (0.0001)  time: 0.397224  data: 0.000366  max mem: 3991
+I20260730 23:27:23 2889964 mum utils.py:218] Training  [ 1200/25000]  eta: 2:36:23  loss: 0.6645 (0.7746)  grad: 0.7065 (0.8200)  batch_size: 16.0000 (16.3847)  lr: 0.0001 (0.0001)  time: 0.400748  data: 0.000351  max mem: 3991
+I20260730 23:27:43 2889964 mum utils.py:218] Training  [ 1250/25000]  eta: 2:36:21  loss: 0.6735 (0.7709)  grad: 0.6065 (0.8131)  batch_size: 16.0000 (16.3829)  lr: 0.0001 (0.0001)  time: 0.393804  data: 0.000362  max mem: 3991
+I20260730 23:28:03 2889964 mum utils.py:218] Training  [ 1300/25000]  eta: 2:36:06  loss: 0.6740 (0.7669)  grad: 0.6689 (0.8070)  batch_size: 21.0000 (16.3613)  lr: 0.0001 (0.0001)  time: 0.393427  data: 0.000417  max mem: 3991
+I20260730 23:28:23 2889964 mum utils.py:218] Training  [ 1350/25000]  eta: 2:35:50  loss: 0.6724 (0.7632)  grad: 0.5666 (0.8004)  batch_size: 16.0000 (16.3316)  lr: 0.0001 (0.0001)  time: 0.399290  data: 0.000492  max mem: 3991
+I20260730 23:28:43 2889964 mum utils.py:218] Training  [ 1400/25000]  eta: 2:35:32  loss: 0.6490 (0.7593)  grad: 0.5134 (0.7933)  batch_size: 16.0000 (16.3255)  lr: 0.0001 (0.0001)  time: 0.393700  data: 0.000423  max mem: 3991
+I20260730 23:29:03 2889964 mum utils.py:218] Training  [ 1450/25000]  eta: 2:35:15  loss: 0.6534 (0.7557)  grad: 0.5368 (0.7861)  batch_size: 16.0000 (16.3425)  lr: 0.0001 (0.0001)  time: 0.396258  data: 0.000332  max mem: 3991
+I20260730 23:29:24 2889964 mum utils.py:218] Training  [ 1500/25000]  eta: 2:35:14  loss: 0.6416 (0.7524)  grad: 0.6166 (0.7797)  batch_size: 16.0000 (16.3304)  lr: 0.0001 (0.0001)  time: 0.423280  data: 0.000391  max mem: 3991
+I20260730 23:29:45 2889964 mum utils.py:218] Training  [ 1550/25000]  eta: 2:35:05  loss: 0.6398 (0.7490)  grad: 0.5263 (0.7723)  batch_size: 12.0000 (16.2934)  lr: 0.0001 (0.0001)  time: 0.427009  data: 0.000350  max mem: 3991
+I20260730 23:30:05 2889964 mum utils.py:218] Training  [ 1600/25000]  eta: 2:34:50  loss: 0.6483 (0.7459)  grad: 0.4626 (0.7651)  batch_size: 12.0000 (16.2786)  lr: 0.0001 (0.0001)  time: 0.388490  data: 0.000363  max mem: 3991
+I20260730 23:30:25 2889964 mum utils.py:218] Training  [ 1650/25000]  eta: 2:34:32  loss: 0.6585 (0.7431)  grad: 0.4623 (0.7582)  batch_size: 16.0000 (16.2750)  lr: 0.0001 (0.0001)  time: 0.387863  data: 0.000370  max mem: 3991
+I20260730 23:30:46 2889964 mum utils.py:218] Training  [ 1700/25000]  eta: 2:34:23  loss: 0.6436 (0.7404)  grad: 0.5629 (0.7531)  batch_size: 16.0000 (16.2663)  lr: 0.0001 (0.0001)  time: 0.391447  data: 0.000371  max mem: 3991
+I20260730 23:31:05 2889964 mum utils.py:218] Training  [ 1750/25000]  eta: 2:34:02  loss: 0.6458 (0.7378)  grad: 0.4167 (0.7464)  batch_size: 16.0000 (16.2987)  lr: 0.0001 (0.0001)  time: 0.403764  data: 0.000390  max mem: 3991
+I20260730 23:31:27 2889964 mum utils.py:218] Training  [ 1800/25000]  eta: 2:33:59  loss: 0.6471 (0.7351)  grad: 0.4596 (0.7401)  batch_size: 16.0000 (16.2926)  lr: 0.0001 (0.0001)  time: 0.423684  data: 0.000336  max mem: 3991
+I20260730 23:31:47 2889964 mum utils.py:218] Training  [ 1850/25000]  eta: 2:33:40  loss: 0.6396 (0.7327)  grad: 0.4693 (0.7349)  batch_size: 16.0000 (16.2869)  lr: 0.0001 (0.0001)  time: 0.394356  data: 0.000381  max mem: 3991
+I20260730 23:32:08 2889964 mum utils.py:218] Training  [ 1900/25000]  eta: 2:33:35  loss: 0.6353 (0.7301)  grad: 0.4890 (0.7289)  batch_size: 16.0000 (16.2930)  lr: 0.0001 (0.0001)  time: 0.437284  data: 0.000351  max mem: 3991
+I20260730 23:32:27 2889964 mum utils.py:218] Training  [ 1950/25000]  eta: 2:33:13  loss: 0.6388 (0.7277)  grad: 0.4780 (0.7224)  batch_size: 16.0000 (16.3055)  lr: 0.0001 (0.0001)  time: 0.395436  data: 0.000377  max mem: 3991
+I20260730 23:32:49 2889964 mum utils.py:218] Training  [ 2000/25000]  eta: 2:33:09  loss: 0.6280 (0.7254)  grad: 0.4638 (0.7165)  batch_size: 16.0000 (16.2999)  lr: 0.0001 (0.0001)  time: 0.453156  data: 0.000399  max mem: 3991
+I20260730 23:33:09 2889964 mum utils.py:218] Training  [ 2050/25000]  eta: 2:32:50  loss: 0.6364 (0.7231)  grad: 0.4923 (0.7106)  batch_size: 12.0000 (16.3116)  lr: 0.0001 (0.0001)  time: 0.415953  data: 0.000409  max mem: 3991
+I20260730 23:33:30 2889964 mum utils.py:218] Training  [ 2100/25000]  eta: 2:32:46  loss: 0.6147 (0.7210)  grad: 0.4393 (0.7060)  batch_size: 16.0000 (16.3118)  lr: 0.0001 (0.0001)  time: 0.437356  data: 0.000377  max mem: 3991
+I20260730 23:33:51 2889964 mum utils.py:218] Training  [ 2150/25000]  eta: 2:32:28  loss: 0.6349 (0.7190)  grad: 0.4713 (0.7010)  batch_size: 16.0000 (16.3082)  lr: 0.0001 (0.0001)  time: 0.383929  data: 0.000317  max mem: 3991
+I20260730 23:34:11 2889964 mum utils.py:218] Training  [ 2200/25000]  eta: 2:32:14  loss: 0.6338 (0.7172)  grad: 0.4339 (0.6956)  batch_size: 16.0000 (16.3044)  lr: 0.0001 (0.0001)  time: 0.398742  data: 0.000400  max mem: 3991
+I20260730 23:34:31 2889964 mum utils.py:218] Training  [ 2250/25000]  eta: 2:31:49  loss: 0.6318 (0.7152)  grad: 0.5379 (0.6906)  batch_size: 16.0000 (16.3048)  lr: 0.0001 (0.0001)  time: 0.392095  data: 0.000366  max mem: 3991
+I20260730 23:34:51 2889964 mum utils.py:218] Training  [ 2300/25000]  eta: 2:31:36  loss: 0.6441 (0.7135)  grad: 0.4169 (0.6855)  batch_size: 16.0000 (16.2929)  lr: 0.0001 (0.0001)  time: 0.451692  data: 0.000344  max mem: 3991
+I20260730 23:35:11 2889964 mum utils.py:218] Training  [ 2350/25000]  eta: 2:31:16  loss: 0.6228 (0.7118)  grad: 0.4082 (0.6802)  batch_size: 16.0000 (16.2935)  lr: 0.0001 (0.0001)  time: 0.390845  data: 0.000515  max mem: 3991
+I20260730 23:35:33 2889964 mum utils.py:218] Training  [ 2400/25000]  eta: 2:31:07  loss: 0.6380 (0.7102)  grad: 0.4018 (0.6751)  batch_size: 16.0000 (16.2999)  lr: 0.0001 (0.0001)  time: 0.431989  data: 0.000424  max mem: 3991
+I20260730 23:35:53 2889964 mum utils.py:218] Training  [ 2450/25000]  eta: 2:30:46  loss: 0.6334 (0.7087)  grad: 0.4426 (0.6711)  batch_size: 16.0000 (16.3064)  lr: 0.0001 (0.0001)  time: 0.391007  data: 0.000354  max mem: 3991
+I20260730 23:36:12 2889964 mum utils.py:218] Training  [ 2500/25000]  eta: 2:30:22  loss: 0.6137 (0.7071)  grad: 0.3878 (0.6666)  batch_size: 16.0000 (16.2971)  lr: 0.0001 (0.0001)  time: 0.394178  data: 0.000390  max mem: 3991
+I20260730 23:36:33 2889964 mum utils.py:218] Training  [ 2550/25000]  eta: 2:30:12  loss: 0.6361 (0.7055)  grad: 0.3847 (0.6616)  batch_size: 16.0000 (16.2944)  lr: 0.0001 (0.0001)  time: 0.421442  data: 0.000383  max mem: 3991
+I20260730 23:36:54 2889964 mum utils.py:218] Training  [ 2600/25000]  eta: 2:29:53  loss: 0.6358 (0.7040)  grad: 0.4385 (0.6582)  batch_size: 16.0000 (16.2918)  lr: 0.0001 (0.0001)  time: 0.425091  data: 0.000380  max mem: 3991
+I20260730 23:37:14 2889964 mum utils.py:218] Training  [ 2650/25000]  eta: 2:29:35  loss: 0.6329 (0.7025)  grad: 0.4659 (0.6545)  batch_size: 16.0000 (16.2720)  lr: 0.0001 (0.0001)  time: 0.390645  data: 0.000371  max mem: 3991
+I20260730 23:37:35 2889964 mum utils.py:218] Training  [ 2700/25000]  eta: 2:29:22  loss: 0.6207 (0.7010)  grad: 0.3548 (0.6502)  batch_size: 16.0000 (16.2673)  lr: 0.0001 (0.0001)  time: 0.456713  data: 0.000389  max mem: 3991
+I20260730 23:37:55 2889964 mum utils.py:218] Training  [ 2750/25000]  eta: 2:29:04  loss: 0.6173 (0.6996)  grad: 0.3698 (0.6467)  batch_size: 16.0000 (16.2777)  lr: 0.0001 (0.0001)  time: 0.431558  data: 0.000372  max mem: 3991
+I20260730 23:38:15 2889964 mum utils.py:218] Training  [ 2800/25000]  eta: 2:28:43  loss: 0.6201 (0.6983)  grad: 0.4373 (0.6426)  batch_size: 16.0000 (16.2931)  lr: 0.0001 (0.0001)  time: 0.410036  data: 0.000344  max mem: 3991
+I20260730 23:38:35 2889964 mum utils.py:218] Training  [ 2850/25000]  eta: 2:28:21  loss: 0.6251 (0.6970)  grad: 0.3913 (0.6386)  batch_size: 16.0000 (16.2964)  lr: 0.0001 (0.0001)  time: 0.411462  data: 0.000403  max mem: 3991
+I20260730 23:38:55 2889964 mum utils.py:218] Training  [ 2900/25000]  eta: 2:28:01  loss: 0.6228 (0.6956)  grad: 0.4168 (0.6347)  batch_size: 12.0000 (16.2899)  lr: 0.0001 (0.0001)  time: 0.390643  data: 0.000379  max mem: 3991
+I20260730 23:39:15 2889964 mum utils.py:218] Training  [ 2950/25000]  eta: 2:27:39  loss: 0.6173 (0.6944)  grad: 0.4107 (0.6313)  batch_size: 16.0000 (16.2907)  lr: 0.0001 (0.0001)  time: 0.399052  data: 0.000354  max mem: 3991
+I20260730 23:39:36 2889964 mum utils.py:218] Training  [ 3000/25000]  eta: 2:27:23  loss: 0.6265 (0.6933)  grad: 0.3517 (0.6275)  batch_size: 16.0000 (16.2976)  lr: 0.0001 (0.0001)  time: 0.393026  data: 0.000351  max mem: 3991
+I20260730 23:39:56 2889964 mum utils.py:218] Training  [ 3050/25000]  eta: 2:27:06  loss: 0.6107 (0.6921)  grad: 0.3864 (0.6240)  batch_size: 21.0000 (16.3088)  lr: 0.0001 (0.0001)  time: 0.394400  data: 0.000373  max mem: 3991
+I20260730 23:40:17 2889964 mum utils.py:218] Training  [ 3100/25000]  eta: 2:26:48  loss: 0.5985 (0.6908)  grad: 0.4705 (0.6205)  batch_size: 16.0000 (16.2960)  lr: 0.0001 (0.0001)  time: 0.417539  data: 0.000385  max mem: 3991
+I20260730 23:40:37 2889964 mum utils.py:218] Training  [ 3150/25000]  eta: 2:26:28  loss: 0.6177 (0.6896)  grad: 0.3826 (0.6168)  batch_size: 12.0000 (16.2945)  lr: 0.0001 (0.0001)  time: 0.393834  data: 0.000363  max mem: 3991
+I20260730 23:40:57 2889964 mum utils.py:218] Training  [ 3200/25000]  eta: 2:26:09  loss: 0.6218 (0.6885)  grad: 0.3510 (0.6131)  batch_size: 16.0000 (16.3030)  lr: 0.0001 (0.0001)  time: 0.395754  data: 0.000400  max mem: 3991
+I20260730 23:41:17 2889964 mum utils.py:218] Training  [ 3250/25000]  eta: 2:25:46  loss: 0.6357 (0.6876)  grad: 0.3655 (0.6101)  batch_size: 12.0000 (16.3064)  lr: 0.0001 (0.0001)  time: 0.394153  data: 0.000563  max mem: 3991
+I20260730 23:41:38 2889964 mum utils.py:218] Training  [ 3300/25000]  eta: 2:25:31  loss: 0.6220 (0.6866)  grad: 0.3737 (0.6067)  batch_size: 16.0000 (16.3014)  lr: 0.0001 (0.0001)  time: 0.383530  data: 0.000345  max mem: 3991
+I20260730 23:41:58 2889964 mum utils.py:218] Training  [ 3350/25000]  eta: 2:25:13  loss: 0.6295 (0.6855)  grad: 0.3421 (0.6033)  batch_size: 16.0000 (16.3002)  lr: 0.0001 (0.0001)  time: 0.391900  data: 0.000361  max mem: 3991
+I20260730 23:42:18 2889964 mum utils.py:218] Training  [ 3400/25000]  eta: 2:24:50  loss: 0.6050 (0.6844)  grad: 0.3957 (0.6002)  batch_size: 16.0000 (16.2955)  lr: 0.0001 (0.0001)  time: 0.396870  data: 0.000333  max mem: 3991
+I20260730 23:42:39 2889964 mum utils.py:218] Training  [ 3450/25000]  eta: 2:24:39  loss: 0.6020 (0.6834)  grad: 0.3265 (0.5974)  batch_size: 16.0000 (16.2964)  lr: 0.0001 (0.0001)  time: 0.418889  data: 0.000386  max mem: 3991
+I20260730 23:43:00 2889964 mum utils.py:218] Training  [ 3500/25000]  eta: 2:24:21  loss: 0.6161 (0.6824)  grad: 0.4084 (0.5946)  batch_size: 16.0000 (16.3011)  lr: 0.0001 (0.0001)  time: 0.394634  data: 0.000332  max mem: 3991
+I20260730 23:43:20 2889964 mum utils.py:218] Training  [ 3550/25000]  eta: 2:24:04  loss: 0.6223 (0.6815)  grad: 0.3873 (0.5916)  batch_size: 21.0000 (16.3081)  lr: 0.0001 (0.0001)  time: 0.413554  data: 0.000347  max mem: 3991
+I20260730 23:43:41 2889964 mum utils.py:218] Training  [ 3600/25000]  eta: 2:23:47  loss: 0.6300 (0.6806)  grad: 0.3565 (0.5891)  batch_size: 16.0000 (16.3160)  lr: 0.0001 (0.0001)  time: 0.433124  data: 0.000384  max mem: 3991
+I20260730 23:44:02 2889964 mum utils.py:218] Training  [ 3650/25000]  eta: 2:23:28  loss: 0.6243 (0.6797)  grad: 0.3287 (0.5865)  batch_size: 16.0000 (16.3177)  lr: 0.0001 (0.0001)  time: 0.399272  data: 0.000596  max mem: 3991
+I20260730 23:44:21 2889964 mum utils.py:218] Training  [ 3700/25000]  eta: 2:23:06  loss: 0.6183 (0.6788)  grad: 0.3487 (0.5837)  batch_size: 16.0000 (16.3164)  lr: 0.0001 (0.0001)  time: 0.392289  data: 0.000357  max mem: 3991
+I20260730 23:44:42 2889964 mum utils.py:218] Training  [ 3750/25000]  eta: 2:22:50  loss: 0.6146 (0.6780)  grad: 0.3527 (0.5809)  batch_size: 16.0000 (16.3260)  lr: 0.0001 (0.0001)  time: 0.407148  data: 0.000348  max mem: 3991
+I20260730 23:45:03 2889964 mum utils.py:218] Training  [ 3800/25000]  eta: 2:22:32  loss: 0.6173 (0.6771)  grad: 0.3350 (0.5785)  batch_size: 16.0000 (16.3239)  lr: 0.0001 (0.0001)  time: 0.390574  data: 0.000561  max mem: 3991
+I20260730 23:45:24 2889964 mum utils.py:218] Training  [ 3850/25000]  eta: 2:22:15  loss: 0.6294 (0.6764)  grad: 0.3844 (0.5761)  batch_size: 16.0000 (16.3274)  lr: 0.0001 (0.0001)  time: 0.423906  data: 0.000540  max mem: 3991
+I20260730 23:45:44 2889964 mum utils.py:218] Training  [ 3900/25000]  eta: 2:21:57  loss: 0.6102 (0.6757)  grad: 0.3556 (0.5735)  batch_size: 16.0000 (16.3330)  lr: 0.0001 (0.0001)  time: 0.394430  data: 0.000385  max mem: 3991
+I20260730 23:46:04 2889964 mum utils.py:218] Training  [ 3950/25000]  eta: 2:21:37  loss: 0.5853 (0.6748)  grad: 0.3690 (0.5708)  batch_size: 16.0000 (16.3478)  lr: 0.0001 (0.0001)  time: 0.391985  data: 0.000340  max mem: 3991
+I20260730 23:46:27 2889964 mum utils.py:218] Training  [ 4000/25000]  eta: 2:21:31  loss: 0.5980 (0.6739)  grad: 0.3972 (0.5690)  batch_size: 16.0000 (16.3599)  lr: 0.0001 (0.0001)  time: 0.494849  data: 0.000350  max mem: 3991
+I20260730 23:46:47 2889964 mum utils.py:218] Training  [ 4050/25000]  eta: 2:21:06  loss: 0.6163 (0.6732)  grad: 0.3737 (0.5663)  batch_size: 21.0000 (16.3688)  lr: 0.0001 (0.0001)  time: 0.388659  data: 0.000449  max mem: 3991
+I20260730 23:47:08 2889964 mum utils.py:218] Training  [ 4100/25000]  eta: 2:20:50  loss: 0.6235 (0.6724)  grad: 0.3312 (0.5638)  batch_size: 16.0000 (16.3723)  lr: 0.0001 (0.0001)  time: 0.384893  data: 0.000357  max mem: 3991
+I20260730 23:47:28 2889964 mum utils.py:218] Training  [ 4150/25000]  eta: 2:20:32  loss: 0.6181 (0.6717)  grad: 0.3013 (0.5613)  batch_size: 16.0000 (16.3655)  lr: 0.0001 (0.0001)  time: 0.440575  data: 0.000408  max mem: 3991
+I20260730 23:47:50 2889964 mum utils.py:218] Training  [ 4200/25000]  eta: 2:20:18  loss: 0.6177 (0.6711)  grad: 0.3629 (0.5591)  batch_size: 16.0000 (16.3701)  lr: 0.0001 (0.0001)  time: 0.394698  data: 0.000504  max mem: 3991
+I20260730 23:48:10 2889964 mum utils.py:218] Training  [ 4250/25000]  eta: 2:19:58  loss: 0.6056 (0.6705)  grad: 0.3242 (0.5571)  batch_size: 16.0000 (16.3658)  lr: 0.0001 (0.0001)  time: 0.382147  data: 0.000480  max mem: 3991
+I20260730 23:48:30 2889964 mum utils.py:218] Training  [ 4300/25000]  eta: 2:19:38  loss: 0.6326 (0.6699)  grad: 0.3269 (0.5545)  batch_size: 16.0000 (16.3606)  lr: 0.0001 (0.0001)  time: 0.397877  data: 0.000364  max mem: 3991
+I20260730 23:48:51 2889964 mum utils.py:218] Training  [ 4350/25000]  eta: 2:19:20  loss: 0.6079 (0.6692)  grad: 0.3435 (0.5522)  batch_size: 16.0000 (16.3613)  lr: 0.0001 (0.0001)  time: 0.398580  data: 0.000342  max mem: 3991
+I20260730 23:49:11 2889964 mum utils.py:218] Training  [ 4400/25000]  eta: 2:19:01  loss: 0.6146 (0.6686)  grad: 0.3323 (0.5499)  batch_size: 16.0000 (16.3645)  lr: 0.0001 (0.0001)  time: 0.390669  data: 0.000342  max mem: 3991
+I20260730 23:49:32 2889964 mum utils.py:218] Training  [ 4450/25000]  eta: 2:18:41  loss: 0.6213 (0.6680)  grad: 0.3495 (0.5477)  batch_size: 16.0000 (16.3768)  lr: 0.0001 (0.0001)  time: 0.400599  data: 0.000336  max mem: 3991
+I20260730 23:49:51 2889964 mum utils.py:218] Training  [ 4500/25000]  eta: 2:18:18  loss: 0.6133 (0.6674)  grad: 0.3704 (0.5454)  batch_size: 16.0000 (16.3693)  lr: 0.0001 (0.0001)  time: 0.394288  data: 0.000368  max mem: 3991
+I20260730 23:50:12 2889964 mum utils.py:218] Training  [ 4550/25000]  eta: 2:18:00  loss: 0.6245 (0.6668)  grad: 0.3371 (0.5432)  batch_size: 16.0000 (16.3702)  lr: 0.0001 (0.0001)  time: 0.449232  data: 0.000341  max mem: 3991
+I20260730 23:50:32 2889964 mum utils.py:218] Training  [ 4600/25000]  eta: 2:17:40  loss: 0.6191 (0.6661)  grad: 0.3110 (0.5406)  batch_size: 16.0000 (16.3697)  lr: 0.0001 (0.0001)  time: 0.396573  data: 0.000329  max mem: 3991
+I20260730 23:50:52 2889964 mum utils.py:218] Training  [ 4650/25000]  eta: 2:17:18  loss: 0.6095 (0.6655)  grad: 0.3495 (0.5389)  batch_size: 16.0000 (16.3694)  lr: 0.0001 (0.0001)  time: 0.390182  data: 0.000334  max mem: 3991
+I20260730 23:51:13 2889964 mum utils.py:218] Training  [ 4700/25000]  eta: 2:17:01  loss: 0.6037 (0.6648)  grad: 0.3545 (0.5368)  batch_size: 16.0000 (16.3799)  lr: 0.0001 (0.0001)  time: 0.398091  data: 0.000381  max mem: 3991
+I20260730 23:51:34 2889964 mum utils.py:218] Training  [ 4750/25000]  eta: 2:16:43  loss: 0.6101 (0.6642)  grad: 0.3039 (0.5345)  batch_size: 16.0000 (16.3831)  lr: 0.0001 (0.0001)  time: 0.387140  data: 0.000370  max mem: 3991
+I20260730 23:51:54 2889964 mum utils.py:218] Training  [ 4800/25000]  eta: 2:16:22  loss: 0.6147 (0.6637)  grad: 0.3205 (0.5324)  batch_size: 16.0000 (16.3933)  lr: 0.0001 (0.0001)  time: 0.414531  data: 0.000348  max mem: 3991
+I20260730 23:52:15 2889964 mum utils.py:218] Training  [ 4850/25000]  eta: 2:16:05  loss: 0.6228 (0.6632)  grad: 0.3374 (0.5306)  batch_size: 16.0000 (16.3981)  lr: 0.0001 (0.0001)  time: 0.425784  data: 0.000342  max mem: 3991
+I20260730 23:52:36 2889964 mum utils.py:218] Training  [ 4900/25000]  eta: 2:15:46  loss: 0.5937 (0.6625)  grad: 0.3730 (0.5289)  batch_size: 12.0000 (16.3879)  lr: 0.0001 (0.0001)  time: 0.392527  data: 0.000441  max mem: 3991
+I20260730 23:52:55 2889964 mum utils.py:218] Training  [ 4950/25000]  eta: 2:15:23  loss: 0.6331 (0.6621)  grad: 0.3644 (0.5272)  batch_size: 16.0000 (16.3900)  lr: 0.0001 (0.0001)  time: 0.394118  data: 0.000347  max mem: 3991
+I20260730 23:53:16 2889964 mum utils.py:218] Training  [ 5000/25000]  eta: 2:15:04  loss: 0.6028 (0.6615)  grad: 0.3466 (0.5250)  batch_size: 16.0000 (16.3943)  lr: 0.0001 (0.0001)  time: 0.429644  data: 0.000476  max mem: 3991
+I20260730 23:53:36 2889964 mum utils.py:218] Training  [ 5050/25000]  eta: 2:14:41  loss: 0.6107 (0.6610)  grad: 0.3475 (0.5231)  batch_size: 16.0000 (16.4053)  lr: 0.0001 (0.0001)  time: 0.397791  data: 0.000594  max mem: 3991
+I20260730 23:53:55 2889964 mum utils.py:218] Training  [ 5100/25000]  eta: 2:14:20  loss: 0.5984 (0.6605)  grad: 0.3408 (0.5212)  batch_size: 12.0000 (16.3966)  lr: 0.0001 (0.0001)  time: 0.399051  data: 0.000360  max mem: 3991
+I20260730 23:54:16 2889964 mum utils.py:218] Training  [ 5150/25000]  eta: 2:14:02  loss: 0.6223 (0.6600)  grad: 0.2755 (0.5192)  batch_size: 16.0000 (16.4015)  lr: 0.0001 (0.0001)  time: 0.391941  data: 0.000583  max mem: 3991
+I20260730 23:54:38 2889964 mum utils.py:218] Training  [ 5200/25000]  eta: 2:13:46  loss: 0.6027 (0.6594)  grad: 0.2737 (0.5172)  batch_size: 16.0000 (16.4088)  lr: 0.0001 (0.0001)  time: 0.441479  data: 0.000331  max mem: 3991
+I20260730 23:54:58 2889964 mum utils.py:218] Training  [ 5250/25000]  eta: 2:13:26  loss: 0.6132 (0.6590)  grad: 0.2833 (0.5155)  batch_size: 16.0000 (16.4068)  lr: 0.0001 (0.0001)  time: 0.388537  data: 0.000364  max mem: 3991
+I20260730 23:55:18 2889964 mum utils.py:218] Training  [ 5300/25000]  eta: 2:13:05  loss: 0.6054 (0.6585)  grad: 0.3015 (0.5137)  batch_size: 16.0000 (16.4003)  lr: 0.0001 (0.0001)  time: 0.392871  data: 0.000360  max mem: 3991
+I20260730 23:55:39 2889964 mum utils.py:218] Training  [ 5350/25000]  eta: 2:12:46  loss: 0.6099 (0.6582)  grad: 0.3711 (0.5121)  batch_size: 16.0000 (16.3966)  lr: 0.0001 (0.0001)  time: 0.408016  data: 0.000337  max mem: 3991
+I20260730 23:55:58 2889964 mum utils.py:218] Training  [ 5400/25000]  eta: 2:12:23  loss: 0.6041 (0.6577)  grad: 0.3356 (0.5105)  batch_size: 16.0000 (16.4012)  lr: 0.0001 (0.0001)  time: 0.390390  data: 0.000377  max mem: 3991
+I20260730 23:56:19 2889964 mum utils.py:218] Training  [ 5450/25000]  eta: 2:12:02  loss: 0.6026 (0.6572)  grad: 0.3167 (0.5088)  batch_size: 12.0000 (16.3964)  lr: 0.0001 (0.0001)  time: 0.387616  data: 0.000360  max mem: 3991
+I20260730 23:56:39 2889964 mum utils.py:218] Training  [ 5500/25000]  eta: 2:11:44  loss: 0.6141 (0.6567)  grad: 0.3199 (0.5073)  batch_size: 16.0000 (16.3928)  lr: 0.0001 (0.0001)  time: 0.387436  data: 0.000368  max mem: 3991
+I20260730 23:57:01 2889964 mum utils.py:218] Training  [ 5550/25000]  eta: 2:11:27  loss: 0.5874 (0.6562)  grad: 0.3160 (0.5056)  batch_size: 16.0000 (16.3900)  lr: 0.0001 (0.0001)  time: 0.417316  data: 0.000383  max mem: 3991
+I20260730 23:57:20 2889964 mum utils.py:218] Training  [ 5600/25000]  eta: 2:11:05  loss: 0.6155 (0.6558)  grad: 0.3235 (0.5040)  batch_size: 16.0000 (16.3876)  lr: 0.0001 (0.0001)  time: 0.392574  data: 0.000350  max mem: 3991
+I20260730 23:57:41 2889964 mum utils.py:218] Training  [ 5650/25000]  eta: 2:10:45  loss: 0.5901 (0.6553)  grad: 0.2656 (0.5022)  batch_size: 16.0000 (16.3835)  lr: 0.0001 (0.0001)  time: 0.435042  data: 0.000335  max mem: 3991
+I20260730 23:58:00 2889964 mum utils.py:218] Training  [ 5700/25000]  eta: 2:10:23  loss: 0.6043 (0.6548)  grad: 0.3323 (0.5007)  batch_size: 16.0000 (16.3805)  lr: 0.0001 (0.0001)  time: 0.393784  data: 0.000417  max mem: 3991
+I20260730 23:58:21 2889964 mum utils.py:218] Training  [ 5750/25000]  eta: 2:10:03  loss: 0.6005 (0.6544)  grad: 0.3141 (0.4990)  batch_size: 16.0000 (16.3865)  lr: 0.0001 (0.0001)  time: 0.421715  data: 0.000324  max mem: 3991
+I20260730 23:58:41 2889964 mum utils.py:218] Training  [ 5800/25000]  eta: 2:09:42  loss: 0.6135 (0.6540)  grad: 0.3280 (0.4978)  batch_size: 16.0000 (16.3815)  lr: 0.0001 (0.0001)  time: 0.387724  data: 0.000405  max mem: 3991
+I20260730 23:59:01 2889964 mum utils.py:218] Training  [ 5850/25000]  eta: 2:09:22  loss: 0.5938 (0.6535)  grad: 0.3006 (0.4962)  batch_size: 16.0000 (16.3822)  lr: 0.0001 (0.0001)  time: 0.417540  data: 0.000346  max mem: 3991
+I20260730 23:59:21 2889964 mum utils.py:218] Training  [ 5900/25000]  eta: 2:08:59  loss: 0.6054 (0.6531)  grad: 0.3335 (0.4949)  batch_size: 21.0000 (16.3867)  lr: 0.0001 (0.0001)  time: 0.392454  data: 0.000348  max mem: 3991
+I20260730 23:59:40 2889964 mum utils.py:218] Training  [ 5950/25000]  eta: 2:08:37  loss: 0.6098 (0.6527)  grad: 0.3045 (0.4933)  batch_size: 16.0000 (16.3878)  lr: 0.0001 (0.0001)  time: 0.397390  data: 0.000337  max mem: 3991
+I20260731 00:00:03 2889964 mum utils.py:218] Training  [ 6000/25000]  eta: 2:08:25  loss: 0.6057 (0.6523)  grad: 0.2971 (0.4918)  batch_size: 16.0000 (16.3924)  lr: 0.0001 (0.0001)  time: 0.490188  data: 0.000368  max mem: 3991
+I20260731 00:00:23 2889964 mum utils.py:218] Training  [ 6050/25000]  eta: 2:08:03  loss: 0.6128 (0.6520)  grad: 0.3001 (0.4903)  batch_size: 16.0000 (16.3894)  lr: 0.0001 (0.0001)  time: 0.390017  data: 0.000337  max mem: 3991
+I20260731 00:00:43 2889964 mum utils.py:218] Training  [ 6100/25000]  eta: 2:07:42  loss: 0.5940 (0.6515)  grad: 0.2966 (0.4888)  batch_size: 16.0000 (16.3896)  lr: 0.0001 (0.0001)  time: 0.416140  data: 0.000684  max mem: 3991
+I20260731 00:01:04 2889964 mum utils.py:218] Training  [ 6150/25000]  eta: 2:07:22  loss: 0.6041 (0.6511)  grad: 0.3456 (0.4875)  batch_size: 16.0000 (16.3900)  lr: 0.0001 (0.0001)  time: 0.390553  data: 0.000390  max mem: 3991
+I20260731 00:01:23 2889964 mum utils.py:218] Training  [ 6200/25000]  eta: 2:07:00  loss: 0.6153 (0.6508)  grad: 0.3135 (0.4862)  batch_size: 16.0000 (16.3903)  lr: 0.0001 (0.0001)  time: 0.393356  data: 0.000354  max mem: 3991
+I20260731 00:01:44 2889964 mum utils.py:218] Training  [ 6250/25000]  eta: 2:06:42  loss: 0.6063 (0.6504)  grad: 0.2871 (0.4846)  batch_size: 16.0000 (16.3891)  lr: 0.0001 (0.0001)  time: 0.408362  data: 0.000365  max mem: 3991
+I20260731 00:02:06 2889964 mum utils.py:218] Training  [ 6300/25000]  eta: 2:06:26  loss: 0.5991 (0.6500)  grad: 0.2855 (0.4832)  batch_size: 16.0000 (16.3885)  lr: 0.0001 (0.0001)  time: 0.443100  data: 0.000305  max mem: 3991
+I20260731 00:02:25 2889964 mum utils.py:218] Training  [ 6350/25000]  eta: 2:06:03  loss: 0.5765 (0.6495)  grad: 0.3107 (0.4820)  batch_size: 16.0000 (16.3872)  lr: 0.0001 (0.0001)  time: 0.386478  data: 0.000350  max mem: 3991
+I20260731 00:02:45 2889964 mum utils.py:218] Training  [ 6400/25000]  eta: 2:05:41  loss: 0.6088 (0.6492)  grad: 0.3281 (0.4806)  batch_size: 16.0000 (16.3876)  lr: 0.0001 (0.0001)  time: 0.399202  data: 0.000321  max mem: 3991
+I20260731 00:03:05 2889964 mum utils.py:218] Training  [ 6450/25000]  eta: 2:05:20  loss: 0.5815 (0.6489)  grad: 0.2650 (0.4792)  batch_size: 16.0000 (16.3892)  lr: 0.0001 (0.0001)  time: 0.419902  data: 0.000374  max mem: 3991
+I20260731 00:03:25 2889964 mum utils.py:218] Training  [ 6500/25000]  eta: 2:05:00  loss: 0.6183 (0.6486)  grad: 0.2963 (0.4778)  batch_size: 21.0000 (16.3893)  lr: 0.0001 (0.0001)  time: 0.398876  data: 0.000314  max mem: 3991
+I20260731 00:03:45 2889964 mum utils.py:218] Training  [ 6550/25000]  eta: 2:04:39  loss: 0.6060 (0.6482)  grad: 0.3734 (0.4767)  batch_size: 16.0000 (16.3922)  lr: 0.0001 (0.0001)  time: 0.410228  data: 0.000318  max mem: 3991
+I20260731 00:04:05 2889964 mum utils.py:218] Training  [ 6600/25000]  eta: 2:04:18  loss: 0.6063 (0.6478)  grad: 0.2874 (0.4753)  batch_size: 16.0000 (16.3948)  lr: 0.0001 (0.0001)  time: 0.393544  data: 0.000342  max mem: 3991
+I20260731 00:04:26 2889964 mum utils.py:218] Training  [ 6650/25000]  eta: 2:03:59  loss: 0.5952 (0.6474)  grad: 0.2532 (0.4739)  batch_size: 16.0000 (16.4023)  lr: 0.0001 (0.0001)  time: 0.422257  data: 0.000393  max mem: 3991
+I20260731 00:04:46 2889964 mum utils.py:218] Training  [ 6700/25000]  eta: 2:03:38  loss: 0.6099 (0.6470)  grad: 0.3022 (0.4726)  batch_size: 16.0000 (16.3987)  lr: 0.0001 (0.0001)  time: 0.387696  data: 0.000528  max mem: 3991
+I20260731 00:05:06 2889964 mum utils.py:218] Training  [ 6750/25000]  eta: 2:03:17  loss: 0.5956 (0.6467)  grad: 0.2900 (0.4714)  batch_size: 16.0000 (16.4041)  lr: 0.0001 (0.0001)  time: 0.398766  data: 0.000380  max mem: 3991
+I20260731 00:05:27 2889964 mum utils.py:218] Training  [ 6800/25000]  eta: 2:02:58  loss: 0.6051 (0.6463)  grad: 0.2920 (0.4703)  batch_size: 16.0000 (16.3982)  lr: 0.0001 (0.0001)  time: 0.384798  data: 0.000350  max mem: 3991
+I20260731 00:05:46 2889964 mum utils.py:218] Training  [ 6850/25000]  eta: 2:02:36  loss: 0.5963 (0.6460)  grad: 0.3103 (0.4691)  batch_size: 16.0000 (16.4011)  lr: 0.0001 (0.0001)  time: 0.392999  data: 0.000402  max mem: 3991
+I20260731 00:06:06 2889964 mum utils.py:218] Training  [ 6900/25000]  eta: 2:02:14  loss: 0.5885 (0.6457)  grad: 0.2600 (0.4677)  batch_size: 12.0000 (16.3962)  lr: 0.0001 (0.0001)  time: 0.393664  data: 0.000324  max mem: 3991
+I20260731 00:06:27 2889964 mum utils.py:218] Training  [ 6950/25000]  eta: 2:01:55  loss: 0.6052 (0.6454)  grad: 0.2833 (0.4668)  batch_size: 16.0000 (16.3971)  lr: 0.0001 (0.0001)  time: 0.392998  data: 0.000381  max mem: 3991
+I20260731 00:06:46 2889964 mum utils.py:218] Training  [ 7000/25000]  eta: 2:01:33  loss: 0.6001 (0.6451)  grad: 0.2989 (0.4656)  batch_size: 16.0000 (16.3989)  lr: 0.0001 (0.0001)  time: 0.394493  data: 0.000451  max mem: 3991
+I20260731 00:07:08 2889964 mum utils.py:218] Training  [ 7050/25000]  eta: 2:01:15  loss: 0.5937 (0.6448)  grad: 0.2804 (0.4643)  batch_size: 16.0000 (16.4022)  lr: 0.0001 (0.0001)  time: 0.433935  data: 0.000354  max mem: 3991
+I20260731 00:07:27 2889964 mum utils.py:218] Training  [ 7100/25000]  eta: 2:00:54  loss: 0.6039 (0.6445)  grad: 0.2974 (0.4632)  batch_size: 21.0000 (16.4016)  lr: 0.0001 (0.0001)  time: 0.408907  data: 0.000395  max mem: 3991
+I20260731 00:07:47 2889964 mum utils.py:218] Training  [ 7150/25000]  eta: 2:00:32  loss: 0.6016 (0.6442)  grad: 0.3315 (0.4620)  batch_size: 12.0000 (16.4036)  lr: 0.0001 (0.0001)  time: 0.397688  data: 0.000351  max mem: 3991
+I20260731 00:08:07 2889964 mum utils.py:218] Training  [ 7200/25000]  eta: 2:00:12  loss: 0.6099 (0.6438)  grad: 0.2853 (0.4609)  batch_size: 16.0000 (16.4054)  lr: 0.0001 (0.0001)  time: 0.390259  data: 0.000402  max mem: 3991
+I20260731 00:08:27 2889964 mum utils.py:218] Training  [ 7250/25000]  eta: 1:59:50  loss: 0.6113 (0.6436)  grad: 0.3155 (0.4596)  batch_size: 16.0000 (16.4027)  lr: 0.0001 (0.0001)  time: 0.398541  data: 0.000354  max mem: 3991
+I20260731 00:08:47 2889964 mum utils.py:218] Training  [ 7300/25000]  eta: 1:59:30  loss: 0.6117 (0.6433)  grad: 0.2787 (0.4586)  batch_size: 16.0000 (16.4034)  lr: 0.0001 (0.0001)  time: 0.421320  data: 0.000335  max mem: 3991
+I20260731 00:09:08 2889964 mum utils.py:218] Training  [ 7350/25000]  eta: 1:59:10  loss: 0.5824 (0.6429)  grad: 0.3481 (0.4578)  batch_size: 16.0000 (16.3982)  lr: 0.0001 (0.0001)  time: 0.417440  data: 0.000377  max mem: 3991
+I20260731 00:09:28 2889964 mum utils.py:218] Training  [ 7400/25000]  eta: 1:58:49  loss: 0.6017 (0.6426)  grad: 0.2777 (0.4567)  batch_size: 12.0000 (16.3908)  lr: 0.0001 (0.0001)  time: 0.396611  data: 0.000353  max mem: 3991
+I20260731 00:09:48 2889964 mum utils.py:218] Training  [ 7450/25000]  eta: 1:58:30  loss: 0.5976 (0.6423)  grad: 0.2553 (0.4556)  batch_size: 16.0000 (16.3855)  lr: 0.0001 (0.0001)  time: 0.444198  data: 0.000327  max mem: 3991
+I20260731 00:10:08 2889964 mum utils.py:218] Training  [ 7500/25000]  eta: 1:58:09  loss: 0.5989 (0.6420)  grad: 0.2508 (0.4543)  batch_size: 16.0000 (16.3895)  lr: 0.0001 (0.0001)  time: 0.387623  data: 0.000339  max mem: 3991
+I20260731 00:10:28 2889964 mum utils.py:218] Training  [ 7550/25000]  eta: 1:57:48  loss: 0.6138 (0.6418)  grad: 0.2522 (0.4532)  batch_size: 16.0000 (16.3874)  lr: 0.0001 (0.0001)  time: 0.396150  data: 0.000355  max mem: 3991
+I20260731 00:10:49 2889964 mum utils.py:218] Training  [ 7600/25000]  eta: 1:57:28  loss: 0.5950 (0.6414)  grad: 0.2859 (0.4523)  batch_size: 16.0000 (16.3918)  lr: 0.0001 (0.0001)  time: 0.435864  data: 0.000354  max mem: 3991
+I20260731 00:11:09 2889964 mum utils.py:218] Training  [ 7650/25000]  eta: 1:57:08  loss: 0.5977 (0.6411)  grad: 0.2810 (0.4511)  batch_size: 16.0000 (16.3896)  lr: 0.0001 (0.0001)  time: 0.400231  data: 0.000380  max mem: 3991
+I20260731 00:11:30 2889964 mum utils.py:218] Training  [ 7700/25000]  eta: 1:56:48  loss: 0.5885 (0.6408)  grad: 0.2746 (0.4500)  batch_size: 16.0000 (16.3884)  lr: 0.0001 (0.0001)  time: 0.392922  data: 0.000345  max mem: 3991
+I20260731 00:11:50 2889964 mum utils.py:218] Training  [ 7750/25000]  eta: 1:56:29  loss: 0.5964 (0.6406)  grad: 0.2730 (0.4490)  batch_size: 16.0000 (16.3940)  lr: 0.0001 (0.0001)  time: 0.439184  data: 0.000303  max mem: 3991
+I20260731 00:12:11 2889964 mum utils.py:218] Training  [ 7800/25000]  eta: 1:56:09  loss: 0.5988 (0.6403)  grad: 0.2548 (0.4480)  batch_size: 16.0000 (16.3921)  lr: 0.0001 (0.0001)  time: 0.411908  data: 0.000725  max mem: 3991
+I20260731 00:12:31 2889964 mum utils.py:218] Training  [ 7850/25000]  eta: 1:55:49  loss: 0.5973 (0.6400)  grad: 0.2529 (0.4470)  batch_size: 16.0000 (16.3903)  lr: 0.0001 (0.0001)  time: 0.388751  data: 0.000372  max mem: 3991
+I20260731 00:12:50 2889964 mum utils.py:218] Training  [ 7900/25000]  eta: 1:55:27  loss: 0.6030 (0.6397)  grad: 0.2747 (0.4459)  batch_size: 16.0000 (16.3918)  lr: 0.0001 (0.0001)  time: 0.390255  data: 0.000395  max mem: 3991
+I20260731 00:13:10 2889964 mum utils.py:218] Training  [ 7950/25000]  eta: 1:55:05  loss: 0.5858 (0.6394)  grad: 0.2851 (0.4451)  batch_size: 16.0000 (16.3945)  lr: 0.0001 (0.0001)  time: 0.393029  data: 0.000354  max mem: 3991
+I20260731 00:13:33 2889964 mum utils.py:218] Training  [ 8000/25000]  eta: 1:54:50  loss: 0.5755 (0.6391)  grad: 0.2697 (0.4441)  batch_size: 16.0000 (16.3902)  lr: 0.0001 (0.0001)  time: 0.500240  data: 0.000345  max mem: 3991
+I20260731 00:13:52 2889964 mum utils.py:218] Training  [ 8050/25000]  eta: 1:54:28  loss: 0.5921 (0.6389)  grad: 0.2702 (0.4431)  batch_size: 16.0000 (16.3926)  lr: 0.0001 (0.0001)  time: 0.391435  data: 0.000352  max mem: 3991
+I20260731 00:14:12 2889964 mum utils.py:218] Training  [ 8100/25000]  eta: 1:54:07  loss: 0.5964 (0.6386)  grad: 0.2749 (0.4422)  batch_size: 16.0000 (16.3960)  lr: 0.0001 (0.0001)  time: 0.403946  data: 0.000351  max mem: 3991
+I20260731 00:14:32 2889964 mum utils.py:218] Training  [ 8150/25000]  eta: 1:53:47  loss: 0.5897 (0.6384)  grad: 0.3429 (0.4414)  batch_size: 16.0000 (16.3930)  lr: 0.0001 (0.0001)  time: 0.396207  data: 0.000343  max mem: 3991
+I20260731 00:14:53 2889964 mum utils.py:218] Training  [ 8200/25000]  eta: 1:53:27  loss: 0.5874 (0.6381)  grad: 0.2435 (0.4403)  batch_size: 16.0000 (16.3945)  lr: 0.0001 (0.0001)  time: 0.441055  data: 0.000337  max mem: 3991
+I20260731 00:15:13 2889964 mum utils.py:218] Training  [ 8250/25000]  eta: 1:53:07  loss: 0.6018 (0.6379)  grad: 0.3165 (0.4395)  batch_size: 16.0000 (16.3917)  lr: 0.0001 (0.0001)  time: 0.424756  data: 0.000318  max mem: 3991
+I20260731 00:15:34 2889964 mum utils.py:218] Training  [ 8300/25000]  eta: 1:52:48  loss: 0.6165 (0.6376)  grad: 0.2594 (0.4385)  batch_size: 16.0000 (16.3942)  lr: 0.0001 (0.0001)  time: 0.385072  data: 0.000351  max mem: 3991
+I20260731 00:15:53 2889964 mum utils.py:218] Training  [ 8350/25000]  eta: 1:52:26  loss: 0.6119 (0.6375)  grad: 0.2513 (0.4374)  batch_size: 16.0000 (16.3913)  lr: 0.0001 (0.0001)  time: 0.388388  data: 0.000322  max mem: 3991
+I20260731 00:16:13 2889964 mum utils.py:218] Training  [ 8400/25000]  eta: 1:52:04  loss: 0.6060 (0.6372)  grad: 0.2757 (0.4366)  batch_size: 16.0000 (16.3926)  lr: 0.0001 (0.0001)  time: 0.386765  data: 0.000356  max mem: 3991
+I20260731 00:16:33 2889964 mum utils.py:218] Training  [ 8450/25000]  eta: 1:51:44  loss: 0.5920 (0.6369)  grad: 0.2869 (0.4359)  batch_size: 12.0000 (16.3884)  lr: 0.0001 (0.0001)  time: 0.390852  data: 0.000357  max mem: 3991
+I20260731 00:16:53 2889964 mum utils.py:218] Training  [ 8500/25000]  eta: 1:51:23  loss: 0.5792 (0.6367)  grad: 0.2459 (0.4349)  batch_size: 16.0000 (16.3848)  lr: 0.0001 (0.0001)  time: 0.392116  data: 0.000339  max mem: 3991
+I20260731 00:17:14 2889964 mum utils.py:218] Training  [ 8550/25000]  eta: 1:51:04  loss: 0.5862 (0.6364)  grad: 0.2400 (0.4339)  batch_size: 16.0000 (16.3871)  lr: 0.0001 (0.0001)  time: 0.387598  data: 0.000361  max mem: 3991
+I20260731 00:17:35 2889964 mum utils.py:218] Training  [ 8600/25000]  eta: 1:50:44  loss: 0.6053 (0.6362)  grad: 0.2715 (0.4332)  batch_size: 16.0000 (16.3843)  lr: 0.0001 (0.0001)  time: 0.411688  data: 0.000360  max mem: 3991
+I20260731 00:17:54 2889964 mum utils.py:218] Training  [ 8650/25000]  eta: 1:50:23  loss: 0.5963 (0.6359)  grad: 0.2879 (0.4322)  batch_size: 16.0000 (16.3811)  lr: 0.0001 (0.0001)  time: 0.399294  data: 0.000344  max mem: 3991
+I20260731 00:18:15 2889964 mum utils.py:218] Training  [ 8700/25000]  eta: 1:50:03  loss: 0.6000 (0.6357)  grad: 0.2742 (0.4313)  batch_size: 16.0000 (16.3804)  lr: 0.0001 (0.0001)  time: 0.387032  data: 0.000416  max mem: 3991
+I20260731 00:18:34 2889964 mum utils.py:218] Training  [ 8750/25000]  eta: 1:49:42  loss: 0.5773 (0.6354)  grad: 0.2851 (0.4305)  batch_size: 16.0000 (16.3778)  lr: 0.0001 (0.0001)  time: 0.406762  data: 0.000338  max mem: 3991
+I20260731 00:18:56 2889964 mum utils.py:218] Training  [ 8800/25000]  eta: 1:49:24  loss: 0.5955 (0.6352)  grad: 0.2505 (0.4296)  batch_size: 16.0000 (16.3822)  lr: 0.0001 (0.0001)  time: 0.437539  data: 0.000457  max mem: 3991
+I20260731 00:19:15 2889964 mum utils.py:218] Training  [ 8850/25000]  eta: 1:49:02  loss: 0.6005 (0.6349)  grad: 0.2717 (0.4287)  batch_size: 16.0000 (16.3801)  lr: 0.0001 (0.0001)  time: 0.388826  data: 0.000356  max mem: 3991
+I20260731 00:19:36 2889964 mum utils.py:218] Training  [ 8900/25000]  eta: 1:48:42  loss: 0.6053 (0.6347)  grad: 0.2824 (0.4279)  batch_size: 16.0000 (16.3815)  lr: 0.0001 (0.0001)  time: 0.390707  data: 0.000440  max mem: 3991
+I20260731 00:19:55 2889964 mum utils.py:218] Training  [ 8950/25000]  eta: 1:48:21  loss: 0.5914 (0.6344)  grad: 0.2257 (0.4270)  batch_size: 16.0000 (16.3830)  lr: 0.0001 (0.0001)  time: 0.389613  data: 0.000338  max mem: 3991
+I20260731 00:20:16 2889964 mum utils.py:218] Training  [ 9000/25000]  eta: 1:48:01  loss: 0.5985 (0.6342)  grad: 0.2709 (0.4262)  batch_size: 16.0000 (16.3813)  lr: 0.0001 (0.0001)  time: 0.390633  data: 0.000317  max mem: 3991
+I20260731 00:20:38 2889964 mum utils.py:218] Training  [ 9050/25000]  eta: 1:47:43  loss: 0.5673 (0.6339)  grad: 0.2719 (0.4254)  batch_size: 16.0000 (16.3803)  lr: 0.0001 (0.0001)  time: 0.430947  data: 0.000540  max mem: 3991
+I20260731 00:20:59 2889964 mum utils.py:218] Training  [ 9100/25000]  eta: 1:47:24  loss: 0.6032 (0.6337)  grad: 0.2699 (0.4246)  batch_size: 16.0000 (16.3834)  lr: 0.0001 (0.0001)  time: 0.388658  data: 0.000345  max mem: 3991
+I20260731 00:21:20 2889964 mum utils.py:218] Training  [ 9150/25000]  eta: 1:47:05  loss: 0.5742 (0.6334)  grad: 0.2993 (0.4239)  batch_size: 16.0000 (16.3866)  lr: 0.0001 (0.0001)  time: 0.386982  data: 0.001084  max mem: 3991
+I20260731 00:21:39 2889964 mum utils.py:218] Training  [ 9200/25000]  eta: 1:46:44  loss: 0.5717 (0.6332)  grad: 0.2349 (0.4230)  batch_size: 16.0000 (16.3879)  lr: 0.0001 (0.0001)  time: 0.413277  data: 0.000332  max mem: 3991
+I20260731 00:22:00 2889964 mum utils.py:218] Training  [ 9250/25000]  eta: 1:46:24  loss: 0.5856 (0.6330)  grad: 0.2643 (0.4224)  batch_size: 21.0000 (16.3911)  lr: 0.0001 (0.0001)  time: 0.390190  data: 0.000388  max mem: 3991
+I20260731 00:22:21 2889964 mum utils.py:218] Training  [ 9300/25000]  eta: 1:46:06  loss: 0.5847 (0.6327)  grad: 0.2505 (0.4216)  batch_size: 16.0000 (16.3874)  lr: 0.0001 (0.0001)  time: 0.463039  data: 0.000405  max mem: 3991
+I20260731 00:22:41 2889964 mum utils.py:218] Training  [ 9350/25000]  eta: 1:45:44  loss: 0.5791 (0.6325)  grad: 0.2273 (0.4207)  batch_size: 16.0000 (16.3819)  lr: 0.0001 (0.0001)  time: 0.386416  data: 0.000706  max mem: 3991
+I20260731 00:23:01 2889964 mum utils.py:218] Training  [ 9400/25000]  eta: 1:45:24  loss: 0.5998 (0.6323)  grad: 0.2327 (0.4199)  batch_size: 21.0000 (16.3826)  lr: 0.0001 (0.0001)  time: 0.420822  data: 0.000370  max mem: 3991
+I20260731 00:23:22 2889964 mum utils.py:218] Training  [ 9450/25000]  eta: 1:45:04  loss: 0.5949 (0.6321)  grad: 0.3219 (0.4192)  batch_size: 16.0000 (16.3831)  lr: 0.0001 (0.0001)  time: 0.402617  data: 0.000376  max mem: 3991
+I20260731 00:23:43 2889964 mum utils.py:218] Training  [ 9500/25000]  eta: 1:44:45  loss: 0.5968 (0.6319)  grad: 0.2813 (0.4184)  batch_size: 16.0000 (16.3857)  lr: 0.0001 (0.0001)  time: 0.456246  data: 0.000385  max mem: 3991
+I20260731 00:24:03 2889964 mum utils.py:218] Training  [ 9550/25000]  eta: 1:44:26  loss: 0.5736 (0.6317)  grad: 0.2811 (0.4177)  batch_size: 12.0000 (16.3839)  lr: 0.0001 (0.0001)  time: 0.408796  data: 0.000336  max mem: 3991
+I20260731 00:24:23 2889964 mum utils.py:218] Training  [ 9600/25000]  eta: 1:44:05  loss: 0.5916 (0.6314)  grad: 0.2615 (0.4169)  batch_size: 16.0000 (16.3860)  lr: 0.0001 (0.0001)  time: 0.431206  data: 0.000349  max mem: 3991
+I20260731 00:24:43 2889964 mum utils.py:218] Training  [ 9650/25000]  eta: 1:43:44  loss: 0.5905 (0.6312)  grad: 0.2697 (0.4162)  batch_size: 16.0000 (16.3886)  lr: 0.0001 (0.0001)  time: 0.394236  data: 0.000355  max mem: 3991
+I20260731 00:25:03 2889964 mum utils.py:218] Training  [ 9700/25000]  eta: 1:43:23  loss: 0.5809 (0.6310)  grad: 0.2562 (0.4156)  batch_size: 16.0000 (16.3877)  lr: 0.0001 (0.0001)  time: 0.411935  data: 0.000344  max mem: 3991
+I20260731 00:25:23 2889964 mum utils.py:218] Training  [ 9750/25000]  eta: 1:43:02  loss: 0.5641 (0.6308)  grad: 0.2595 (0.4148)  batch_size: 12.0000 (16.3844)  lr: 0.0001 (0.0001)  time: 0.395603  data: 0.000678  max mem: 3991
+I20260731 00:25:44 2889964 mum utils.py:218] Training  [ 9800/25000]  eta: 1:42:42  loss: 0.5900 (0.6306)  grad: 0.2545 (0.4140)  batch_size: 16.0000 (16.3798)  lr: 0.0001 (0.0001)  time: 0.422555  data: 0.000326  max mem: 3991
+I20260731 00:26:04 2889964 mum utils.py:218] Training  [ 9850/25000]  eta: 1:42:22  loss: 0.5781 (0.6303)  grad: 0.2638 (0.4133)  batch_size: 16.0000 (16.3773)  lr: 0.0001 (0.0001)  time: 0.397941  data: 0.000331  max mem: 3991
+I20260731 00:26:24 2889964 mum utils.py:218] Training  [ 9900/25000]  eta: 1:42:02  loss: 0.5759 (0.6301)  grad: 0.2595 (0.4126)  batch_size: 16.0000 (16.3729)  lr: 0.0001 (0.0001)  time: 0.434193  data: 0.000344  max mem: 3991
+I20260731 00:26:45 2889964 mum utils.py:218] Training  [ 9950/25000]  eta: 1:41:42  loss: 0.5782 (0.6299)  grad: 0.2870 (0.4120)  batch_size: 16.0000 (16.3741)  lr: 0.0001 (0.0001)  time: 0.428762  data: 0.000390  max mem: 3991
+I20260731 00:27:07 2889964 mum utils.py:218] Training  [10000/25000]  eta: 1:41:24  loss: 0.5854 (0.6296)  grad: 0.2385 (0.4112)  batch_size: 12.0000 (16.3710)  lr: 0.0001 (0.0001)  time: 0.484058  data: 0.000322  max mem: 3991
+I20260731 00:27:26 2889964 mum utils.py:218] Training  [10050/25000]  eta: 1:41:03  loss: 0.5920 (0.6294)  grad: 0.2485 (0.4105)  batch_size: 16.0000 (16.3715)  lr: 0.0001 (0.0001)  time: 0.384207  data: 0.000337  max mem: 3991
+I20260731 00:27:46 2889964 mum utils.py:218] Training  [10100/25000]  eta: 1:40:42  loss: 0.5914 (0.6292)  grad: 0.2318 (0.4098)  batch_size: 16.0000 (16.3725)  lr: 0.0001 (0.0001)  time: 0.395513  data: 0.000330  max mem: 3991
+I20260731 00:28:06 2889964 mum utils.py:218] Training  [10150/25000]  eta: 1:40:22  loss: 0.5854 (0.6290)  grad: 0.2528 (0.4092)  batch_size: 16.0000 (16.3740)  lr: 0.0001 (0.0001)  time: 0.382856  data: 0.000338  max mem: 3991
+I20260731 00:28:26 2889964 mum utils.py:218] Training  [10200/25000]  eta: 1:40:01  loss: 0.5870 (0.6288)  grad: 0.2424 (0.4084)  batch_size: 16.0000 (16.3739)  lr: 0.0001 (0.0001)  time: 0.399350  data: 0.000324  max mem: 3991
+I20260731 00:28:47 2889964 mum utils.py:218] Training  [10250/25000]  eta: 1:39:42  loss: 0.5912 (0.6286)  grad: 0.2481 (0.4077)  batch_size: 12.0000 (16.3745)  lr: 0.0001 (0.0001)  time: 0.402495  data: 0.000424  max mem: 3991
+I20260731 00:29:07 2889964 mum utils.py:218] Training  [10300/25000]  eta: 1:39:20  loss: 0.5997 (0.6285)  grad: 0.2820 (0.4070)  batch_size: 16.0000 (16.3746)  lr: 0.0001 (0.0001)  time: 0.390613  data: 0.000300  max mem: 3991
+I20260731 00:29:26 2889964 mum utils.py:218] Training  [10350/25000]  eta: 1:38:59  loss: 0.6079 (0.6283)  grad: 0.2343 (0.4063)  batch_size: 16.0000 (16.3739)  lr: 0.0001 (0.0001)  time: 0.391091  data: 0.000353  max mem: 3991
+I20260731 00:29:46 2889964 mum utils.py:218] Training  [10400/25000]  eta: 1:38:38  loss: 0.5738 (0.6281)  grad: 0.2478 (0.4056)  batch_size: 16.0000 (16.3783)  lr: 0.0001 (0.0001)  time: 0.393836  data: 0.000337  max mem: 3991
+I20260731 00:30:08 2889964 mum utils.py:218] Training  [10450/25000]  eta: 1:38:20  loss: 0.6071 (0.6279)  grad: 0.2439 (0.4049)  batch_size: 16.0000 (16.3778)  lr: 0.0001 (0.0001)  time: 0.415936  data: 0.000317  max mem: 3991
+I20260731 00:30:28 2889964 mum utils.py:218] Training  [10500/25000]  eta: 1:37:59  loss: 0.6021 (0.6277)  grad: 0.2303 (0.4042)  batch_size: 12.0000 (16.3751)  lr: 0.0001 (0.0001)  time: 0.392051  data: 0.000530  max mem: 3991
+I20260731 00:30:48 2889964 mum utils.py:218] Training  [10550/25000]  eta: 1:37:38  loss: 0.5749 (0.6275)  grad: 0.2521 (0.4035)  batch_size: 16.0000 (16.3741)  lr: 0.0001 (0.0001)  time: 0.396799  data: 0.000350  max mem: 3991
+I20260731 00:31:08 2889964 mum utils.py:218] Training  [10600/25000]  eta: 1:37:18  loss: 0.5882 (0.6274)  grad: 0.2718 (0.4030)  batch_size: 16.0000 (16.3749)  lr: 0.0001 (0.0001)  time: 0.391534  data: 0.000328  max mem: 3991
+I20260731 00:31:29 2889964 mum utils.py:218] Training  [10650/25000]  eta: 1:36:59  loss: 0.5997 (0.6272)  grad: 0.2519 (0.4023)  batch_size: 21.0000 (16.3762)  lr: 0.0001 (0.0001)  time: 0.422706  data: 0.000350  max mem: 3991
+I20260731 00:31:50 2889964 mum utils.py:218] Training  [10700/25000]  eta: 1:36:39  loss: 0.5917 (0.6270)  grad: 0.2494 (0.4016)  batch_size: 16.0000 (16.3802)  lr: 0.0001 (0.0001)  time: 0.427323  data: 0.000354  max mem: 3991
+I20260731 00:32:10 2889964 mum utils.py:218] Training  [10750/25000]  eta: 1:36:19  loss: 0.5960 (0.6269)  grad: 0.2461 (0.4009)  batch_size: 16.0000 (16.3831)  lr: 0.0001 (0.0001)  time: 0.389309  data: 0.000386  max mem: 3991
+I20260731 00:32:30 2889964 mum utils.py:218] Training  [10800/25000]  eta: 1:35:58  loss: 0.5924 (0.6267)  grad: 0.2714 (0.4003)  batch_size: 16.0000 (16.3851)  lr: 0.0001 (0.0001)  time: 0.391122  data: 0.000344  max mem: 3991
+I20260731 00:32:51 2889964 mum utils.py:218] Training  [10850/25000]  eta: 1:35:39  loss: 0.6013 (0.6266)  grad: 0.2667 (0.3997)  batch_size: 16.0000 (16.3825)  lr: 0.0001 (0.0001)  time: 0.453084  data: 0.000364  max mem: 3991
+I20260731 00:33:11 2889964 mum utils.py:218] Training  [10900/25000]  eta: 1:35:18  loss: 0.5667 (0.6263)  grad: 0.2444 (0.3990)  batch_size: 16.0000 (16.3839)  lr: 0.0001 (0.0001)  time: 0.399705  data: 0.000332  max mem: 3991
+I20260731 00:33:30 2889964 mum utils.py:218] Training  [10950/25000]  eta: 1:34:57  loss: 0.5962 (0.6262)  grad: 0.2612 (0.3984)  batch_size: 16.0000 (16.3879)  lr: 0.0001 (0.0001)  time: 0.388614  data: 0.000447  max mem: 3991
+I20260731 00:33:52 2889964 mum utils.py:218] Training  [11000/25000]  eta: 1:34:38  loss: 0.5684 (0.6260)  grad: 0.2299 (0.3978)  batch_size: 16.0000 (16.3869)  lr: 0.0001 (0.0001)  time: 0.460137  data: 0.000381  max mem: 3991
+I20260731 00:34:12 2889964 mum utils.py:218] Training  [11050/25000]  eta: 1:34:17  loss: 0.5790 (0.6258)  grad: 0.2409 (0.3972)  batch_size: 16.0000 (16.3876)  lr: 0.0001 (0.0001)  time: 0.403058  data: 0.000558  max mem: 3991
+I20260731 00:34:33 2889964 mum utils.py:218] Training  [11100/25000]  eta: 1:33:58  loss: 0.5652 (0.6256)  grad: 0.2728 (0.3966)  batch_size: 12.0000 (16.3861)  lr: 0.0001 (0.0001)  time: 0.431820  data: 0.000340  max mem: 3991
+I20260731 00:34:53 2889964 mum utils.py:218] Training  [11150/25000]  eta: 1:33:37  loss: 0.5798 (0.6254)  grad: 0.2574 (0.3960)  batch_size: 12.0000 (16.3847)  lr: 0.0001 (0.0001)  time: 0.392700  data: 0.000322  max mem: 3991
+I20260731 00:35:13 2889964 mum utils.py:218] Training  [11200/25000]  eta: 1:33:17  loss: 0.5700 (0.6252)  grad: 0.2350 (0.3954)  batch_size: 16.0000 (16.3864)  lr: 0.0001 (0.0001)  time: 0.419110  data: 0.000574  max mem: 3991
+I20260731 00:35:33 2889964 mum utils.py:218] Training  [11250/25000]  eta: 1:32:56  loss: 0.6001 (0.6250)  grad: 0.2614 (0.3949)  batch_size: 16.0000 (16.3849)  lr: 0.0001 (0.0001)  time: 0.389160  data: 0.000388  max mem: 3991
+I20260731 00:35:52 2889964 mum utils.py:218] Training  [11300/25000]  eta: 1:32:35  loss: 0.6125 (0.6249)  grad: 0.2304 (0.3943)  batch_size: 16.0000 (16.3807)  lr: 0.0001 (0.0001)  time: 0.391931  data: 0.000365  max mem: 3991
+I20260731 00:36:13 2889964 mum utils.py:218] Training  [11350/25000]  eta: 1:32:16  loss: 0.5738 (0.6247)  grad: 0.2368 (0.3937)  batch_size: 16.0000 (16.3818)  lr: 0.0001 (0.0001)  time: 0.390167  data: 0.000404  max mem: 3991
+I20260731 00:36:35 2889964 mum utils.py:218] Training  [11400/25000]  eta: 1:31:57  loss: 0.5834 (0.6245)  grad: 0.2506 (0.3931)  batch_size: 16.0000 (16.3824)  lr: 0.0001 (0.0001)  time: 0.492972  data: 0.000304  max mem: 3991
+I20260731 00:36:56 2889964 mum utils.py:218] Training  [11450/25000]  eta: 1:31:37  loss: 0.5907 (0.6244)  grad: 0.2381 (0.3926)  batch_size: 16.0000 (16.3811)  lr: 0.0001 (0.0001)  time: 0.440276  data: 0.000635  max mem: 3991
+I20260731 00:37:16 2889964 mum utils.py:218] Training  [11500/25000]  eta: 1:31:17  loss: 0.5963 (0.6242)  grad: 0.2434 (0.3919)  batch_size: 21.0000 (16.3872)  lr: 0.0001 (0.0001)  time: 0.388160  data: 0.000548  max mem: 3991
+I20260731 00:37:36 2889964 mum utils.py:218] Training  [11550/25000]  eta: 1:30:56  loss: 0.5764 (0.6240)  grad: 0.2645 (0.3914)  batch_size: 16.0000 (16.3852)  lr: 0.0001 (0.0001)  time: 0.395044  data: 0.000335  max mem: 3991
+I20260731 00:37:55 2889964 mum utils.py:218] Training  [11600/25000]  eta: 1:30:35  loss: 0.5844 (0.6238)  grad: 0.2626 (0.3909)  batch_size: 16.0000 (16.3845)  lr: 0.0001 (0.0001)  time: 0.388832  data: 0.000383  max mem: 3991
+I20260731 00:38:16 2889964 mum utils.py:218] Training  [11650/25000]  eta: 1:30:15  loss: 0.5842 (0.6237)  grad: 0.2590 (0.3903)  batch_size: 16.0000 (16.3859)  lr: 0.0001 (0.0001)  time: 0.435821  data: 0.000361  max mem: 3991
+I20260731 00:38:37 2889964 mum utils.py:218] Training  [11700/25000]  eta: 1:29:56  loss: 0.5993 (0.6235)  grad: 0.2356 (0.3898)  batch_size: 16.0000 (16.3852)  lr: 0.0001 (0.0001)  time: 0.436556  data: 0.000359  max mem: 3991
+I20260731 00:38:56 2889964 mum utils.py:218] Training  [11750/25000]  eta: 1:29:34  loss: 0.5988 (0.6234)  grad: 0.2448 (0.3893)  batch_size: 16.0000 (16.3864)  lr: 0.0001 (0.0001)  time: 0.385810  data: 0.000320  max mem: 3991
+I20260731 00:39:17 2889964 mum utils.py:218] Training  [11800/25000]  eta: 1:29:14  loss: 0.5952 (0.6232)  grad: 0.2520 (0.3888)  batch_size: 16.0000 (16.3862)  lr: 0.0001 (0.0001)  time: 0.437207  data: 0.000375  max mem: 3991
+I20260731 00:39:38 2889964 mum utils.py:218] Training  [11850/25000]  eta: 1:28:55  loss: 0.5920 (0.6231)  grad: 0.2644 (0.3882)  batch_size: 12.0000 (16.3826)  lr: 0.0001 (0.0001)  time: 0.422303  data: 0.000349  max mem: 3991
+I20260731 00:39:58 2889964 mum utils.py:218] Training  [11900/25000]  eta: 1:28:34  loss: 0.5899 (0.6229)  grad: 0.2348 (0.3877)  batch_size: 16.0000 (16.3820)  lr: 0.0001 (0.0001)  time: 0.390045  data: 0.000354  max mem: 3991
+I20260731 00:40:18 2889964 mum utils.py:218] Training  [11950/25000]  eta: 1:28:14  loss: 0.5606 (0.6227)  grad: 0.2528 (0.3872)  batch_size: 16.0000 (16.3825)  lr: 0.0001 (0.0001)  time: 0.402217  data: 0.000328  max mem: 3991
+I20260731 00:40:40 2889964 mum utils.py:218] Training  [12000/25000]  eta: 1:27:55  loss: 0.5748 (0.6226)  grad: 0.2453 (0.3866)  batch_size: 16.0000 (16.3816)  lr: 0.0001 (0.0001)  time: 0.513244  data: 0.000345  max mem: 3991
+I20260731 00:41:00 2889964 mum utils.py:218] Training  [12050/25000]  eta: 1:27:35  loss: 0.5847 (0.6224)  grad: 0.2256 (0.3861)  batch_size: 16.0000 (16.3771)  lr: 0.0001 (0.0001)  time: 0.381909  data: 0.000395  max mem: 3991
+I20260731 00:41:20 2889964 mum utils.py:218] Training  [12100/25000]  eta: 1:27:14  loss: 0.5746 (0.6223)  grad: 0.2379 (0.3856)  batch_size: 16.0000 (16.3821)  lr: 0.0001 (0.0001)  time: 0.398809  data: 0.000471  max mem: 3991
+I20260731 00:41:40 2889964 mum utils.py:218] Training  [12150/25000]  eta: 1:26:54  loss: 0.5830 (0.6221)  grad: 0.2405 (0.3851)  batch_size: 16.0000 (16.3838)  lr: 0.0001 (0.0001)  time: 0.417629  data: 0.000341  max mem: 3991
+I20260731 00:42:02 2889964 mum utils.py:218] Training  [12200/25000]  eta: 1:26:34  loss: 0.5937 (0.6220)  grad: 0.2562 (0.3846)  batch_size: 16.0000 (16.3862)  lr: 0.0001 (0.0001)  time: 0.442026  data: 0.000746  max mem: 3991
+I20260731 00:42:22 2889964 mum utils.py:218] Training  [12250/25000]  eta: 1:26:14  loss: 0.6053 (0.6218)  grad: 0.2505 (0.3840)  batch_size: 16.0000 (16.3849)  lr: 0.0001 (0.0001)  time: 0.435140  data: 0.000358  max mem: 3991
+I20260731 00:42:41 2889964 mum utils.py:218] Training  [12300/25000]  eta: 1:25:53  loss: 0.6001 (0.6217)  grad: 0.2326 (0.3834)  batch_size: 16.0000 (16.3862)  lr: 0.0001 (0.0001)  time: 0.385729  data: 0.000352  max mem: 3991
+I20260731 00:43:02 2889964 mum utils.py:218] Training  [12350/25000]  eta: 1:25:33  loss: 0.5821 (0.6216)  grad: 0.2733 (0.3829)  batch_size: 16.0000 (16.3869)  lr: 0.0001 (0.0001)  time: 0.417187  data: 0.000355  max mem: 3991
+I20260731 00:43:22 2889964 mum utils.py:218] Training  [12400/25000]  eta: 1:25:13  loss: 0.5875 (0.6214)  grad: 0.2478 (0.3824)  batch_size: 16.0000 (16.3880)  lr: 0.0001 (0.0001)  time: 0.409067  data: 0.000334  max mem: 3991
+I20260731 00:43:42 2889964 mum utils.py:218] Training  [12450/25000]  eta: 1:24:52  loss: 0.5796 (0.6213)  grad: 0.3003 (0.3820)  batch_size: 16.0000 (16.3884)  lr: 0.0001 (0.0001)  time: 0.387683  data: 0.000326  max mem: 3991
+I20260731 00:44:02 2889964 mum utils.py:218] Training  [12500/25000]  eta: 1:24:31  loss: 0.5672 (0.6211)  grad: 0.2492 (0.3815)  batch_size: 16.0000 (16.3882)  lr: 0.0001 (0.0001)  time: 0.425756  data: 0.000476  max mem: 3991
+I20260731 00:44:23 2889964 mum utils.py:218] Training  [12550/25000]  eta: 1:24:11  loss: 0.5869 (0.6210)  grad: 0.2696 (0.3810)  batch_size: 16.0000 (16.3889)  lr: 0.0001 (0.0001)  time: 0.400915  data: 0.000340  max mem: 3991
+I20260731 00:44:42 2889964 mum utils.py:218] Training  [12600/25000]  eta: 1:23:50  loss: 0.5798 (0.6208)  grad: 0.2508 (0.3804)  batch_size: 16.0000 (16.3922)  lr: 0.0001 (0.0001)  time: 0.390762  data: 0.000344  max mem: 3991
+I20260731 00:45:03 2889964 mum utils.py:218] Training  [12650/25000]  eta: 1:23:31  loss: 0.5870 (0.6207)  grad: 0.2390 (0.3799)  batch_size: 16.0000 (16.3891)  lr: 0.0001 (0.0001)  time: 0.436911  data: 0.000330  max mem: 3991
+I20260731 00:45:22 2889964 mum utils.py:218] Training  [12700/25000]  eta: 1:23:10  loss: 0.6060 (0.6206)  grad: 0.2325 (0.3795)  batch_size: 16.0000 (16.3899)  lr: 0.0001 (0.0001)  time: 0.392380  data: 0.000324  max mem: 3991
+I20260731 00:45:43 2889964 mum utils.py:218] Training  [12750/25000]  eta: 1:22:50  loss: 0.5704 (0.6205)  grad: 0.2370 (0.3789)  batch_size: 16.0000 (16.3914)  lr: 0.0001 (0.0001)  time: 0.440562  data: 0.000347  max mem: 3991
+I20260731 00:46:03 2889964 mum utils.py:218] Training  [12800/25000]  eta: 1:22:29  loss: 0.5665 (0.6203)  grad: 0.2637 (0.3785)  batch_size: 12.0000 (16.3883)  lr: 0.0001 (0.0001)  time: 0.422751  data: 0.000335  max mem: 3991
+I20260731 00:46:24 2889964 mum utils.py:218] Training  [12850/25000]  eta: 1:22:09  loss: 0.5831 (0.6201)  grad: 0.2305 (0.3780)  batch_size: 16.0000 (16.3867)  lr: 0.0001 (0.0001)  time: 0.426893  data: 0.000304  max mem: 3991
+I20260731 00:46:43 2889964 mum utils.py:218] Training  [12900/25000]  eta: 1:21:48  loss: 0.5963 (0.6200)  grad: 0.2416 (0.3775)  batch_size: 16.0000 (16.3845)  lr: 0.0001 (0.0001)  time: 0.388682  data: 0.000331  max mem: 3991
+I20260731 00:47:04 2889964 mum utils.py:218] Training  [12950/25000]  eta: 1:21:28  loss: 0.5857 (0.6199)  grad: 0.2530 (0.3770)  batch_size: 16.0000 (16.3794)  lr: 0.0001 (0.0001)  time: 0.414418  data: 0.000368  max mem: 3991
+I20260731 00:47:24 2889964 mum utils.py:218] Training  [13000/25000]  eta: 1:21:07  loss: 0.5779 (0.6198)  grad: 0.2332 (0.3765)  batch_size: 16.0000 (16.3795)  lr: 0.0001 (0.0001)  time: 0.392914  data: 0.000404  max mem: 3991
+I20260731 00:47:44 2889964 mum utils.py:218] Training  [13050/25000]  eta: 1:20:47  loss: 0.6038 (0.6196)  grad: 0.2414 (0.3760)  batch_size: 16.0000 (16.3820)  lr: 0.0001 (0.0001)  time: 0.384639  data: 0.000343  max mem: 3991
+I20260731 00:48:06 2889964 mum utils.py:218] Training  [13100/25000]  eta: 1:20:28  loss: 0.5820 (0.6195)  grad: 0.2491 (0.3755)  batch_size: 16.0000 (16.3820)  lr: 0.0001 (0.0001)  time: 0.440991  data: 0.000355  max mem: 3991
+I20260731 00:48:26 2889964 mum utils.py:218] Training  [13150/25000]  eta: 1:20:08  loss: 0.5765 (0.6193)  grad: 0.2446 (0.3751)  batch_size: 16.0000 (16.3808)  lr: 0.0001 (0.0001)  time: 0.408791  data: 0.000391  max mem: 3991
+I20260731 00:48:47 2889964 mum utils.py:218] Training  [13200/25000]  eta: 1:19:48  loss: 0.5783 (0.6192)  grad: 0.2420 (0.3746)  batch_size: 16.0000 (16.3821)  lr: 0.0001 (0.0001)  time: 0.410846  data: 0.000330  max mem: 3991
+I20260731 00:49:06 2889964 mum utils.py:218] Training  [13250/25000]  eta: 1:19:27  loss: 0.5812 (0.6191)  grad: 0.2768 (0.3741)  batch_size: 16.0000 (16.3847)  lr: 0.0001 (0.0001)  time: 0.404352  data: 0.000362  max mem: 3991
+I20260731 00:49:26 2889964 mum utils.py:218] Training  [13300/25000]  eta: 1:19:07  loss: 0.5733 (0.6190)  grad: 0.2581 (0.3737)  batch_size: 16.0000 (16.3845)  lr: 0.0001 (0.0001)  time: 0.380349  data: 0.000369  max mem: 3991
+I20260731 00:49:47 2889964 mum utils.py:218] Training  [13350/25000]  eta: 1:18:46  loss: 0.5869 (0.6188)  grad: 0.2414 (0.3733)  batch_size: 12.0000 (16.3797)  lr: 0.0001 (0.0001)  time: 0.423555  data: 0.000337  max mem: 3991
+I20260731 00:50:06 2889964 mum utils.py:218] Training  [13400/25000]  eta: 1:18:25  loss: 0.5998 (0.6187)  grad: 0.2246 (0.3728)  batch_size: 16.0000 (16.3814)  lr: 0.0001 (0.0001)  time: 0.391014  data: 0.000424  max mem: 3991
+I20260731 00:50:27 2889964 mum utils.py:218] Training  [13450/25000]  eta: 1:18:05  loss: 0.5872 (0.6186)  grad: 0.2738 (0.3723)  batch_size: 16.0000 (16.3813)  lr: 0.0001 (0.0001)  time: 0.406086  data: 0.000375  max mem: 3991
+I20260731 00:50:46 2889964 mum utils.py:218] Training  [13500/25000]  eta: 1:17:44  loss: 0.5667 (0.6185)  grad: 0.2335 (0.3719)  batch_size: 16.0000 (16.3818)  lr: 0.0001 (0.0001)  time: 0.398587  data: 0.000343  max mem: 3991
+I20260731 00:51:06 2889964 mum utils.py:218] Training  [13550/25000]  eta: 1:17:24  loss: 0.5819 (0.6183)  grad: 0.2408 (0.3715)  batch_size: 16.0000 (16.3834)  lr: 0.0001 (0.0001)  time: 0.389741  data: 0.000347  max mem: 3991
+I20260731 00:51:27 2889964 mum utils.py:218] Training  [13600/25000]  eta: 1:17:04  loss: 0.5907 (0.6182)  grad: 0.2672 (0.3711)  batch_size: 16.0000 (16.3861)  lr: 0.0001 (0.0001)  time: 0.441872  data: 0.000367  max mem: 3991
+I20260731 00:51:46 2889964 mum utils.py:218] Training  [13650/25000]  eta: 1:16:43  loss: 0.5832 (0.6180)  grad: 0.2530 (0.3707)  batch_size: 16.0000 (16.3825)  lr: 0.0001 (0.0001)  time: 0.392882  data: 0.001148  max mem: 3991
+I20260731 00:52:06 2889964 mum utils.py:218] Training  [13700/25000]  eta: 1:16:22  loss: 0.5697 (0.6179)  grad: 0.2292 (0.3702)  batch_size: 16.0000 (16.3830)  lr: 0.0001 (0.0001)  time: 0.395516  data: 0.000378  max mem: 3991
+I20260731 00:52:27 2889964 mum utils.py:218] Training  [13750/25000]  eta: 1:16:02  loss: 0.5898 (0.6178)  grad: 0.2423 (0.3698)  batch_size: 12.0000 (16.3792)  lr: 0.0001 (0.0001)  time: 0.429151  data: 0.000367  max mem: 3991
+I20260731 00:52:46 2889964 mum utils.py:218] Training  [13800/25000]  eta: 1:15:41  loss: 0.5761 (0.6176)  grad: 0.2561 (0.3694)  batch_size: 16.0000 (16.3795)  lr: 0.0001 (0.0001)  time: 0.393168  data: 0.000346  max mem: 3991
+I20260731 00:53:07 2889964 mum utils.py:218] Training  [13850/25000]  eta: 1:15:21  loss: 0.5883 (0.6175)  grad: 0.2494 (0.3689)  batch_size: 16.0000 (16.3798)  lr: 0.0001 (0.0001)  time: 0.425072  data: 0.000350  max mem: 3991
+I20260731 00:53:28 2889964 mum utils.py:218] Training  [13900/25000]  eta: 1:15:01  loss: 0.5751 (0.6174)  grad: 0.2529 (0.3685)  batch_size: 16.0000 (16.3792)  lr: 0.0001 (0.0001)  time: 0.386219  data: 0.000368  max mem: 3991
+I20260731 00:53:48 2889964 mum utils.py:218] Training  [13950/25000]  eta: 1:14:41  loss: 0.5929 (0.6172)  grad: 0.2423 (0.3681)  batch_size: 16.0000 (16.3819)  lr: 0.0001 (0.0001)  time: 0.386636  data: 0.000374  max mem: 3991
+I20260731 00:54:11 2889964 mum utils.py:218] Training  [14000/25000]  eta: 1:14:23  loss: 0.5945 (0.6171)  grad: 0.2222 (0.3677)  batch_size: 16.0000 (16.3791)  lr: 0.0001 (0.0001)  time: 0.491429  data: 0.000312  max mem: 3991
+I20260731 00:54:30 2889964 mum utils.py:218] Training  [14050/25000]  eta: 1:14:02  loss: 0.5742 (0.6170)  grad: 0.2350 (0.3672)  batch_size: 16.0000 (16.3796)  lr: 0.0001 (0.0001)  time: 0.392933  data: 0.000361  max mem: 3991
+I20260731 00:54:52 2889964 mum utils.py:218] Training  [14100/25000]  eta: 1:13:42  loss: 0.5706 (0.6168)  grad: 0.2265 (0.3668)  batch_size: 16.0000 (16.3808)  lr: 0.0001 (0.0001)  time: 0.446730  data: 0.000864  max mem: 3991
+I20260731 00:55:11 2889964 mum utils.py:218] Training  [14150/25000]  eta: 1:13:21  loss: 0.5746 (0.6167)  grad: 0.2347 (0.3664)  batch_size: 16.0000 (16.3820)  lr: 0.0001 (0.0001)  time: 0.389821  data: 0.000317  max mem: 3991
+I20260731 00:55:32 2889964 mum utils.py:218] Training  [14200/25000]  eta: 1:13:02  loss: 0.5688 (0.6166)  grad: 0.2265 (0.3660)  batch_size: 16.0000 (16.3792)  lr: 0.0001 (0.0001)  time: 0.436555  data: 0.000399  max mem: 3991
+I20260731 00:55:53 2889964 mum utils.py:218] Training  [14250/25000]  eta: 1:12:42  loss: 0.5791 (0.6165)  grad: 0.2630 (0.3655)  batch_size: 16.0000 (16.3796)  lr: 0.0001 (0.0001)  time: 0.419263  data: 0.000345  max mem: 3991
+I20260731 00:56:13 2889964 mum utils.py:218] Training  [14300/25000]  eta: 1:12:21  loss: 0.5732 (0.6164)  grad: 0.2522 (0.3651)  batch_size: 12.0000 (16.3793)  lr: 0.0001 (0.0001)  time: 0.388816  data: 0.000350  max mem: 3991
+I20260731 00:56:34 2889964 mum utils.py:218] Training  [14350/25000]  eta: 1:12:01  loss: 0.5668 (0.6163)  grad: 0.2540 (0.3648)  batch_size: 16.0000 (16.3810)  lr: 0.0001 (0.0001)  time: 0.421530  data: 0.000529  max mem: 3991
+I20260731 00:56:55 2889964 mum utils.py:218] Training  [14400/25000]  eta: 1:11:42  loss: 0.5906 (0.6161)  grad: 0.2224 (0.3644)  batch_size: 16.0000 (16.3847)  lr: 0.0001 (0.0001)  time: 0.422191  data: 0.000381  max mem: 3991
+I20260731 00:57:16 2889964 mum utils.py:218] Training  [14450/25000]  eta: 1:11:22  loss: 0.5791 (0.6160)  grad: 0.2375 (0.3639)  batch_size: 16.0000 (16.3860)  lr: 0.0001 (0.0001)  time: 0.420012  data: 0.000366  max mem: 3991
+I20260731 00:57:36 2889964 mum utils.py:218] Training  [14500/25000]  eta: 1:11:01  loss: 0.5826 (0.6159)  grad: 0.2684 (0.3636)  batch_size: 16.0000 (16.3880)  lr: 0.0001 (0.0001)  time: 0.390336  data: 0.000334  max mem: 3991
+I20260731 00:57:56 2889964 mum utils.py:218] Training  [14550/25000]  eta: 1:10:41  loss: 0.5832 (0.6158)  grad: 0.2407 (0.3632)  batch_size: 21.0000 (16.3895)  lr: 0.0001 (0.0001)  time: 0.395727  data: 0.000512  max mem: 3991
+I20260731 00:58:16 2889964 mum utils.py:218] Training  [14600/25000]  eta: 1:10:21  loss: 0.5910 (0.6157)  grad: 0.2370 (0.3628)  batch_size: 16.0000 (16.3917)  lr: 0.0001 (0.0001)  time: 0.432687  data: 0.000350  max mem: 3991
+I20260731 00:58:36 2889964 mum utils.py:218] Training  [14650/25000]  eta: 1:10:00  loss: 0.5675 (0.6155)  grad: 0.2449 (0.3624)  batch_size: 16.0000 (16.3931)  lr: 0.0001 (0.0001)  time: 0.401651  data: 0.000322  max mem: 3991
+I20260731 00:58:56 2889964 mum utils.py:218] Training  [14700/25000]  eta: 1:09:39  loss: 0.5828 (0.6154)  grad: 0.2357 (0.3620)  batch_size: 12.0000 (16.3929)  lr: 0.0001 (0.0001)  time: 0.390764  data: 0.000404  max mem: 3991
+I20260731 00:59:15 2889964 mum utils.py:218] Training  [14750/25000]  eta: 1:09:19  loss: 0.5787 (0.6153)  grad: 0.2313 (0.3616)  batch_size: 16.0000 (16.3923)  lr: 0.0001 (0.0001)  time: 0.391678  data: 0.000342  max mem: 3991
+I20260731 00:59:36 2889964 mum utils.py:218] Training  [14800/25000]  eta: 1:08:59  loss: 0.5882 (0.6152)  grad: 0.2840 (0.3613)  batch_size: 16.0000 (16.3934)  lr: 0.0001 (0.0001)  time: 0.455295  data: 0.000358  max mem: 3991
+I20260731 00:59:57 2889964 mum utils.py:218] Training  [14850/25000]  eta: 1:08:39  loss: 0.5848 (0.6151)  grad: 0.2566 (0.3609)  batch_size: 16.0000 (16.3953)  lr: 0.0001 (0.0001)  time: 0.388101  data: 0.000338  max mem: 3991
+I20260731 01:00:17 2889964 mum utils.py:218] Training  [14900/25000]  eta: 1:08:18  loss: 0.5849 (0.6150)  grad: 0.2393 (0.3605)  batch_size: 16.0000 (16.3931)  lr: 0.0001 (0.0001)  time: 0.399357  data: 0.000321  max mem: 3991
+I20260731 01:00:38 2889964 mum utils.py:218] Training  [14950/25000]  eta: 1:07:58  loss: 0.5811 (0.6149)  grad: 0.2384 (0.3601)  batch_size: 16.0000 (16.3954)  lr: 0.0001 (0.0001)  time: 0.454282  data: 0.000321  max mem: 3991
+I20260731 01:00:58 2889964 mum utils.py:218] Training  [15000/25000]  eta: 1:07:38  loss: 0.5745 (0.6147)  grad: 0.2439 (0.3597)  batch_size: 16.0000 (16.3954)  lr: 0.0001 (0.0001)  time: 0.390942  data: 0.000354  max mem: 3991
+I20260731 01:01:18 2889964 mum utils.py:218] Training  [15050/25000]  eta: 1:07:18  loss: 0.5738 (0.6146)  grad: 0.2465 (0.3593)  batch_size: 16.0000 (16.3964)  lr: 0.0001 (0.0001)  time: 0.446904  data: 0.000341  max mem: 3991
+I20260731 01:01:38 2889964 mum utils.py:218] Training  [15100/25000]  eta: 1:06:57  loss: 0.5715 (0.6145)  grad: 0.2436 (0.3589)  batch_size: 12.0000 (16.3955)  lr: 0.0001 (0.0001)  time: 0.389595  data: 0.000514  max mem: 3991
+I20260731 01:01:59 2889964 mum utils.py:218] Training  [15150/25000]  eta: 1:06:37  loss: 0.5758 (0.6143)  grad: 0.2422 (0.3585)  batch_size: 16.0000 (16.3947)  lr: 0.0001 (0.0001)  time: 0.397959  data: 0.000325  max mem: 3991
+I20260731 01:02:20 2889964 mum utils.py:218] Training  [15200/25000]  eta: 1:06:17  loss: 0.5686 (0.6142)  grad: 0.2354 (0.3582)  batch_size: 12.0000 (16.3921)  lr: 0.0001 (0.0001)  time: 0.382827  data: 0.000425  max mem: 3991
+I20260731 01:02:40 2889964 mum utils.py:218] Training  [15250/25000]  eta: 1:05:57  loss: 0.5785 (0.6141)  grad: 0.2393 (0.3578)  batch_size: 16.0000 (16.3920)  lr: 0.0001 (0.0001)  time: 0.414226  data: 0.000717  max mem: 3991
+I20260731 01:03:00 2889964 mum utils.py:218] Training  [15300/25000]  eta: 1:05:36  loss: 0.5898 (0.6140)  grad: 0.2211 (0.3574)  batch_size: 16.0000 (16.3915)  lr: 0.0001 (0.0001)  time: 0.419339  data: 0.000323  max mem: 3991
+I20260731 01:03:20 2889964 mum utils.py:218] Training  [15350/25000]  eta: 1:05:16  loss: 0.6028 (0.6139)  grad: 0.2498 (0.3570)  batch_size: 16.0000 (16.3918)  lr: 0.0001 (0.0001)  time: 0.428045  data: 0.000317  max mem: 3991
+I20260731 01:03:40 2889964 mum utils.py:218] Training  [15400/25000]  eta: 1:04:55  loss: 0.5671 (0.6138)  grad: 0.2530 (0.3567)  batch_size: 16.0000 (16.3922)  lr: 0.0001 (0.0001)  time: 0.390953  data: 0.000330  max mem: 3991
+I20260731 01:04:00 2889964 mum utils.py:218] Training  [15450/25000]  eta: 1:04:35  loss: 0.5779 (0.6137)  grad: 0.2414 (0.3563)  batch_size: 16.0000 (16.3932)  lr: 0.0001 (0.0001)  time: 0.408385  data: 0.000352  max mem: 3991
+I20260731 01:04:20 2889964 mum utils.py:218] Training  [15500/25000]  eta: 1:04:14  loss: 0.5945 (0.6136)  grad: 0.2300 (0.3560)  batch_size: 16.0000 (16.3931)  lr: 0.0001 (0.0001)  time: 0.389056  data: 0.000439  max mem: 3991
+I20260731 01:04:40 2889964 mum utils.py:218] Training  [15550/25000]  eta: 1:03:54  loss: 0.5884 (0.6135)  grad: 0.2511 (0.3556)  batch_size: 16.0000 (16.3928)  lr: 0.0001 (0.0001)  time: 0.396653  data: 0.000337  max mem: 3991
+I20260731 01:05:00 2889964 mum utils.py:218] Training  [15600/25000]  eta: 1:03:34  loss: 0.5810 (0.6133)  grad: 0.2313 (0.3553)  batch_size: 16.0000 (16.3920)  lr: 0.0001 (0.0001)  time: 0.393936  data: 0.000374  max mem: 3991
+I20260731 01:05:21 2889964 mum utils.py:218] Training  [15650/25000]  eta: 1:03:14  loss: 0.5735 (0.6132)  grad: 0.2417 (0.3549)  batch_size: 16.0000 (16.3944)  lr: 0.0000 (0.0001)  time: 0.390041  data: 0.000337  max mem: 3991
+I20260731 01:05:41 2889964 mum utils.py:218] Training  [15700/25000]  eta: 1:02:53  loss: 0.5965 (0.6132)  grad: 0.2355 (0.3546)  batch_size: 16.0000 (16.3936)  lr: 0.0000 (0.0001)  time: 0.383251  data: 0.000430  max mem: 3991
+I20260731 01:06:02 2889964 mum utils.py:218] Training  [15750/25000]  eta: 1:02:33  loss: 0.5785 (0.6131)  grad: 0.2359 (0.3542)  batch_size: 16.0000 (16.3942)  lr: 0.0000 (0.0001)  time: 0.388126  data: 0.000346  max mem: 3991
+I20260731 01:06:22 2889964 mum utils.py:218] Training  [15800/25000]  eta: 1:02:13  loss: 0.5894 (0.6130)  grad: 0.2242 (0.3538)  batch_size: 16.0000 (16.3960)  lr: 0.0000 (0.0001)  time: 0.393900  data: 0.000518  max mem: 3991
+I20260731 01:06:43 2889964 mum utils.py:218] Training  [15850/25000]  eta: 1:01:53  loss: 0.5650 (0.6129)  grad: 0.2546 (0.3535)  batch_size: 16.0000 (16.4002)  lr: 0.0000 (0.0001)  time: 0.424328  data: 0.000378  max mem: 3991
+I20260731 01:07:03 2889964 mum utils.py:218] Training  [15900/25000]  eta: 1:01:32  loss: 0.5795 (0.6128)  grad: 0.2531 (0.3531)  batch_size: 16.0000 (16.4028)  lr: 0.0000 (0.0001)  time: 0.391843  data: 0.000330  max mem: 3991
+I20260731 01:07:22 2889964 mum utils.py:218] Training  [15950/25000]  eta: 1:01:12  loss: 0.5565 (0.6127)  grad: 0.2379 (0.3528)  batch_size: 16.0000 (16.4036)  lr: 0.0000 (0.0001)  time: 0.389667  data: 0.000481  max mem: 3991
+I20260731 01:07:46 2889964 mum utils.py:218] Training  [16000/25000]  eta: 1:00:53  loss: 0.5707 (0.6125)  grad: 0.2311 (0.3524)  batch_size: 16.0000 (16.4017)  lr: 0.0000 (0.0001)  time: 0.585818  data: 0.000388  max mem: 3991
+I20260731 01:08:05 2889964 mum utils.py:218] Training  [16050/25000]  eta: 1:00:33  loss: 0.5765 (0.6124)  grad: 0.2342 (0.3520)  batch_size: 16.0000 (16.4012)  lr: 0.0000 (0.0001)  time: 0.411193  data: 0.000353  max mem: 3991
+I20260731 01:08:26 2889964 mum utils.py:218] Training  [16100/25000]  eta: 1:00:12  loss: 0.5721 (0.6123)  grad: 0.2492 (0.3517)  batch_size: 16.0000 (16.4003)  lr: 0.0000 (0.0001)  time: 0.385832  data: 0.000364  max mem: 3991
+I20260731 01:08:46 2889964 mum utils.py:218] Training  [16150/25000]  eta: 0:59:52  loss: 0.5729 (0.6122)  grad: 0.2386 (0.3514)  batch_size: 16.0000 (16.3982)  lr: 0.0000 (0.0001)  time: 0.391102  data: 0.000332  max mem: 3991
+I20260731 01:09:06 2889964 mum utils.py:218] Training  [16200/25000]  eta: 0:59:32  loss: 0.5867 (0.6121)  grad: 0.2400 (0.3511)  batch_size: 16.0000 (16.3985)  lr: 0.0000 (0.0001)  time: 0.386427  data: 0.000341  max mem: 3991
+I20260731 01:09:26 2889964 mum utils.py:218] Training  [16250/25000]  eta: 0:59:11  loss: 0.5692 (0.6120)  grad: 0.2104 (0.3507)  batch_size: 16.0000 (16.3978)  lr: 0.0000 (0.0001)  time: 0.388045  data: 0.000328  max mem: 3991
+I20260731 01:09:46 2889964 mum utils.py:218] Training  [16300/25000]  eta: 0:58:51  loss: 0.5735 (0.6119)  grad: 0.2318 (0.3503)  batch_size: 16.0000 (16.3978)  lr: 0.0000 (0.0001)  time: 0.396558  data: 0.000439  max mem: 3991
+I20260731 01:10:06 2889964 mum utils.py:218] Training  [16350/25000]  eta: 0:58:30  loss: 0.5745 (0.6118)  grad: 0.2413 (0.3500)  batch_size: 12.0000 (16.3980)  lr: 0.0000 (0.0001)  time: 0.425664  data: 0.000338  max mem: 3991
+I20260731 01:10:26 2889964 mum utils.py:218] Training  [16400/25000]  eta: 0:58:10  loss: 0.5560 (0.6117)  grad: 0.2441 (0.3497)  batch_size: 16.0000 (16.3971)  lr: 0.0000 (0.0001)  time: 0.396405  data: 0.000575  max mem: 3991
+I20260731 01:10:46 2889964 mum utils.py:218] Training  [16450/25000]  eta: 0:57:49  loss: 0.5757 (0.6116)  grad: 0.2319 (0.3494)  batch_size: 16.0000 (16.3968)  lr: 0.0000 (0.0001)  time: 0.432516  data: 0.000369  max mem: 3991
+I20260731 01:11:07 2889964 mum utils.py:218] Training  [16500/25000]  eta: 0:57:29  loss: 0.5641 (0.6115)  grad: 0.2281 (0.3490)  batch_size: 16.0000 (16.3967)  lr: 0.0000 (0.0001)  time: 0.387020  data: 0.000335  max mem: 3991
+I20260731 01:11:26 2889964 mum utils.py:218] Training  [16550/25000]  eta: 0:57:09  loss: 0.5783 (0.6114)  grad: 0.2386 (0.3487)  batch_size: 16.0000 (16.3960)  lr: 0.0000 (0.0001)  time: 0.391851  data: 0.000317  max mem: 3991
+I20260731 01:11:47 2889964 mum utils.py:218] Training  [16600/25000]  eta: 0:56:48  loss: 0.5754 (0.6113)  grad: 0.2380 (0.3484)  batch_size: 16.0000 (16.3958)  lr: 0.0000 (0.0001)  time: 0.435492  data: 0.000296  max mem: 3991
+I20260731 01:12:07 2889964 mum utils.py:218] Training  [16650/25000]  eta: 0:56:28  loss: 0.5675 (0.6112)  grad: 0.2487 (0.3481)  batch_size: 16.0000 (16.3951)  lr: 0.0000 (0.0001)  time: 0.391807  data: 0.000353  max mem: 3991
+I20260731 01:12:28 2889964 mum utils.py:218] Training  [16700/25000]  eta: 0:56:08  loss: 0.5791 (0.6111)  grad: 0.2384 (0.3478)  batch_size: 16.0000 (16.3933)  lr: 0.0000 (0.0001)  time: 0.386049  data: 0.000488  max mem: 3991
+I20260731 01:12:49 2889964 mum utils.py:218] Training  [16750/25000]  eta: 0:55:48  loss: 0.5858 (0.6110)  grad: 0.2432 (0.3475)  batch_size: 16.0000 (16.3945)  lr: 0.0000 (0.0001)  time: 0.418415  data: 0.000387  max mem: 3991
+I20260731 01:13:09 2889964 mum utils.py:218] Training  [16800/25000]  eta: 0:55:28  loss: 0.5694 (0.6109)  grad: 0.2407 (0.3472)  batch_size: 16.0000 (16.3946)  lr: 0.0000 (0.0001)  time: 0.432467  data: 0.000350  max mem: 3991
+I20260731 01:13:30 2889964 mum utils.py:218] Training  [16850/25000]  eta: 0:55:08  loss: 0.5750 (0.6108)  grad: 0.2331 (0.3469)  batch_size: 16.0000 (16.3961)  lr: 0.0000 (0.0001)  time: 0.448539  data: 0.000336  max mem: 3991
+I20260731 01:13:50 2889964 mum utils.py:218] Training  [16900/25000]  eta: 0:54:47  loss: 0.5774 (0.6107)  grad: 0.2401 (0.3466)  batch_size: 16.0000 (16.3970)  lr: 0.0000 (0.0001)  time: 0.406516  data: 0.000349  max mem: 3991
+I20260731 01:14:11 2889964 mum utils.py:218] Training  [16950/25000]  eta: 0:54:27  loss: 0.5749 (0.6107)  grad: 0.2592 (0.3463)  batch_size: 16.0000 (16.3937)  lr: 0.0000 (0.0001)  time: 0.387900  data: 0.000382  max mem: 3991
+I20260731 01:14:30 2889964 mum utils.py:218] Training  [17000/25000]  eta: 0:54:07  loss: 0.5824 (0.6106)  grad: 0.2494 (0.3460)  batch_size: 16.0000 (16.3950)  lr: 0.0000 (0.0001)  time: 0.387827  data: 0.000380  max mem: 3991
+I20260731 01:14:51 2889964 mum utils.py:218] Training  [17050/25000]  eta: 0:53:46  loss: 0.5615 (0.6105)  grad: 0.2431 (0.3457)  batch_size: 16.0000 (16.3958)  lr: 0.0000 (0.0001)  time: 0.431235  data: 0.000336  max mem: 3991
+I20260731 01:15:11 2889964 mum utils.py:218] Training  [17100/25000]  eta: 0:53:26  loss: 0.5802 (0.6104)  grad: 0.2274 (0.3453)  batch_size: 16.0000 (16.3981)  lr: 0.0000 (0.0001)  time: 0.385923  data: 0.000403  max mem: 3991
+I20260731 01:15:31 2889964 mum utils.py:218] Training  [17150/25000]  eta: 0:53:06  loss: 0.5829 (0.6103)  grad: 0.2412 (0.3450)  batch_size: 16.0000 (16.3968)  lr: 0.0000 (0.0001)  time: 0.387878  data: 0.000344  max mem: 3991
+I20260731 01:15:51 2889964 mum utils.py:218] Training  [17200/25000]  eta: 0:52:45  loss: 0.5710 (0.6102)  grad: 0.2384 (0.3447)  batch_size: 16.0000 (16.3972)  lr: 0.0000 (0.0001)  time: 0.390592  data: 0.000330  max mem: 3991
+I20260731 01:16:13 2889964 mum utils.py:218] Training  [17250/25000]  eta: 0:52:25  loss: 0.5721 (0.6101)  grad: 0.2388 (0.3444)  batch_size: 16.0000 (16.3990)  lr: 0.0000 (0.0001)  time: 0.420170  data: 0.000368  max mem: 3991
+I20260731 01:16:32 2889964 mum utils.py:218] Training  [17300/25000]  eta: 0:52:05  loss: 0.5764 (0.6100)  grad: 0.2454 (0.3441)  batch_size: 16.0000 (16.3988)  lr: 0.0000 (0.0001)  time: 0.391609  data: 0.000325  max mem: 3991
+I20260731 01:16:52 2889964 mum utils.py:218] Training  [17350/25000]  eta: 0:51:44  loss: 0.5740 (0.6099)  grad: 0.2424 (0.3438)  batch_size: 16.0000 (16.3996)  lr: 0.0000 (0.0001)  time: 0.390336  data: 0.000351  max mem: 3991
+I20260731 01:17:12 2889964 mum utils.py:218] Training  [17400/25000]  eta: 0:51:24  loss: 0.5654 (0.6098)  grad: 0.2395 (0.3435)  batch_size: 16.0000 (16.4004)  lr: 0.0000 (0.0001)  time: 0.382777  data: 0.000357  max mem: 3991
+I20260731 01:17:33 2889964 mum utils.py:218] Training  [17450/25000]  eta: 0:51:04  loss: 0.5704 (0.6097)  grad: 0.2436 (0.3432)  batch_size: 16.0000 (16.3997)  lr: 0.0000 (0.0001)  time: 0.386200  data: 0.000343  max mem: 3991
+I20260731 01:17:53 2889964 mum utils.py:218] Training  [17500/25000]  eta: 0:50:43  loss: 0.5858 (0.6096)  grad: 0.2484 (0.3429)  batch_size: 12.0000 (16.3974)  lr: 0.0000 (0.0001)  time: 0.397642  data: 0.000391  max mem: 3991
+I20260731 01:18:13 2889964 mum utils.py:218] Training  [17550/25000]  eta: 0:50:23  loss: 0.6030 (0.6095)  grad: 0.2363 (0.3426)  batch_size: 16.0000 (16.3984)  lr: 0.0000 (0.0001)  time: 0.389043  data: 0.000341  max mem: 3991
+I20260731 01:18:34 2889964 mum utils.py:218] Training  [17600/25000]  eta: 0:50:03  loss: 0.5809 (0.6095)  grad: 0.2375 (0.3423)  batch_size: 16.0000 (16.3975)  lr: 0.0000 (0.0001)  time: 0.393584  data: 0.000449  max mem: 3991
+I20260731 01:18:53 2889964 mum utils.py:218] Training  [17650/25000]  eta: 0:49:42  loss: 0.5794 (0.6094)  grad: 0.2396 (0.3421)  batch_size: 16.0000 (16.3973)  lr: 0.0000 (0.0001)  time: 0.387562  data: 0.000350  max mem: 3991
+I20260731 01:19:13 2889964 mum utils.py:218] Training  [17700/25000]  eta: 0:49:22  loss: 0.5949 (0.6093)  grad: 0.2228 (0.3418)  batch_size: 16.0000 (16.3975)  lr: 0.0000 (0.0001)  time: 0.394784  data: 0.000478  max mem: 3991
+I20260731 01:19:33 2889964 mum utils.py:218] Training  [17750/25000]  eta: 0:49:01  loss: 0.5673 (0.6092)  grad: 0.2346 (0.3415)  batch_size: 16.0000 (16.3965)  lr: 0.0000 (0.0001)  time: 0.402875  data: 0.000356  max mem: 3991
+I20260731 01:19:55 2889964 mum utils.py:218] Training  [17800/25000]  eta: 0:48:42  loss: 0.5672 (0.6091)  grad: 0.2353 (0.3412)  batch_size: 16.0000 (16.3947)  lr: 0.0000 (0.0001)  time: 0.467858  data: 0.000342  max mem: 3991
+I20260731 01:20:15 2889964 mum utils.py:218] Training  [17850/25000]  eta: 0:48:21  loss: 0.5801 (0.6090)  grad: 0.2173 (0.3409)  batch_size: 16.0000 (16.3949)  lr: 0.0000 (0.0001)  time: 0.385549  data: 0.000842  max mem: 3991
+I20260731 01:20:35 2889964 mum utils.py:218] Training  [17900/25000]  eta: 0:48:01  loss: 0.5481 (0.6089)  grad: 0.2202 (0.3406)  batch_size: 16.0000 (16.3943)  lr: 0.0000 (0.0001)  time: 0.384639  data: 0.000379  max mem: 3991
+I20260731 01:20:55 2889964 mum utils.py:218] Training  [17950/25000]  eta: 0:47:41  loss: 0.5833 (0.6088)  grad: 0.2361 (0.3403)  batch_size: 12.0000 (16.3931)  lr: 0.0000 (0.0001)  time: 0.420471  data: 0.000361  max mem: 3991
+I20260731 01:21:18 2889964 mum utils.py:218] Training  [18000/25000]  eta: 0:47:21  loss: 0.5875 (0.6087)  grad: 0.2466 (0.3400)  batch_size: 16.0000 (16.3923)  lr: 0.0000 (0.0001)  time: 0.533724  data: 0.000337  max mem: 3991
+I20260731 01:21:38 2889964 mum utils.py:218] Training  [18050/25000]  eta: 0:47:01  loss: 0.5769 (0.6086)  grad: 0.2301 (0.3397)  batch_size: 16.0000 (16.3924)  lr: 0.0000 (0.0001)  time: 0.379892  data: 0.000334  max mem: 3991
+I20260731 01:21:59 2889964 mum utils.py:218] Training  [18100/25000]  eta: 0:46:41  loss: 0.5548 (0.6085)  grad: 0.2314 (0.3394)  batch_size: 16.0000 (16.3945)  lr: 0.0000 (0.0001)  time: 0.405197  data: 0.000350  max mem: 3991
+I20260731 01:22:19 2889964 mum utils.py:218] Training  [18150/25000]  eta: 0:46:21  loss: 0.5938 (0.6084)  grad: 0.2277 (0.3391)  batch_size: 16.0000 (16.3960)  lr: 0.0000 (0.0001)  time: 0.380459  data: 0.000366  max mem: 3991
+I20260731 01:22:39 2889964 mum utils.py:218] Training  [18200/25000]  eta: 0:46:00  loss: 0.5861 (0.6083)  grad: 0.2283 (0.3388)  batch_size: 12.0000 (16.3952)  lr: 0.0000 (0.0001)  time: 0.382141  data: 0.000349  max mem: 3991
+I20260731 01:22:59 2889964 mum utils.py:218] Training  [18250/25000]  eta: 0:45:40  loss: 0.5783 (0.6082)  grad: 0.2258 (0.3386)  batch_size: 12.0000 (16.3915)  lr: 0.0000 (0.0001)  time: 0.404133  data: 0.000334  max mem: 3991
+I20260731 01:23:19 2889964 mum utils.py:218] Training  [18300/25000]  eta: 0:45:19  loss: 0.5616 (0.6081)  grad: 0.2174 (0.3383)  batch_size: 16.0000 (16.3934)  lr: 0.0000 (0.0001)  time: 0.419726  data: 0.000679  max mem: 3991
+I20260731 01:23:39 2889964 mum utils.py:218] Training  [18350/25000]  eta: 0:44:59  loss: 0.5779 (0.6080)  grad: 0.2347 (0.3380)  batch_size: 16.0000 (16.3929)  lr: 0.0000 (0.0001)  time: 0.415277  data: 0.000361  max mem: 3991
+I20260731 01:23:59 2889964 mum utils.py:218] Training  [18400/25000]  eta: 0:44:38  loss: 0.5643 (0.6079)  grad: 0.2350 (0.3377)  batch_size: 16.0000 (16.3930)  lr: 0.0000 (0.0001)  time: 0.390332  data: 0.000345  max mem: 3991
+I20260731 01:24:19 2889964 mum utils.py:218] Training  [18450/25000]  eta: 0:44:18  loss: 0.5698 (0.6078)  grad: 0.2353 (0.3374)  batch_size: 16.0000 (16.3929)  lr: 0.0000 (0.0001)  time: 0.394496  data: 0.000335  max mem: 3991
+I20260731 01:24:39 2889964 mum utils.py:218] Training  [18500/25000]  eta: 0:43:58  loss: 0.5954 (0.6078)  grad: 0.2416 (0.3372)  batch_size: 16.0000 (16.3951)  lr: 0.0000 (0.0001)  time: 0.426535  data: 0.000297  max mem: 3991
+I20260731 01:24:58 2889964 mum utils.py:218] Training  [18550/25000]  eta: 0:43:37  loss: 0.5816 (0.6077)  grad: 0.2302 (0.3369)  batch_size: 21.0000 (16.3963)  lr: 0.0000 (0.0001)  time: 0.390458  data: 0.000427  max mem: 3991
+I20260731 01:25:20 2889964 mum utils.py:218] Training  [18600/25000]  eta: 0:43:17  loss: 0.5712 (0.6076)  grad: 0.2351 (0.3366)  batch_size: 12.0000 (16.3958)  lr: 0.0000 (0.0001)  time: 0.418638  data: 0.001179  max mem: 3991
+I20260731 01:25:42 2889964 mum utils.py:218] Training  [18650/25000]  eta: 0:42:57  loss: 0.5866 (0.6075)  grad: 0.2284 (0.3364)  batch_size: 16.0000 (16.3975)  lr: 0.0000 (0.0001)  time: 0.413175  data: 0.000404  max mem: 3991
+I20260731 01:26:03 2889964 mum utils.py:218] Training  [18700/25000]  eta: 0:42:37  loss: 0.5814 (0.6074)  grad: 0.2197 (0.3361)  batch_size: 16.0000 (16.3977)  lr: 0.0000 (0.0001)  time: 0.397844  data: 0.000333  max mem: 3991
+I20260731 01:26:24 2889964 mum utils.py:218] Training  [18750/25000]  eta: 0:42:17  loss: 0.5727 (0.6073)  grad: 0.2417 (0.3358)  batch_size: 16.0000 (16.3966)  lr: 0.0000 (0.0001)  time: 0.422488  data: 0.000408  max mem: 3991
+I20260731 01:26:45 2889964 mum utils.py:218] Training  [18800/25000]  eta: 0:41:57  loss: 0.5732 (0.6072)  grad: 0.2289 (0.3355)  batch_size: 16.0000 (16.3949)  lr: 0.0000 (0.0001)  time: 0.382153  data: 0.000381  max mem: 3991
+I20260731 01:27:05 2889964 mum utils.py:218] Training  [18850/25000]  eta: 0:41:37  loss: 0.5799 (0.6072)  grad: 0.2454 (0.3352)  batch_size: 16.0000 (16.3970)  lr: 0.0000 (0.0001)  time: 0.430135  data: 0.000319  max mem: 3991
+I20260731 01:27:25 2889964 mum utils.py:218] Training  [18900/25000]  eta: 0:41:16  loss: 0.5985 (0.6071)  grad: 0.2130 (0.3350)  batch_size: 16.0000 (16.3960)  lr: 0.0000 (0.0001)  time: 0.397569  data: 0.000367  max mem: 3991
+I20260731 01:27:45 2889964 mum utils.py:218] Training  [18950/25000]  eta: 0:40:56  loss: 0.5675 (0.6070)  grad: 0.2282 (0.3347)  batch_size: 16.0000 (16.3956)  lr: 0.0000 (0.0001)  time: 0.387802  data: 0.000384  max mem: 3991
+I20260731 01:28:05 2889964 mum utils.py:218] Training  [19000/25000]  eta: 0:40:36  loss: 0.5735 (0.6069)  grad: 0.2176 (0.3344)  batch_size: 16.0000 (16.3954)  lr: 0.0000 (0.0001)  time: 0.462614  data: 0.000862  max mem: 3991
+I20260731 01:28:26 2889964 mum utils.py:218] Training  [19050/25000]  eta: 0:40:16  loss: 0.5834 (0.6069)  grad: 0.2274 (0.3342)  batch_size: 16.0000 (16.3948)  lr: 0.0000 (0.0001)  time: 0.388313  data: 0.000287  max mem: 3991
+I20260731 01:28:45 2889964 mum utils.py:218] Training  [19100/25000]  eta: 0:39:55  loss: 0.5673 (0.6068)  grad: 0.2385 (0.3339)  batch_size: 12.0000 (16.3925)  lr: 0.0000 (0.0001)  time: 0.395201  data: 0.000375  max mem: 3991
+I20260731 01:29:05 2889964 mum utils.py:218] Training  [19150/25000]  eta: 0:39:34  loss: 0.5775 (0.6067)  grad: 0.2238 (0.3337)  batch_size: 16.0000 (16.3912)  lr: 0.0000 (0.0001)  time: 0.388577  data: 0.000341  max mem: 3991
+I20260731 01:29:25 2889964 mum utils.py:218] Training  [19200/25000]  eta: 0:39:14  loss: 0.5898 (0.6066)  grad: 0.2354 (0.3334)  batch_size: 16.0000 (16.3913)  lr: 0.0000 (0.0001)  time: 0.391651  data: 0.000360  max mem: 3991
+I20260731 01:29:46 2889964 mum utils.py:218] Training  [19250/25000]  eta: 0:38:54  loss: 0.5736 (0.6065)  grad: 0.2305 (0.3332)  batch_size: 16.0000 (16.3911)  lr: 0.0000 (0.0001)  time: 0.420506  data: 0.000328  max mem: 3991
+I20260731 01:30:07 2889964 mum utils.py:218] Training  [19300/25000]  eta: 0:38:34  loss: 0.5905 (0.6065)  grad: 0.2236 (0.3329)  batch_size: 16.0000 (16.3905)  lr: 0.0000 (0.0001)  time: 0.435320  data: 0.000434  max mem: 3991
+I20260731 01:30:27 2889964 mum utils.py:218] Training  [19350/25000]  eta: 0:38:14  loss: 0.5619 (0.6064)  grad: 0.2376 (0.3327)  batch_size: 16.0000 (16.3879)  lr: 0.0000 (0.0001)  time: 0.387384  data: 0.000362  max mem: 3991
+I20260731 01:30:47 2889964 mum utils.py:218] Training  [19400/25000]  eta: 0:37:53  loss: 0.5715 (0.6063)  grad: 0.2250 (0.3324)  batch_size: 16.0000 (16.3891)  lr: 0.0000 (0.0001)  time: 0.383523  data: 0.000353  max mem: 3991
+I20260731 01:31:08 2889964 mum utils.py:218] Training  [19450/25000]  eta: 0:37:33  loss: 0.5867 (0.6062)  grad: 0.2414 (0.3321)  batch_size: 16.0000 (16.3896)  lr: 0.0000 (0.0001)  time: 0.392353  data: 0.000326  max mem: 3991
+I20260731 01:31:29 2889964 mum utils.py:218] Training  [19500/25000]  eta: 0:37:13  loss: 0.5845 (0.6061)  grad: 0.2229 (0.3319)  batch_size: 16.0000 (16.3900)  lr: 0.0000 (0.0001)  time: 0.414244  data: 0.000339  max mem: 3991
+I20260731 01:31:49 2889964 mum utils.py:218] Training  [19550/25000]  eta: 0:36:53  loss: 0.5663 (0.6060)  grad: 0.2469 (0.3316)  batch_size: 16.0000 (16.3876)  lr: 0.0000 (0.0001)  time: 0.427783  data: 0.000376  max mem: 3991
+I20260731 01:32:09 2889964 mum utils.py:218] Training  [19600/25000]  eta: 0:36:32  loss: 0.5803 (0.6060)  grad: 0.2235 (0.3313)  batch_size: 16.0000 (16.3896)  lr: 0.0000 (0.0001)  time: 0.390043  data: 0.000342  max mem: 3991
+I20260731 01:32:28 2889964 mum utils.py:218] Training  [19650/25000]  eta: 0:36:12  loss: 0.5384 (0.6059)  grad: 0.2214 (0.3311)  batch_size: 16.0000 (16.3896)  lr: 0.0000 (0.0001)  time: 0.393370  data: 0.000343  max mem: 3991
+I20260731 01:32:49 2889964 mum utils.py:218] Training  [19700/25000]  eta: 0:35:51  loss: 0.5767 (0.6058)  grad: 0.2400 (0.3308)  batch_size: 12.0000 (16.3888)  lr: 0.0000 (0.0001)  time: 0.407488  data: 0.000505  max mem: 3991
+I20260731 01:33:10 2889964 mum utils.py:218] Training  [19750/25000]  eta: 0:35:31  loss: 0.5769 (0.6057)  grad: 0.2380 (0.3306)  batch_size: 16.0000 (16.3870)  lr: 0.0000 (0.0001)  time: 0.392650  data: 0.000519  max mem: 3991
+I20260731 01:33:29 2889964 mum utils.py:218] Training  [19800/25000]  eta: 0:35:11  loss: 0.5742 (0.6056)  grad: 0.2268 (0.3303)  batch_size: 16.0000 (16.3860)  lr: 0.0000 (0.0001)  time: 0.392610  data: 0.000425  max mem: 3991
+I20260731 01:33:51 2889964 mum utils.py:218] Training  [19850/25000]  eta: 0:34:51  loss: 0.5901 (0.6056)  grad: 0.2235 (0.3301)  batch_size: 16.0000 (16.3846)  lr: 0.0000 (0.0001)  time: 0.418797  data: 0.000352  max mem: 3991
+I20260731 01:34:10 2889964 mum utils.py:218] Training  [19900/25000]  eta: 0:34:30  loss: 0.5676 (0.6055)  grad: 0.2372 (0.3298)  batch_size: 16.0000 (16.3825)  lr: 0.0000 (0.0001)  time: 0.388949  data: 0.000385  max mem: 3991
+I20260731 01:34:30 2889964 mum utils.py:218] Training  [19950/25000]  eta: 0:34:10  loss: 0.5527 (0.6054)  grad: 0.2155 (0.3296)  batch_size: 16.0000 (16.3825)  lr: 0.0000 (0.0001)  time: 0.391422  data: 0.000376  max mem: 3991
+I20260731 01:34:53 2889964 mum utils.py:218] Training  [20000/25000]  eta: 0:33:50  loss: 0.5771 (0.6053)  grad: 0.2120 (0.3293)  batch_size: 16.0000 (16.3821)  lr: 0.0000 (0.0001)  time: 0.490877  data: 0.000375  max mem: 3991
+I20260731 01:35:12 2889964 mum utils.py:218] Training  [20050/25000]  eta: 0:33:29  loss: 0.5659 (0.6052)  grad: 0.2396 (0.3290)  batch_size: 16.0000 (16.3827)  lr: 0.0000 (0.0001)  time: 0.388398  data: 0.000361  max mem: 3991
+I20260731 01:35:31 2889964 mum utils.py:218] Training  [20100/25000]  eta: 0:33:09  loss: 0.5622 (0.6051)  grad: 0.2133 (0.3288)  batch_size: 12.0000 (16.3813)  lr: 0.0000 (0.0001)  time: 0.387570  data: 0.000326  max mem: 3991
+I20260731 01:35:51 2889964 mum utils.py:218] Training  [20150/25000]  eta: 0:32:48  loss: 0.5812 (0.6051)  grad: 0.2278 (0.3285)  batch_size: 16.0000 (16.3796)  lr: 0.0000 (0.0001)  time: 0.391443  data: 0.000329  max mem: 3991
+I20260731 01:36:11 2889964 mum utils.py:218] Training  [20200/25000]  eta: 0:32:28  loss: 0.5657 (0.6050)  grad: 0.2357 (0.3283)  batch_size: 16.0000 (16.3813)  lr: 0.0000 (0.0001)  time: 0.411018  data: 0.000329  max mem: 3991
+I20260731 01:36:32 2889964 mum utils.py:218] Training  [20250/25000]  eta: 0:32:08  loss: 0.5676 (0.6049)  grad: 0.2279 (0.3280)  batch_size: 16.0000 (16.3802)  lr: 0.0000 (0.0001)  time: 0.419618  data: 0.000343  max mem: 3991
+I20260731 01:36:51 2889964 mum utils.py:218] Training  [20300/25000]  eta: 0:31:47  loss: 0.5923 (0.6048)  grad: 0.2382 (0.3278)  batch_size: 16.0000 (16.3805)  lr: 0.0000 (0.0001)  time: 0.391294  data: 0.000347  max mem: 3991
+I20260731 01:37:11 2889964 mum utils.py:218] Training  [20350/25000]  eta: 0:31:27  loss: 0.5660 (0.6048)  grad: 0.2059 (0.3276)  batch_size: 12.0000 (16.3786)  lr: 0.0000 (0.0001)  time: 0.387404  data: 0.000335  max mem: 3991
+I20260731 01:37:31 2889964 mum utils.py:218] Training  [20400/25000]  eta: 0:31:07  loss: 0.5639 (0.6047)  grad: 0.2242 (0.3273)  batch_size: 16.0000 (16.3773)  lr: 0.0000 (0.0001)  time: 0.390155  data: 0.000347  max mem: 3991
+I20260731 01:37:51 2889964 mum utils.py:218] Training  [20450/25000]  eta: 0:30:46  loss: 0.5804 (0.6046)  grad: 0.2168 (0.3270)  batch_size: 21.0000 (16.3786)  lr: 0.0000 (0.0001)  time: 0.395914  data: 0.000329  max mem: 3991
+I20260731 01:38:11 2889964 mum utils.py:218] Training  [20500/25000]  eta: 0:30:26  loss: 0.5680 (0.6046)  grad: 0.2316 (0.3268)  batch_size: 16.0000 (16.3788)  lr: 0.0000 (0.0001)  time: 0.390204  data: 0.000321  max mem: 3991
+I20260731 01:38:31 2889964 mum utils.py:218] Training  [20550/25000]  eta: 0:30:06  loss: 0.5608 (0.6045)  grad: 0.2076 (0.3266)  batch_size: 16.0000 (16.3773)  lr: 0.0000 (0.0001)  time: 0.399260  data: 0.000311  max mem: 3991
+I20260731 01:38:52 2889964 mum utils.py:218] Training  [20600/25000]  eta: 0:29:46  loss: 0.5759 (0.6044)  grad: 0.2115 (0.3263)  batch_size: 16.0000 (16.3784)  lr: 0.0000 (0.0001)  time: 0.430879  data: 0.000378  max mem: 3991
+I20260731 01:39:13 2889964 mum utils.py:218] Training  [20650/25000]  eta: 0:29:25  loss: 0.5659 (0.6043)  grad: 0.2193 (0.3260)  batch_size: 16.0000 (16.3786)  lr: 0.0000 (0.0001)  time: 0.382006  data: 0.000359  max mem: 3991
+I20260731 01:39:34 2889964 mum utils.py:218] Training  [20700/25000]  eta: 0:29:05  loss: 0.5941 (0.6042)  grad: 0.2162 (0.3258)  batch_size: 16.0000 (16.3794)  lr: 0.0000 (0.0001)  time: 0.389926  data: 0.000378  max mem: 3991
+I20260731 01:39:54 2889964 mum utils.py:218] Training  [20750/25000]  eta: 0:28:45  loss: 0.5600 (0.6042)  grad: 0.2196 (0.3255)  batch_size: 12.0000 (16.3794)  lr: 0.0000 (0.0001)  time: 0.387061  data: 0.000384  max mem: 3991
+I20260731 01:40:14 2889964 mum utils.py:218] Training  [20800/25000]  eta: 0:28:24  loss: 0.5713 (0.6041)  grad: 0.2168 (0.3253)  batch_size: 16.0000 (16.3791)  lr: 0.0000 (0.0001)  time: 0.444728  data: 0.000352  max mem: 3991
+I20260731 01:40:33 2889964 mum utils.py:218] Training  [20850/25000]  eta: 0:28:04  loss: 0.5840 (0.6040)  grad: 0.2204 (0.3250)  batch_size: 16.0000 (16.3789)  lr: 0.0000 (0.0001)  time: 0.387639  data: 0.000352  max mem: 3991
+I20260731 01:40:53 2889964 mum utils.py:218] Training  [20900/25000]  eta: 0:27:44  loss: 0.5703 (0.6039)  grad: 0.2236 (0.3248)  batch_size: 12.0000 (16.3780)  lr: 0.0000 (0.0001)  time: 0.390884  data: 0.000343  max mem: 3991
+I20260731 01:41:13 2889964 mum utils.py:218] Training  [20950/25000]  eta: 0:27:23  loss: 0.5921 (0.6039)  grad: 0.2146 (0.3245)  batch_size: 16.0000 (16.3768)  lr: 0.0000 (0.0001)  time: 0.389472  data: 0.000375  max mem: 3991
+I20260731 01:41:34 2889964 mum utils.py:218] Training  [21000/25000]  eta: 0:27:03  loss: 0.5759 (0.6038)  grad: 0.2124 (0.3243)  batch_size: 12.0000 (16.3738)  lr: 0.0000 (0.0001)  time: 0.408382  data: 0.000333  max mem: 3991
+I20260731 01:41:53 2889964 mum utils.py:218] Training  [21050/25000]  eta: 0:26:43  loss: 0.5560 (0.6037)  grad: 0.2198 (0.3240)  batch_size: 16.0000 (16.3728)  lr: 0.0000 (0.0001)  time: 0.393757  data: 0.000359  max mem: 3991
+I20260731 01:42:15 2889964 mum utils.py:218] Training  [21100/25000]  eta: 0:26:22  loss: 0.5737 (0.6036)  grad: 0.2203 (0.3238)  batch_size: 16.0000 (16.3721)  lr: 0.0000 (0.0001)  time: 0.430999  data: 0.000869  max mem: 3991
+I20260731 01:42:36 2889964 mum utils.py:218] Training  [21150/25000]  eta: 0:26:02  loss: 0.5690 (0.6036)  grad: 0.2182 (0.3235)  batch_size: 12.0000 (16.3692)  lr: 0.0000 (0.0001)  time: 0.441890  data: 0.000406  max mem: 3991
+I20260731 01:42:56 2889964 mum utils.py:218] Training  [21200/25000]  eta: 0:25:42  loss: 0.5604 (0.6035)  grad: 0.2260 (0.3233)  batch_size: 16.0000 (16.3698)  lr: 0.0000 (0.0001)  time: 0.395813  data: 0.000616  max mem: 3991
+I20260731 01:43:17 2889964 mum utils.py:218] Training  [21250/25000]  eta: 0:25:22  loss: 0.5799 (0.6034)  grad: 0.2295 (0.3231)  batch_size: 16.0000 (16.3706)  lr: 0.0000 (0.0001)  time: 0.388341  data: 0.001596  max mem: 3991
+I20260731 01:43:37 2889964 mum utils.py:218] Training  [21300/25000]  eta: 0:25:01  loss: 0.5989 (0.6034)  grad: 0.2257 (0.3228)  batch_size: 16.0000 (16.3705)  lr: 0.0000 (0.0001)  time: 0.393079  data: 0.000450  max mem: 3991
+I20260731 01:43:57 2889964 mum utils.py:218] Training  [21350/25000]  eta: 0:24:41  loss: 0.5703 (0.6033)  grad: 0.2041 (0.3226)  batch_size: 12.0000 (16.3673)  lr: 0.0000 (0.0001)  time: 0.393327  data: 0.001105  max mem: 3991
+I20260731 01:44:16 2889964 mum utils.py:218] Training  [21400/25000]  eta: 0:24:21  loss: 0.5727 (0.6032)  grad: 0.2300 (0.3223)  batch_size: 16.0000 (16.3664)  lr: 0.0000 (0.0001)  time: 0.393142  data: 0.000345  max mem: 3991
+I20260731 01:44:37 2889964 mum utils.py:218] Training  [21450/25000]  eta: 0:24:00  loss: 0.5775 (0.6032)  grad: 0.2195 (0.3221)  batch_size: 16.0000 (16.3668)  lr: 0.0000 (0.0001)  time: 0.401682  data: 0.000516  max mem: 3991
+I20260731 01:44:57 2889964 mum utils.py:218] Training  [21500/25000]  eta: 0:23:40  loss: 0.5787 (0.6031)  grad: 0.2111 (0.3218)  batch_size: 16.0000 (16.3680)  lr: 0.0000 (0.0001)  time: 0.400953  data: 0.000463  max mem: 3991
+I20260731 01:45:17 2889964 mum utils.py:218] Training  [21550/25000]  eta: 0:23:20  loss: 0.5833 (0.6030)  grad: 0.2213 (0.3216)  batch_size: 16.0000 (16.3679)  lr: 0.0000 (0.0001)  time: 0.428269  data: 0.000392  max mem: 3991
+I20260731 01:45:39 2889964 mum utils.py:218] Training  [21600/25000]  eta: 0:23:00  loss: 0.5740 (0.6030)  grad: 0.2257 (0.3214)  batch_size: 16.0000 (16.3679)  lr: 0.0000 (0.0001)  time: 0.427393  data: 0.000383  max mem: 3991
+I20260731 01:45:59 2889964 mum utils.py:218] Training  [21650/25000]  eta: 0:22:39  loss: 0.5766 (0.6029)  grad: 0.2124 (0.3212)  batch_size: 16.0000 (16.3671)  lr: 0.0000 (0.0001)  time: 0.385451  data: 0.000379  max mem: 3991
+I20260731 01:46:19 2889964 mum utils.py:218] Training  [21700/25000]  eta: 0:22:19  loss: 0.5724 (0.6028)  grad: 0.2116 (0.3209)  batch_size: 16.0000 (16.3661)  lr: 0.0000 (0.0001)  time: 0.400802  data: 0.000351  max mem: 3991
+I20260731 01:46:39 2889964 mum utils.py:218] Training  [21750/25000]  eta: 0:21:59  loss: 0.5715 (0.6028)  grad: 0.2044 (0.3207)  batch_size: 16.0000 (16.3664)  lr: 0.0000 (0.0001)  time: 0.388926  data: 0.000304  max mem: 3991
+I20260731 01:46:59 2889964 mum utils.py:218] Training  [21800/25000]  eta: 0:21:38  loss: 0.5507 (0.6027)  grad: 0.2244 (0.3204)  batch_size: 16.0000 (16.3662)  lr: 0.0000 (0.0001)  time: 0.392113  data: 0.000393  max mem: 3991
+I20260731 01:47:19 2889964 mum utils.py:218] Training  [21850/25000]  eta: 0:21:18  loss: 0.5859 (0.6026)  grad: 0.2159 (0.3202)  batch_size: 16.0000 (16.3662)  lr: 0.0000 (0.0001)  time: 0.386111  data: 0.000431  max mem: 3991
+I20260731 01:47:40 2889964 mum utils.py:218] Training  [21900/25000]  eta: 0:20:58  loss: 0.5695 (0.6026)  grad: 0.2178 (0.3200)  batch_size: 12.0000 (16.3673)  lr: 0.0000 (0.0001)  time: 0.393673  data: 0.000547  max mem: 3991
+I20260731 01:48:01 2889964 mum utils.py:218] Training  [21950/25000]  eta: 0:20:38  loss: 0.5738 (0.6025)  grad: 0.2096 (0.3197)  batch_size: 16.0000 (16.3670)  lr: 0.0000 (0.0001)  time: 0.433358  data: 0.000455  max mem: 3991
+I20260731 01:48:23 2889964 mum utils.py:218] Training  [22000/25000]  eta: 0:20:18  loss: 0.5464 (0.6024)  grad: 0.2035 (0.3195)  batch_size: 16.0000 (16.3675)  lr: 0.0000 (0.0001)  time: 0.551675  data: 0.000356  max mem: 3991
+I20260731 01:48:43 2889964 mum utils.py:218] Training  [22050/25000]  eta: 0:19:57  loss: 0.5597 (0.6023)  grad: 0.2176 (0.3192)  batch_size: 16.0000 (16.3688)  lr: 0.0000 (0.0001)  time: 0.387970  data: 0.000362  max mem: 3991
+I20260731 01:49:03 2889964 mum utils.py:218] Training  [22100/25000]  eta: 0:19:37  loss: 0.5715 (0.6023)  grad: 0.2113 (0.3190)  batch_size: 16.0000 (16.3701)  lr: 0.0000 (0.0001)  time: 0.381693  data: 0.000341  max mem: 3991
+I20260731 01:49:23 2889964 mum utils.py:218] Training  [22150/25000]  eta: 0:19:17  loss: 0.5856 (0.6022)  grad: 0.2091 (0.3188)  batch_size: 16.0000 (16.3708)  lr: 0.0000 (0.0001)  time: 0.388274  data: 0.000488  max mem: 3991
+I20260731 01:49:43 2889964 mum utils.py:218] Training  [22200/25000]  eta: 0:18:56  loss: 0.5732 (0.6022)  grad: 0.2056 (0.3185)  batch_size: 16.0000 (16.3703)  lr: 0.0000 (0.0001)  time: 0.395895  data: 0.000725  max mem: 3991
+I20260731 01:50:04 2889964 mum utils.py:218] Training  [22250/25000]  eta: 0:18:36  loss: 0.5650 (0.6021)  grad: 0.2168 (0.3183)  batch_size: 16.0000 (16.3707)  lr: 0.0000 (0.0001)  time: 0.391855  data: 0.000327  max mem: 3991
+I20260731 01:50:23 2889964 mum utils.py:218] Training  [22300/25000]  eta: 0:18:16  loss: 0.5656 (0.6021)  grad: 0.2134 (0.3180)  batch_size: 16.0000 (16.3714)  lr: 0.0000 (0.0001)  time: 0.390060  data: 0.000328  max mem: 3991
+I20260731 01:50:43 2889964 mum utils.py:218] Training  [22350/25000]  eta: 0:17:55  loss: 0.5892 (0.6020)  grad: 0.2014 (0.3178)  batch_size: 16.0000 (16.3722)  lr: 0.0000 (0.0001)  time: 0.391850  data: 0.000384  max mem: 3991
+I20260731 01:51:03 2889964 mum utils.py:218] Training  [22400/25000]  eta: 0:17:35  loss: 0.5787 (0.6019)  grad: 0.2029 (0.3175)  batch_size: 16.0000 (16.3727)  lr: 0.0000 (0.0001)  time: 0.396462  data: 0.000325  max mem: 3991
+I20260731 01:51:23 2889964 mum utils.py:218] Training  [22450/25000]  eta: 0:17:15  loss: 0.5583 (0.6019)  grad: 0.2098 (0.3173)  batch_size: 16.0000 (16.3717)  lr: 0.0000 (0.0001)  time: 0.387065  data: 0.000363  max mem: 3991
+I20260731 01:51:43 2889964 mum utils.py:218] Training  [22500/25000]  eta: 0:16:54  loss: 0.6033 (0.6018)  grad: 0.2028 (0.3171)  batch_size: 12.0000 (16.3700)  lr: 0.0000 (0.0001)  time: 0.429244  data: 0.000338  max mem: 3991
+I20260731 01:52:04 2889964 mum utils.py:218] Training  [22550/25000]  eta: 0:16:34  loss: 0.5712 (0.6018)  grad: 0.2076 (0.3168)  batch_size: 16.0000 (16.3695)  lr: 0.0000 (0.0001)  time: 0.388122  data: 0.000368  max mem: 3991
+I20260731 01:52:23 2889964 mum utils.py:218] Training  [22600/25000]  eta: 0:16:14  loss: 0.5729 (0.6017)  grad: 0.2104 (0.3166)  batch_size: 16.0000 (16.3723)  lr: 0.0000 (0.0001)  time: 0.387311  data: 0.000479  max mem: 3991
+I20260731 01:52:44 2889964 mum utils.py:218] Training  [22650/25000]  eta: 0:15:53  loss: 0.5569 (0.6016)  grad: 0.2023 (0.3164)  batch_size: 16.0000 (16.3742)  lr: 0.0000 (0.0001)  time: 0.428689  data: 0.000437  max mem: 3991
+I20260731 01:53:04 2889964 mum utils.py:218] Training  [22700/25000]  eta: 0:15:33  loss: 0.5928 (0.6016)  grad: 0.2170 (0.3161)  batch_size: 16.0000 (16.3733)  lr: 0.0000 (0.0001)  time: 0.419140  data: 0.000382  max mem: 3991
+I20260731 01:53:24 2889964 mum utils.py:218] Training  [22750/25000]  eta: 0:15:13  loss: 0.5587 (0.6016)  grad: 0.2103 (0.3159)  batch_size: 16.0000 (16.3735)  lr: 0.0000 (0.0001)  time: 0.393417  data: 0.000346  max mem: 3991
+I20260731 01:53:43 2889964 mum utils.py:218] Training  [22800/25000]  eta: 0:14:52  loss: 0.5800 (0.6015)  grad: 0.1988 (0.3157)  batch_size: 16.0000 (16.3739)  lr: 0.0000 (0.0001)  time: 0.405945  data: 0.000434  max mem: 3991
+I20260731 01:54:03 2889964 mum utils.py:218] Training  [22850/25000]  eta: 0:14:32  loss: 0.5781 (0.6014)  grad: 0.2106 (0.3154)  batch_size: 16.0000 (16.3743)  lr: 0.0000 (0.0001)  time: 0.394692  data: 0.000388  max mem: 3991
+I20260731 01:54:23 2889964 mum utils.py:218] Training  [22900/25000]  eta: 0:14:12  loss: 0.5709 (0.6014)  grad: 0.2078 (0.3152)  batch_size: 16.0000 (16.3740)  lr: 0.0000 (0.0001)  time: 0.420168  data: 0.000779  max mem: 3991
+I20260731 01:54:43 2889964 mum utils.py:218] Training  [22950/25000]  eta: 0:13:51  loss: 0.5778 (0.6013)  grad: 0.2033 (0.3149)  batch_size: 16.0000 (16.3733)  lr: 0.0000 (0.0001)  time: 0.389288  data: 0.000324  max mem: 3991
+I20260731 01:55:03 2889964 mum utils.py:218] Training  [23000/25000]  eta: 0:13:31  loss: 0.5693 (0.6013)  grad: 0.2041 (0.3147)  batch_size: 16.0000 (16.3732)  lr: 0.0000 (0.0001)  time: 0.394398  data: 0.000605  max mem: 3991
+I20260731 01:55:22 2889964 mum utils.py:218] Training  [23050/25000]  eta: 0:13:11  loss: 0.5683 (0.6012)  grad: 0.2027 (0.3145)  batch_size: 16.0000 (16.3729)  lr: 0.0000 (0.0001)  time: 0.386011  data: 0.000342  max mem: 3991
+I20260731 01:55:42 2889964 mum utils.py:218] Training  [23100/25000]  eta: 0:12:50  loss: 0.5728 (0.6012)  grad: 0.2059 (0.3142)  batch_size: 16.0000 (16.3732)  lr: 0.0000 (0.0001)  time: 0.385627  data: 0.000399  max mem: 3991
+I20260731 01:56:02 2889964 mum utils.py:218] Training  [23150/25000]  eta: 0:12:30  loss: 0.5744 (0.6011)  grad: 0.1995 (0.3140)  batch_size: 16.0000 (16.3738)  lr: 0.0000 (0.0001)  time: 0.393808  data: 0.000364  max mem: 3991
+I20260731 01:56:22 2889964 mum utils.py:218] Training  [23200/25000]  eta: 0:12:10  loss: 0.5613 (0.6010)  grad: 0.2054 (0.3138)  batch_size: 16.0000 (16.3737)  lr: 0.0000 (0.0001)  time: 0.396044  data: 0.000346  max mem: 3991
+I20260731 01:56:42 2889964 mum utils.py:218] Training  [23250/25000]  eta: 0:11:49  loss: 0.5659 (0.6009)  grad: 0.2012 (0.3135)  batch_size: 16.0000 (16.3758)  lr: 0.0000 (0.0001)  time: 0.419114  data: 0.000366  max mem: 3991
+I20260731 01:57:01 2889964 mum utils.py:218] Training  [23300/25000]  eta: 0:11:29  loss: 0.5724 (0.6009)  grad: 0.1968 (0.3133)  batch_size: 16.0000 (16.3759)  lr: 0.0000 (0.0001)  time: 0.392008  data: 0.000420  max mem: 3991
+I20260731 01:57:22 2889964 mum utils.py:218] Training  [23350/25000]  eta: 0:11:09  loss: 0.5670 (0.6008)  grad: 0.2004 (0.3131)  batch_size: 16.0000 (16.3770)  lr: 0.0000 (0.0001)  time: 0.456173  data: 0.000437  max mem: 3991
+I20260731 01:57:42 2889964 mum utils.py:218] Training  [23400/25000]  eta: 0:10:48  loss: 0.5664 (0.6008)  grad: 0.2010 (0.3128)  batch_size: 16.0000 (16.3767)  lr: 0.0000 (0.0001)  time: 0.422352  data: 0.000352  max mem: 3991
+I20260731 01:58:02 2889964 mum utils.py:218] Training  [23450/25000]  eta: 0:10:28  loss: 0.5726 (0.6007)  grad: 0.2010 (0.3126)  batch_size: 16.0000 (16.3777)  lr: 0.0000 (0.0001)  time: 0.389621  data: 0.000358  max mem: 3991
+I20260731 01:58:22 2889964 mum utils.py:218] Training  [23500/25000]  eta: 0:10:08  loss: 0.5691 (0.6006)  grad: 0.1962 (0.3123)  batch_size: 16.0000 (16.3790)  lr: 0.0000 (0.0001)  time: 0.402109  data: 0.000402  max mem: 3991
+I20260731 01:58:41 2889964 mum utils.py:218] Training  [23550/25000]  eta: 0:09:48  loss: 0.5765 (0.6006)  grad: 0.1932 (0.3121)  batch_size: 16.0000 (16.3782)  lr: 0.0000 (0.0001)  time: 0.388330  data: 0.000363  max mem: 3991
+I20260731 01:59:02 2889964 mum utils.py:218] Training  [23600/25000]  eta: 0:09:27  loss: 0.5740 (0.6005)  grad: 0.2069 (0.3119)  batch_size: 21.0000 (16.3783)  lr: 0.0000 (0.0001)  time: 0.389801  data: 0.000388  max mem: 3991
+I20260731 01:59:21 2889964 mum utils.py:218] Training  [23650/25000]  eta: 0:09:07  loss: 0.5493 (0.6004)  grad: 0.2035 (0.3116)  batch_size: 16.0000 (16.3775)  lr: 0.0000 (0.0001)  time: 0.385037  data: 0.000353  max mem: 3991
+I20260731 01:59:42 2889964 mum utils.py:218] Training  [23700/25000]  eta: 0:08:47  loss: 0.5711 (0.6003)  grad: 0.1981 (0.3114)  batch_size: 21.0000 (16.3802)  lr: 0.0000 (0.0001)  time: 0.425302  data: 0.000354  max mem: 3991
+I20260731 02:00:01 2889964 mum utils.py:218] Training  [23750/25000]  eta: 0:08:26  loss: 0.5621 (0.6003)  grad: 0.1969 (0.3112)  batch_size: 16.0000 (16.3833)  lr: 0.0000 (0.0001)  time: 0.390518  data: 0.000379  max mem: 3991
+I20260731 02:00:21 2889964 mum utils.py:218] Training  [23800/25000]  eta: 0:08:06  loss: 0.5636 (0.6002)  grad: 0.1920 (0.3109)  batch_size: 16.0000 (16.3836)  lr: 0.0000 (0.0001)  time: 0.392198  data: 0.000325  max mem: 3991
+I20260731 02:00:42 2889964 mum utils.py:218] Training  [23850/25000]  eta: 0:07:46  loss: 0.5735 (0.6002)  grad: 0.1924 (0.3107)  batch_size: 16.0000 (16.3830)  lr: 0.0000 (0.0001)  time: 0.417783  data: 0.000358  max mem: 3991
+I20260731 02:01:02 2889964 mum utils.py:218] Training  [23900/25000]  eta: 0:07:26  loss: 0.5844 (0.6001)  grad: 0.1932 (0.3104)  batch_size: 16.0000 (16.3831)  lr: 0.0000 (0.0001)  time: 0.379979  data: 0.000412  max mem: 3991
+I20260731 02:01:23 2889964 mum utils.py:218] Training  [23950/25000]  eta: 0:07:05  loss: 0.5654 (0.6000)  grad: 0.1971 (0.3102)  batch_size: 16.0000 (16.3827)  lr: 0.0000 (0.0001)  time: 0.438236  data: 0.000400  max mem: 3991
+I20260731 02:01:45 2889964 mum utils.py:218] Training  [24000/25000]  eta: 0:06:45  loss: 0.5617 (0.6000)  grad: 0.1994 (0.3100)  batch_size: 16.0000 (16.3841)  lr: 0.0000 (0.0001)  time: 0.489573  data: 0.000348  max mem: 3991
+I20260731 02:02:04 2889964 mum utils.py:218] Training  [24050/25000]  eta: 0:06:25  loss: 0.5845 (0.6000)  grad: 0.1943 (0.3098)  batch_size: 12.0000 (16.3830)  lr: 0.0000 (0.0001)  time: 0.393387  data: 0.000332  max mem: 3991
+I20260731 02:02:25 2889964 mum utils.py:218] Training  [24100/25000]  eta: 0:06:05  loss: 0.5654 (0.5999)  grad: 0.2002 (0.3095)  batch_size: 16.0000 (16.3823)  lr: 0.0000 (0.0001)  time: 0.433058  data: 0.000306  max mem: 3991
+I20260731 02:02:46 2889964 mum utils.py:218] Training  [24150/25000]  eta: 0:05:44  loss: 0.5732 (0.5998)  grad: 0.1953 (0.3093)  batch_size: 12.0000 (16.3819)  lr: 0.0000 (0.0001)  time: 0.393212  data: 0.000402  max mem: 3991
+I20260731 02:03:07 2889964 mum utils.py:218] Training  [24200/25000]  eta: 0:05:24  loss: 0.5754 (0.5998)  grad: 0.1911 (0.3090)  batch_size: 16.0000 (16.3818)  lr: 0.0000 (0.0001)  time: 0.443349  data: 0.000366  max mem: 3991
+I20260731 02:03:27 2889964 mum utils.py:218] Training  [24250/25000]  eta: 0:05:04  loss: 0.5605 (0.5997)  grad: 0.1997 (0.3088)  batch_size: 12.0000 (16.3800)  lr: 0.0000 (0.0001)  time: 0.412066  data: 0.000375  max mem: 3991
+I20260731 02:03:47 2889964 mum utils.py:218] Training  [24300/25000]  eta: 0:04:43  loss: 0.5579 (0.5997)  grad: 0.1898 (0.3086)  batch_size: 21.0000 (16.3818)  lr: 0.0000 (0.0001)  time: 0.431484  data: 0.000375  max mem: 3991
+I20260731 02:04:08 2889964 mum utils.py:218] Training  [24350/25000]  eta: 0:04:23  loss: 0.5768 (0.5996)  grad: 0.1930 (0.3083)  batch_size: 16.0000 (16.3811)  lr: 0.0000 (0.0001)  time: 0.386662  data: 0.000337  max mem: 3991
+I20260731 02:04:27 2889964 mum utils.py:218] Training  [24400/25000]  eta: 0:04:03  loss: 0.5821 (0.5996)  grad: 0.1872 (0.3081)  batch_size: 16.0000 (16.3792)  lr: 0.0000 (0.0001)  time: 0.392860  data: 0.000360  max mem: 3991
+I20260731 02:04:47 2889964 mum utils.py:218] Training  [24450/25000]  eta: 0:03:43  loss: 0.5740 (0.5995)  grad: 0.1920 (0.3079)  batch_size: 16.0000 (16.3785)  lr: 0.0000 (0.0001)  time: 0.397430  data: 0.000572  max mem: 3991
+I20260731 02:05:07 2889964 mum utils.py:218] Training  [24500/25000]  eta: 0:03:22  loss: 0.5697 (0.5995)  grad: 0.1953 (0.3076)  batch_size: 12.0000 (16.3787)  lr: 0.0000 (0.0001)  time: 0.389112  data: 0.000382  max mem: 3991
+I20260731 02:05:28 2889964 mum utils.py:218] Training  [24550/25000]  eta: 0:03:02  loss: 0.5650 (0.5994)  grad: 0.1878 (0.3074)  batch_size: 16.0000 (16.3794)  lr: 0.0000 (0.0001)  time: 0.438991  data: 0.000430  max mem: 3991
+I20260731 02:05:48 2889964 mum utils.py:218] Training  [24600/25000]  eta: 0:02:42  loss: 0.5624 (0.5994)  grad: 0.1861 (0.3072)  batch_size: 12.0000 (16.3783)  lr: 0.0000 (0.0001)  time: 0.384879  data: 0.000459  max mem: 3991
+I20260731 02:06:09 2889964 mum utils.py:218] Training  [24650/25000]  eta: 0:02:21  loss: 0.5610 (0.5993)  grad: 0.1977 (0.3070)  batch_size: 16.0000 (16.3768)  lr: 0.0000 (0.0001)  time: 0.420725  data: 0.000372  max mem: 3991
+I20260731 02:06:29 2889964 mum utils.py:218] Training  [24700/25000]  eta: 0:02:01  loss: 0.5807 (0.5993)  grad: 0.1861 (0.3067)  batch_size: 16.0000 (16.3762)  lr: 0.0000 (0.0001)  time: 0.430384  data: 0.000365  max mem: 3991
+I20260731 02:06:49 2889964 mum utils.py:218] Training  [24750/25000]  eta: 0:01:41  loss: 0.5707 (0.5992)  grad: 0.1943 (0.3065)  batch_size: 16.0000 (16.3757)  lr: 0.0000 (0.0001)  time: 0.391654  data: 0.000469  max mem: 3991
+I20260731 02:07:10 2889964 mum utils.py:218] Training  [24800/25000]  eta: 0:01:21  loss: 0.5623 (0.5992)  grad: 0.1855 (0.3063)  batch_size: 16.0000 (16.3761)  lr: 0.0000 (0.0001)  time: 0.448173  data: 0.000386  max mem: 3991
+I20260731 02:07:30 2889964 mum utils.py:218] Training  [24850/25000]  eta: 0:01:00  loss: 0.5524 (0.5991)  grad: 0.1916 (0.3060)  batch_size: 16.0000 (16.3760)  lr: 0.0000 (0.0001)  time: 0.401100  data: 0.000358  max mem: 3991
+I20260731 02:07:50 2889964 mum utils.py:218] Training  [24900/25000]  eta: 0:00:40  loss: 0.5690 (0.5991)  grad: 0.1903 (0.3058)  batch_size: 16.0000 (16.3750)  lr: 0.0000 (0.0001)  time: 0.400290  data: 0.000686  max mem: 3991
+I20260731 02:08:09 2889964 mum utils.py:218] Training  [24950/25000]  eta: 0:00:20  loss: 0.5631 (0.5990)  grad: 0.1867 (0.3056)  batch_size: 16.0000 (16.3767)  lr: 0.0000 (0.0001)  time: 0.391642  data: 0.000442  max mem: 3991
+Launching eval: fast
+Created dir /data/data_taohy/modelReShow/MuM/checkpoints/eval/training_24999/fast
+I20260731 02:08:29 2889964 mum train.py:77] Saved eval cfg /data/data_taohy/modelReShow/MuM/checkpoints/eval/training_24999/fast/eval_cfg.yaml
+I20260731 02:08:29 2889964 mum train.py:83] Launched eval fast
+Launching eval: slow
+Created dir /data/data_taohy/modelReShow/MuM/checkpoints/eval/training_24999/slow
+I20260731 02:08:29 2889964 mum train.py:77] Saved eval cfg /data/data_taohy/modelReShow/MuM/checkpoints/eval/training_24999/slow/eval_cfg.yaml
+I20260731 02:08:29 2889964 mum train.py:83] Launched eval slow
+I20260731 02:08:29 2889964 mum utils.py:218] Training  [24999/25000]  eta: 0:00:00  loss: 0.5635 (0.5989)  grad: 0.1837 (0.3054)  batch_size: 16.0000 (16.3751)  lr: 0.0000 (0.0001)  time: 0.436808  data: 0.000332  max mem: 3991
+I20260731 02:08:29 2889964 mum utils.py:246] Training Total time: 2:49:00 (0.405609 s / it)
+Training time 2:49:00
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mmum_vits_blendedmvs[0m at: [34mhttps://wandb.ai/3222703726-huazhong-university-of-science-and-technology/MuM/runs/psnzmb4a[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20260730_231925-psnzmb4a/logs[0m
+[rank0]:[W731 02:09:01.648363226 ProcessGroupNCCL.cpp:1496] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
