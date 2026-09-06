@@ -1,0 +1,1136 @@
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+26-09-04 21:40:57.493 - INFO:   name: COCO_MSRS_MCUD_demo
+  model: MUCMTransformer
+  track_wandb: True
+  wandb_project: DeFusion-plusplus
+  wandb_entity: 3222703726-huazhong-university-of-science-and-technology
+  use_tb_logger: False
+  dataset:[
+    train:[
+      name: train
+      noise_dataroot: /data1/Taohy/dataset/COCO
+      noise_trainpairs: data/coco_train2017_train_data.txt
+      train_name: train2017
+      batch_size: 4
+      image_size: 224
+      max_iter: 40
+      iter_size: 1
+      workers: 2
+      irvis_dataroot: /data1/Taohy/dataset/MSRS
+      infrare_name: train/ir
+      visible_name: train/vi
+      teacher1_pth: None
+      teacher2_pth: None
+      phase: train
+    ]
+    val:[
+      name: val
+      noise_dataroot: /data1/Taohy/dataset/MSRS
+      noise_trainpairs: data/msrs_test_ir_val_data.txt
+      train_name: test/ir
+      batch_size: 4
+      image_size: 224
+      iter_size: 1
+      max_iter: 40
+      workers: 2
+      val_batches: 50
+      irvis_dataroot: /data1/Taohy/dataset/MSRS
+      infrare_name: test/ir
+      visible_name: test/vi
+      phase: val
+    ]
+  ]
+  network_G:[
+    in_nc: 3
+    block_num: 2
+    init: xavier
+    hidden_channels: 128
+    K: 4
+  ]
+  path:[
+    pretrain_model_G: None
+    strict_load: True
+    resume_state: None
+    root: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete
+    experiments_root: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/experiments/COCO_MSRS_MCUD_demo
+    models: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/experiments/COCO_MSRS_MCUD_demo/models
+    training_state: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/experiments/COCO_MSRS_MCUD_demo/training_state
+    log: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/experiments/COCO_MSRS_MCUD_demo
+    val_images: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/experiments/COCO_MSRS_MCUD_demo/val_images
+  ]
+  logger:[
+    print_freq: 20
+    save_checkpoint_freq: 5000
+  ]
+  train:[
+    lr: 0.0001
+    min_lr: 0.0
+    warmup_steps: 2000
+    steps: 20000
+    checkpoint_steps: 5000
+    log_steps: 20
+    beta1: 0.9
+    beta2: 0.999
+    max_grad_norm: 20
+    manual_seed: 1
+  ]
+  is_train: True
+
+26-09-04 21:40:58.559 - INFO: Number of CUD train images: 50,000
+26-09-04 21:40:58.559 - INFO: Number of MCUD train pairs: 1,083
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/user2/.netrc.
+wandb: Currently logged in as: 3222703726 (3222703726-huazhong-university-of-science-and-technology) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run z9fjf9h3
+wandb: Tracking run with wandb version 0.26.1
+wandb: Run data is saved locally in /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/wandb/run-20260904_214103-z9fjf9h3
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run COCO_MSRS_MCUD_demo
+wandb: ⭐️ View project at https://wandb.ai/3222703726-huazhong-university-of-science-and-technology/defusion-plusplus
+wandb: 🚀 View run at https://wandb.ai/3222703726-huazhong-university-of-science-and-technology/defusion-plusplus/runs/z9fjf9h3
+26-09-04 21:41:07.125 - INFO: # network parameters: 237609344
+26-09-04 21:41:07.125 - INFO: Start training: 20000 steps, warmup 2000 steps, log every 20 steps, checkpoint every 5000 steps
+Warning: teacher1 weights not found, using random init: None
+Warning: teacher2 weights not found, using random init: None
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/torchvision/transforms/functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/torchvision/transforms/functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+26-09-04 21:41:14.513 - INFO: <step:     0, lr:0.000e+00> cud_total: 4.3789e+02 mcud_total: 2.8065e+00 loss: 4.4069e+02 grad: 2.7911e+02
+26-09-04 21:41:39.101 - INFO: <step:    20, lr:1.000e-06> cud_total: 4.3398e+02 mcud_total: 2.7462e+00 loss: 4.3673e+02 grad: 2.5554e+02
+26-09-04 21:42:06.919 - INFO: <step:    40, lr:2.000e-06> cud_total: 4.4033e+02 mcud_total: 2.9846e+00 loss: 4.4331e+02 grad: 2.7513e+02
+26-09-04 21:42:32.532 - INFO: <step:    60, lr:3.000e-06> cud_total: 4.0898e+02 mcud_total: 2.8877e+00 loss: 4.1187e+02 grad: 1.8571e+02
+26-09-04 21:43:02.502 - INFO: <step:    80, lr:4.000e-06> cud_total: 3.9550e+02 mcud_total: 2.8041e+00 loss: 3.9831e+02 grad: 1.5619e+02
+26-09-04 21:43:29.618 - INFO: <step:   100, lr:5.000e-06> cud_total: 3.7497e+02 mcud_total: 3.0749e+00 loss: 3.7804e+02 grad: 2.3140e+02
+26-09-04 21:43:56.015 - INFO: <step:   120, lr:6.000e-06> cud_total: 3.7415e+02 mcud_total: 2.7430e+00 loss: 3.7690e+02 grad: 9.7990e+01
+26-09-04 21:44:23.470 - INFO: <step:   140, lr:7.000e-06> cud_total: 3.4833e+02 mcud_total: 2.4420e+00 loss: 3.5078e+02 grad: 1.0295e+02
+26-09-04 21:44:48.167 - INFO: <step:   160, lr:8.000e-06> cud_total: 3.4684e+02 mcud_total: 2.7612e+00 loss: 3.4961e+02 grad: 9.4001e+01
+26-09-04 21:45:15.629 - INFO: <step:   180, lr:9.000e-06> cud_total: 3.3504e+02 mcud_total: 2.6379e+00 loss: 3.3768e+02 grad: 9.1196e+01
+26-09-04 21:45:42.300 - INFO: <step:   200, lr:1.000e-05> cud_total: 3.1847e+02 mcud_total: 2.2758e+00 loss: 3.2074e+02 grad: 6.9751e+01
+26-09-04 21:46:05.670 - INFO: <step:   220, lr:1.100e-05> cud_total: 2.8623e+02 mcud_total: 2.3415e+00 loss: 2.8857e+02 grad: 6.2941e+01
+26-09-04 21:46:29.499 - INFO: <step:   240, lr:1.200e-05> cud_total: 2.8186e+02 mcud_total: 1.8868e+00 loss: 2.8375e+02 grad: 6.2816e+01
+26-09-04 21:46:53.867 - INFO: <step:   260, lr:1.300e-05> cud_total: 2.8049e+02 mcud_total: 1.7731e+00 loss: 2.8227e+02 grad: 6.2874e+01
+26-09-04 21:47:08.198 - INFO: <step:   280, lr:1.400e-05> cud_total: 2.4212e+02 mcud_total: 1.8001e+00 loss: 2.4392e+02 grad: 9.0930e+01
+26-09-04 21:47:16.604 - INFO: <step:   300, lr:1.500e-05> cud_total: 2.3416e+02 mcud_total: 1.5797e+00 loss: 2.3574e+02 grad: 6.7568e+01
+26-09-04 21:47:22.615 - INFO: <step:   320, lr:1.600e-05> cud_total: 2.2088e+02 mcud_total: 1.5240e+00 loss: 2.2241e+02 grad: 5.2416e+01
+26-09-04 21:47:27.635 - INFO: <step:   340, lr:1.700e-05> cud_total: 2.0333e+02 mcud_total: 1.4167e+00 loss: 2.0475e+02 grad: 5.7724e+01
+26-09-04 21:47:33.046 - INFO: <step:   360, lr:1.800e-05> cud_total: 1.9497e+02 mcud_total: 1.4157e+00 loss: 1.9638e+02 grad: 4.6278e+01
+26-09-04 21:47:38.881 - INFO: <step:   380, lr:1.900e-05> cud_total: 1.8306e+02 mcud_total: 1.1429e+00 loss: 1.8421e+02 grad: 9.4785e+01
+26-09-04 21:47:45.724 - INFO: <step:   400, lr:2.000e-05> cud_total: 1.8102e+02 mcud_total: 1.1107e+00 loss: 1.8213e+02 grad: 9.9542e+01
+26-09-04 21:47:50.647 - INFO: <step:   420, lr:2.100e-05> cud_total: 1.8003e+02 mcud_total: 9.3249e-01 loss: 1.8096e+02 grad: 6.6204e+01
+26-09-04 21:47:55.194 - INFO: <step:   440, lr:2.200e-05> cud_total: 1.7159e+02 mcud_total: 9.3214e-01 loss: 1.7252e+02 grad: 7.8677e+01
+26-09-04 21:48:01.094 - INFO: <step:   460, lr:2.300e-05> cud_total: 1.6745e+02 mcud_total: 8.7089e-01 loss: 1.6832e+02 grad: 7.8230e+01
+26-09-04 21:48:06.996 - INFO: <step:   480, lr:2.400e-05> cud_total: 1.6767e+02 mcud_total: 9.9690e-01 loss: 1.6866e+02 grad: 1.5953e+02
+26-09-04 21:48:12.420 - INFO: <step:   500, lr:2.500e-05> cud_total: 1.6457e+02 mcud_total: 8.2364e-01 loss: 1.6539e+02 grad: 1.6829e+02
+26-09-04 21:48:18.943 - INFO: <step:   520, lr:2.600e-05> cud_total: 1.5529e+02 mcud_total: 9.7879e-01 loss: 1.5627e+02 grad: 2.2599e+02
+26-09-04 21:48:23.536 - INFO: <step:   540, lr:2.700e-05> cud_total: 1.5354e+02 mcud_total: 1.0846e+00 loss: 1.5462e+02 grad: 1.7620e+02
+26-09-04 21:48:28.467 - INFO: <step:   560, lr:2.800e-05> cud_total: 1.5640e+02 mcud_total: 8.9716e-01 loss: 1.5729e+02 grad: 1.6013e+02
+26-09-04 21:48:33.979 - INFO: <step:   580, lr:2.900e-05> cud_total: 1.5698e+02 mcud_total: 7.1746e-01 loss: 1.5770e+02 grad: 1.4423e+02
+26-09-04 21:48:39.427 - INFO: <step:   600, lr:3.000e-05> cud_total: 1.5499e+02 mcud_total: 1.0609e+00 loss: 1.5605e+02 grad: 1.3214e+02
+26-09-04 21:48:47.255 - INFO: <step:   620, lr:3.100e-05> cud_total: 1.6012e+02 mcud_total: 8.8051e-01 loss: 1.6100e+02 grad: 9.8658e+01
+26-09-04 21:48:52.970 - INFO: <step:   640, lr:3.200e-05> cud_total: 1.4776e+02 mcud_total: 8.7526e-01 loss: 1.4863e+02 grad: 1.3781e+02
+26-09-04 21:48:58.892 - INFO: <step:   660, lr:3.300e-05> cud_total: 1.4777e+02 mcud_total: 9.1593e-01 loss: 1.4869e+02 grad: 2.3200e+02
+26-09-04 21:49:06.000 - INFO: <step:   680, lr:3.400e-05> cud_total: 1.5823e+02 mcud_total: 8.6227e-01 loss: 1.5909e+02 grad: 2.0605e+02
+26-09-04 21:49:11.611 - INFO: <step:   700, lr:3.500e-05> cud_total: 1.5596e+02 mcud_total: 8.2083e-01 loss: 1.5678e+02 grad: 1.4349e+02
+26-09-04 21:49:17.519 - INFO: <step:   720, lr:3.600e-05> cud_total: 1.5466e+02 mcud_total: 7.3319e-01 loss: 1.5539e+02 grad: 3.3877e+02
+26-09-04 21:49:23.555 - INFO: <step:   740, lr:3.700e-05> cud_total: 1.5045e+02 mcud_total: 1.0269e+00 loss: 1.5147e+02 grad: 1.2942e+02
+26-09-04 21:49:29.134 - INFO: <step:   760, lr:3.800e-05> cud_total: 1.6131e+02 mcud_total: 7.9059e-01 loss: 1.6210e+02 grad: 7.1450e+02
+26-09-04 21:49:34.598 - INFO: <step:   780, lr:3.900e-05> cud_total: 1.4310e+02 mcud_total: 6.7875e-01 loss: 1.4378e+02 grad: 3.0512e+02
+26-09-04 21:49:39.957 - INFO: <step:   800, lr:4.000e-05> cud_total: 1.2535e+02 mcud_total: 7.7966e-01 loss: 1.2613e+02 grad: 1.9311e+02
+26-09-04 21:49:47.723 - INFO: <step:   820, lr:4.100e-05> cud_total: 1.3566e+02 mcud_total: 7.9948e-01 loss: 1.3646e+02 grad: 2.7500e+02
+26-09-04 21:49:53.496 - INFO: <step:   840, lr:4.200e-05> cud_total: 1.3824e+02 mcud_total: 7.5461e-01 loss: 1.3900e+02 grad: 8.7447e+02
+26-09-04 21:49:59.449 - INFO: <step:   860, lr:4.300e-05> cud_total: 1.1936e+02 mcud_total: 6.4378e-01 loss: 1.2001e+02 grad: 1.9969e+02
+26-09-04 21:50:04.906 - INFO: <step:   880, lr:4.400e-05> cud_total: 1.3192e+02 mcud_total: 8.5219e-01 loss: 1.3278e+02 grad: 5.7751e+02
+26-09-04 21:50:10.710 - INFO: <step:   900, lr:4.500e-05> cud_total: 1.2616e+02 mcud_total: 8.0697e-01 loss: 1.2697e+02 grad: 2.2380e+02
+26-09-04 21:50:16.643 - INFO: <step:   920, lr:4.600e-05> cud_total: 1.1211e+02 mcud_total: 9.1829e-01 loss: 1.1303e+02 grad: 7.4021e+02
+26-09-04 21:50:23.210 - INFO: <step:   940, lr:4.700e-05> cud_total: 1.3403e+02 mcud_total: 6.8322e-01 loss: 1.3471e+02 grad: 4.9477e+02
+26-09-04 21:50:28.611 - INFO: <step:   960, lr:4.800e-05> cud_total: 1.0265e+02 mcud_total: 8.3849e-01 loss: 1.0349e+02 grad: 3.1884e+02
+26-09-04 21:50:34.027 - INFO: <step:   980, lr:4.900e-05> cud_total: 1.1568e+02 mcud_total: 7.5056e-01 loss: 1.1643e+02 grad: 3.1080e+02
+26-09-04 21:50:39.819 - INFO: <step:  1000, lr:5.000e-05> cud_total: 1.2066e+02 mcud_total: 6.7257e-01 loss: 1.2133e+02 grad: 5.9428e+02
+26-09-04 21:50:46.681 - INFO: <step:  1020, lr:5.100e-05> cud_total: 1.0380e+02 mcud_total: 8.7898e-01 loss: 1.0468e+02 grad: 2.9511e+02
+26-09-04 21:50:52.441 - INFO: <step:  1040, lr:5.200e-05> cud_total: 9.0737e+01 mcud_total: 8.0661e-01 loss: 9.1544e+01 grad: 2.5211e+02
+26-09-04 21:50:59.006 - INFO: <step:  1060, lr:5.300e-05> cud_total: 1.1103e+02 mcud_total: 6.6862e-01 loss: 1.1170e+02 grad: 6.9177e+02
+26-09-04 21:51:04.905 - INFO: <step:  1080, lr:5.400e-05> cud_total: 1.1384e+02 mcud_total: 5.8609e-01 loss: 1.1443e+02 grad: 9.3567e+02
+26-09-04 21:51:10.227 - INFO: <step:  1100, lr:5.500e-05> cud_total: 8.6335e+01 mcud_total: 8.5731e-01 loss: 8.7192e+01 grad: 8.6213e+02
+26-09-04 21:51:17.806 - INFO: <step:  1120, lr:5.600e-05> cud_total: 1.1478e+02 mcud_total: 8.1796e-01 loss: 1.1560e+02 grad: 3.5689e+02
+26-09-04 21:51:23.437 - INFO: <step:  1140, lr:5.700e-05> cud_total: 1.1104e+02 mcud_total: 7.7762e-01 loss: 1.1182e+02 grad: 1.1296e+03
+26-09-04 21:51:28.366 - INFO: <step:  1160, lr:5.800e-05> cud_total: 8.8128e+01 mcud_total: 6.6005e-01 loss: 8.8788e+01 grad: 3.8801e+02
+26-09-04 21:51:36.232 - INFO: <step:  1180, lr:5.900e-05> cud_total: 1.0730e+02 mcud_total: 7.7595e-01 loss: 1.0807e+02 grad: 6.6961e+02
+26-09-04 21:51:41.405 - INFO: <step:  1200, lr:6.000e-05> cud_total: 1.0245e+02 mcud_total: 8.5151e-01 loss: 1.0330e+02 grad: 2.1373e+02
+26-09-04 21:51:47.137 - INFO: <step:  1220, lr:6.100e-05> cud_total: 1.0279e+02 mcud_total: 6.5227e-01 loss: 1.0344e+02 grad: 1.3275e+03
+26-09-04 21:51:53.736 - INFO: <step:  1240, lr:6.200e-05> cud_total: 1.1219e+02 mcud_total: 8.4654e-01 loss: 1.1304e+02 grad: 9.7754e+02
+26-09-04 21:51:58.679 - INFO: <step:  1260, lr:6.300e-05> cud_total: 8.1875e+01 mcud_total: 7.0755e-01 loss: 8.2582e+01 grad: 5.3553e+02
+26-09-04 21:52:05.193 - INFO: <step:  1280, lr:6.400e-05> cud_total: 7.7902e+01 mcud_total: 6.3411e-01 loss: 7.8537e+01 grad: 8.0405e+02
+26-09-04 21:52:11.437 - INFO: <step:  1300, lr:6.500e-05> cud_total: 9.0756e+01 mcud_total: 7.9041e-01 loss: 9.1547e+01 grad: 3.8235e+02
+26-09-04 21:52:16.545 - INFO: <step:  1320, lr:6.600e-05> cud_total: 8.6554e+01 mcud_total: 6.7610e-01 loss: 8.7230e+01 grad: 3.5784e+02
+26-09-04 21:52:21.631 - INFO: <step:  1340, lr:6.700e-05> cud_total: 6.8788e+01 mcud_total: 6.4229e-01 loss: 6.9430e+01 grad: 6.7447e+02
+26-09-04 21:52:27.229 - INFO: <step:  1360, lr:6.800e-05> cud_total: 1.2826e+02 mcud_total: 8.2054e-01 loss: 1.2908e+02 grad: 3.1232e+02
+26-09-04 21:52:35.053 - INFO: <step:  1380, lr:6.900e-05> cud_total: 8.1321e+01 mcud_total: 7.0266e-01 loss: 8.2024e+01 grad: 8.9146e+02
+26-09-04 21:52:40.042 - INFO: <step:  1400, lr:7.000e-05> cud_total: 1.1229e+02 mcud_total: 6.5668e-01 loss: 1.1294e+02 grad: 4.9768e+02
+26-09-04 21:52:47.584 - INFO: <step:  1420, lr:7.100e-05> cud_total: 8.1949e+01 mcud_total: 6.0271e-01 loss: 8.2552e+01 grad: 2.6913e+02
+26-09-04 21:52:53.247 - INFO: <step:  1440, lr:7.200e-05> cud_total: 8.6510e+01 mcud_total: 5.4780e-01 loss: 8.7058e+01 grad: 8.5158e+02
+26-09-04 21:52:59.643 - INFO: <step:  1460, lr:7.300e-05> cud_total: 6.0288e+01 mcud_total: 7.5516e-01 loss: 6.1043e+01 grad: 5.2004e+02
+26-09-04 21:53:06.940 - INFO: <step:  1480, lr:7.400e-05> cud_total: 6.9722e+01 mcud_total: 7.1822e-01 loss: 7.0440e+01 grad: 6.6863e+02
+26-09-04 21:53:15.063 - INFO: <step:  1500, lr:7.500e-05> cud_total: 6.8397e+01 mcud_total: 5.9025e-01 loss: 6.8988e+01 grad: 7.4373e+02
+26-09-04 21:53:23.325 - INFO: <step:  1520, lr:7.600e-05> cud_total: 1.0767e+02 mcud_total: 7.5971e-01 loss: 1.0843e+02 grad: 5.7120e+02
+26-09-04 21:53:30.922 - INFO: <step:  1540, lr:7.700e-05> cud_total: 8.6303e+01 mcud_total: 7.3697e-01 loss: 8.7040e+01 grad: 4.0594e+02
+26-09-04 21:53:38.626 - INFO: <step:  1560, lr:7.800e-05> cud_total: 6.1340e+01 mcud_total: 7.1716e-01 loss: 6.2057e+01 grad: 5.1943e+02
+26-09-04 21:53:45.252 - INFO: <step:  1580, lr:7.900e-05> cud_total: 7.2907e+01 mcud_total: 6.8525e-01 loss: 7.3592e+01 grad: 7.7468e+02
+26-09-04 21:53:51.631 - INFO: <step:  1600, lr:8.000e-05> cud_total: 1.1007e+02 mcud_total: 6.1646e-01 loss: 1.1068e+02 grad: 6.1781e+02
+26-09-04 21:53:56.298 - INFO: <step:  1620, lr:8.100e-05> cud_total: 8.0288e+01 mcud_total: 5.6019e-01 loss: 8.0849e+01 grad: 5.7535e+02
+26-09-04 21:54:03.849 - INFO: <step:  1640, lr:8.200e-05> cud_total: 8.9556e+01 mcud_total: 6.6482e-01 loss: 9.0221e+01 grad: 6.0457e+02
+26-09-04 21:54:10.211 - INFO: <step:  1660, lr:8.300e-05> cud_total: 9.1473e+01 mcud_total: 7.0603e-01 loss: 9.2179e+01 grad: 5.9532e+02
+26-09-04 21:54:16.413 - INFO: <step:  1680, lr:8.400e-05> cud_total: 7.9669e+01 mcud_total: 6.6505e-01 loss: 8.0334e+01 grad: 5.2133e+02
+26-09-04 21:54:22.288 - INFO: <step:  1700, lr:8.500e-05> cud_total: 6.7773e+01 mcud_total: 6.1189e-01 loss: 6.8385e+01 grad: 8.0833e+02
+26-09-04 21:54:28.273 - INFO: <step:  1720, lr:8.600e-05> cud_total: 8.5289e+01 mcud_total: 6.3895e-01 loss: 8.5928e+01 grad: 4.8487e+02
+26-09-04 21:54:34.817 - INFO: <step:  1740, lr:8.700e-05> cud_total: 6.9545e+01 mcud_total: 9.5140e-01 loss: 7.0496e+01 grad: 3.0122e+02
+26-09-04 21:54:42.842 - INFO: <step:  1760, lr:8.800e-05> cud_total: 1.1668e+02 mcud_total: 5.6030e-01 loss: 1.1724e+02 grad: 2.5033e+02
+26-09-04 21:54:48.659 - INFO: <step:  1780, lr:8.900e-05> cud_total: 6.4507e+01 mcud_total: 6.5041e-01 loss: 6.5157e+01 grad: 2.6445e+02
+26-09-04 21:54:55.499 - INFO: <step:  1800, lr:9.000e-05> cud_total: 8.2282e+01 mcud_total: 5.9663e-01 loss: 8.2879e+01 grad: 1.0134e+03
+26-09-04 21:55:01.188 - INFO: <step:  1820, lr:9.100e-05> cud_total: 6.3567e+01 mcud_total: 6.5379e-01 loss: 6.4220e+01 grad: 6.7833e+02
+26-09-04 21:55:07.986 - INFO: <step:  1840, lr:9.200e-05> cud_total: 5.2991e+01 mcud_total: 8.1849e-01 loss: 5.3809e+01 grad: 7.3707e+02
+26-09-04 21:55:15.218 - INFO: <step:  1860, lr:9.300e-05> cud_total: 7.0338e+01 mcud_total: 6.5075e-01 loss: 7.0988e+01 grad: 5.1765e+02
+26-09-04 21:55:22.073 - INFO: <step:  1880, lr:9.400e-05> cud_total: 7.7002e+01 mcud_total: 7.5446e-01 loss: 7.7756e+01 grad: 2.8364e+02
+26-09-04 21:55:29.865 - INFO: <step:  1900, lr:9.500e-05> cud_total: 7.5951e+01 mcud_total: 5.5116e-01 loss: 7.6502e+01 grad: 2.2793e+02
+26-09-04 21:55:36.017 - INFO: <step:  1920, lr:9.600e-05> cud_total: 9.2646e+01 mcud_total: 5.8643e-01 loss: 9.3233e+01 grad: 4.6897e+02
+26-09-04 21:55:44.118 - INFO: <step:  1940, lr:9.700e-05> cud_total: 7.3920e+01 mcud_total: 5.9070e-01 loss: 7.4511e+01 grad: 4.5410e+02
+26-09-04 21:55:50.278 - INFO: <step:  1960, lr:9.800e-05> cud_total: 4.9378e+01 mcud_total: 6.7145e-01 loss: 5.0049e+01 grad: 4.2864e+02
+26-09-04 21:55:55.766 - INFO: <step:  1980, lr:9.900e-05> cud_total: 5.6894e+01 mcud_total: 6.3468e-01 loss: 5.7528e+01 grad: 3.4485e+02
+26-09-04 21:56:01.479 - INFO: <step:  2000, lr:1.000e-04> cud_total: 9.4272e+01 mcud_total: 5.2810e-01 loss: 9.4800e+01 grad: 2.8613e+02
+26-09-04 21:56:08.652 - INFO: <step:  2020, lr:1.000e-04> cud_total: 5.2110e+01 mcud_total: 5.8261e-01 loss: 5.2693e+01 grad: 7.7389e+02
+26-09-04 21:56:13.957 - INFO: <step:  2040, lr:1.000e-04> cud_total: 6.7825e+01 mcud_total: 8.3847e-01 loss: 6.8663e+01 grad: 9.5479e+02
+26-09-04 21:56:20.946 - INFO: <step:  2060, lr:1.000e-04> cud_total: 5.2829e+01 mcud_total: 6.8610e-01 loss: 5.3515e+01 grad: 4.5058e+02
+26-09-04 21:56:27.116 - INFO: <step:  2080, lr:1.000e-04> cud_total: 8.2973e+01 mcud_total: 6.7674e-01 loss: 8.3650e+01 grad: 3.3884e+02
+26-09-04 21:56:35.094 - INFO: <step:  2100, lr:9.999e-05> cud_total: 6.4041e+01 mcud_total: 6.4789e-01 loss: 6.4689e+01 grad: 3.8361e+02
+26-09-04 21:56:43.011 - INFO: <step:  2120, lr:9.999e-05> cud_total: 7.3196e+01 mcud_total: 6.3208e-01 loss: 7.3828e+01 grad: 5.0871e+02
+26-09-04 21:56:50.513 - INFO: <step:  2140, lr:9.999e-05> cud_total: 6.8825e+01 mcud_total: 5.5159e-01 loss: 6.9376e+01 grad: 4.8389e+02
+26-09-04 21:56:58.669 - INFO: <step:  2160, lr:9.998e-05> cud_total: 7.6976e+01 mcud_total: 5.8650e-01 loss: 7.7563e+01 grad: 4.2715e+02
+26-09-04 21:57:06.554 - INFO: <step:  2180, lr:9.998e-05> cud_total: 4.6502e+01 mcud_total: 5.9880e-01 loss: 4.7101e+01 grad: 4.2806e+02
+26-09-04 21:57:12.823 - INFO: <step:  2200, lr:9.997e-05> cud_total: 5.5271e+01 mcud_total: 7.9063e-01 loss: 5.6062e+01 grad: 3.7315e+02
+26-09-04 21:57:20.663 - INFO: <step:  2220, lr:9.996e-05> cud_total: 5.8289e+01 mcud_total: 6.2964e-01 loss: 5.8919e+01 grad: 4.9544e+02
+26-09-04 21:57:26.183 - INFO: <step:  2240, lr:9.996e-05> cud_total: 7.5585e+01 mcud_total: 5.6257e-01 loss: 7.6148e+01 grad: 4.0443e+02
+26-09-04 21:57:33.356 - INFO: <step:  2260, lr:9.995e-05> cud_total: 5.5065e+01 mcud_total: 7.5723e-01 loss: 5.5822e+01 grad: 8.6544e+02
+26-09-04 21:57:40.122 - INFO: <step:  2280, lr:9.994e-05> cud_total: 6.7258e+01 mcud_total: 5.2561e-01 loss: 6.7783e+01 grad: 4.2852e+02
+26-09-04 21:57:46.031 - INFO: <step:  2300, lr:9.993e-05> cud_total: 6.0333e+01 mcud_total: 5.7143e-01 loss: 6.0905e+01 grad: 5.8838e+02
+26-09-04 21:57:51.781 - INFO: <step:  2320, lr:9.992e-05> cud_total: 5.2910e+01 mcud_total: 5.9876e-01 loss: 5.3508e+01 grad: 2.1889e+02
+26-09-04 21:57:58.074 - INFO: <step:  2340, lr:9.991e-05> cud_total: 5.2904e+01 mcud_total: 5.9888e-01 loss: 5.3503e+01 grad: 3.6714e+02
+26-09-04 21:58:04.528 - INFO: <step:  2360, lr:9.990e-05> cud_total: 6.4770e+01 mcud_total: 6.6992e-01 loss: 6.5440e+01 grad: 6.7338e+02
+26-09-04 21:58:11.612 - INFO: <step:  2380, lr:9.989e-05> cud_total: 7.4115e+01 mcud_total: 5.9625e-01 loss: 7.4711e+01 grad: 3.3801e+02
+26-09-04 21:58:18.311 - INFO: <step:  2400, lr:9.988e-05> cud_total: 4.1587e+01 mcud_total: 5.7589e-01 loss: 4.2163e+01 grad: 3.2474e+02
+26-09-04 21:58:25.256 - INFO: <step:  2420, lr:9.987e-05> cud_total: 4.5363e+01 mcud_total: 5.7089e-01 loss: 4.5934e+01 grad: 3.5788e+02
+26-09-04 21:58:31.452 - INFO: <step:  2440, lr:9.985e-05> cud_total: 4.1497e+01 mcud_total: 6.5207e-01 loss: 4.2149e+01 grad: 2.7478e+02
+26-09-04 21:58:38.297 - INFO: <step:  2460, lr:9.984e-05> cud_total: 6.9187e+01 mcud_total: 5.7593e-01 loss: 6.9763e+01 grad: 2.7302e+02
+26-09-04 21:58:45.375 - INFO: <step:  2480, lr:9.982e-05> cud_total: 6.4593e+01 mcud_total: 6.0151e-01 loss: 6.5195e+01 grad: 5.8022e+02
+26-09-04 21:58:52.336 - INFO: <step:  2500, lr:9.981e-05> cud_total: 5.0856e+01 mcud_total: 7.1854e-01 loss: 5.1575e+01 grad: 3.6305e+02
+26-09-04 21:58:59.276 - INFO: <step:  2520, lr:9.979e-05> cud_total: 6.5967e+01 mcud_total: 6.3243e-01 loss: 6.6599e+01 grad: 2.2064e+02
+26-09-04 21:59:05.545 - INFO: <step:  2540, lr:9.978e-05> cud_total: 5.8345e+01 mcud_total: 6.3024e-01 loss: 5.8975e+01 grad: 2.3129e+02
+26-09-04 21:59:12.554 - INFO: <step:  2560, lr:9.976e-05> cud_total: 4.5256e+01 mcud_total: 7.1314e-01 loss: 4.5970e+01 grad: 4.0790e+02
+26-09-04 21:59:19.884 - INFO: <step:  2580, lr:9.974e-05> cud_total: 6.6532e+01 mcud_total: 6.8566e-01 loss: 6.7217e+01 grad: 1.7421e+02
+26-09-04 21:59:26.200 - INFO: <step:  2600, lr:9.973e-05> cud_total: 6.6476e+01 mcud_total: 7.1258e-01 loss: 6.7188e+01 grad: 2.5664e+02
+26-09-04 21:59:34.005 - INFO: <step:  2620, lr:9.971e-05> cud_total: 7.2024e+01 mcud_total: 5.4873e-01 loss: 7.2572e+01 grad: 6.0966e+02
+26-09-04 21:59:40.144 - INFO: <step:  2640, lr:9.969e-05> cud_total: 8.5878e+01 mcud_total: 6.7654e-01 loss: 8.6554e+01 grad: 1.5486e+02
+26-09-04 21:59:47.343 - INFO: <step:  2660, lr:9.967e-05> cud_total: 5.1185e+01 mcud_total: 6.6588e-01 loss: 5.1851e+01 grad: 2.7955e+02
+26-09-04 21:59:55.712 - INFO: <step:  2680, lr:9.965e-05> cud_total: 3.9976e+01 mcud_total: 6.3686e-01 loss: 4.0613e+01 grad: 3.0498e+02
+26-09-04 22:00:02.055 - INFO: <step:  2700, lr:9.963e-05> cud_total: 5.7142e+01 mcud_total: 5.9924e-01 loss: 5.7741e+01 grad: 3.8254e+02
+26-09-04 22:00:07.844 - INFO: <step:  2720, lr:9.961e-05> cud_total: 5.3706e+01 mcud_total: 5.9797e-01 loss: 5.4304e+01 grad: 3.6211e+02
+26-09-04 22:00:15.671 - INFO: <step:  2740, lr:9.958e-05> cud_total: 5.6585e+01 mcud_total: 6.5468e-01 loss: 5.7239e+01 grad: 7.7674e+02
+26-09-04 22:00:24.936 - INFO: <step:  2760, lr:9.956e-05> cud_total: 6.2128e+01 mcud_total: 5.2898e-01 loss: 6.2657e+01 grad: 3.1001e+02
+26-09-04 22:00:31.270 - INFO: <step:  2780, lr:9.954e-05> cud_total: 5.2213e+01 mcud_total: 5.6189e-01 loss: 5.2774e+01 grad: 2.6778e+02
+26-09-04 22:00:37.436 - INFO: <step:  2800, lr:9.951e-05> cud_total: 5.5210e+01 mcud_total: 7.5970e-01 loss: 5.5969e+01 grad: 3.2105e+02
+26-09-04 22:00:43.900 - INFO: <step:  2820, lr:9.949e-05> cud_total: 6.4698e+01 mcud_total: 7.1446e-01 loss: 6.5412e+01 grad: 3.7097e+02
+26-09-04 22:00:50.984 - INFO: <step:  2840, lr:9.946e-05> cud_total: 8.6260e+01 mcud_total: 5.8787e-01 loss: 8.6848e+01 grad: 1.7795e+02
+26-09-04 22:00:57.121 - INFO: <step:  2860, lr:9.944e-05> cud_total: 4.2668e+01 mcud_total: 5.7456e-01 loss: 4.3242e+01 grad: 6.2599e+02
+26-09-04 22:01:03.215 - INFO: <step:  2880, lr:9.941e-05> cud_total: 7.2385e+01 mcud_total: 6.3296e-01 loss: 7.3018e+01 grad: 1.2663e+02
+26-09-04 22:01:08.681 - INFO: <step:  2900, lr:9.938e-05> cud_total: 5.2143e+01 mcud_total: 6.1879e-01 loss: 5.2762e+01 grad: 4.0824e+02
+26-09-04 22:01:15.676 - INFO: <step:  2920, lr:9.936e-05> cud_total: 7.3565e+01 mcud_total: 5.0493e-01 loss: 7.4070e+01 grad: 1.9605e+02
+26-09-04 22:01:25.427 - INFO: <step:  2940, lr:9.933e-05> cud_total: 5.7280e+01 mcud_total: 5.2987e-01 loss: 5.7810e+01 grad: 3.5772e+02
+26-09-04 22:01:34.928 - INFO: <step:  2960, lr:9.930e-05> cud_total: 5.3127e+01 mcud_total: 4.7842e-01 loss: 5.3605e+01 grad: 1.9338e+02
+26-09-04 22:01:40.459 - INFO: <step:  2980, lr:9.927e-05> cud_total: 4.2605e+01 mcud_total: 4.6507e-01 loss: 4.3070e+01 grad: 1.2147e+02
+26-09-04 22:01:48.391 - INFO: <step:  3000, lr:9.924e-05> cud_total: 6.4467e+01 mcud_total: 4.6508e-01 loss: 6.4932e+01 grad: 7.2738e+02
+26-09-04 22:01:55.250 - INFO: <step:  3020, lr:9.921e-05> cud_total: 4.3365e+01 mcud_total: 4.8115e-01 loss: 4.3846e+01 grad: 3.6096e+02
+26-09-04 22:02:01.703 - INFO: <step:  3040, lr:9.918e-05> cud_total: 6.2542e+01 mcud_total: 5.1052e-01 loss: 6.3053e+01 grad: 3.5099e+02
+26-09-04 22:02:08.204 - INFO: <step:  3060, lr:9.915e-05> cud_total: 5.5525e+01 mcud_total: 5.9454e-01 loss: 5.6119e+01 grad: 5.2404e+02
+26-09-04 22:02:13.969 - INFO: <step:  3080, lr:9.911e-05> cud_total: 5.9511e+01 mcud_total: 5.9463e-01 loss: 6.0105e+01 grad: 2.9103e+02
+26-09-04 22:02:19.916 - INFO: <step:  3100, lr:9.908e-05> cud_total: 5.8654e+01 mcud_total: 5.3830e-01 loss: 5.9192e+01 grad: 1.3089e+02
+26-09-04 22:02:25.390 - INFO: <step:  3120, lr:9.905e-05> cud_total: 8.7407e+01 mcud_total: 5.4686e-01 loss: 8.7954e+01 grad: 5.3261e+02
+26-09-04 22:02:32.905 - INFO: <step:  3140, lr:9.901e-05> cud_total: 7.0617e+01 mcud_total: 5.5692e-01 loss: 7.1174e+01 grad: 1.3520e+02
+26-09-04 22:02:40.234 - INFO: <step:  3160, lr:9.898e-05> cud_total: 8.6725e+01 mcud_total: 6.9634e-01 loss: 8.7421e+01 grad: 1.6103e+02
+26-09-04 22:02:46.047 - INFO: <step:  3180, lr:9.894e-05> cud_total: 5.9721e+01 mcud_total: 5.4228e-01 loss: 6.0263e+01 grad: 2.1041e+02
+26-09-04 22:02:53.409 - INFO: <step:  3200, lr:9.891e-05> cud_total: 5.1869e+01 mcud_total: 6.3548e-01 loss: 5.2505e+01 grad: 3.5053e+02
+26-09-04 22:03:01.799 - INFO: <step:  3220, lr:9.887e-05> cud_total: 7.2414e+01 mcud_total: 5.5906e-01 loss: 7.2973e+01 grad: 3.8605e+02
+26-09-04 22:03:09.047 - INFO: <step:  3240, lr:9.883e-05> cud_total: 2.9056e+01 mcud_total: 5.0201e-01 loss: 2.9558e+01 grad: 3.3143e+02
+26-09-04 22:03:18.246 - INFO: <step:  3260, lr:9.880e-05> cud_total: 6.4539e+01 mcud_total: 5.4859e-01 loss: 6.5088e+01 grad: 1.9024e+02
+26-09-04 22:03:26.422 - INFO: <step:  3280, lr:9.876e-05> cud_total: 4.3660e+01 mcud_total: 4.3009e-01 loss: 4.4090e+01 grad: 2.6337e+02
+26-09-04 22:03:33.523 - INFO: <step:  3300, lr:9.872e-05> cud_total: 5.8147e+01 mcud_total: 5.6409e-01 loss: 5.8711e+01 grad: 1.0948e+02
+26-09-04 22:03:41.263 - INFO: <step:  3320, lr:9.868e-05> cud_total: 3.9713e+01 mcud_total: 5.2971e-01 loss: 4.0243e+01 grad: 1.4025e+02
+26-09-04 22:03:49.686 - INFO: <step:  3340, lr:9.864e-05> cud_total: 6.7541e+01 mcud_total: 4.6404e-01 loss: 6.8006e+01 grad: 1.1584e+02
+26-09-04 22:03:56.739 - INFO: <step:  3360, lr:9.860e-05> cud_total: 4.5487e+01 mcud_total: 5.9343e-01 loss: 4.6080e+01 grad: 2.5955e+02
+26-09-04 22:04:06.448 - INFO: <step:  3380, lr:9.856e-05> cud_total: 5.2948e+01 mcud_total: 6.2647e-01 loss: 5.3574e+01 grad: 3.6442e+02
+26-09-04 22:04:16.339 - INFO: <step:  3400, lr:9.851e-05> cud_total: 3.5774e+01 mcud_total: 5.5422e-01 loss: 3.6329e+01 grad: 3.0109e+02
+26-09-04 22:04:28.475 - INFO: <step:  3420, lr:9.847e-05> cud_total: 6.6462e+01 mcud_total: 5.9274e-01 loss: 6.7055e+01 grad: 1.5472e+02
+26-09-04 22:04:38.837 - INFO: <step:  3440, lr:9.843e-05> cud_total: 7.6413e+01 mcud_total: 4.9582e-01 loss: 7.6909e+01 grad: 1.8515e+02
+26-09-04 22:04:45.466 - INFO: <step:  3460, lr:9.839e-05> cud_total: 7.1905e+01 mcud_total: 6.0979e-01 loss: 7.2515e+01 grad: 1.4094e+02
+26-09-04 22:04:53.111 - INFO: <step:  3480, lr:9.834e-05> cud_total: 5.2540e+01 mcud_total: 6.1818e-01 loss: 5.3158e+01 grad: 1.7747e+02
+26-09-04 22:05:00.588 - INFO: <step:  3500, lr:9.830e-05> cud_total: 6.1239e+01 mcud_total: 5.8507e-01 loss: 6.1824e+01 grad: 1.7193e+02
+26-09-04 22:05:08.898 - INFO: <step:  3520, lr:9.825e-05> cud_total: 5.7769e+01 mcud_total: 5.9385e-01 loss: 5.8363e+01 grad: 2.3350e+02
+26-09-04 22:05:16.644 - INFO: <step:  3540, lr:9.820e-05> cud_total: 4.4887e+01 mcud_total: 5.3789e-01 loss: 4.5425e+01 grad: 3.7689e+02
+26-09-04 22:05:24.955 - INFO: <step:  3560, lr:9.816e-05> cud_total: 7.1083e+01 mcud_total: 5.3858e-01 loss: 7.1622e+01 grad: 1.6461e+02
+26-09-04 22:05:31.669 - INFO: <step:  3580, lr:9.811e-05> cud_total: 4.9746e+01 mcud_total: 4.7067e-01 loss: 5.0216e+01 grad: 1.4999e+02
+26-09-04 22:05:38.571 - INFO: <step:  3600, lr:9.806e-05> cud_total: 4.4627e+01 mcud_total: 3.9933e-01 loss: 4.5027e+01 grad: 1.6635e+02
+26-09-04 22:05:44.799 - INFO: <step:  3620, lr:9.801e-05> cud_total: 7.5920e+01 mcud_total: 6.1002e-01 loss: 7.6530e+01 grad: 2.0988e+02
+26-09-04 22:05:52.122 - INFO: <step:  3640, lr:9.797e-05> cud_total: 4.7557e+01 mcud_total: 4.6401e-01 loss: 4.8021e+01 grad: 5.2228e+02
+26-09-04 22:06:01.536 - INFO: <step:  3660, lr:9.792e-05> cud_total: 4.3857e+01 mcud_total: 4.6993e-01 loss: 4.4327e+01 grad: 1.2406e+02
+26-09-04 22:06:07.114 - INFO: <step:  3680, lr:9.787e-05> cud_total: 4.0339e+01 mcud_total: 5.7581e-01 loss: 4.0915e+01 grad: 2.2980e+02
+26-09-04 22:06:14.887 - INFO: <step:  3700, lr:9.782e-05> cud_total: 6.1787e+01 mcud_total: 6.1222e-01 loss: 6.2399e+01 grad: 2.6252e+02
+26-09-04 22:06:21.246 - INFO: <step:  3720, lr:9.776e-05> cud_total: 5.5900e+01 mcud_total: 5.1872e-01 loss: 5.6419e+01 grad: 3.7706e+02
+26-09-04 22:06:28.843 - INFO: <step:  3740, lr:9.771e-05> cud_total: 4.4056e+01 mcud_total: 4.9736e-01 loss: 4.4553e+01 grad: 2.6688e+02
+26-09-04 22:06:34.762 - INFO: <step:  3760, lr:9.766e-05> cud_total: 5.3850e+01 mcud_total: 6.4277e-01 loss: 5.4493e+01 grad: 1.8557e+02
+26-09-04 22:06:43.169 - INFO: <step:  3780, lr:9.761e-05> cud_total: 4.2242e+01 mcud_total: 5.5034e-01 loss: 4.2792e+01 grad: 2.3734e+02
+26-09-04 22:06:50.197 - INFO: <step:  3800, lr:9.755e-05> cud_total: 4.1655e+01 mcud_total: 5.6219e-01 loss: 4.2218e+01 grad: 2.1934e+02
+26-09-04 22:06:57.792 - INFO: <step:  3820, lr:9.750e-05> cud_total: 5.6041e+01 mcud_total: 4.7133e-01 loss: 5.6513e+01 grad: 2.3645e+02
+26-09-04 22:07:06.532 - INFO: <step:  3840, lr:9.744e-05> cud_total: 7.1850e+01 mcud_total: 4.5945e-01 loss: 7.2309e+01 grad: 2.6246e+02
+26-09-04 22:07:14.620 - INFO: <step:  3860, lr:9.739e-05> cud_total: 3.7131e+01 mcud_total: 5.2140e-01 loss: 3.7653e+01 grad: 2.2376e+02
+26-09-04 22:07:22.166 - INFO: <step:  3880, lr:9.733e-05> cud_total: 4.0440e+01 mcud_total: 4.8614e-01 loss: 4.0926e+01 grad: 2.1556e+02
+26-09-04 22:07:29.715 - INFO: <step:  3900, lr:9.728e-05> cud_total: 4.5556e+01 mcud_total: 4.6199e-01 loss: 4.6018e+01 grad: 3.3917e+02
+26-09-04 22:07:35.212 - INFO: <step:  3920, lr:9.722e-05> cud_total: 3.5466e+01 mcud_total: 4.2812e-01 loss: 3.5894e+01 grad: 2.2696e+02
+26-09-04 22:07:41.518 - INFO: <step:  3940, lr:9.716e-05> cud_total: 7.3729e+01 mcud_total: 5.3215e-01 loss: 7.4261e+01 grad: 2.1595e+02
+26-09-04 22:07:49.748 - INFO: <step:  3960, lr:9.710e-05> cud_total: 8.3670e+01 mcud_total: 5.3334e-01 loss: 8.4203e+01 grad: 3.1365e+02
+26-09-04 22:07:55.798 - INFO: <step:  3980, lr:9.704e-05> cud_total: 5.8595e+01 mcud_total: 5.3548e-01 loss: 5.9130e+01 grad: 1.4036e+02
+26-09-04 22:08:05.265 - INFO: <step:  4000, lr:9.698e-05> cud_total: 5.7347e+01 mcud_total: 5.0059e-01 loss: 5.7848e+01 grad: 1.8580e+02
+26-09-04 22:08:12.635 - INFO: <step:  4020, lr:9.692e-05> cud_total: 4.3267e+01 mcud_total: 5.1716e-01 loss: 4.3784e+01 grad: 9.7194e+01
+26-09-04 22:08:20.271 - INFO: <step:  4040, lr:9.686e-05> cud_total: 8.1600e+01 mcud_total: 4.0119e-01 loss: 8.2001e+01 grad: 7.0032e+01
+26-09-04 22:08:28.239 - INFO: <step:  4060, lr:9.680e-05> cud_total: 2.8024e+01 mcud_total: 4.3461e-01 loss: 2.8458e+01 grad: 2.1407e+02
+26-09-04 22:08:35.011 - INFO: <step:  4080, lr:9.674e-05> cud_total: 4.4117e+01 mcud_total: 4.6269e-01 loss: 4.4580e+01 grad: 1.4336e+02
+26-09-04 22:08:42.815 - INFO: <step:  4100, lr:9.668e-05> cud_total: 4.4475e+01 mcud_total: 4.6980e-01 loss: 4.4945e+01 grad: 1.2915e+02
+26-09-04 22:08:48.929 - INFO: <step:  4120, lr:9.662e-05> cud_total: 3.2952e+01 mcud_total: 4.5881e-01 loss: 3.3411e+01 grad: 2.5081e+02
+26-09-04 22:08:56.659 - INFO: <step:  4140, lr:9.655e-05> cud_total: 3.8421e+01 mcud_total: 4.4392e-01 loss: 3.8864e+01 grad: 2.5400e+02
+26-09-04 22:09:05.724 - INFO: <step:  4160, lr:9.649e-05> cud_total: 3.7913e+01 mcud_total: 4.8744e-01 loss: 3.8400e+01 grad: 1.8070e+02
+26-09-04 22:09:12.709 - INFO: <step:  4180, lr:9.642e-05> cud_total: 7.0155e+01 mcud_total: 4.0323e-01 loss: 7.0558e+01 grad: 2.6625e+02
+26-09-04 22:09:19.321 - INFO: <step:  4200, lr:9.636e-05> cud_total: 5.2367e+01 mcud_total: 4.8504e-01 loss: 5.2852e+01 grad: 1.4455e+02
+26-09-04 22:09:26.027 - INFO: <step:  4220, lr:9.629e-05> cud_total: 6.3596e+01 mcud_total: 4.8279e-01 loss: 6.4079e+01 grad: 1.1085e+02
+26-09-04 22:09:33.684 - INFO: <step:  4240, lr:9.623e-05> cud_total: 4.5824e+01 mcud_total: 4.6267e-01 loss: 4.6287e+01 grad: 2.8560e+02
+26-09-04 22:09:41.708 - INFO: <step:  4260, lr:9.616e-05> cud_total: 2.7811e+01 mcud_total: 4.0317e-01 loss: 2.8214e+01 grad: 2.2760e+02
+26-09-04 22:09:50.337 - INFO: <step:  4280, lr:9.609e-05> cud_total: 4.6078e+01 mcud_total: 4.7797e-01 loss: 4.6556e+01 grad: 3.3193e+02
+26-09-04 22:10:00.198 - INFO: <step:  4300, lr:9.603e-05> cud_total: 4.3974e+01 mcud_total: 5.4108e-01 loss: 4.4515e+01 grad: 1.6623e+02
+26-09-04 22:10:08.460 - INFO: <step:  4320, lr:9.596e-05> cud_total: 5.1239e+01 mcud_total: 4.6096e-01 loss: 5.1700e+01 grad: 1.2029e+02
+26-09-04 22:10:18.486 - INFO: <step:  4340, lr:9.589e-05> cud_total: 6.0687e+01 mcud_total: 4.9839e-01 loss: 6.1185e+01 grad: 2.2419e+02
+26-09-04 22:10:28.952 - INFO: <step:  4360, lr:9.582e-05> cud_total: 7.5374e+01 mcud_total: 5.2877e-01 loss: 7.5902e+01 grad: 1.9434e+02
+26-09-04 22:10:35.692 - INFO: <step:  4380, lr:9.575e-05> cud_total: 4.9187e+01 mcud_total: 4.0596e-01 loss: 4.9593e+01 grad: 3.0520e+02
+26-09-04 22:10:45.799 - INFO: <step:  4400, lr:9.568e-05> cud_total: 5.9029e+01 mcud_total: 5.4704e-01 loss: 5.9576e+01 grad: 1.8325e+02
+26-09-04 22:10:54.257 - INFO: <step:  4420, lr:9.561e-05> cud_total: 2.0058e+01 mcud_total: 5.5426e-01 loss: 2.0612e+01 grad: 2.9870e+02
+26-09-04 22:11:02.432 - INFO: <step:  4440, lr:9.553e-05> cud_total: 6.4060e+01 mcud_total: 5.6049e-01 loss: 6.4621e+01 grad: 3.0383e+02
+26-09-04 22:11:11.189 - INFO: <step:  4460, lr:9.546e-05> cud_total: 5.3123e+01 mcud_total: 4.6992e-01 loss: 5.3592e+01 grad: 2.4772e+02
+26-09-04 22:11:19.784 - INFO: <step:  4480, lr:9.539e-05> cud_total: 6.7639e+01 mcud_total: 5.7801e-01 loss: 6.8217e+01 grad: 9.6926e+01
+26-09-04 22:11:29.973 - INFO: <step:  4500, lr:9.532e-05> cud_total: 5.2821e+01 mcud_total: 5.4579e-01 loss: 5.3367e+01 grad: 8.8340e+01
+26-09-04 22:11:36.931 - INFO: <step:  4520, lr:9.524e-05> cud_total: 8.2637e+01 mcud_total: 5.1395e-01 loss: 8.3151e+01 grad: 1.1657e+02
+26-09-04 22:11:44.533 - INFO: <step:  4540, lr:9.517e-05> cud_total: 5.9829e+01 mcud_total: 3.5961e-01 loss: 6.0188e+01 grad: 1.1047e+02
+26-09-04 22:11:52.457 - INFO: <step:  4560, lr:9.509e-05> cud_total: 7.1618e+01 mcud_total: 5.1244e-01 loss: 7.2130e+01 grad: 1.0858e+02
+26-09-04 22:11:59.738 - INFO: <step:  4580, lr:9.502e-05> cud_total: 5.4926e+01 mcud_total: 3.4814e-01 loss: 5.5274e+01 grad: 2.5770e+02
+26-09-04 22:12:06.725 - INFO: <step:  4600, lr:9.494e-05> cud_total: 3.2663e+01 mcud_total: 5.1825e-01 loss: 3.3181e+01 grad: 1.8445e+02
+26-09-04 22:12:15.788 - INFO: <step:  4620, lr:9.486e-05> cud_total: 4.5058e+01 mcud_total: 4.9193e-01 loss: 4.5550e+01 grad: 2.1040e+02
+26-09-04 22:12:24.435 - INFO: <step:  4640, lr:9.479e-05> cud_total: 4.5329e+01 mcud_total: 4.0885e-01 loss: 4.5738e+01 grad: 2.7059e+02
+26-09-04 22:12:32.868 - INFO: <step:  4660, lr:9.471e-05> cud_total: 2.9509e+01 mcud_total: 4.6631e-01 loss: 2.9975e+01 grad: 1.3890e+02
+26-09-04 22:12:41.189 - INFO: <step:  4680, lr:9.463e-05> cud_total: 5.7123e+01 mcud_total: 4.6570e-01 loss: 5.7589e+01 grad: 2.0225e+02
+26-09-04 22:12:49.943 - INFO: <step:  4700, lr:9.455e-05> cud_total: 3.8189e+01 mcud_total: 4.4747e-01 loss: 3.8637e+01 grad: 3.5443e+02
+26-09-04 22:12:57.115 - INFO: <step:  4720, lr:9.447e-05> cud_total: 5.0722e+01 mcud_total: 5.2059e-01 loss: 5.1242e+01 grad: 1.0217e+02
+26-09-04 22:13:03.528 - INFO: <step:  4740, lr:9.439e-05> cud_total: 5.3508e+01 mcud_total: 4.4884e-01 loss: 5.3957e+01 grad: 1.3117e+02
+26-09-04 22:13:09.996 - INFO: <step:  4760, lr:9.431e-05> cud_total: 6.8042e+01 mcud_total: 4.4769e-01 loss: 6.8490e+01 grad: 1.8199e+02
+26-09-04 22:13:19.563 - INFO: <step:  4780, lr:9.423e-05> cud_total: 6.1138e+01 mcud_total: 3.4738e-01 loss: 6.1485e+01 grad: 1.1553e+02
+26-09-04 22:13:26.407 - INFO: <step:  4800, lr:9.415e-05> cud_total: 3.3254e+01 mcud_total: 4.5606e-01 loss: 3.3710e+01 grad: 1.2008e+02
+26-09-04 22:13:32.158 - INFO: <step:  4820, lr:9.407e-05> cud_total: 4.1605e+01 mcud_total: 4.3620e-01 loss: 4.2042e+01 grad: 1.2930e+02
+26-09-04 22:13:39.253 - INFO: <step:  4840, lr:9.398e-05> cud_total: 4.3206e+01 mcud_total: 4.3347e-01 loss: 4.3639e+01 grad: 3.7295e+02
+26-09-04 22:13:47.958 - INFO: <step:  4860, lr:9.390e-05> cud_total: 4.6233e+01 mcud_total: 4.5919e-01 loss: 4.6692e+01 grad: 2.2985e+02
+26-09-04 22:13:54.318 - INFO: <step:  4880, lr:9.382e-05> cud_total: 7.3828e+01 mcud_total: 3.7852e-01 loss: 7.4206e+01 grad: 9.2866e+01
+26-09-04 22:14:02.304 - INFO: <step:  4900, lr:9.373e-05> cud_total: 7.1475e+01 mcud_total: 3.3860e-01 loss: 7.1814e+01 grad: 1.9278e+02
+26-09-04 22:14:09.813 - INFO: <step:  4920, lr:9.365e-05> cud_total: 5.3895e+01 mcud_total: 4.4303e-01 loss: 5.4338e+01 grad: 3.6284e+02
+26-09-04 22:14:17.821 - INFO: <step:  4940, lr:9.356e-05> cud_total: 4.5843e+01 mcud_total: 3.9771e-01 loss: 4.6241e+01 grad: 1.2570e+02
+26-09-04 22:14:25.121 - INFO: <step:  4960, lr:9.347e-05> cud_total: 3.5747e+01 mcud_total: 4.6903e-01 loss: 3.6216e+01 grad: 2.3724e+02
+26-09-04 22:14:33.379 - INFO: <step:  4980, lr:9.339e-05> cud_total: 6.5809e+01 mcud_total: 4.3813e-01 loss: 6.6247e+01 grad: 2.0803e+02
+26-09-04 22:14:41.096 - INFO: <step:  5000, lr:9.330e-05> cud_total: 4.2744e+01 mcud_total: 4.3786e-01 loss: 4.3182e+01 grad: 6.0402e+02
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/torchvision/transforms/functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/torchvision/transforms/functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+26-09-04 22:15:16.967 - INFO: [step 5000] val loss: 36.8051
+26-09-04 22:15:21.673 - INFO: Saved checkpoint: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/experiments/COCO_MSRS_MCUD_demo/models/checkpoint-Defusion-plusplus-20260904_221441-step5000-loss43.1817-valloss36.8051.pth
+26-09-04 22:15:26.987 - INFO: <step:  5020, lr:9.321e-05> cud_total: 4.6539e+01 mcud_total: 5.3346e-01 loss: 4.7072e+01 grad: 1.3436e+02
+26-09-04 22:15:38.462 - INFO: <step:  5040, lr:9.313e-05> cud_total: 3.5652e+01 mcud_total: 4.6954e-01 loss: 3.6121e+01 grad: 2.4253e+02
+26-09-04 22:15:47.833 - INFO: <step:  5060, lr:9.304e-05> cud_total: 3.9715e+01 mcud_total: 3.9740e-01 loss: 4.0112e+01 grad: 2.2485e+02
+26-09-04 22:15:54.630 - INFO: <step:  5080, lr:9.295e-05> cud_total: 7.7690e+01 mcud_total: 4.6165e-01 loss: 7.8152e+01 grad: 1.8680e+02
+26-09-04 22:16:04.963 - INFO: <step:  5100, lr:9.286e-05> cud_total: 2.4284e+01 mcud_total: 4.7045e-01 loss: 2.4754e+01 grad: 2.2522e+02
+26-09-04 22:16:14.835 - INFO: <step:  5120, lr:9.277e-05> cud_total: 3.0467e+01 mcud_total: 5.0455e-01 loss: 3.0972e+01 grad: 2.4923e+02
+26-09-04 22:16:24.414 - INFO: <step:  5140, lr:9.268e-05> cud_total: 3.2691e+01 mcud_total: 3.2548e-01 loss: 3.3016e+01 grad: 2.0466e+02
+[step 5000] val loss: 36.8051
+26-09-04 22:16:34.876 - INFO: <step:  5160, lr:9.259e-05> cud_total: 6.8089e+01 mcud_total: 3.6828e-01 loss: 6.8457e+01 grad: 1.8973e+02
+26-09-04 22:16:43.484 - INFO: <step:  5180, lr:9.249e-05> cud_total: 4.6114e+01 mcud_total: 4.9922e-01 loss: 4.6613e+01 grad: 2.9763e+02
+26-09-04 22:16:58.484 - INFO: <step:  5200, lr:9.240e-05> cud_total: 2.4987e+01 mcud_total: 4.0548e-01 loss: 2.5393e+01 grad: 1.2794e+02
+26-09-04 22:17:10.933 - INFO: <step:  5220, lr:9.231e-05> cud_total: 3.7306e+01 mcud_total: 4.2822e-01 loss: 3.7734e+01 grad: 3.1730e+02
+26-09-04 22:17:19.580 - INFO: <step:  5240, lr:9.222e-05> cud_total: 6.3145e+01 mcud_total: 3.5979e-01 loss: 6.3505e+01 grad: 2.7473e+02
+26-09-04 22:17:32.661 - INFO: <step:  5260, lr:9.212e-05> cud_total: 5.8505e+01 mcud_total: 5.1871e-01 loss: 5.9024e+01 grad: 2.8910e+02
+26-09-04 22:17:41.600 - INFO: <step:  5280, lr:9.203e-05> cud_total: 3.8236e+01 mcud_total: 4.2824e-01 loss: 3.8664e+01 grad: 2.1559e+02
+26-09-04 22:17:49.843 - INFO: <step:  5300, lr:9.193e-05> cud_total: 6.1747e+01 mcud_total: 4.6899e-01 loss: 6.2216e+01 grad: 1.4898e+02
+26-09-04 22:17:57.753 - INFO: <step:  5320, lr:9.184e-05> cud_total: 3.2481e+01 mcud_total: 5.1007e-01 loss: 3.2991e+01 grad: 1.8303e+02
+26-09-04 22:18:10.396 - INFO: <step:  5340, lr:9.174e-05> cud_total: 2.9060e+01 mcud_total: 4.8552e-01 loss: 2.9546e+01 grad: 2.1711e+02
+26-09-04 22:18:20.139 - INFO: <step:  5360, lr:9.165e-05> cud_total: 3.7836e+01 mcud_total: 4.2435e-01 loss: 3.8261e+01 grad: 1.4405e+02
+26-09-04 22:18:26.009 - INFO: <step:  5380, lr:9.155e-05> cud_total: 4.7170e+01 mcud_total: 4.5959e-01 loss: 4.7630e+01 grad: 1.3757e+02
+26-09-04 22:18:35.107 - INFO: <step:  5400, lr:9.145e-05> cud_total: 6.7325e+01 mcud_total: 4.8147e-01 loss: 6.7806e+01 grad: 1.1722e+02
+26-09-04 22:18:41.740 - INFO: <step:  5420, lr:9.135e-05> cud_total: 6.7377e+01 mcud_total: 5.0156e-01 loss: 6.7878e+01 grad: 1.7530e+02
+26-09-04 22:18:47.542 - INFO: <step:  5440, lr:9.126e-05> cud_total: 6.2260e+01 mcud_total: 5.1164e-01 loss: 6.2772e+01 grad: 1.2072e+02
+26-09-04 22:18:53.138 - INFO: <step:  5460, lr:9.116e-05> cud_total: 5.6231e+01 mcud_total: 4.6510e-01 loss: 5.6696e+01 grad: 1.0002e+02
+26-09-04 22:18:59.631 - INFO: <step:  5480, lr:9.106e-05> cud_total: 4.7585e+01 mcud_total: 3.6706e-01 loss: 4.7953e+01 grad: 2.0919e+02
+26-09-04 22:19:05.276 - INFO: <step:  5500, lr:9.096e-05> cud_total: 4.8474e+01 mcud_total: 4.3119e-01 loss: 4.8906e+01 grad: 1.4855e+02
+26-09-04 22:19:13.013 - INFO: <step:  5520, lr:9.086e-05> cud_total: 4.2503e+01 mcud_total: 3.8140e-01 loss: 4.2885e+01 grad: 1.3647e+02
+26-09-04 22:19:18.594 - INFO: <step:  5540, lr:9.076e-05> cud_total: 5.4175e+01 mcud_total: 3.7089e-01 loss: 5.4546e+01 grad: 4.0115e+02
+26-09-04 22:19:24.834 - INFO: <step:  5560, lr:9.066e-05> cud_total: 4.5900e+01 mcud_total: 4.6590e-01 loss: 4.6366e+01 grad: 1.8811e+02
+26-09-04 22:19:35.332 - INFO: <step:  5580, lr:9.055e-05> cud_total: 3.3249e+01 mcud_total: 4.7893e-01 loss: 3.3728e+01 grad: 1.8758e+02
+26-09-04 22:19:46.940 - INFO: <step:  5600, lr:9.045e-05> cud_total: 4.5430e+01 mcud_total: 3.5300e-01 loss: 4.5783e+01 grad: 1.1921e+02
+26-09-04 22:19:57.011 - INFO: <step:  5620, lr:9.035e-05> cud_total: 3.8676e+01 mcud_total: 3.9899e-01 loss: 3.9075e+01 grad: 2.3046e+02
+26-09-04 22:20:06.153 - INFO: <step:  5640, lr:9.024e-05> cud_total: 5.1873e+01 mcud_total: 3.8114e-01 loss: 5.2254e+01 grad: 2.5985e+02
+26-09-04 22:20:17.091 - INFO: <step:  5660, lr:9.014e-05> cud_total: 7.4385e+01 mcud_total: 4.0485e-01 loss: 7.4790e+01 grad: 7.4266e+01
+26-09-04 22:20:23.963 - INFO: <step:  5680, lr:9.004e-05> cud_total: 3.7489e+01 mcud_total: 4.6374e-01 loss: 3.7953e+01 grad: 3.0589e+02
+26-09-04 22:20:34.444 - INFO: <step:  5700, lr:8.993e-05> cud_total: 4.9440e+01 mcud_total: 3.5954e-01 loss: 4.9799e+01 grad: 1.7936e+02
+26-09-04 22:20:43.144 - INFO: <step:  5720, lr:8.983e-05> cud_total: 5.0346e+01 mcud_total: 4.3157e-01 loss: 5.0777e+01 grad: 2.1751e+02
+26-09-04 22:20:51.826 - INFO: <step:  5740, lr:8.972e-05> cud_total: 2.1215e+01 mcud_total: 4.4367e-01 loss: 2.1659e+01 grad: 2.4177e+02
+26-09-04 22:20:59.923 - INFO: <step:  5760, lr:8.961e-05> cud_total: 4.5752e+01 mcud_total: 4.5555e-01 loss: 4.6208e+01 grad: 2.7942e+02
+26-09-04 22:21:07.636 - INFO: <step:  5780, lr:8.951e-05> cud_total: 5.2187e+01 mcud_total: 3.0358e-01 loss: 5.2491e+01 grad: 9.9221e+01
+26-09-04 22:21:15.397 - INFO: <step:  5800, lr:8.940e-05> cud_total: 5.4304e+01 mcud_total: 4.2423e-01 loss: 5.4728e+01 grad: 9.9407e+01
+26-09-04 22:21:24.903 - INFO: <step:  5820, lr:8.929e-05> cud_total: 4.0802e+01 mcud_total: 4.8667e-01 loss: 4.1288e+01 grad: 1.2935e+02
+26-09-04 22:21:34.048 - INFO: <step:  5840, lr:8.918e-05> cud_total: 4.4486e+01 mcud_total: 3.6646e-01 loss: 4.4853e+01 grad: 2.4763e+02
+26-09-04 22:21:42.413 - INFO: <step:  5860, lr:8.908e-05> cud_total: 3.7730e+01 mcud_total: 4.3809e-01 loss: 3.8168e+01 grad: 1.2811e+02
+26-09-04 22:21:49.898 - INFO: <step:  5880, lr:8.897e-05> cud_total: 3.1776e+01 mcud_total: 3.7004e-01 loss: 3.2146e+01 grad: 2.1767e+02
+26-09-04 22:21:59.235 - INFO: <step:  5900, lr:8.886e-05> cud_total: 4.4902e+01 mcud_total: 4.1417e-01 loss: 4.5316e+01 grad: 2.8882e+02
+26-09-04 22:22:06.852 - INFO: <step:  5920, lr:8.875e-05> cud_total: 4.1712e+01 mcud_total: 3.5911e-01 loss: 4.2071e+01 grad: 2.3585e+02
+26-09-04 22:22:14.920 - INFO: <step:  5940, lr:8.864e-05> cud_total: 2.2852e+01 mcud_total: 4.7467e-01 loss: 2.3327e+01 grad: 3.4500e+02
+26-09-04 22:22:21.887 - INFO: <step:  5960, lr:8.853e-05> cud_total: 3.2190e+01 mcud_total: 3.8541e-01 loss: 3.2575e+01 grad: 1.8814e+02
+26-09-04 22:22:31.040 - INFO: <step:  5980, lr:8.841e-05> cud_total: 4.3296e+01 mcud_total: 4.3099e-01 loss: 4.3727e+01 grad: 1.4676e+02
+26-09-04 22:22:40.294 - INFO: <step:  6000, lr:8.830e-05> cud_total: 3.7554e+01 mcud_total: 3.8732e-01 loss: 3.7941e+01 grad: 9.5106e+01
+26-09-04 22:22:48.720 - INFO: <step:  6020, lr:8.819e-05> cud_total: 5.9907e+01 mcud_total: 3.6974e-01 loss: 6.0277e+01 grad: 7.1179e+01
+26-09-04 22:22:57.459 - INFO: <step:  6040, lr:8.808e-05> cud_total: 3.6955e+01 mcud_total: 4.2180e-01 loss: 3.7377e+01 grad: 3.6431e+02
+26-09-04 22:23:05.515 - INFO: <step:  6060, lr:8.796e-05> cud_total: 4.1808e+01 mcud_total: 3.6220e-01 loss: 4.2171e+01 grad: 1.9937e+02
+26-09-04 22:23:15.446 - INFO: <step:  6080, lr:8.785e-05> cud_total: 3.5489e+01 mcud_total: 4.5093e-01 loss: 3.5940e+01 grad: 2.3309e+02
+26-09-04 22:23:24.705 - INFO: <step:  6100, lr:8.774e-05> cud_total: 2.5274e+01 mcud_total: 3.7925e-01 loss: 2.5653e+01 grad: 1.2224e+02
+26-09-04 22:23:32.618 - INFO: <step:  6120, lr:8.762e-05> cud_total: 5.1491e+01 mcud_total: 4.6396e-01 loss: 5.1955e+01 grad: 1.9149e+02
+26-09-04 22:23:41.187 - INFO: <step:  6140, lr:8.751e-05> cud_total: 4.3827e+01 mcud_total: 4.3507e-01 loss: 4.4262e+01 grad: 1.4288e+02
+26-09-04 22:23:49.696 - INFO: <step:  6160, lr:8.739e-05> cud_total: 3.4276e+01 mcud_total: 4.6086e-01 loss: 3.4736e+01 grad: 2.5934e+02
+26-09-04 22:23:58.120 - INFO: <step:  6180, lr:8.727e-05> cud_total: 5.5049e+01 mcud_total: 3.9793e-01 loss: 5.5447e+01 grad: 2.3559e+02
+26-09-04 22:24:07.463 - INFO: <step:  6200, lr:8.716e-05> cud_total: 3.4413e+01 mcud_total: 4.4524e-01 loss: 3.4858e+01 grad: 9.2620e+01
+26-09-04 22:24:17.372 - INFO: <step:  6220, lr:8.704e-05> cud_total: 4.8611e+01 mcud_total: 2.9260e-01 loss: 4.8904e+01 grad: 1.1647e+02
+26-09-04 22:24:25.728 - INFO: <step:  6240, lr:8.692e-05> cud_total: 3.3779e+01 mcud_total: 4.2089e-01 loss: 3.4200e+01 grad: 2.3896e+02
+26-09-04 22:24:35.253 - INFO: <step:  6260, lr:8.680e-05> cud_total: 3.2858e+01 mcud_total: 4.0783e-01 loss: 3.3266e+01 grad: 1.3162e+02
+26-09-04 22:24:46.628 - INFO: <step:  6280, lr:8.669e-05> cud_total: 2.6169e+01 mcud_total: 3.2972e-01 loss: 2.6498e+01 grad: 2.1747e+02
+26-09-04 22:24:55.046 - INFO: <step:  6300, lr:8.657e-05> cud_total: 3.8633e+01 mcud_total: 4.0640e-01 loss: 3.9039e+01 grad: 1.5765e+02
+26-09-04 22:25:03.244 - INFO: <step:  6320, lr:8.645e-05> cud_total: 2.3066e+01 mcud_total: 3.8200e-01 loss: 2.3448e+01 grad: 2.2524e+02
+26-09-04 22:25:11.298 - INFO: <step:  6340, lr:8.633e-05> cud_total: 4.6728e+01 mcud_total: 3.8683e-01 loss: 4.7114e+01 grad: 1.6967e+02
+26-09-04 22:25:19.384 - INFO: <step:  6360, lr:8.621e-05> cud_total: 4.4386e+01 mcud_total: 4.1660e-01 loss: 4.4803e+01 grad: 9.7242e+01
+26-09-04 22:25:29.498 - INFO: <step:  6380, lr:8.609e-05> cud_total: 1.8807e+01 mcud_total: 4.1139e-01 loss: 1.9219e+01 grad: 1.1081e+02
+26-09-04 22:25:38.512 - INFO: <step:  6400, lr:8.597e-05> cud_total: 3.6453e+01 mcud_total: 4.2105e-01 loss: 3.6874e+01 grad: 1.5718e+02
+26-09-04 22:25:45.533 - INFO: <step:  6420, lr:8.585e-05> cud_total: 3.3542e+01 mcud_total: 3.9946e-01 loss: 3.3942e+01 grad: 1.8447e+02
+26-09-04 22:25:56.251 - INFO: <step:  6440, lr:8.572e-05> cud_total: 3.9710e+01 mcud_total: 3.8923e-01 loss: 4.0099e+01 grad: 1.5682e+02
+26-09-04 22:26:04.756 - INFO: <step:  6460, lr:8.560e-05> cud_total: 3.7783e+01 mcud_total: 3.5435e-01 loss: 3.8137e+01 grad: 1.5443e+02
+26-09-04 22:26:14.042 - INFO: <step:  6480, lr:8.548e-05> cud_total: 3.9702e+01 mcud_total: 4.5849e-01 loss: 4.0161e+01 grad: 1.5539e+02
+26-09-04 22:26:23.633 - INFO: <step:  6500, lr:8.536e-05> cud_total: 3.9769e+01 mcud_total: 4.4733e-01 loss: 4.0217e+01 grad: 1.3401e+02
+26-09-04 22:26:30.806 - INFO: <step:  6520, lr:8.523e-05> cud_total: 3.3219e+01 mcud_total: 4.2899e-01 loss: 3.3648e+01 grad: 4.1579e+02
+26-09-04 22:26:38.781 - INFO: <step:  6540, lr:8.511e-05> cud_total: 5.2796e+01 mcud_total: 3.9824e-01 loss: 5.3194e+01 grad: 1.1168e+02
+26-09-04 22:26:48.882 - INFO: <step:  6560, lr:8.498e-05> cud_total: 5.0086e+01 mcud_total: 4.0256e-01 loss: 5.0489e+01 grad: 9.4117e+01
+26-09-04 22:26:54.404 - INFO: <step:  6580, lr:8.486e-05> cud_total: 6.1385e+01 mcud_total: 3.2176e-01 loss: 6.1707e+01 grad: 9.6144e+01
+26-09-04 22:26:59.929 - INFO: <step:  6600, lr:8.473e-05> cud_total: 2.5445e+01 mcud_total: 4.2649e-01 loss: 2.5871e+01 grad: 3.7966e+02
+26-09-04 22:27:07.785 - INFO: <step:  6620, lr:8.461e-05> cud_total: 5.6976e+01 mcud_total: 3.7433e-01 loss: 5.7350e+01 grad: 3.0309e+02
+26-09-04 22:27:17.587 - INFO: <step:  6640, lr:8.448e-05> cud_total: 2.5130e+01 mcud_total: 3.3686e-01 loss: 2.5467e+01 grad: 1.5369e+02
+26-09-04 22:27:26.627 - INFO: <step:  6660, lr:8.435e-05> cud_total: 5.5167e+01 mcud_total: 3.6488e-01 loss: 5.5532e+01 grad: 7.4955e+01
+26-09-04 22:27:37.732 - INFO: <step:  6680, lr:8.423e-05> cud_total: 4.6282e+01 mcud_total: 3.8356e-01 loss: 4.6665e+01 grad: 2.5154e+02
+26-09-04 22:27:47.013 - INFO: <step:  6700, lr:8.410e-05> cud_total: 5.4760e+01 mcud_total: 5.0167e-01 loss: 5.5262e+01 grad: 1.5804e+02
+26-09-04 22:27:56.925 - INFO: <step:  6720, lr:8.397e-05> cud_total: 4.3652e+01 mcud_total: 4.3902e-01 loss: 4.4091e+01 grad: 1.9744e+02
+26-09-04 22:28:08.203 - INFO: <step:  6740, lr:8.384e-05> cud_total: 3.4894e+01 mcud_total: 4.1954e-01 loss: 3.5313e+01 grad: 9.0285e+01
+26-09-04 22:28:18.408 - INFO: <step:  6760, lr:8.372e-05> cud_total: 4.8284e+01 mcud_total: 4.0835e-01 loss: 4.8692e+01 grad: 5.2858e+02
+26-09-04 22:28:25.172 - INFO: <step:  6780, lr:8.359e-05> cud_total: 3.3535e+01 mcud_total: 3.4303e-01 loss: 3.3878e+01 grad: 1.3538e+02
+26-09-04 22:28:34.171 - INFO: <step:  6800, lr:8.346e-05> cud_total: 6.0619e+01 mcud_total: 3.7777e-01 loss: 6.0996e+01 grad: 3.6732e+02
+26-09-04 22:28:40.763 - INFO: <step:  6820, lr:8.333e-05> cud_total: 4.6684e+01 mcud_total: 3.9788e-01 loss: 4.7082e+01 grad: 3.0655e+02
+26-09-04 22:28:48.051 - INFO: <step:  6840, lr:8.320e-05> cud_total: 4.5470e+01 mcud_total: 2.9801e-01 loss: 4.5768e+01 grad: 1.2280e+02
+26-09-04 22:28:57.520 - INFO: <step:  6860, lr:8.307e-05> cud_total: 2.7180e+01 mcud_total: 3.6407e-01 loss: 2.7544e+01 grad: 2.4194e+02
+26-09-04 22:29:06.345 - INFO: <step:  6880, lr:8.293e-05> cud_total: 2.9032e+01 mcud_total: 3.6014e-01 loss: 2.9392e+01 grad: 2.0677e+02
+26-09-04 22:29:14.263 - INFO: <step:  6900, lr:8.280e-05> cud_total: 3.8710e+01 mcud_total: 4.1512e-01 loss: 3.9126e+01 grad: 4.4960e+02
+26-09-04 22:29:21.329 - INFO: <step:  6920, lr:8.267e-05> cud_total: 6.9247e+01 mcud_total: 4.1249e-01 loss: 6.9660e+01 grad: 1.6781e+02
+26-09-04 22:29:32.694 - INFO: <step:  6940, lr:8.254e-05> cud_total: 4.7872e+01 mcud_total: 3.5530e-01 loss: 4.8227e+01 grad: 2.0155e+02
+26-09-04 22:29:41.980 - INFO: <step:  6960, lr:8.241e-05> cud_total: 3.0578e+01 mcud_total: 3.7913e-01 loss: 3.0957e+01 grad: 2.2693e+02
+26-09-04 22:29:48.402 - INFO: <step:  6980, lr:8.227e-05> cud_total: 4.1790e+01 mcud_total: 3.8884e-01 loss: 4.2179e+01 grad: 3.0202e+02
+26-09-04 22:29:55.739 - INFO: <step:  7000, lr:8.214e-05> cud_total: 3.1737e+01 mcud_total: 4.1994e-01 loss: 3.2157e+01 grad: 2.5554e+02
+26-09-04 22:30:03.702 - INFO: <step:  7020, lr:8.201e-05> cud_total: 2.8234e+01 mcud_total: 3.8285e-01 loss: 2.8616e+01 grad: 1.5031e+02
+26-09-04 22:30:12.103 - INFO: <step:  7040, lr:8.187e-05> cud_total: 5.6459e+01 mcud_total: 3.7397e-01 loss: 5.6833e+01 grad: 1.4416e+02
+26-09-04 22:30:17.461 - INFO: <step:  7060, lr:8.174e-05> cud_total: 6.0168e+01 mcud_total: 4.2037e-01 loss: 6.0588e+01 grad: 9.2783e+01
+26-09-04 22:30:23.093 - INFO: <step:  7080, lr:8.160e-05> cud_total: 3.5695e+01 mcud_total: 4.4001e-01 loss: 3.6135e+01 grad: 3.4587e+02
+26-09-04 22:30:31.185 - INFO: <step:  7100, lr:8.147e-05> cud_total: 3.5177e+01 mcud_total: 3.6387e-01 loss: 3.5540e+01 grad: 2.3735e+02
+26-09-04 22:30:39.209 - INFO: <step:  7120, lr:8.133e-05> cud_total: 5.6338e+01 mcud_total: 3.3957e-01 loss: 5.6678e+01 grad: 8.4609e+01
+26-09-04 22:30:46.301 - INFO: <step:  7140, lr:8.119e-05> cud_total: 5.5033e+01 mcud_total: 3.3193e-01 loss: 5.5365e+01 grad: 1.5653e+02
+26-09-04 22:30:51.000 - INFO: <step:  7160, lr:8.106e-05> cud_total: 4.9027e+01 mcud_total: 4.7269e-01 loss: 4.9500e+01 grad: 5.5740e+01
+26-09-04 22:30:57.593 - INFO: <step:  7180, lr:8.092e-05> cud_total: 4.0503e+01 mcud_total: 3.4671e-01 loss: 4.0850e+01 grad: 4.3181e+02
+26-09-04 22:31:02.570 - INFO: <step:  7200, lr:8.078e-05> cud_total: 3.9001e+01 mcud_total: 3.9886e-01 loss: 3.9400e+01 grad: 1.6409e+02
+26-09-04 22:31:09.406 - INFO: <step:  7220, lr:8.065e-05> cud_total: 6.3911e+01 mcud_total: 4.2912e-01 loss: 6.4340e+01 grad: 8.1158e+01
+26-09-04 22:31:20.133 - INFO: <step:  7240, lr:8.051e-05> cud_total: 2.5080e+01 mcud_total: 3.6510e-01 loss: 2.5445e+01 grad: 1.8718e+02
+26-09-04 22:31:26.559 - INFO: <step:  7260, lr:8.037e-05> cud_total: 6.3893e+01 mcud_total: 3.4978e-01 loss: 6.4242e+01 grad: 6.3298e+01
+26-09-04 22:31:32.713 - INFO: <step:  7280, lr:8.023e-05> cud_total: 2.9467e+01 mcud_total: 4.3522e-01 loss: 2.9902e+01 grad: 8.5065e+01
+26-09-04 22:31:40.325 - INFO: <step:  7300, lr:8.009e-05> cud_total: 3.6534e+01 mcud_total: 4.8700e-01 loss: 3.7021e+01 grad: 1.8260e+02
+26-09-04 22:31:47.275 - INFO: <step:  7320, lr:7.995e-05> cud_total: 3.8120e+01 mcud_total: 4.0442e-01 loss: 3.8524e+01 grad: 1.1750e+02
+26-09-04 22:31:53.889 - INFO: <step:  7340, lr:7.981e-05> cud_total: 4.9846e+01 mcud_total: 4.7271e-01 loss: 5.0318e+01 grad: 1.9937e+02
+26-09-04 22:32:01.258 - INFO: <step:  7360, lr:7.967e-05> cud_total: 4.2757e+01 mcud_total: 3.8490e-01 loss: 4.3142e+01 grad: 2.6833e+02
+26-09-04 22:32:07.222 - INFO: <step:  7380, lr:7.953e-05> cud_total: 3.3684e+01 mcud_total: 4.1195e-01 loss: 3.4096e+01 grad: 1.5777e+02
+26-09-04 22:32:13.010 - INFO: <step:  7400, lr:7.939e-05> cud_total: 8.4531e+01 mcud_total: 3.3493e-01 loss: 8.4866e+01 grad: 6.5474e+01
+26-09-04 22:32:18.472 - INFO: <step:  7420, lr:7.925e-05> cud_total: 4.6206e+01 mcud_total: 3.5193e-01 loss: 4.6558e+01 grad: 2.5290e+02
+26-09-04 22:32:29.538 - INFO: <step:  7440, lr:7.911e-05> cud_total: 4.4287e+01 mcud_total: 3.8274e-01 loss: 4.4670e+01 grad: 2.1313e+02
+26-09-04 22:32:37.436 - INFO: <step:  7460, lr:7.896e-05> cud_total: 3.3542e+01 mcud_total: 3.7879e-01 loss: 3.3920e+01 grad: 1.3636e+02
+26-09-04 22:32:44.467 - INFO: <step:  7480, lr:7.882e-05> cud_total: 3.9462e+01 mcud_total: 4.2022e-01 loss: 3.9882e+01 grad: 7.6407e+01
+26-09-04 22:32:54.268 - INFO: <step:  7500, lr:7.868e-05> cud_total: 3.0588e+01 mcud_total: 4.2773e-01 loss: 3.1016e+01 grad: 1.0990e+02
+26-09-04 22:33:03.218 - INFO: <step:  7520, lr:7.854e-05> cud_total: 4.0699e+01 mcud_total: 3.7473e-01 loss: 4.1074e+01 grad: 6.8428e+01
+26-09-04 22:33:10.424 - INFO: <step:  7540, lr:7.839e-05> cud_total: 4.7027e+01 mcud_total: 3.0176e-01 loss: 4.7328e+01 grad: 1.1755e+02
+26-09-04 22:33:15.858 - INFO: <step:  7560, lr:7.825e-05> cud_total: 5.2413e+01 mcud_total: 3.2970e-01 loss: 5.2743e+01 grad: 1.2494e+02
+26-09-04 22:33:23.110 - INFO: <step:  7580, lr:7.810e-05> cud_total: 4.5022e+01 mcud_total: 3.3904e-01 loss: 4.5361e+01 grad: 1.0685e+02
+26-09-04 22:33:29.975 - INFO: <step:  7600, lr:7.796e-05> cud_total: 4.3339e+01 mcud_total: 3.3896e-01 loss: 4.3678e+01 grad: 8.2356e+01
+26-09-04 22:33:37.261 - INFO: <step:  7620, lr:7.781e-05> cud_total: 3.7386e+01 mcud_total: 4.0424e-01 loss: 3.7790e+01 grad: 5.8741e+01
+26-09-04 22:33:44.934 - INFO: <step:  7640, lr:7.767e-05> cud_total: 5.3936e+01 mcud_total: 4.0198e-01 loss: 5.4338e+01 grad: 1.8139e+02
+26-09-04 22:33:53.042 - INFO: <step:  7660, lr:7.752e-05> cud_total: 5.4179e+01 mcud_total: 3.4479e-01 loss: 5.4524e+01 grad: 8.5574e+01
+26-09-04 22:34:02.854 - INFO: <step:  7680, lr:7.738e-05> cud_total: 3.9230e+01 mcud_total: 3.7604e-01 loss: 3.9606e+01 grad: 2.4194e+02
+26-09-04 22:34:13.448 - INFO: <step:  7700, lr:7.723e-05> cud_total: 4.3425e+01 mcud_total: 3.4140e-01 loss: 4.3766e+01 grad: 9.2323e+01
+26-09-04 22:34:21.961 - INFO: <step:  7720, lr:7.709e-05> cud_total: 3.4097e+01 mcud_total: 3.4695e-01 loss: 3.4444e+01 grad: 2.9915e+02
+26-09-04 22:34:27.304 - INFO: <step:  7740, lr:7.694e-05> cud_total: 3.1316e+01 mcud_total: 3.9816e-01 loss: 3.1714e+01 grad: 1.8084e+02
+26-09-04 22:34:33.708 - INFO: <step:  7760, lr:7.679e-05> cud_total: 2.0700e+01 mcud_total: 3.6784e-01 loss: 2.1068e+01 grad: 2.8396e+02
+26-09-04 22:34:39.101 - INFO: <step:  7780, lr:7.664e-05> cud_total: 5.3757e+01 mcud_total: 3.2414e-01 loss: 5.4081e+01 grad: 1.6409e+02
+26-09-04 22:34:44.818 - INFO: <step:  7800, lr:7.650e-05> cud_total: 6.2952e+01 mcud_total: 4.4430e-01 loss: 6.3396e+01 grad: 4.1751e+01
+26-09-04 22:34:50.181 - INFO: <step:  7820, lr:7.635e-05> cud_total: 4.1637e+01 mcud_total: 4.3725e-01 loss: 4.2075e+01 grad: 7.3802e+01
+26-09-04 22:34:55.491 - INFO: <step:  7840, lr:7.620e-05> cud_total: 3.6466e+01 mcud_total: 3.6665e-01 loss: 3.6833e+01 grad: 9.1812e+01
+26-09-04 22:35:01.196 - INFO: <step:  7860, lr:7.605e-05> cud_total: 4.5160e+01 mcud_total: 4.7997e-01 loss: 4.5640e+01 grad: 2.1700e+02
+26-09-04 22:35:06.582 - INFO: <step:  7880, lr:7.590e-05> cud_total: 5.0995e+01 mcud_total: 3.5220e-01 loss: 5.1347e+01 grad: 7.2920e+01
+26-09-04 22:35:11.954 - INFO: <step:  7900, lr:7.575e-05> cud_total: 6.9220e+01 mcud_total: 4.6307e-01 loss: 6.9683e+01 grad: 9.8760e+01
+26-09-04 22:35:17.403 - INFO: <step:  7920, lr:7.560e-05> cud_total: 3.5340e+01 mcud_total: 4.0910e-01 loss: 3.5749e+01 grad: 2.2035e+02
+26-09-04 22:35:22.858 - INFO: <step:  7940, lr:7.545e-05> cud_total: 3.3509e+01 mcud_total: 2.7599e-01 loss: 3.3785e+01 grad: 1.4914e+02
+26-09-04 22:35:28.812 - INFO: <step:  7960, lr:7.530e-05> cud_total: 3.7779e+01 mcud_total: 3.3872e-01 loss: 3.8117e+01 grad: 1.1431e+02
+26-09-04 22:35:36.941 - INFO: <step:  7980, lr:7.515e-05> cud_total: 7.0656e+01 mcud_total: 3.6860e-01 loss: 7.1025e+01 grad: 1.3569e+02
+26-09-04 22:35:46.098 - INFO: <step:  8000, lr:7.500e-05> cud_total: 3.0808e+01 mcud_total: 3.5914e-01 loss: 3.1167e+01 grad: 3.0668e+02
+26-09-04 22:35:55.926 - INFO: <step:  8020, lr:7.485e-05> cud_total: 4.7152e+01 mcud_total: 2.9811e-01 loss: 4.7450e+01 grad: 1.0447e+02
+26-09-04 22:36:06.295 - INFO: <step:  8040, lr:7.470e-05> cud_total: 5.3672e+01 mcud_total: 4.2756e-01 loss: 5.4100e+01 grad: 1.6970e+02
+26-09-04 22:36:13.285 - INFO: <step:  8060, lr:7.455e-05> cud_total: 3.9631e+01 mcud_total: 3.9513e-01 loss: 4.0026e+01 grad: 8.2622e+01
+26-09-04 22:36:18.969 - INFO: <step:  8080, lr:7.439e-05> cud_total: 5.2589e+01 mcud_total: 3.3241e-01 loss: 5.2921e+01 grad: 1.0470e+02
+26-09-04 22:36:23.453 - INFO: <step:  8100, lr:7.424e-05> cud_total: 4.5552e+01 mcud_total: 3.5382e-01 loss: 4.5906e+01 grad: 7.9434e+01
+26-09-04 22:36:27.759 - INFO: <step:  8120, lr:7.409e-05> cud_total: 5.9053e+01 mcud_total: 4.0598e-01 loss: 5.9459e+01 grad: 9.5500e+01
+26-09-04 22:36:32.676 - INFO: <step:  8140, lr:7.393e-05> cud_total: 4.6658e+01 mcud_total: 3.5940e-01 loss: 4.7017e+01 grad: 1.3387e+02
+26-09-04 22:36:36.796 - INFO: <step:  8160, lr:7.378e-05> cud_total: 3.3101e+01 mcud_total: 3.6268e-01 loss: 3.3464e+01 grad: 1.1456e+02
+26-09-04 22:36:41.025 - INFO: <step:  8180, lr:7.363e-05> cud_total: 5.1571e+01 mcud_total: 3.2018e-01 loss: 5.1891e+01 grad: 8.0792e+01
+26-09-04 22:36:45.561 - INFO: <step:  8200, lr:7.347e-05> cud_total: 3.5505e+01 mcud_total: 3.2024e-01 loss: 3.5825e+01 grad: 2.2139e+02
+26-09-04 22:36:49.838 - INFO: <step:  8220, lr:7.332e-05> cud_total: 5.8278e+01 mcud_total: 4.9908e-01 loss: 5.8777e+01 grad: 2.1050e+02
+26-09-04 22:36:54.214 - INFO: <step:  8240, lr:7.316e-05> cud_total: 5.0152e+01 mcud_total: 3.8832e-01 loss: 5.0540e+01 grad: 1.3307e+02
+26-09-04 22:36:58.559 - INFO: <step:  8260, lr:7.301e-05> cud_total: 4.4488e+01 mcud_total: 3.4945e-01 loss: 4.4837e+01 grad: 1.7223e+02
+26-09-04 22:37:02.756 - INFO: <step:  8280, lr:7.285e-05> cud_total: 4.6873e+01 mcud_total: 3.5436e-01 loss: 4.7227e+01 grad: 7.2006e+01
+26-09-04 22:37:06.927 - INFO: <step:  8300, lr:7.270e-05> cud_total: 3.8529e+01 mcud_total: 3.7547e-01 loss: 3.8904e+01 grad: 5.3028e+02
+26-09-04 22:37:11.373 - INFO: <step:  8320, lr:7.254e-05> cud_total: 3.7773e+01 mcud_total: 4.1352e-01 loss: 3.8186e+01 grad: 2.1720e+02
+26-09-04 22:37:16.171 - INFO: <step:  8340, lr:7.239e-05> cud_total: 5.6916e+01 mcud_total: 2.9244e-01 loss: 5.7208e+01 grad: 8.3222e+01
+26-09-04 22:37:21.800 - INFO: <step:  8360, lr:7.223e-05> cud_total: 5.0272e+01 mcud_total: 3.5151e-01 loss: 5.0624e+01 grad: 8.2777e+01
+26-09-04 22:37:28.114 - INFO: <step:  8380, lr:7.208e-05> cud_total: 3.1249e+01 mcud_total: 3.7775e-01 loss: 3.1627e+01 grad: 9.7616e+01
+26-09-04 22:37:34.639 - INFO: <step:  8400, lr:7.192e-05> cud_total: 3.1278e+01 mcud_total: 3.8374e-01 loss: 3.1662e+01 grad: 3.1525e+02
+26-09-04 22:37:39.177 - INFO: <step:  8420, lr:7.176e-05> cud_total: 5.9892e+01 mcud_total: 3.2989e-01 loss: 6.0222e+01 grad: 2.0983e+02
+26-09-04 22:37:44.072 - INFO: <step:  8440, lr:7.160e-05> cud_total: 5.1094e+01 mcud_total: 3.6253e-01 loss: 5.1457e+01 grad: 1.5379e+02
+26-09-04 22:37:50.181 - INFO: <step:  8460, lr:7.145e-05> cud_total: 2.9099e+01 mcud_total: 3.6576e-01 loss: 2.9465e+01 grad: 2.9187e+02
+26-09-04 22:38:01.023 - INFO: <step:  8480, lr:7.129e-05> cud_total: 2.9577e+01 mcud_total: 3.3202e-01 loss: 2.9909e+01 grad: 1.8665e+02
+26-09-04 22:38:10.734 - INFO: <step:  8500, lr:7.113e-05> cud_total: 4.5500e+01 mcud_total: 3.7641e-01 loss: 4.5876e+01 grad: 5.9716e+01
+26-09-04 22:38:20.703 - INFO: <step:  8520, lr:7.097e-05> cud_total: 5.5863e+01 mcud_total: 4.4066e-01 loss: 5.6304e+01 grad: 1.3989e+02
+26-09-04 22:38:31.245 - INFO: <step:  8540, lr:7.081e-05> cud_total: 5.3502e+01 mcud_total: 4.3576e-01 loss: 5.3938e+01 grad: 9.2820e+01
+26-09-04 22:38:40.930 - INFO: <step:  8560, lr:7.066e-05> cud_total: 2.3939e+01 mcud_total: 3.0039e-01 loss: 2.4240e+01 grad: 1.4965e+02
+26-09-04 22:38:52.156 - INFO: <step:  8580, lr:7.050e-05> cud_total: 4.9172e+01 mcud_total: 4.3335e-01 loss: 4.9605e+01 grad: 1.8877e+02
+26-09-04 22:39:00.976 - INFO: <step:  8600, lr:7.034e-05> cud_total: 3.4786e+01 mcud_total: 3.8859e-01 loss: 3.5175e+01 grad: 2.4838e+02
+26-09-04 22:39:10.807 - INFO: <step:  8620, lr:7.018e-05> cud_total: 3.4581e+01 mcud_total: 3.3370e-01 loss: 3.4915e+01 grad: 7.1981e+02
+26-09-04 22:39:17.738 - INFO: <step:  8640, lr:7.002e-05> cud_total: 3.6475e+01 mcud_total: 3.8724e-01 loss: 3.6862e+01 grad: 1.3521e+02
+26-09-04 22:39:25.663 - INFO: <step:  8660, lr:6.986e-05> cud_total: 3.9459e+01 mcud_total: 3.3938e-01 loss: 3.9798e+01 grad: 1.6545e+02
+26-09-04 22:39:35.713 - INFO: <step:  8680, lr:6.970e-05> cud_total: 5.3211e+01 mcud_total: 4.7311e-01 loss: 5.3684e+01 grad: 5.6638e+01
+26-09-04 22:39:43.653 - INFO: <step:  8700, lr:6.954e-05> cud_total: 3.6685e+01 mcud_total: 3.4365e-01 loss: 3.7029e+01 grad: 1.2593e+02
+26-09-04 22:39:53.185 - INFO: <step:  8720, lr:6.938e-05> cud_total: 3.4427e+01 mcud_total: 3.6245e-01 loss: 3.4790e+01 grad: 2.0579e+02
+26-09-04 22:40:04.023 - INFO: <step:  8740, lr:6.921e-05> cud_total: 2.4434e+01 mcud_total: 4.1440e-01 loss: 2.4848e+01 grad: 1.3281e+02
+26-09-04 22:40:09.456 - INFO: <step:  8760, lr:6.905e-05> cud_total: 5.7144e+01 mcud_total: 3.8233e-01 loss: 5.7526e+01 grad: 6.7212e+01
+26-09-04 22:40:15.338 - INFO: <step:  8780, lr:6.889e-05> cud_total: 3.7139e+01 mcud_total: 3.6066e-01 loss: 3.7499e+01 grad: 1.4966e+02
+26-09-04 22:40:26.724 - INFO: <step:  8800, lr:6.873e-05> cud_total: 4.0241e+01 mcud_total: 2.7819e-01 loss: 4.0519e+01 grad: 6.2664e+01
+26-09-04 22:40:37.295 - INFO: <step:  8820, lr:6.857e-05> cud_total: 3.8889e+01 mcud_total: 4.0152e-01 loss: 3.9291e+01 grad: 1.6348e+02
+26-09-04 22:40:45.638 - INFO: <step:  8840, lr:6.841e-05> cud_total: 4.3679e+01 mcud_total: 3.9332e-01 loss: 4.4073e+01 grad: 6.0449e+01
+26-09-04 22:40:53.893 - INFO: <step:  8860, lr:6.824e-05> cud_total: 3.6943e+01 mcud_total: 3.1161e-01 loss: 3.7254e+01 grad: 1.3639e+02
+26-09-04 22:41:06.740 - INFO: <step:  8880, lr:6.808e-05> cud_total: 3.4966e+01 mcud_total: 3.5216e-01 loss: 3.5318e+01 grad: 2.6701e+02
+26-09-04 22:41:17.243 - INFO: <step:  8900, lr:6.792e-05> cud_total: 4.2567e+01 mcud_total: 2.9571e-01 loss: 4.2863e+01 grad: 4.4347e+02
+26-09-04 22:41:28.727 - INFO: <step:  8920, lr:6.776e-05> cud_total: 3.9628e+01 mcud_total: 3.1576e-01 loss: 3.9944e+01 grad: 9.6204e+01
+26-09-04 22:41:38.784 - INFO: <step:  8940, lr:6.759e-05> cud_total: 4.6115e+01 mcud_total: 3.0178e-01 loss: 4.6417e+01 grad: 2.3806e+02
+26-09-04 22:41:48.979 - INFO: <step:  8960, lr:6.743e-05> cud_total: 5.4835e+01 mcud_total: 3.5936e-01 loss: 5.5194e+01 grad: 1.2603e+02
+26-09-04 22:42:00.946 - INFO: <step:  8980, lr:6.726e-05> cud_total: 3.2632e+01 mcud_total: 3.6502e-01 loss: 3.2997e+01 grad: 1.7717e+02
+26-09-04 22:42:11.888 - INFO: <step:  9000, lr:6.710e-05> cud_total: 2.0433e+01 mcud_total: 4.0431e-01 loss: 2.0838e+01 grad: 1.6524e+02
+26-09-04 22:42:22.326 - INFO: <step:  9020, lr:6.694e-05> cud_total: 3.4905e+01 mcud_total: 3.3824e-01 loss: 3.5243e+01 grad: 1.8844e+02
+26-09-04 22:42:32.815 - INFO: <step:  9040, lr:6.677e-05> cud_total: 5.4087e+01 mcud_total: 4.2757e-01 loss: 5.4515e+01 grad: 6.3391e+01
+26-09-04 22:42:43.162 - INFO: <step:  9060, lr:6.661e-05> cud_total: 4.0803e+01 mcud_total: 3.8540e-01 loss: 4.1188e+01 grad: 8.4865e+01
+26-09-04 22:42:53.927 - INFO: <step:  9080, lr:6.644e-05> cud_total: 6.1222e+01 mcud_total: 3.1176e-01 loss: 6.1534e+01 grad: 9.8679e+01
+26-09-04 22:43:04.374 - INFO: <step:  9100, lr:6.628e-05> cud_total: 3.7463e+01 mcud_total: 2.8388e-01 loss: 3.7746e+01 grad: 1.5724e+02
+26-09-04 22:43:18.200 - INFO: <step:  9120, lr:6.611e-05> cud_total: 4.0830e+01 mcud_total: 3.7098e-01 loss: 4.1201e+01 grad: 2.3173e+02
+26-09-04 22:43:27.026 - INFO: <step:  9140, lr:6.595e-05> cud_total: 4.6301e+01 mcud_total: 3.6674e-01 loss: 4.6668e+01 grad: 1.0561e+02
+26-09-04 22:43:35.695 - INFO: <step:  9160, lr:6.578e-05> cud_total: 5.2555e+01 mcud_total: 4.2810e-01 loss: 5.2983e+01 grad: 1.7347e+02
+26-09-04 22:43:45.814 - INFO: <step:  9180, lr:6.562e-05> cud_total: 3.8399e+01 mcud_total: 3.1460e-01 loss: 3.8714e+01 grad: 1.0531e+02
+26-09-04 22:43:56.374 - INFO: <step:  9200, lr:6.545e-05> cud_total: 4.7431e+01 mcud_total: 3.9093e-01 loss: 4.7822e+01 grad: 9.0009e+01
+26-09-04 22:44:06.682 - INFO: <step:  9220, lr:6.528e-05> cud_total: 3.0174e+01 mcud_total: 3.5810e-01 loss: 3.0532e+01 grad: 1.0315e+02
+26-09-04 22:44:16.726 - INFO: <step:  9240, lr:6.512e-05> cud_total: 4.7702e+01 mcud_total: 3.4440e-01 loss: 4.8046e+01 grad: 1.3897e+02
+26-09-04 22:44:26.924 - INFO: <step:  9260, lr:6.495e-05> cud_total: 1.5048e+01 mcud_total: 4.0315e-01 loss: 1.5451e+01 grad: 1.9839e+02
+26-09-04 22:44:35.639 - INFO: <step:  9280, lr:6.479e-05> cud_total: 4.1251e+01 mcud_total: 3.2638e-01 loss: 4.1577e+01 grad: 1.1916e+02
+26-09-04 22:44:42.189 - INFO: <step:  9300, lr:6.462e-05> cud_total: 5.7992e+01 mcud_total: 3.4670e-01 loss: 5.8339e+01 grad: 1.7445e+02
+26-09-04 22:44:53.416 - INFO: <step:  9320, lr:6.445e-05> cud_total: 3.2325e+01 mcud_total: 4.1969e-01 loss: 3.2745e+01 grad: 2.0972e+02
+26-09-04 22:45:06.898 - INFO: <step:  9340, lr:6.428e-05> cud_total: 4.0173e+01 mcud_total: 3.1888e-01 loss: 4.0492e+01 grad: 1.0093e+02
+26-09-04 22:45:13.565 - INFO: <step:  9360, lr:6.412e-05> cud_total: 4.8120e+01 mcud_total: 3.8220e-01 loss: 4.8502e+01 grad: 1.0040e+02
+26-09-04 22:45:20.994 - INFO: <step:  9380, lr:6.395e-05> cud_total: 2.4044e+01 mcud_total: 3.7711e-01 loss: 2.4421e+01 grad: 9.2897e+01
+26-09-04 22:45:32.509 - INFO: <step:  9400, lr:6.378e-05> cud_total: 6.1890e+01 mcud_total: 3.6728e-01 loss: 6.2257e+01 grad: 1.1063e+02
+26-09-04 22:45:42.721 - INFO: <step:  9420, lr:6.361e-05> cud_total: 4.5055e+01 mcud_total: 3.4908e-01 loss: 4.5405e+01 grad: 1.5123e+02
+26-09-04 22:45:54.391 - INFO: <step:  9440, lr:6.345e-05> cud_total: 3.1032e+01 mcud_total: 3.0946e-01 loss: 3.1341e+01 grad: 9.9298e+01
+26-09-04 22:46:05.074 - INFO: <step:  9460, lr:6.328e-05> cud_total: 6.6203e+01 mcud_total: 4.4523e-01 loss: 6.6648e+01 grad: 2.0067e+02
+26-09-04 22:46:14.283 - INFO: <step:  9480, lr:6.311e-05> cud_total: 4.5399e+01 mcud_total: 3.7826e-01 loss: 4.5778e+01 grad: 2.0751e+02
+26-09-04 22:46:24.446 - INFO: <step:  9500, lr:6.294e-05> cud_total: 5.3422e+01 mcud_total: 3.1545e-01 loss: 5.3738e+01 grad: 2.7285e+02
+26-09-04 22:46:34.393 - INFO: <step:  9520, lr:6.277e-05> cud_total: 2.5651e+01 mcud_total: 4.1567e-01 loss: 2.6066e+01 grad: 2.7145e+02
+26-09-04 22:46:45.638 - INFO: <step:  9540, lr:6.260e-05> cud_total: 3.3024e+01 mcud_total: 2.8673e-01 loss: 3.3311e+01 grad: 1.9656e+02
+26-09-04 22:46:59.165 - INFO: <step:  9560, lr:6.243e-05> cud_total: 5.1665e+01 mcud_total: 3.5059e-01 loss: 5.2016e+01 grad: 9.0514e+01
+26-09-04 22:47:13.056 - INFO: <step:  9580, lr:6.227e-05> cud_total: 3.5449e+01 mcud_total: 3.4047e-01 loss: 3.5789e+01 grad: 9.3816e+01
+26-09-04 22:47:21.335 - INFO: <step:  9600, lr:6.210e-05> cud_total: 2.7100e+01 mcud_total: 3.4443e-01 loss: 2.7444e+01 grad: 7.1094e+01
+26-09-04 22:47:30.893 - INFO: <step:  9620, lr:6.193e-05> cud_total: 2.6875e+01 mcud_total: 3.0971e-01 loss: 2.7185e+01 grad: 9.1176e+01
+26-09-04 22:47:42.028 - INFO: <step:  9640, lr:6.176e-05> cud_total: 2.9407e+01 mcud_total: 3.5206e-01 loss: 2.9759e+01 grad: 1.0600e+02
+26-09-04 22:47:53.215 - INFO: <step:  9660, lr:6.159e-05> cud_total: 3.9580e+01 mcud_total: 3.8658e-01 loss: 3.9967e+01 grad: 1.1798e+02
+26-09-04 22:48:03.411 - INFO: <step:  9680, lr:6.142e-05> cud_total: 4.8023e+01 mcud_total: 3.3296e-01 loss: 4.8356e+01 grad: 1.2901e+02
+26-09-04 22:48:16.940 - INFO: <step:  9700, lr:6.125e-05> cud_total: 2.6620e+01 mcud_total: 3.1378e-01 loss: 2.6934e+01 grad: 2.1467e+02
+26-09-04 22:48:27.068 - INFO: <step:  9720, lr:6.108e-05> cud_total: 3.6534e+01 mcud_total: 2.6452e-01 loss: 3.6798e+01 grad: 3.0529e+02
+26-09-04 22:48:36.419 - INFO: <step:  9740, lr:6.091e-05> cud_total: 4.1999e+01 mcud_total: 4.1093e-01 loss: 4.2410e+01 grad: 2.0923e+02
+26-09-04 22:48:47.304 - INFO: <step:  9760, lr:6.074e-05> cud_total: 3.4067e+01 mcud_total: 3.1429e-01 loss: 3.4381e+01 grad: 1.3548e+02
+26-09-04 22:48:58.447 - INFO: <step:  9780, lr:6.057e-05> cud_total: 4.7866e+01 mcud_total: 3.6718e-01 loss: 4.8233e+01 grad: 1.7200e+02
+26-09-04 22:49:08.681 - INFO: <step:  9800, lr:6.040e-05> cud_total: 3.3685e+01 mcud_total: 3.2773e-01 loss: 3.4013e+01 grad: 2.9799e+02
+26-09-04 22:49:19.808 - INFO: <step:  9820, lr:6.022e-05> cud_total: 4.9422e+01 mcud_total: 2.9970e-01 loss: 4.9722e+01 grad: 1.3266e+02
+26-09-04 22:49:27.920 - INFO: <step:  9840, lr:6.005e-05> cud_total: 4.1017e+01 mcud_total: 2.9324e-01 loss: 4.1310e+01 grad: 8.4030e+01
+26-09-04 22:49:37.735 - INFO: <step:  9860, lr:5.988e-05> cud_total: 4.5072e+01 mcud_total: 3.6251e-01 loss: 4.5435e+01 grad: 1.0222e+02
+26-09-04 22:49:49.930 - INFO: <step:  9880, lr:5.971e-05> cud_total: 3.7905e+01 mcud_total: 3.3357e-01 loss: 3.8238e+01 grad: 2.6150e+02
+26-09-04 22:49:59.673 - INFO: <step:  9900, lr:5.954e-05> cud_total: 3.4234e+01 mcud_total: 2.5846e-01 loss: 3.4492e+01 grad: 3.0091e+02
+26-09-04 22:50:10.551 - INFO: <step:  9920, lr:5.937e-05> cud_total: 3.4042e+01 mcud_total: 3.5001e-01 loss: 3.4392e+01 grad: 8.9950e+01
+26-09-04 22:50:17.782 - INFO: <step:  9940, lr:5.920e-05> cud_total: 5.7388e+01 mcud_total: 3.4666e-01 loss: 5.7735e+01 grad: 1.9032e+02
+26-09-04 22:50:28.447 - INFO: <step:  9960, lr:5.903e-05> cud_total: 4.1337e+01 mcud_total: 2.9898e-01 loss: 4.1636e+01 grad: 5.6171e+01
+26-09-04 22:50:41.673 - INFO: <step:  9980, lr:5.885e-05> cud_total: 3.4316e+01 mcud_total: 3.3052e-01 loss: 3.4646e+01 grad: 7.2522e+01
+26-09-04 22:50:50.545 - INFO: <step: 10000, lr:5.868e-05> cud_total: 4.7722e+01 mcud_total: 4.7792e-01 loss: 4.8200e+01 grad: 1.4576e+02
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/torchvision/transforms/functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/torchvision/transforms/functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+26-09-04 22:50:59.452 - INFO: [step 10000] val loss: 18.5919
+26-09-04 22:53:02.606 - INFO: Saved checkpoint: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/experiments/COCO_MSRS_MCUD_demo/models/checkpoint-Defusion-plusplus-20260904_225050-step10000-loss48.1996-valloss18.5919.pth
+26-09-04 22:53:13.828 - INFO: <step: 10020, lr:5.851e-05> cud_total: 3.1061e+01 mcud_total: 3.5859e-01 loss: 3.1420e+01 grad: 1.2463e+02
+[step 10000] val loss: 18.5919
+26-09-04 22:53:26.900 - INFO: <step: 10040, lr:5.834e-05> cud_total: 2.7100e+01 mcud_total: 3.5740e-01 loss: 2.7457e+01 grad: 1.9789e+02
+26-09-04 22:53:37.696 - INFO: <step: 10060, lr:5.817e-05> cud_total: 2.6777e+01 mcud_total: 3.3651e-01 loss: 2.7113e+01 grad: 2.3715e+02
+26-09-04 22:53:50.202 - INFO: <step: 10080, lr:5.799e-05> cud_total: 3.6277e+01 mcud_total: 3.9007e-01 loss: 3.6667e+01 grad: 7.3527e+01
+26-09-04 22:54:00.495 - INFO: <step: 10100, lr:5.782e-05> cud_total: 4.4501e+01 mcud_total: 3.2074e-01 loss: 4.4821e+01 grad: 8.0579e+01
+26-09-04 22:54:13.734 - INFO: <step: 10120, lr:5.765e-05> cud_total: 4.3475e+01 mcud_total: 2.6932e-01 loss: 4.3745e+01 grad: 6.7478e+01
+26-09-04 22:54:24.609 - INFO: <step: 10140, lr:5.748e-05> cud_total: 4.2766e+01 mcud_total: 2.8928e-01 loss: 4.3055e+01 grad: 5.6403e+01
+26-09-04 22:54:36.230 - INFO: <step: 10160, lr:5.730e-05> cud_total: 2.4067e+01 mcud_total: 2.9463e-01 loss: 2.4361e+01 grad: 8.1984e+01
+26-09-04 22:54:46.736 - INFO: <step: 10180, lr:5.713e-05> cud_total: 3.2832e+01 mcud_total: 2.7125e-01 loss: 3.3103e+01 grad: 1.7831e+02
+26-09-04 22:54:54.435 - INFO: <step: 10200, lr:5.696e-05> cud_total: 3.7294e+01 mcud_total: 2.7881e-01 loss: 3.7573e+01 grad: 3.9414e+02
+26-09-04 22:55:02.658 - INFO: <step: 10220, lr:5.679e-05> cud_total: 5.7032e+01 mcud_total: 3.1429e-01 loss: 5.7346e+01 grad: 5.9595e+01
+26-09-04 22:55:14.891 - INFO: <step: 10240, lr:5.661e-05> cud_total: 3.5852e+01 mcud_total: 2.9729e-01 loss: 3.6149e+01 grad: 8.2971e+01
+26-09-04 22:55:24.113 - INFO: <step: 10260, lr:5.644e-05> cud_total: 3.2801e+01 mcud_total: 3.5074e-01 loss: 3.3152e+01 grad: 8.3786e+01
+26-09-04 22:55:31.693 - INFO: <step: 10280, lr:5.627e-05> cud_total: 3.0219e+01 mcud_total: 3.2289e-01 loss: 3.0542e+01 grad: 1.2210e+02
+26-09-04 22:55:38.479 - INFO: <step: 10300, lr:5.609e-05> cud_total: 5.2349e+01 mcud_total: 3.2313e-01 loss: 5.2672e+01 grad: 1.1785e+02
+26-09-04 22:55:43.560 - INFO: <step: 10320, lr:5.592e-05> cud_total: 2.5435e+01 mcud_total: 2.8558e-01 loss: 2.5720e+01 grad: 1.6676e+02
+26-09-04 22:55:49.222 - INFO: <step: 10340, lr:5.575e-05> cud_total: 2.4051e+01 mcud_total: 2.9846e-01 loss: 2.4349e+01 grad: 2.0134e+02
+26-09-04 22:55:57.570 - INFO: <step: 10360, lr:5.557e-05> cud_total: 2.7306e+01 mcud_total: 2.7371e-01 loss: 2.7580e+01 grad: 1.3970e+02
+26-09-04 22:56:05.550 - INFO: <step: 10380, lr:5.540e-05> cud_total: 3.4739e+01 mcud_total: 2.8887e-01 loss: 3.5028e+01 grad: 1.4736e+02
+26-09-04 22:56:10.012 - INFO: <step: 10400, lr:5.523e-05> cud_total: 4.5659e+01 mcud_total: 3.8435e-01 loss: 4.6043e+01 grad: 5.1531e+01
+26-09-04 22:56:14.147 - INFO: <step: 10420, lr:5.505e-05> cud_total: 5.7491e+01 mcud_total: 3.0538e-01 loss: 5.7796e+01 grad: 9.3225e+01
+26-09-04 22:56:18.242 - INFO: <step: 10440, lr:5.488e-05> cud_total: 4.8444e+01 mcud_total: 2.8130e-01 loss: 4.8725e+01 grad: 8.0980e+01
+26-09-04 22:56:22.474 - INFO: <step: 10460, lr:5.471e-05> cud_total: 2.6181e+01 mcud_total: 3.6062e-01 loss: 2.6542e+01 grad: 1.5423e+02
+26-09-04 22:56:26.695 - INFO: <step: 10480, lr:5.453e-05> cud_total: 4.9107e+01 mcud_total: 3.0435e-01 loss: 4.9411e+01 grad: 7.5088e+01
+26-09-04 22:56:30.748 - INFO: <step: 10500, lr:5.436e-05> cud_total: 1.8174e+01 mcud_total: 3.1656e-01 loss: 1.8491e+01 grad: 1.7009e+02
+26-09-04 22:56:34.795 - INFO: <step: 10520, lr:5.418e-05> cud_total: 4.8027e+01 mcud_total: 3.6974e-01 loss: 4.8397e+01 grad: 2.7564e+02
+26-09-04 22:56:39.062 - INFO: <step: 10540, lr:5.401e-05> cud_total: 4.5388e+01 mcud_total: 3.1150e-01 loss: 4.5699e+01 grad: 7.7069e+01
+26-09-04 22:56:43.329 - INFO: <step: 10560, lr:5.384e-05> cud_total: 3.0167e+01 mcud_total: 3.5847e-01 loss: 3.0525e+01 grad: 1.2607e+02
+26-09-04 22:56:47.929 - INFO: <step: 10580, lr:5.366e-05> cud_total: 3.7252e+01 mcud_total: 2.4312e-01 loss: 3.7495e+01 grad: 3.0480e+02
+26-09-04 22:56:52.210 - INFO: <step: 10600, lr:5.349e-05> cud_total: 2.9084e+01 mcud_total: 2.8791e-01 loss: 2.9372e+01 grad: 9.7856e+01
+26-09-04 22:56:56.498 - INFO: <step: 10620, lr:5.331e-05> cud_total: 4.8189e+01 mcud_total: 3.1847e-01 loss: 4.8507e+01 grad: 7.4350e+01
+26-09-04 22:57:00.826 - INFO: <step: 10640, lr:5.314e-05> cud_total: 5.8119e+01 mcud_total: 3.0632e-01 loss: 5.8426e+01 grad: 9.2090e+01
+26-09-04 22:57:05.493 - INFO: <step: 10660, lr:5.297e-05> cud_total: 3.9985e+01 mcud_total: 2.9784e-01 loss: 4.0283e+01 grad: 8.3977e+01
+26-09-04 22:57:11.033 - INFO: <step: 10680, lr:5.279e-05> cud_total: 4.4057e+01 mcud_total: 3.5468e-01 loss: 4.4411e+01 grad: 1.5358e+02
+26-09-04 22:57:19.874 - INFO: <step: 10700, lr:5.262e-05> cud_total: 2.5100e+01 mcud_total: 3.2107e-01 loss: 2.5421e+01 grad: 2.0230e+02
+26-09-04 22:57:30.659 - INFO: <step: 10720, lr:5.244e-05> cud_total: 1.8519e+01 mcud_total: 3.3466e-01 loss: 1.8853e+01 grad: 9.5901e+01
+26-09-04 22:57:41.428 - INFO: <step: 10740, lr:5.227e-05> cud_total: 4.3455e+01 mcud_total: 3.1129e-01 loss: 4.3766e+01 grad: 1.9235e+02
+26-09-04 22:57:50.170 - INFO: <step: 10760, lr:5.209e-05> cud_total: 4.6155e+01 mcud_total: 3.4170e-01 loss: 4.6496e+01 grad: 1.0904e+02
+26-09-04 22:58:02.532 - INFO: <step: 10780, lr:5.192e-05> cud_total: 2.8572e+01 mcud_total: 3.5849e-01 loss: 2.8931e+01 grad: 2.7876e+02
+26-09-04 22:58:12.508 - INFO: <step: 10800, lr:5.174e-05> cud_total: 2.2978e+01 mcud_total: 2.9204e-01 loss: 2.3270e+01 grad: 1.0502e+02
+26-09-04 22:58:22.046 - INFO: <step: 10820, lr:5.157e-05> cud_total: 4.5653e+01 mcud_total: 2.8368e-01 loss: 4.5937e+01 grad: 1.0400e+02
+26-09-04 22:58:35.879 - INFO: <step: 10840, lr:5.140e-05> cud_total: 1.5851e+01 mcud_total: 2.9888e-01 loss: 1.6150e+01 grad: 2.2875e+02
+26-09-04 22:58:46.386 - INFO: <step: 10860, lr:5.122e-05> cud_total: 2.9710e+01 mcud_total: 3.5491e-01 loss: 3.0065e+01 grad: 1.0442e+02
+26-09-04 22:58:57.951 - INFO: <step: 10880, lr:5.105e-05> cud_total: 2.9898e+01 mcud_total: 3.4536e-01 loss: 3.0243e+01 grad: 5.8037e+01
+26-09-04 22:59:10.224 - INFO: <step: 10900, lr:5.087e-05> cud_total: 2.3515e+01 mcud_total: 2.7215e-01 loss: 2.3788e+01 grad: 9.8194e+01
+26-09-04 22:59:21.754 - INFO: <step: 10920, lr:5.070e-05> cud_total: 4.0909e+01 mcud_total: 2.9227e-01 loss: 4.1201e+01 grad: 1.2332e+02
+26-09-04 22:59:33.508 - INFO: <step: 10940, lr:5.052e-05> cud_total: 4.7899e+01 mcud_total: 2.3554e-01 loss: 4.8134e+01 grad: 6.2724e+01
+26-09-04 22:59:45.241 - INFO: <step: 10960, lr:5.035e-05> cud_total: 1.8362e+01 mcud_total: 3.6989e-01 loss: 1.8732e+01 grad: 1.3286e+02
+26-09-04 22:59:55.449 - INFO: <step: 10980, lr:5.017e-05> cud_total: 3.7152e+01 mcud_total: 2.9624e-01 loss: 3.7448e+01 grad: 1.8278e+02
+26-09-04 23:00:12.506 - INFO: <step: 11000, lr:5.000e-05> cud_total: 3.7621e+01 mcud_total: 3.9251e-01 loss: 3.8013e+01 grad: 1.2460e+02
+26-09-04 23:00:21.836 - INFO: <step: 11020, lr:4.983e-05> cud_total: 3.6291e+01 mcud_total: 3.6339e-01 loss: 3.6654e+01 grad: 4.1545e+02
+26-09-04 23:00:32.141 - INFO: <step: 11040, lr:4.965e-05> cud_total: 6.4317e+01 mcud_total: 2.6091e-01 loss: 6.4578e+01 grad: 1.0048e+02
+26-09-04 23:00:41.169 - INFO: <step: 11060, lr:4.948e-05> cud_total: 4.7013e+01 mcud_total: 3.3514e-01 loss: 4.7348e+01 grad: 4.8585e+01
+26-09-04 23:00:49.717 - INFO: <step: 11080, lr:4.930e-05> cud_total: 4.3410e+01 mcud_total: 4.1105e-01 loss: 4.3821e+01 grad: 8.6238e+01
+26-09-04 23:01:01.465 - INFO: <step: 11100, lr:4.913e-05> cud_total: 2.5357e+01 mcud_total: 3.0609e-01 loss: 2.5663e+01 grad: 1.0525e+02
+26-09-04 23:01:13.796 - INFO: <step: 11120, lr:4.895e-05> cud_total: 4.8542e+01 mcud_total: 3.5819e-01 loss: 4.8900e+01 grad: 1.4857e+02
+26-09-04 23:01:26.049 - INFO: <step: 11140, lr:4.878e-05> cud_total: 2.1268e+01 mcud_total: 2.7458e-01 loss: 2.1543e+01 grad: 1.0735e+02
+26-09-04 23:01:34.960 - INFO: <step: 11160, lr:4.860e-05> cud_total: 2.6360e+01 mcud_total: 3.1626e-01 loss: 2.6676e+01 grad: 1.4758e+02
+26-09-04 23:01:47.941 - INFO: <step: 11180, lr:4.843e-05> cud_total: 3.4844e+01 mcud_total: 3.5392e-01 loss: 3.5198e+01 grad: 1.2518e+02
+26-09-04 23:01:59.375 - INFO: <step: 11200, lr:4.826e-05> cud_total: 3.1257e+01 mcud_total: 2.7204e-01 loss: 3.1529e+01 grad: 1.2194e+02
+26-09-04 23:02:09.969 - INFO: <step: 11220, lr:4.808e-05> cud_total: 3.6665e+01 mcud_total: 2.9375e-01 loss: 3.6959e+01 grad: 2.0217e+02
+26-09-04 23:02:21.756 - INFO: <step: 11240, lr:4.791e-05> cud_total: 4.6125e+01 mcud_total: 4.7450e-01 loss: 4.6600e+01 grad: 1.3989e+02
+26-09-04 23:02:32.970 - INFO: <step: 11260, lr:4.773e-05> cud_total: 3.0572e+01 mcud_total: 3.0997e-01 loss: 3.0881e+01 grad: 1.7977e+02
+26-09-04 23:02:44.733 - INFO: <step: 11280, lr:4.756e-05> cud_total: 3.7523e+01 mcud_total: 2.9107e-01 loss: 3.7814e+01 grad: 8.2665e+01
+26-09-04 23:02:57.064 - INFO: <step: 11300, lr:4.738e-05> cud_total: 5.2799e+01 mcud_total: 3.6149e-01 loss: 5.3160e+01 grad: 7.5875e+01
+26-09-04 23:03:08.765 - INFO: <step: 11320, lr:4.721e-05> cud_total: 3.7244e+01 mcud_total: 3.3085e-01 loss: 3.7575e+01 grad: 7.3105e+01
+26-09-04 23:03:18.086 - INFO: <step: 11340, lr:4.703e-05> cud_total: 1.7455e+01 mcud_total: 3.4916e-01 loss: 1.7804e+01 grad: 9.7195e+01
+26-09-04 23:03:27.036 - INFO: <step: 11360, lr:4.686e-05> cud_total: 4.7090e+01 mcud_total: 4.1964e-01 loss: 4.7510e+01 grad: 1.2485e+02
+26-09-04 23:03:37.074 - INFO: <step: 11380, lr:4.669e-05> cud_total: 1.8388e+01 mcud_total: 3.8818e-01 loss: 1.8776e+01 grad: 1.4253e+02
+26-09-04 23:03:46.254 - INFO: <step: 11400, lr:4.651e-05> cud_total: 1.2628e+01 mcud_total: 3.7902e-01 loss: 1.3007e+01 grad: 3.6986e+02
+26-09-04 23:03:55.612 - INFO: <step: 11420, lr:4.634e-05> cud_total: 2.7551e+01 mcud_total: 2.5374e-01 loss: 2.7805e+01 grad: 9.8556e+01
+26-09-04 23:04:02.089 - INFO: <step: 11440, lr:4.616e-05> cud_total: 2.9527e+01 mcud_total: 3.9421e-01 loss: 2.9922e+01 grad: 7.9028e+01
+26-09-04 23:04:09.634 - INFO: <step: 11460, lr:4.599e-05> cud_total: 5.7562e+01 mcud_total: 3.3227e-01 loss: 5.7894e+01 grad: 7.3464e+01
+26-09-04 23:04:18.990 - INFO: <step: 11480, lr:4.582e-05> cud_total: 3.9732e+01 mcud_total: 3.4379e-01 loss: 4.0075e+01 grad: 2.1698e+02
+26-09-04 23:04:24.986 - INFO: <step: 11500, lr:4.564e-05> cud_total: 2.9433e+01 mcud_total: 3.3174e-01 loss: 2.9765e+01 grad: 1.6179e+02
+26-09-04 23:04:30.356 - INFO: <step: 11520, lr:4.547e-05> cud_total: 1.5657e+01 mcud_total: 3.2064e-01 loss: 1.5978e+01 grad: 2.1586e+02
+26-09-04 23:04:36.374 - INFO: <step: 11540, lr:4.529e-05> cud_total: 3.7800e+01 mcud_total: 2.8954e-01 loss: 3.8090e+01 grad: 1.4492e+02
+26-09-04 23:04:47.152 - INFO: <step: 11560, lr:4.512e-05> cud_total: 2.9573e+01 mcud_total: 3.3899e-01 loss: 2.9912e+01 grad: 2.6153e+02
+26-09-04 23:04:58.595 - INFO: <step: 11580, lr:4.495e-05> cud_total: 3.4911e+01 mcud_total: 2.8194e-01 loss: 3.5193e+01 grad: 6.4715e+01
+26-09-04 23:05:12.961 - INFO: <step: 11600, lr:4.477e-05> cud_total: 2.7732e+01 mcud_total: 3.5520e-01 loss: 2.8087e+01 grad: 1.5985e+02
+26-09-04 23:05:26.470 - INFO: <step: 11620, lr:4.460e-05> cud_total: 2.7980e+01 mcud_total: 2.4575e-01 loss: 2.8226e+01 grad: 7.6247e+01
+26-09-04 23:05:33.858 - INFO: <step: 11640, lr:4.443e-05> cud_total: 4.9759e+01 mcud_total: 3.6107e-01 loss: 5.0121e+01 grad: 1.3955e+02
+26-09-04 23:05:46.245 - INFO: <step: 11660, lr:4.425e-05> cud_total: 2.8327e+01 mcud_total: 2.3387e-01 loss: 2.8561e+01 grad: 8.6403e+01
+26-09-04 23:05:55.384 - INFO: <step: 11680, lr:4.408e-05> cud_total: 2.9101e+01 mcud_total: 3.0765e-01 loss: 2.9408e+01 grad: 6.9769e+01
+26-09-04 23:06:04.089 - INFO: <step: 11700, lr:4.391e-05> cud_total: 4.5840e+01 mcud_total: 3.2193e-01 loss: 4.6161e+01 grad: 5.4966e+01
+26-09-04 23:06:14.754 - INFO: <step: 11720, lr:4.373e-05> cud_total: 4.6584e+01 mcud_total: 2.8683e-01 loss: 4.6871e+01 grad: 1.4725e+02
+26-09-04 23:06:26.129 - INFO: <step: 11740, lr:4.356e-05> cud_total: 3.3061e+01 mcud_total: 2.8823e-01 loss: 3.3350e+01 grad: 9.6318e+01
+26-09-04 23:06:37.719 - INFO: <step: 11760, lr:4.339e-05> cud_total: 3.3294e+01 mcud_total: 3.6135e-01 loss: 3.3656e+01 grad: 8.1255e+01
+26-09-04 23:06:47.540 - INFO: <step: 11780, lr:4.321e-05> cud_total: 3.0376e+01 mcud_total: 3.2577e-01 loss: 3.0702e+01 grad: 7.6632e+01
+26-09-04 23:07:00.731 - INFO: <step: 11800, lr:4.304e-05> cud_total: 8.3126e+01 mcud_total: 2.7002e-01 loss: 8.3396e+01 grad: 5.8433e+01
+26-09-04 23:07:14.407 - INFO: <step: 11820, lr:4.287e-05> cud_total: 3.2479e+01 mcud_total: 3.6317e-01 loss: 3.2843e+01 grad: 6.9316e+02
+26-09-04 23:07:27.684 - INFO: <step: 11840, lr:4.270e-05> cud_total: 4.5995e+01 mcud_total: 3.9059e-01 loss: 4.6385e+01 grad: 1.0092e+02
+26-09-04 23:07:40.776 - INFO: <step: 11860, lr:4.252e-05> cud_total: 3.3782e+01 mcud_total: 3.1793e-01 loss: 3.4100e+01 grad: 8.3174e+01
+26-09-04 23:07:51.881 - INFO: <step: 11880, lr:4.235e-05> cud_total: 2.1894e+01 mcud_total: 2.4551e-01 loss: 2.2140e+01 grad: 7.4652e+01
+26-09-04 23:08:00.979 - INFO: <step: 11900, lr:4.218e-05> cud_total: 5.2913e+01 mcud_total: 2.7090e-01 loss: 5.3184e+01 grad: 1.2665e+02
+26-09-04 23:08:11.568 - INFO: <step: 11920, lr:4.201e-05> cud_total: 5.8763e+01 mcud_total: 3.6190e-01 loss: 5.9124e+01 grad: 6.6138e+01
+26-09-04 23:08:23.393 - INFO: <step: 11940, lr:4.183e-05> cud_total: 3.1021e+01 mcud_total: 2.7712e-01 loss: 3.1298e+01 grad: 5.9942e+01
+26-09-04 23:08:37.114 - INFO: <step: 11960, lr:4.166e-05> cud_total: 2.6392e+01 mcud_total: 2.8174e-01 loss: 2.6674e+01 grad: 1.5796e+02
+26-09-04 23:08:49.155 - INFO: <step: 11980, lr:4.149e-05> cud_total: 3.0518e+01 mcud_total: 3.2365e-01 loss: 3.0842e+01 grad: 9.0485e+01
+26-09-04 23:09:02.460 - INFO: <step: 12000, lr:4.132e-05> cud_total: 2.7608e+01 mcud_total: 3.1789e-01 loss: 2.7926e+01 grad: 6.8223e+01
+26-09-04 23:09:15.262 - INFO: <step: 12020, lr:4.115e-05> cud_total: 2.6973e+01 mcud_total: 3.3905e-01 loss: 2.7312e+01 grad: 1.8813e+02
+26-09-04 23:09:24.473 - INFO: <step: 12040, lr:4.097e-05> cud_total: 2.4907e+01 mcud_total: 2.5716e-01 loss: 2.5164e+01 grad: 8.3382e+01
+26-09-04 23:09:35.328 - INFO: <step: 12060, lr:4.080e-05> cud_total: 1.7739e+01 mcud_total: 2.8901e-01 loss: 1.8028e+01 grad: 1.0102e+02
+26-09-04 23:09:48.664 - INFO: <step: 12080, lr:4.063e-05> cud_total: 5.1071e+01 mcud_total: 2.6861e-01 loss: 5.1339e+01 grad: 1.1894e+02
+26-09-04 23:10:01.166 - INFO: <step: 12100, lr:4.046e-05> cud_total: 2.6176e+01 mcud_total: 2.6407e-01 loss: 2.6440e+01 grad: 1.4683e+02
+26-09-04 23:10:12.754 - INFO: <step: 12120, lr:4.029e-05> cud_total: 4.9861e+01 mcud_total: 3.8556e-01 loss: 5.0246e+01 grad: 5.5283e+01
+26-09-04 23:10:23.540 - INFO: <step: 12140, lr:4.012e-05> cud_total: 3.1400e+01 mcud_total: 3.1935e-01 loss: 3.1720e+01 grad: 6.9994e+01
+26-09-04 23:10:35.112 - INFO: <step: 12160, lr:3.995e-05> cud_total: 2.2322e+01 mcud_total: 3.1171e-01 loss: 2.2634e+01 grad: 8.6596e+01
+26-09-04 23:10:46.355 - INFO: <step: 12180, lr:3.978e-05> cud_total: 4.0051e+01 mcud_total: 2.9548e-01 loss: 4.0346e+01 grad: 5.6632e+01
+26-09-04 23:10:59.258 - INFO: <step: 12200, lr:3.960e-05> cud_total: 4.8893e+01 mcud_total: 2.9418e-01 loss: 4.9187e+01 grad: 5.9365e+01
+26-09-04 23:11:11.984 - INFO: <step: 12220, lr:3.943e-05> cud_total: 4.3001e+01 mcud_total: 2.6848e-01 loss: 4.3269e+01 grad: 5.9736e+01
+26-09-04 23:11:24.784 - INFO: <step: 12240, lr:3.926e-05> cud_total: 5.5404e+01 mcud_total: 3.4651e-01 loss: 5.5751e+01 grad: 8.9938e+01
+26-09-04 23:11:36.291 - INFO: <step: 12260, lr:3.909e-05> cud_total: 4.7849e+01 mcud_total: 2.7835e-01 loss: 4.8128e+01 grad: 2.0767e+02
+26-09-04 23:11:46.379 - INFO: <step: 12280, lr:3.892e-05> cud_total: 4.5914e+01 mcud_total: 2.4719e-01 loss: 4.6161e+01 grad: 5.7967e+01
+26-09-04 23:11:58.707 - INFO: <step: 12300, lr:3.875e-05> cud_total: 2.6488e+01 mcud_total: 2.8536e-01 loss: 2.6774e+01 grad: 9.8403e+01
+26-09-04 23:12:06.097 - INFO: <step: 12320, lr:3.858e-05> cud_total: 3.6569e+01 mcud_total: 3.6679e-01 loss: 3.6936e+01 grad: 6.9623e+01
+26-09-04 23:12:13.248 - INFO: <step: 12340, lr:3.841e-05> cud_total: 3.7478e+01 mcud_total: 2.7330e-01 loss: 3.7751e+01 grad: 1.0646e+02
+26-09-04 23:12:19.608 - INFO: <step: 12360, lr:3.824e-05> cud_total: 3.2198e+01 mcud_total: 2.6012e-01 loss: 3.2458e+01 grad: 1.0166e+02
+26-09-04 23:12:24.989 - INFO: <step: 12380, lr:3.807e-05> cud_total: 6.4204e+01 mcud_total: 3.5074e-01 loss: 6.4555e+01 grad: 6.3669e+01
+26-09-04 23:12:29.970 - INFO: <step: 12400, lr:3.790e-05> cud_total: 2.4744e+01 mcud_total: 3.3813e-01 loss: 2.5082e+01 grad: 1.7447e+02
+26-09-04 23:12:36.680 - INFO: <step: 12420, lr:3.773e-05> cud_total: 3.7925e+01 mcud_total: 3.8209e-01 loss: 3.8307e+01 grad: 7.8036e+01
+26-09-04 23:12:49.349 - INFO: <step: 12440, lr:3.757e-05> cud_total: 4.6467e+01 mcud_total: 2.3893e-01 loss: 4.6706e+01 grad: 8.3747e+01
+26-09-04 23:13:02.747 - INFO: <step: 12460, lr:3.740e-05> cud_total: 3.8830e+01 mcud_total: 4.1946e-01 loss: 3.9250e+01 grad: 6.8197e+01
+26-09-04 23:13:15.097 - INFO: <step: 12480, lr:3.723e-05> cud_total: 3.8998e+01 mcud_total: 3.6641e-01 loss: 3.9364e+01 grad: 1.4236e+02
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/torchvision/transforms/functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/torchvision/transforms/functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+26-09-04 23:13:26.193 - INFO: <step: 12500, lr:3.706e-05> cud_total: 4.9745e+01 mcud_total: 4.5083e-01 loss: 5.0196e+01 grad: 9.6961e+01
+26-09-04 23:13:31.953 - INFO: <step: 12520, lr:3.689e-05> cud_total: 3.3604e+01 mcud_total: 3.5880e-01 loss: 3.3963e+01 grad: 2.6184e+02
+26-09-04 23:13:36.852 - INFO: <step: 12540, lr:3.672e-05> cud_total: 3.5055e+01 mcud_total: 3.0004e-01 loss: 3.5355e+01 grad: 1.0369e+02
+26-09-04 23:13:41.492 - INFO: <step: 12560, lr:3.655e-05> cud_total: 1.8126e+01 mcud_total: 2.9890e-01 loss: 1.8425e+01 grad: 1.9101e+02
+26-09-04 23:13:45.845 - INFO: <step: 12580, lr:3.639e-05> cud_total: 1.6698e+01 mcud_total: 2.6710e-01 loss: 1.6965e+01 grad: 2.0938e+02
+26-09-04 23:13:50.202 - INFO: <step: 12600, lr:3.622e-05> cud_total: 3.0937e+01 mcud_total: 3.4118e-01 loss: 3.1279e+01 grad: 1.5151e+02
+26-09-04 23:13:54.580 - INFO: <step: 12620, lr:3.605e-05> cud_total: 1.5504e+01 mcud_total: 3.0458e-01 loss: 1.5809e+01 grad: 2.3654e+02
+26-09-04 23:13:59.752 - INFO: <step: 12640, lr:3.588e-05> cud_total: 4.9383e+01 mcud_total: 3.8212e-01 loss: 4.9765e+01 grad: 1.0185e+02
+26-09-04 23:14:05.095 - INFO: <step: 12660, lr:3.572e-05> cud_total: 2.1148e+01 mcud_total: 3.0555e-01 loss: 2.1453e+01 grad: 3.0529e+02
+26-09-04 23:14:10.327 - INFO: <step: 12680, lr:3.555e-05> cud_total: 3.0737e+01 mcud_total: 3.6034e-01 loss: 3.1098e+01 grad: 2.0007e+02
+26-09-04 23:14:16.198 - INFO: <step: 12700, lr:3.538e-05> cud_total: 3.8811e+01 mcud_total: 2.4301e-01 loss: 3.9054e+01 grad: 1.0748e+02
+26-09-04 23:14:21.570 - INFO: <step: 12720, lr:3.521e-05> cud_total: 5.2089e+01 mcud_total: 2.7673e-01 loss: 5.2366e+01 grad: 1.6215e+02
+26-09-04 23:14:26.116 - INFO: <step: 12740, lr:3.505e-05> cud_total: 3.8328e+01 mcud_total: 3.3111e-01 loss: 3.8660e+01 grad: 1.7500e+02
+26-09-04 23:14:30.326 - INFO: <step: 12760, lr:3.488e-05> cud_total: 3.1269e+01 mcud_total: 2.6008e-01 loss: 3.1529e+01 grad: 7.9710e+01
+26-09-04 23:14:34.518 - INFO: <step: 12780, lr:3.472e-05> cud_total: 3.1782e+01 mcud_total: 2.9916e-01 loss: 3.2081e+01 grad: 1.3655e+02
+26-09-04 23:14:38.699 - INFO: <step: 12800, lr:3.455e-05> cud_total: 4.0710e+01 mcud_total: 3.2265e-01 loss: 4.1033e+01 grad: 1.6908e+02
+26-09-04 23:14:42.907 - INFO: <step: 12820, lr:3.438e-05> cud_total: 2.8387e+01 mcud_total: 3.5733e-01 loss: 2.8745e+01 grad: 1.1653e+02
+26-09-04 23:14:47.118 - INFO: <step: 12840, lr:3.422e-05> cud_total: 3.2853e+01 mcud_total: 3.6695e-01 loss: 3.3220e+01 grad: 1.6957e+02
+26-09-04 23:14:51.327 - INFO: <step: 12860, lr:3.405e-05> cud_total: 3.6846e+01 mcud_total: 2.9413e-01 loss: 3.7140e+01 grad: 2.8579e+02
+26-09-04 23:14:55.519 - INFO: <step: 12880, lr:3.389e-05> cud_total: 1.7271e+01 mcud_total: 3.8041e-01 loss: 1.7652e+01 grad: 1.0559e+02
+26-09-04 23:14:59.878 - INFO: <step: 12900, lr:3.372e-05> cud_total: 6.0200e+01 mcud_total: 3.9370e-01 loss: 6.0593e+01 grad: 7.6930e+01
+26-09-04 23:15:04.072 - INFO: <step: 12920, lr:3.356e-05> cud_total: 3.8001e+01 mcud_total: 3.2109e-01 loss: 3.8322e+01 grad: 7.9888e+01
+26-09-04 23:15:08.424 - INFO: <step: 12940, lr:3.339e-05> cud_total: 3.2836e+01 mcud_total: 2.7917e-01 loss: 3.3115e+01 grad: 1.5984e+02
+26-09-04 23:15:12.746 - INFO: <step: 12960, lr:3.323e-05> cud_total: 3.1706e+01 mcud_total: 2.9598e-01 loss: 3.2002e+01 grad: 1.6280e+02
+26-09-04 23:15:17.077 - INFO: <step: 12980, lr:3.306e-05> cud_total: 4.4014e+01 mcud_total: 3.1683e-01 loss: 4.4331e+01 grad: 5.9600e+01
+26-09-04 23:15:21.456 - INFO: <step: 13000, lr:3.290e-05> cud_total: 2.5836e+01 mcud_total: 2.7842e-01 loss: 2.6114e+01 grad: 9.6494e+01
+26-09-04 23:15:26.142 - INFO: <step: 13020, lr:3.274e-05> cud_total: 3.5665e+01 mcud_total: 3.7978e-01 loss: 3.6045e+01 grad: 8.4610e+01
+26-09-04 23:15:30.597 - INFO: <step: 13040, lr:3.257e-05> cud_total: 2.1217e+01 mcud_total: 3.1362e-01 loss: 2.1530e+01 grad: 2.1432e+02
+26-09-04 23:15:35.988 - INFO: <step: 13060, lr:3.241e-05> cud_total: 2.2374e+01 mcud_total: 2.4251e-01 loss: 2.2617e+01 grad: 9.1913e+01
+26-09-04 23:15:41.459 - INFO: <step: 13080, lr:3.224e-05> cud_total: 5.6634e+01 mcud_total: 3.2873e-01 loss: 5.6963e+01 grad: 7.2942e+01
+26-09-04 23:15:47.877 - INFO: <step: 13100, lr:3.208e-05> cud_total: 2.6638e+01 mcud_total: 3.0701e-01 loss: 2.6945e+01 grad: 1.1683e+02
+26-09-04 23:15:53.568 - INFO: <step: 13120, lr:3.192e-05> cud_total: 2.5896e+01 mcud_total: 2.8250e-01 loss: 2.6178e+01 grad: 1.8320e+02
+26-09-04 23:15:59.978 - INFO: <step: 13140, lr:3.176e-05> cud_total: 3.7075e+01 mcud_total: 2.5342e-01 loss: 3.7329e+01 grad: 7.2416e+01
+26-09-04 23:16:05.315 - INFO: <step: 13160, lr:3.159e-05> cud_total: 1.4017e+01 mcud_total: 4.7557e-01 loss: 1.4493e+01 grad: 2.0464e+02
+26-09-04 23:16:10.882 - INFO: <step: 13180, lr:3.143e-05> cud_total: 3.8916e+01 mcud_total: 2.7872e-01 loss: 3.9194e+01 grad: 8.8394e+01
+26-09-04 23:16:17.628 - INFO: <step: 13200, lr:3.127e-05> cud_total: 4.7394e+01 mcud_total: 3.0192e-01 loss: 4.7696e+01 grad: 1.2304e+02
+26-09-04 23:16:24.584 - INFO: <step: 13220, lr:3.111e-05> cud_total: 2.7683e+01 mcud_total: 3.1926e-01 loss: 2.8002e+01 grad: 2.8265e+02
+26-09-04 23:16:30.758 - INFO: <step: 13240, lr:3.095e-05> cud_total: 3.1157e+01 mcud_total: 3.4906e-01 loss: 3.1506e+01 grad: 2.6433e+02
+26-09-04 23:16:36.073 - INFO: <step: 13260, lr:3.079e-05> cud_total: 2.9880e+01 mcud_total: 2.6676e-01 loss: 3.0147e+01 grad: 2.0145e+02
+26-09-04 23:16:41.056 - INFO: <step: 13280, lr:3.062e-05> cud_total: 1.8700e+01 mcud_total: 3.2290e-01 loss: 1.9023e+01 grad: 2.1185e+02
+26-09-04 23:16:46.101 - INFO: <step: 13300, lr:3.046e-05> cud_total: 3.1777e+01 mcud_total: 2.9397e-01 loss: 3.2071e+01 grad: 7.9408e+01
+26-09-04 23:16:50.623 - INFO: <step: 13320, lr:3.030e-05> cud_total: 2.2287e+01 mcud_total: 3.1052e-01 loss: 2.2598e+01 grad: 3.2192e+02
+26-09-04 23:16:55.584 - INFO: <step: 13340, lr:3.014e-05> cud_total: 4.2051e+01 mcud_total: 2.2761e-01 loss: 4.2279e+01 grad: 5.5281e+01
+26-09-04 23:17:00.365 - INFO: <step: 13360, lr:2.998e-05> cud_total: 3.1222e+01 mcud_total: 4.2003e-01 loss: 3.1642e+01 grad: 1.1813e+02
+26-09-04 23:17:05.254 - INFO: <step: 13380, lr:2.982e-05> cud_total: 3.3230e+01 mcud_total: 3.3763e-01 loss: 3.3567e+01 grad: 6.0782e+01
+26-09-04 23:17:09.665 - INFO: <step: 13400, lr:2.966e-05> cud_total: 4.7693e+01 mcud_total: 2.2860e-01 loss: 4.7921e+01 grad: 1.0571e+02
+26-09-04 23:17:14.045 - INFO: <step: 13420, lr:2.950e-05> cud_total: 3.2469e+01 mcud_total: 3.8366e-01 loss: 3.2853e+01 grad: 2.8288e+02
+26-09-04 23:17:18.418 - INFO: <step: 13440, lr:2.934e-05> cud_total: 4.1390e+01 mcud_total: 3.1109e-01 loss: 4.1701e+01 grad: 1.2320e+02
+26-09-04 23:17:22.777 - INFO: <step: 13460, lr:2.919e-05> cud_total: 2.9452e+01 mcud_total: 3.0286e-01 loss: 2.9755e+01 grad: 1.7372e+02
+26-09-04 23:17:27.416 - INFO: <step: 13480, lr:2.903e-05> cud_total: 2.1164e+01 mcud_total: 2.9787e-01 loss: 2.1462e+01 grad: 1.3767e+02
+26-09-04 23:17:32.023 - INFO: <step: 13500, lr:2.887e-05> cud_total: 2.4251e+01 mcud_total: 3.0695e-01 loss: 2.4558e+01 grad: 2.1010e+02
+26-09-04 23:17:36.503 - INFO: <step: 13520, lr:2.871e-05> cud_total: 1.5060e+01 mcud_total: 3.6238e-01 loss: 1.5422e+01 grad: 1.6403e+02
+26-09-04 23:17:40.944 - INFO: <step: 13540, lr:2.855e-05> cud_total: 2.7831e+01 mcud_total: 2.3886e-01 loss: 2.8070e+01 grad: 1.0872e+02
+26-09-04 23:17:45.742 - INFO: <step: 13560, lr:2.840e-05> cud_total: 3.1178e+01 mcud_total: 4.3458e-01 loss: 3.1612e+01 grad: 1.4818e+02
+26-09-04 23:17:50.193 - INFO: <step: 13580, lr:2.824e-05> cud_total: 4.8184e+01 mcud_total: 2.9343e-01 loss: 4.8477e+01 grad: 1.0623e+02
+26-09-04 23:17:54.647 - INFO: <step: 13600, lr:2.808e-05> cud_total: 4.5843e+01 mcud_total: 2.7590e-01 loss: 4.6119e+01 grad: 4.8779e+01
+26-09-04 23:17:59.176 - INFO: <step: 13620, lr:2.792e-05> cud_total: 4.1114e+01 mcud_total: 3.4254e-01 loss: 4.1457e+01 grad: 1.0080e+02
+26-09-04 23:18:04.100 - INFO: <step: 13640, lr:2.777e-05> cud_total: 4.0387e+01 mcud_total: 3.7434e-01 loss: 4.0761e+01 grad: 1.0714e+02
+26-09-04 23:18:09.586 - INFO: <step: 13660, lr:2.761e-05> cud_total: 2.1664e+01 mcud_total: 2.7145e-01 loss: 2.1935e+01 grad: 7.5022e+01
+26-09-04 23:18:15.040 - INFO: <step: 13680, lr:2.746e-05> cud_total: 3.1330e+01 mcud_total: 2.9916e-01 loss: 3.1629e+01 grad: 9.8485e+01
+26-09-04 23:18:21.455 - INFO: <step: 13700, lr:2.730e-05> cud_total: 4.2228e+01 mcud_total: 3.1659e-01 loss: 4.2545e+01 grad: 7.0831e+01
+26-09-04 23:18:26.051 - INFO: <step: 13720, lr:2.715e-05> cud_total: 2.1926e+01 mcud_total: 2.7283e-01 loss: 2.2199e+01 grad: 1.2327e+02
+26-09-04 23:18:30.358 - INFO: <step: 13740, lr:2.699e-05> cud_total: 2.7494e+01 mcud_total: 3.5543e-01 loss: 2.7850e+01 grad: 6.7162e+02
+26-09-04 23:18:34.590 - INFO: <step: 13760, lr:2.684e-05> cud_total: 3.5019e+01 mcud_total: 3.5350e-01 loss: 3.5372e+01 grad: 1.5137e+02
+26-09-04 23:18:38.804 - INFO: <step: 13780, lr:2.668e-05> cud_total: 4.5425e+01 mcud_total: 2.6348e-01 loss: 4.5688e+01 grad: 1.5500e+02
+26-09-04 23:18:43.719 - INFO: <step: 13800, lr:2.653e-05> cud_total: 2.4563e+01 mcud_total: 2.6715e-01 loss: 2.4830e+01 grad: 1.1894e+02
+26-09-04 23:18:49.943 - INFO: <step: 13820, lr:2.637e-05> cud_total: 2.9613e+01 mcud_total: 3.8427e-01 loss: 2.9998e+01 grad: 1.1306e+02
+26-09-04 23:18:55.871 - INFO: <step: 13840, lr:2.622e-05> cud_total: 2.5692e+01 mcud_total: 3.2618e-01 loss: 2.6018e+01 grad: 8.4018e+01
+26-09-04 23:19:01.656 - INFO: <step: 13860, lr:2.607e-05> cud_total: 3.2117e+01 mcud_total: 2.6711e-01 loss: 3.2384e+01 grad: 1.3178e+02
+26-09-04 23:19:07.724 - INFO: <step: 13880, lr:2.591e-05> cud_total: 2.5772e+01 mcud_total: 2.5791e-01 loss: 2.6030e+01 grad: 1.0542e+02
+26-09-04 23:19:15.893 - INFO: <step: 13900, lr:2.576e-05> cud_total: 3.7058e+01 mcud_total: 2.6258e-01 loss: 3.7321e+01 grad: 1.2685e+02
+26-09-04 23:19:24.009 - INFO: <step: 13920, lr:2.561e-05> cud_total: 3.1254e+01 mcud_total: 2.1979e-01 loss: 3.1474e+01 grad: 7.1105e+01
+26-09-04 23:19:30.294 - INFO: <step: 13940, lr:2.545e-05> cud_total: 2.4176e+01 mcud_total: 2.7068e-01 loss: 2.4447e+01 grad: 1.7671e+02
+26-09-04 23:19:35.778 - INFO: <step: 13960, lr:2.530e-05> cud_total: 2.9808e+01 mcud_total: 2.3455e-01 loss: 3.0042e+01 grad: 2.2400e+02
+26-09-04 23:19:42.200 - INFO: <step: 13980, lr:2.515e-05> cud_total: 2.9079e+01 mcud_total: 2.9725e-01 loss: 2.9377e+01 grad: 8.1068e+01
+26-09-04 23:19:49.572 - INFO: <step: 14000, lr:2.500e-05> cud_total: 4.2067e+01 mcud_total: 2.5747e-01 loss: 4.2325e+01 grad: 8.0584e+01
+26-09-04 23:20:01.164 - INFO: <step: 14020, lr:2.485e-05> cud_total: 3.1438e+01 mcud_total: 2.5514e-01 loss: 3.1694e+01 grad: 1.0797e+02
+26-09-04 23:20:09.385 - INFO: <step: 14040, lr:2.470e-05> cud_total: 4.0688e+01 mcud_total: 2.7415e-01 loss: 4.0962e+01 grad: 9.2333e+01
+26-09-04 23:20:15.566 - INFO: <step: 14060, lr:2.455e-05> cud_total: 3.6149e+01 mcud_total: 3.8076e-01 loss: 3.6530e+01 grad: 6.5197e+01
+26-09-04 23:20:21.803 - INFO: <step: 14080, lr:2.440e-05> cud_total: 4.6565e+01 mcud_total: 3.1154e-01 loss: 4.6876e+01 grad: 1.0009e+02
+26-09-04 23:20:28.270 - INFO: <step: 14100, lr:2.425e-05> cud_total: 3.4412e+01 mcud_total: 3.1270e-01 loss: 3.4724e+01 grad: 6.6362e+01
+26-09-04 23:20:33.560 - INFO: <step: 14120, lr:2.410e-05> cud_total: 2.4695e+01 mcud_total: 2.6910e-01 loss: 2.4964e+01 grad: 1.0392e+02
+26-09-04 23:20:40.043 - INFO: <step: 14140, lr:2.395e-05> cud_total: 4.8020e+01 mcud_total: 3.1818e-01 loss: 4.8338e+01 grad: 5.2909e+01
+26-09-04 23:20:45.828 - INFO: <step: 14160, lr:2.380e-05> cud_total: 3.9339e+01 mcud_total: 3.0556e-01 loss: 3.9644e+01 grad: 8.1273e+01
+26-09-04 23:20:52.912 - INFO: <step: 14180, lr:2.365e-05> cud_total: 4.0972e+01 mcud_total: 2.6221e-01 loss: 4.1234e+01 grad: 4.7905e+01
+26-09-04 23:20:59.188 - INFO: <step: 14200, lr:2.350e-05> cud_total: 4.5525e+01 mcud_total: 3.3329e-01 loss: 4.5858e+01 grad: 5.5665e+01
+26-09-04 23:21:04.697 - INFO: <step: 14220, lr:2.336e-05> cud_total: 4.3197e+01 mcud_total: 2.6336e-01 loss: 4.3460e+01 grad: 1.3762e+02
+26-09-04 23:21:10.495 - INFO: <step: 14240, lr:2.321e-05> cud_total: 3.8005e+01 mcud_total: 2.8996e-01 loss: 3.8295e+01 grad: 5.9070e+01
+26-09-04 23:21:18.325 - INFO: <step: 14260, lr:2.306e-05> cud_total: 3.0606e+01 mcud_total: 2.8464e-01 loss: 3.0891e+01 grad: 3.0418e+02
+26-09-04 23:21:25.578 - INFO: <step: 14280, lr:2.291e-05> cud_total: 2.9065e+01 mcud_total: 3.3974e-01 loss: 2.9405e+01 grad: 9.8035e+01
+26-09-04 23:21:31.869 - INFO: <step: 14300, lr:2.277e-05> cud_total: 2.0683e+01 mcud_total: 2.3698e-01 loss: 2.0920e+01 grad: 9.2904e+01
+26-09-04 23:21:38.128 - INFO: <step: 14320, lr:2.262e-05> cud_total: 1.7137e+01 mcud_total: 3.4047e-01 loss: 1.7478e+01 grad: 7.1525e+01
+26-09-04 23:21:45.291 - INFO: <step: 14340, lr:2.248e-05> cud_total: 3.0203e+01 mcud_total: 2.9870e-01 loss: 3.0502e+01 grad: 6.6957e+01
+26-09-04 23:21:53.153 - INFO: <step: 14360, lr:2.233e-05> cud_total: 4.7445e+01 mcud_total: 3.8757e-01 loss: 4.7832e+01 grad: 7.5728e+01
+26-09-04 23:21:58.630 - INFO: <step: 14380, lr:2.219e-05> cud_total: 2.1394e+01 mcud_total: 3.0979e-01 loss: 2.1703e+01 grad: 1.1167e+02
+26-09-04 23:22:04.315 - INFO: <step: 14400, lr:2.204e-05> cud_total: 4.3736e+01 mcud_total: 3.8845e-01 loss: 4.4125e+01 grad: 3.2944e+01
+26-09-04 23:22:10.781 - INFO: <step: 14420, lr:2.190e-05> cud_total: 2.2171e+01 mcud_total: 3.3798e-01 loss: 2.2509e+01 grad: 1.6504e+02
+26-09-04 23:22:16.838 - INFO: <step: 14440, lr:2.175e-05> cud_total: 3.9703e+01 mcud_total: 2.3880e-01 loss: 3.9941e+01 grad: 9.2530e+01
+26-09-04 23:22:24.735 - INFO: <step: 14460, lr:2.161e-05> cud_total: 4.7535e+01 mcud_total: 2.6480e-01 loss: 4.7799e+01 grad: 1.1874e+02
+26-09-04 23:22:31.157 - INFO: <step: 14480, lr:2.146e-05> cud_total: 3.3148e+01 mcud_total: 2.7668e-01 loss: 3.3424e+01 grad: 5.8575e+01
+26-09-04 23:22:37.128 - INFO: <step: 14500, lr:2.132e-05> cud_total: 2.6829e+01 mcud_total: 2.9184e-01 loss: 2.7121e+01 grad: 1.1927e+02
+26-09-04 23:22:42.231 - INFO: <step: 14520, lr:2.118e-05> cud_total: 6.2757e+01 mcud_total: 2.9394e-01 loss: 6.3051e+01 grad: 6.9485e+01
+26-09-04 23:22:47.919 - INFO: <step: 14540, lr:2.104e-05> cud_total: 5.0735e+01 mcud_total: 3.2705e-01 loss: 5.1062e+01 grad: 5.8673e+01
+26-09-04 23:22:56.140 - INFO: <step: 14560, lr:2.089e-05> cud_total: 2.7891e+01 mcud_total: 2.4726e-01 loss: 2.8138e+01 grad: 2.1033e+02
+26-09-04 23:23:00.824 - INFO: <step: 14580, lr:2.075e-05> cud_total: 3.2778e+01 mcud_total: 2.9659e-01 loss: 3.3075e+01 grad: 1.9183e+02
+26-09-04 23:23:08.490 - INFO: <step: 14600, lr:2.061e-05> cud_total: 2.4874e+01 mcud_total: 2.2983e-01 loss: 2.5104e+01 grad: 1.2222e+02
+26-09-04 23:23:13.280 - INFO: <step: 14620, lr:2.047e-05> cud_total: 2.5376e+01 mcud_total: 3.3821e-01 loss: 2.5714e+01 grad: 4.2035e+01
+26-09-04 23:23:18.964 - INFO: <step: 14640, lr:2.033e-05> cud_total: 4.4374e+01 mcud_total: 3.6123e-01 loss: 4.4735e+01 grad: 5.0159e+01
+26-09-04 23:23:23.825 - INFO: <step: 14660, lr:2.019e-05> cud_total: 3.5473e+01 mcud_total: 3.8406e-01 loss: 3.5857e+01 grad: 5.8428e+01
+26-09-04 23:23:29.382 - INFO: <step: 14680, lr:2.005e-05> cud_total: 3.7510e+01 mcud_total: 3.1649e-01 loss: 3.7826e+01 grad: 8.8892e+01
+26-09-04 23:23:36.964 - INFO: <step: 14700, lr:1.991e-05> cud_total: 4.4317e+01 mcud_total: 3.1711e-01 loss: 4.4634e+01 grad: 1.3513e+02
+26-09-04 23:23:48.295 - INFO: <step: 14720, lr:1.977e-05> cud_total: 3.0541e+01 mcud_total: 3.5433e-01 loss: 3.0896e+01 grad: 4.6737e+01
+26-09-04 23:23:53.434 - INFO: <step: 14740, lr:1.963e-05> cud_total: 3.8638e+01 mcud_total: 2.5753e-01 loss: 3.8895e+01 grad: 8.5498e+01
+26-09-04 23:24:00.520 - INFO: <step: 14760, lr:1.949e-05> cud_total: 3.4207e+01 mcud_total: 3.4550e-01 loss: 3.4552e+01 grad: 1.1040e+02
+26-09-04 23:24:05.009 - INFO: <step: 14780, lr:1.935e-05> cud_total: 5.1963e+01 mcud_total: 2.6455e-01 loss: 5.2228e+01 grad: 1.5443e+02
+26-09-04 23:24:09.409 - INFO: <step: 14800, lr:1.922e-05> cud_total: 4.2810e+01 mcud_total: 2.7903e-01 loss: 4.3089e+01 grad: 5.5143e+01
+26-09-04 23:24:13.995 - INFO: <step: 14820, lr:1.908e-05> cud_total: 4.2172e+01 mcud_total: 2.8824e-01 loss: 4.2460e+01 grad: 8.3762e+01
+26-09-04 23:24:18.547 - INFO: <step: 14840, lr:1.894e-05> cud_total: 3.1251e+01 mcud_total: 2.4782e-01 loss: 3.1499e+01 grad: 9.2132e+01
+26-09-04 23:24:22.924 - INFO: <step: 14860, lr:1.881e-05> cud_total: 3.6811e+01 mcud_total: 2.9788e-01 loss: 3.7109e+01 grad: 7.2745e+01
+26-09-04 23:24:27.295 - INFO: <step: 14880, lr:1.867e-05> cud_total: 4.0337e+01 mcud_total: 2.9774e-01 loss: 4.0635e+01 grad: 4.3645e+01
+26-09-04 23:24:31.523 - INFO: <step: 14900, lr:1.853e-05> cud_total: 2.7839e+01 mcud_total: 3.2110e-01 loss: 2.8160e+01 grad: 8.7219e+01
+26-09-04 23:24:36.239 - INFO: <step: 14920, lr:1.840e-05> cud_total: 4.3263e+01 mcud_total: 2.4598e-01 loss: 4.3509e+01 grad: 1.3359e+02
+26-09-04 23:24:41.066 - INFO: <step: 14940, lr:1.826e-05> cud_total: 4.0159e+01 mcud_total: 2.7378e-01 loss: 4.0432e+01 grad: 7.1256e+01
+26-09-04 23:24:46.626 - INFO: <step: 14960, lr:1.813e-05> cud_total: 2.7108e+01 mcud_total: 2.7143e-01 loss: 2.7379e+01 grad: 9.5406e+01
+26-09-04 23:24:52.599 - INFO: <step: 14980, lr:1.799e-05> cud_total: 4.5674e+01 mcud_total: 2.6114e-01 loss: 4.5935e+01 grad: 4.8616e+01
+26-09-04 23:24:59.187 - INFO: <step: 15000, lr:1.786e-05> cud_total: 1.7657e+01 mcud_total: 4.0370e-01 loss: 1.8060e+01 grad: 1.1683e+02
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/torchvision/transforms/functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/torchvision/transforms/functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+26-09-04 23:25:06.702 - INFO: [step 15000] val loss: 22.3568
+26-09-04 23:26:42.881 - INFO: Saved checkpoint: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/experiments/COCO_MSRS_MCUD_demo/models/checkpoint-Defusion-plusplus-20260904_232459-step15000-loss18.0604-valloss22.3568.pth
+26-09-04 23:26:51.171 - INFO: <step: 15020, lr:1.773e-05> cud_total: 3.3600e+01 mcud_total: 3.0423e-01 loss: 3.3904e+01 grad: 2.1887e+02
+26-09-04 23:26:59.120 - INFO: <step: 15040, lr:1.759e-05> cud_total: 5.5305e+01 mcud_total: 2.9740e-01 loss: 5.5603e+01 grad: 1.1493e+02
+26-09-04 23:27:07.506 - INFO: <step: 15060, lr:1.746e-05> cud_total: 4.6923e+01 mcud_total: 2.5743e-01 loss: 4.7181e+01 grad: 6.8293e+01
+26-09-04 23:27:14.131 - INFO: <step: 15080, lr:1.733e-05> cud_total: 6.6765e+01 mcud_total: 2.6832e-01 loss: 6.7033e+01 grad: 1.3898e+02
+26-09-04 23:27:21.655 - INFO: <step: 15100, lr:1.720e-05> cud_total: 5.9468e+01 mcud_total: 3.3219e-01 loss: 5.9800e+01 grad: 5.4360e+01
+26-09-04 23:27:29.322 - INFO: <step: 15120, lr:1.707e-05> cud_total: 1.3827e+01 mcud_total: 3.1865e-01 loss: 1.4145e+01 grad: 7.3876e+01
+26-09-04 23:27:36.649 - INFO: <step: 15140, lr:1.693e-05> cud_total: 4.6641e+01 mcud_total: 2.8900e-01 loss: 4.6930e+01 grad: 1.6534e+02
+26-09-04 23:27:44.637 - INFO: <step: 15160, lr:1.680e-05> cud_total: 2.5184e+01 mcud_total: 3.5285e-01 loss: 2.5537e+01 grad: 6.1999e+01
+[step 15000] val loss: 22.3568
+26-09-04 23:27:52.913 - INFO: <step: 15180, lr:1.667e-05> cud_total: 2.2088e+01 mcud_total: 3.4210e-01 loss: 2.2430e+01 grad: 6.3714e+01
+26-09-04 23:28:00.296 - INFO: <step: 15200, lr:1.654e-05> cud_total: 5.3140e+01 mcud_total: 2.6904e-01 loss: 5.3409e+01 grad: 3.8832e+01
+26-09-04 23:28:07.794 - INFO: <step: 15220, lr:1.641e-05> cud_total: 5.6761e+01 mcud_total: 3.9892e-01 loss: 5.7159e+01 grad: 6.4143e+01
+26-09-04 23:28:15.371 - INFO: <step: 15240, lr:1.628e-05> cud_total: 4.7450e+01 mcud_total: 3.0135e-01 loss: 4.7751e+01 grad: 6.8227e+01
+26-09-04 23:28:22.561 - INFO: <step: 15260, lr:1.616e-05> cud_total: 5.7448e+01 mcud_total: 2.4518e-01 loss: 5.7693e+01 grad: 1.3397e+02
+26-09-04 23:28:28.737 - INFO: <step: 15280, lr:1.603e-05> cud_total: 1.3182e+01 mcud_total: 2.8971e-01 loss: 1.3472e+01 grad: 6.4959e+01
+26-09-04 23:28:33.821 - INFO: <step: 15300, lr:1.590e-05> cud_total: 2.0770e+01 mcud_total: 3.3726e-01 loss: 2.1107e+01 grad: 1.2525e+02
+26-09-04 23:28:39.790 - INFO: <step: 15320, lr:1.577e-05> cud_total: 3.8540e+01 mcud_total: 3.1782e-01 loss: 3.8858e+01 grad: 8.2540e+01
+26-09-04 23:28:46.039 - INFO: <step: 15340, lr:1.565e-05> cud_total: 3.9077e+01 mcud_total: 2.7326e-01 loss: 3.9350e+01 grad: 6.9667e+01
+26-09-04 23:28:51.408 - INFO: <step: 15360, lr:1.552e-05> cud_total: 2.9232e+01 mcud_total: 2.8142e-01 loss: 2.9513e+01 grad: 2.6780e+02
+26-09-04 23:28:55.852 - INFO: <step: 15380, lr:1.539e-05> cud_total: 2.6670e+01 mcud_total: 2.8348e-01 loss: 2.6953e+01 grad: 8.5405e+01
+26-09-04 23:29:00.627 - INFO: <step: 15400, lr:1.527e-05> cud_total: 3.3249e+01 mcud_total: 3.3850e-01 loss: 3.3588e+01 grad: 1.0536e+02
+26-09-04 23:29:06.423 - INFO: <step: 15420, lr:1.514e-05> cud_total: 2.3337e+01 mcud_total: 2.5165e-01 loss: 2.3589e+01 grad: 3.6473e+01
+26-09-04 23:29:13.804 - INFO: <step: 15440, lr:1.502e-05> cud_total: 2.4306e+01 mcud_total: 3.2361e-01 loss: 2.4629e+01 grad: 1.4946e+02
+26-09-04 23:29:21.706 - INFO: <step: 15460, lr:1.489e-05> cud_total: 6.1381e+01 mcud_total: 3.9396e-01 loss: 6.1775e+01 grad: 4.4207e+01
+26-09-04 23:29:30.361 - INFO: <step: 15480, lr:1.477e-05> cud_total: 3.5177e+01 mcud_total: 4.3355e-01 loss: 3.5611e+01 grad: 1.1817e+02
+26-09-04 23:29:37.579 - INFO: <step: 15500, lr:1.464e-05> cud_total: 3.3858e+01 mcud_total: 2.4210e-01 loss: 3.4100e+01 grad: 6.8069e+01
+26-09-04 23:29:44.289 - INFO: <step: 15520, lr:1.452e-05> cud_total: 1.9120e+01 mcud_total: 3.3253e-01 loss: 1.9452e+01 grad: 1.4661e+02
+26-09-04 23:29:51.750 - INFO: <step: 15540, lr:1.440e-05> cud_total: 3.9880e+01 mcud_total: 3.2600e-01 loss: 4.0206e+01 grad: 1.4150e+02
+26-09-04 23:29:58.191 - INFO: <step: 15560, lr:1.428e-05> cud_total: 3.7913e+01 mcud_total: 2.9677e-01 loss: 3.8210e+01 grad: 4.9522e+01
+26-09-04 23:30:03.068 - INFO: <step: 15580, lr:1.415e-05> cud_total: 3.3570e+01 mcud_total: 2.9605e-01 loss: 3.3866e+01 grad: 5.6241e+01
+26-09-04 23:30:07.972 - INFO: <step: 15600, lr:1.403e-05> cud_total: 4.4838e+01 mcud_total: 2.4473e-01 loss: 4.5082e+01 grad: 1.9726e+02
+26-09-04 23:30:12.694 - INFO: <step: 15620, lr:1.391e-05> cud_total: 2.0683e+01 mcud_total: 2.9435e-01 loss: 2.0978e+01 grad: 8.1287e+01
+26-09-04 23:30:17.023 - INFO: <step: 15640, lr:1.379e-05> cud_total: 3.8116e+01 mcud_total: 2.9748e-01 loss: 3.8414e+01 grad: 9.3474e+01
+26-09-04 23:30:21.334 - INFO: <step: 15660, lr:1.367e-05> cud_total: 2.2822e+01 mcud_total: 2.1618e-01 loss: 2.3038e+01 grad: 7.9243e+01
+26-09-04 23:30:25.685 - INFO: <step: 15680, lr:1.355e-05> cud_total: 5.9719e+01 mcud_total: 3.1982e-01 loss: 6.0039e+01 grad: 6.5736e+01
+26-09-04 23:30:30.135 - INFO: <step: 15700, lr:1.343e-05> cud_total: 4.2010e+01 mcud_total: 2.6711e-01 loss: 4.2277e+01 grad: 1.5409e+02
+26-09-04 23:30:35.015 - INFO: <step: 15720, lr:1.331e-05> cud_total: 6.6522e+01 mcud_total: 2.4707e-01 loss: 6.6769e+01 grad: 4.6606e+01
+26-09-04 23:30:39.338 - INFO: <step: 15740, lr:1.320e-05> cud_total: 2.0513e+01 mcud_total: 3.7290e-01 loss: 2.0886e+01 grad: 8.5114e+01
+26-09-04 23:30:44.702 - INFO: <step: 15760, lr:1.308e-05> cud_total: 2.6866e+01 mcud_total: 2.6886e-01 loss: 2.7135e+01 grad: 1.3057e+02
+26-09-04 23:30:50.797 - INFO: <step: 15780, lr:1.296e-05> cud_total: 2.1359e+01 mcud_total: 3.1716e-01 loss: 2.1676e+01 grad: 5.0347e+01
+26-09-04 23:30:57.500 - INFO: <step: 15800, lr:1.284e-05> cud_total: 2.7664e+01 mcud_total: 3.5138e-01 loss: 2.8016e+01 grad: 8.5935e+01
+26-09-04 23:31:04.422 - INFO: <step: 15820, lr:1.273e-05> cud_total: 2.1706e+01 mcud_total: 3.2517e-01 loss: 2.2031e+01 grad: 7.1555e+01
+26-09-04 23:31:11.108 - INFO: <step: 15840, lr:1.261e-05> cud_total: 4.1232e+01 mcud_total: 3.0055e-01 loss: 4.1532e+01 grad: 4.0261e+01
+26-09-04 23:31:20.935 - INFO: <step: 15860, lr:1.249e-05> cud_total: 2.9268e+01 mcud_total: 2.6411e-01 loss: 2.9532e+01 grad: 5.5044e+01
+26-09-04 23:31:28.197 - INFO: <step: 15880, lr:1.238e-05> cud_total: 4.4949e+01 mcud_total: 3.6648e-01 loss: 4.5316e+01 grad: 1.0455e+02
+26-09-04 23:31:35.325 - INFO: <step: 15900, lr:1.226e-05> cud_total: 2.9078e+01 mcud_total: 2.6268e-01 loss: 2.9341e+01 grad: 8.5823e+01
+26-09-04 23:31:41.300 - INFO: <step: 15920, lr:1.215e-05> cud_total: 2.8214e+01 mcud_total: 2.2801e-01 loss: 2.8442e+01 grad: 1.1487e+02
+26-09-04 23:31:46.337 - INFO: <step: 15940, lr:1.204e-05> cud_total: 2.7130e+01 mcud_total: 2.4318e-01 loss: 2.7373e+01 grad: 6.2231e+01
+26-09-04 23:31:52.423 - INFO: <step: 15960, lr:1.192e-05> cud_total: 4.0623e+01 mcud_total: 2.6290e-01 loss: 4.0886e+01 grad: 5.3816e+01
+26-09-04 23:31:57.072 - INFO: <step: 15980, lr:1.181e-05> cud_total: 1.3448e+01 mcud_total: 3.1233e-01 loss: 1.3760e+01 grad: 1.0376e+02
+26-09-04 23:32:01.916 - INFO: <step: 16000, lr:1.170e-05> cud_total: 3.8780e+01 mcud_total: 3.1202e-01 loss: 3.9092e+01 grad: 5.4762e+01
+26-09-04 23:32:06.241 - INFO: <step: 16020, lr:1.159e-05> cud_total: 4.1695e+01 mcud_total: 2.9658e-01 loss: 4.1991e+01 grad: 4.1039e+01
+26-09-04 23:32:10.389 - INFO: <step: 16040, lr:1.147e-05> cud_total: 4.3287e+01 mcud_total: 2.6024e-01 loss: 4.3548e+01 grad: 6.9790e+01
+26-09-04 23:32:14.541 - INFO: <step: 16060, lr:1.136e-05> cud_total: 2.1732e+01 mcud_total: 2.3737e-01 loss: 2.1970e+01 grad: 5.9441e+01
+26-09-04 23:32:18.670 - INFO: <step: 16080, lr:1.125e-05> cud_total: 3.5874e+01 mcud_total: 2.5027e-01 loss: 3.6124e+01 grad: 7.8097e+01
+26-09-04 23:32:23.315 - INFO: <step: 16100, lr:1.114e-05> cud_total: 4.4750e+01 mcud_total: 3.1232e-01 loss: 4.5062e+01 grad: 5.1494e+01
+26-09-04 23:32:28.664 - INFO: <step: 16120, lr:1.103e-05> cud_total: 2.8779e+01 mcud_total: 3.0670e-01 loss: 2.9086e+01 grad: 6.2201e+01
+26-09-04 23:32:35.567 - INFO: <step: 16140, lr:1.092e-05> cud_total: 1.9894e+01 mcud_total: 3.1371e-01 loss: 2.0207e+01 grad: 1.6062e+02
+26-09-04 23:32:44.371 - INFO: <step: 16160, lr:1.082e-05> cud_total: 2.0838e+01 mcud_total: 2.7766e-01 loss: 2.1116e+01 grad: 1.1691e+02
+26-09-04 23:32:52.274 - INFO: <step: 16180, lr:1.071e-05> cud_total: 2.2813e+01 mcud_total: 2.9776e-01 loss: 2.3111e+01 grad: 8.5370e+01
+26-09-04 23:32:59.049 - INFO: <step: 16200, lr:1.060e-05> cud_total: 2.4268e+01 mcud_total: 2.6686e-01 loss: 2.4535e+01 grad: 5.8240e+01
+26-09-04 23:33:08.160 - INFO: <step: 16220, lr:1.049e-05> cud_total: 4.6819e+01 mcud_total: 2.5866e-01 loss: 4.7078e+01 grad: 5.1506e+01
+26-09-04 23:33:17.117 - INFO: <step: 16240, lr:1.039e-05> cud_total: 2.1249e+01 mcud_total: 2.5960e-01 loss: 2.1508e+01 grad: 6.7541e+01
+26-09-04 23:33:24.339 - INFO: <step: 16260, lr:1.028e-05> cud_total: 2.3303e+01 mcud_total: 2.2532e-01 loss: 2.3528e+01 grad: 4.5648e+01
+26-09-04 23:33:30.804 - INFO: <step: 16280, lr:1.017e-05> cud_total: 2.4132e+01 mcud_total: 2.7613e-01 loss: 2.4408e+01 grad: 1.3475e+02
+26-09-04 23:33:37.913 - INFO: <step: 16300, lr:1.007e-05> cud_total: 2.5898e+01 mcud_total: 3.0056e-01 loss: 2.6199e+01 grad: 1.0209e+02
+26-09-04 23:33:45.691 - INFO: <step: 16320, lr:9.963e-06> cud_total: 3.4873e+01 mcud_total: 3.3769e-01 loss: 3.5211e+01 grad: 6.9317e+01
+26-09-04 23:33:54.455 - INFO: <step: 16340, lr:9.859e-06> cud_total: 2.0323e+01 mcud_total: 2.8177e-01 loss: 2.0605e+01 grad: 5.3488e+01
+26-09-04 23:34:00.796 - INFO: <step: 16360, lr:9.755e-06> cud_total: 3.3694e+01 mcud_total: 3.7339e-01 loss: 3.4067e+01 grad: 1.1508e+02
+26-09-04 23:34:07.355 - INFO: <step: 16380, lr:9.652e-06> cud_total: 3.5274e+01 mcud_total: 2.9464e-01 loss: 3.5569e+01 grad: 4.5943e+01
+26-09-04 23:34:15.067 - INFO: <step: 16400, lr:9.549e-06> cud_total: 4.2132e+01 mcud_total: 3.3841e-01 loss: 4.2470e+01 grad: 7.8692e+01
+26-09-04 23:34:23.893 - INFO: <step: 16420, lr:9.447e-06> cud_total: 2.6981e+01 mcud_total: 2.1693e-01 loss: 2.7198e+01 grad: 1.0797e+02
+26-09-04 23:34:30.591 - INFO: <step: 16440, lr:9.345e-06> cud_total: 5.3479e+01 mcud_total: 2.8471e-01 loss: 5.3764e+01 grad: 7.2455e+01
+26-09-04 23:34:37.997 - INFO: <step: 16460, lr:9.244e-06> cud_total: 2.7249e+01 mcud_total: 3.4626e-01 loss: 2.7595e+01 grad: 4.7953e+01
+26-09-04 23:34:45.331 - INFO: <step: 16480, lr:9.143e-06> cud_total: 2.7915e+01 mcud_total: 2.7302e-01 loss: 2.8188e+01 grad: 4.7247e+01
+26-09-04 23:34:50.834 - INFO: <step: 16500, lr:9.042e-06> cud_total: 4.1499e+01 mcud_total: 2.6462e-01 loss: 4.1764e+01 grad: 7.7280e+01
+26-09-04 23:34:55.257 - INFO: <step: 16520, lr:8.943e-06> cud_total: 3.3008e+01 mcud_total: 2.8355e-01 loss: 3.3292e+01 grad: 1.0255e+02
+26-09-04 23:34:59.904 - INFO: <step: 16540, lr:8.843e-06> cud_total: 3.6899e+01 mcud_total: 2.9709e-01 loss: 3.7196e+01 grad: 1.1250e+02
+26-09-04 23:35:04.221 - INFO: <step: 16560, lr:8.744e-06> cud_total: 2.7282e+01 mcud_total: 2.3524e-01 loss: 2.7517e+01 grad: 1.8607e+02
+26-09-04 23:35:08.649 - INFO: <step: 16580, lr:8.646e-06> cud_total: 3.6955e+01 mcud_total: 3.5282e-01 loss: 3.7308e+01 grad: 5.0990e+01
+26-09-04 23:35:13.904 - INFO: <step: 16600, lr:8.548e-06> cud_total: 3.6230e+01 mcud_total: 3.2477e-01 loss: 3.6555e+01 grad: 1.3033e+02
+26-09-04 23:35:19.475 - INFO: <step: 16620, lr:8.451e-06> cud_total: 5.3880e+01 mcud_total: 3.7293e-01 loss: 5.4253e+01 grad: 4.9064e+01
+26-09-04 23:35:27.169 - INFO: <step: 16640, lr:8.354e-06> cud_total: 3.6149e+01 mcud_total: 2.6937e-01 loss: 3.6418e+01 grad: 5.6316e+01
+26-09-04 23:35:37.016 - INFO: <step: 16660, lr:8.258e-06> cud_total: 2.7114e+01 mcud_total: 3.2093e-01 loss: 2.7435e+01 grad: 5.2261e+01
+26-09-04 23:35:41.900 - INFO: <step: 16680, lr:8.162e-06> cud_total: 5.5963e+01 mcud_total: 2.5572e-01 loss: 5.6218e+01 grad: 3.4581e+01
+26-09-04 23:35:47.179 - INFO: <step: 16700, lr:8.066e-06> cud_total: 9.6738e+00 mcud_total: 2.4596e-01 loss: 9.9197e+00 grad: 2.8603e+02
+26-09-04 23:35:51.424 - INFO: <step: 16720, lr:7.972e-06> cud_total: 3.2634e+01 mcud_total: 2.4139e-01 loss: 3.2875e+01 grad: 1.2136e+02
+26-09-04 23:35:55.791 - INFO: <step: 16740, lr:7.877e-06> cud_total: 3.3559e+01 mcud_total: 2.9266e-01 loss: 3.3851e+01 grad: 7.4209e+01
+26-09-04 23:36:00.686 - INFO: <step: 16760, lr:7.784e-06> cud_total: 5.2288e+01 mcud_total: 2.9041e-01 loss: 5.2578e+01 grad: 5.9948e+01
+26-09-04 23:36:06.084 - INFO: <step: 16780, lr:7.690e-06> cud_total: 4.4687e+01 mcud_total: 3.2496e-01 loss: 4.5012e+01 grad: 6.6251e+01
+26-09-04 23:36:13.045 - INFO: <step: 16800, lr:7.598e-06> cud_total: 2.2094e+01 mcud_total: 3.3764e-01 loss: 2.2432e+01 grad: 4.0047e+01
+26-09-04 23:36:18.901 - INFO: <step: 16820, lr:7.505e-06> cud_total: 2.2271e+01 mcud_total: 2.8951e-01 loss: 2.2561e+01 grad: 3.6399e+01
+26-09-04 23:36:23.324 - INFO: <step: 16840, lr:7.414e-06> cud_total: 3.5212e+01 mcud_total: 2.4838e-01 loss: 3.5461e+01 grad: 4.5950e+01
+26-09-04 23:36:27.742 - INFO: <step: 16860, lr:7.322e-06> cud_total: 4.3801e+01 mcud_total: 2.3407e-01 loss: 4.4035e+01 grad: 5.9573e+01
+26-09-04 23:36:32.206 - INFO: <step: 16880, lr:7.232e-06> cud_total: 2.7470e+01 mcud_total: 2.5301e-01 loss: 2.7723e+01 grad: 1.2988e+02
+26-09-04 23:36:36.670 - INFO: <step: 16900, lr:7.142e-06> cud_total: 2.6788e+01 mcud_total: 2.5399e-01 loss: 2.7042e+01 grad: 9.1353e+01
+26-09-04 23:36:41.104 - INFO: <step: 16920, lr:7.052e-06> cud_total: 4.1413e+01 mcud_total: 3.1044e-01 loss: 4.1723e+01 grad: 5.5440e+01
+26-09-04 23:36:45.581 - INFO: <step: 16940, lr:6.963e-06> cud_total: 2.4823e+01 mcud_total: 2.1093e-01 loss: 2.5034e+01 grad: 2.1384e+02
+26-09-04 23:36:50.068 - INFO: <step: 16960, lr:6.874e-06> cud_total: 4.6637e+01 mcud_total: 3.0729e-01 loss: 4.6945e+01 grad: 8.5476e+01
+26-09-04 23:36:54.518 - INFO: <step: 16980, lr:6.786e-06> cud_total: 1.7773e+01 mcud_total: 2.7782e-01 loss: 1.8051e+01 grad: 9.6018e+01
+26-09-04 23:36:58.990 - INFO: <step: 17000, lr:6.699e-06> cud_total: 2.4184e+01 mcud_total: 3.5830e-01 loss: 2.4542e+01 grad: 7.3671e+01
+26-09-04 23:37:03.443 - INFO: <step: 17020, lr:6.612e-06> cud_total: 1.7744e+01 mcud_total: 2.4397e-01 loss: 1.7988e+01 grad: 8.8994e+01
+26-09-04 23:37:07.956 - INFO: <step: 17040, lr:6.525e-06> cud_total: 2.0804e+01 mcud_total: 2.3520e-01 loss: 2.1039e+01 grad: 5.6518e+01
+26-09-04 23:37:12.473 - INFO: <step: 17060, lr:6.439e-06> cud_total: 4.0783e+01 mcud_total: 2.8249e-01 loss: 4.1066e+01 grad: 7.3286e+01
+26-09-04 23:37:17.369 - INFO: <step: 17080, lr:6.354e-06> cud_total: 2.3298e+01 mcud_total: 2.7346e-01 loss: 2.3572e+01 grad: 3.7804e+01
+26-09-04 23:37:21.954 - INFO: <step: 17100, lr:6.269e-06> cud_total: 4.5882e+01 mcud_total: 3.0020e-01 loss: 4.6182e+01 grad: 4.1355e+01
+26-09-04 23:37:26.623 - INFO: <step: 17120, lr:6.185e-06> cud_total: 1.9079e+01 mcud_total: 2.3409e-01 loss: 1.9313e+01 grad: 1.6994e+02
+26-09-04 23:37:32.092 - INFO: <step: 17140, lr:6.101e-06> cud_total: 3.2101e+01 mcud_total: 3.0634e-01 loss: 3.2407e+01 grad: 3.9441e+01
+26-09-04 23:37:38.984 - INFO: <step: 17160, lr:6.018e-06> cud_total: 3.1486e+01 mcud_total: 2.9986e-01 loss: 3.1786e+01 grad: 6.2516e+01
+26-09-04 23:37:47.905 - INFO: <step: 17180, lr:5.935e-06> cud_total: 4.2352e+01 mcud_total: 2.2463e-01 loss: 4.2577e+01 grad: 3.6870e+01
+26-09-04 23:37:58.355 - INFO: <step: 17200, lr:5.853e-06> cud_total: 4.9053e+01 mcud_total: 3.6966e-01 loss: 4.9422e+01 grad: 6.8428e+01
+26-09-04 23:38:04.419 - INFO: <step: 17220, lr:5.771e-06> cud_total: 4.4125e+01 mcud_total: 4.2488e-01 loss: 4.4550e+01 grad: 4.3081e+01
+26-09-04 23:38:10.703 - INFO: <step: 17240, lr:5.690e-06> cud_total: 5.6035e+01 mcud_total: 2.7087e-01 loss: 5.6306e+01 grad: 2.9148e+01
+26-09-04 23:38:17.174 - INFO: <step: 17260, lr:5.609e-06> cud_total: 4.4496e+01 mcud_total: 3.0478e-01 loss: 4.4800e+01 grad: 8.3987e+01
+26-09-04 23:38:26.130 - INFO: <step: 17280, lr:5.529e-06> cud_total: 5.4973e+01 mcud_total: 2.8099e-01 loss: 5.5254e+01 grad: 6.9936e+01
+26-09-04 23:38:32.005 - INFO: <step: 17300, lr:5.450e-06> cud_total: 4.7502e+01 mcud_total: 2.7209e-01 loss: 4.7774e+01 grad: 7.3256e+01
+26-09-04 23:38:38.796 - INFO: <step: 17320, lr:5.371e-06> cud_total: 4.8064e+01 mcud_total: 2.7015e-01 loss: 4.8334e+01 grad: 3.3995e+01
+26-09-04 23:38:45.263 - INFO: <step: 17340, lr:5.292e-06> cud_total: 1.1250e+01 mcud_total: 2.6399e-01 loss: 1.1514e+01 grad: 4.0086e+01
+26-09-04 23:38:54.291 - INFO: <step: 17360, lr:5.214e-06> cud_total: 4.5406e+01 mcud_total: 2.6803e-01 loss: 4.5674e+01 grad: 5.6625e+01
+26-09-04 23:39:00.904 - INFO: <step: 17380, lr:5.137e-06> cud_total: 2.0312e+01 mcud_total: 3.2344e-01 loss: 2.0635e+01 grad: 5.3462e+01
+26-09-04 23:39:07.868 - INFO: <step: 17400, lr:5.060e-06> cud_total: 3.0941e+01 mcud_total: 2.4032e-01 loss: 3.1182e+01 grad: 1.0714e+02
+26-09-04 23:39:14.897 - INFO: <step: 17420, lr:4.984e-06> cud_total: 1.4476e+01 mcud_total: 2.4275e-01 loss: 1.4719e+01 grad: 7.4566e+01
+26-09-04 23:39:20.881 - INFO: <step: 17440, lr:4.908e-06> cud_total: 2.9247e+01 mcud_total: 3.4106e-01 loss: 2.9588e+01 grad: 7.1337e+01
+26-09-04 23:39:25.818 - INFO: <step: 17460, lr:4.833e-06> cud_total: 3.5708e+01 mcud_total: 3.4620e-01 loss: 3.6054e+01 grad: 7.8095e+01
+26-09-04 23:39:30.705 - INFO: <step: 17480, lr:4.759e-06> cud_total: 5.0407e+01 mcud_total: 3.4668e-01 loss: 5.0753e+01 grad: 4.4105e+01
+26-09-04 23:39:35.446 - INFO: <step: 17500, lr:4.685e-06> cud_total: 2.9709e+01 mcud_total: 3.8362e-01 loss: 3.0092e+01 grad: 4.9425e+01
+26-09-04 23:39:40.217 - INFO: <step: 17520, lr:4.611e-06> cud_total: 4.4694e+01 mcud_total: 3.5665e-01 loss: 4.5051e+01 grad: 7.3690e+01
+26-09-04 23:39:45.729 - INFO: <step: 17540, lr:4.538e-06> cud_total: 2.5833e+01 mcud_total: 2.8532e-01 loss: 2.6118e+01 grad: 5.1095e+01
+26-09-04 23:39:51.150 - INFO: <step: 17560, lr:4.466e-06> cud_total: 3.9637e+01 mcud_total: 2.6255e-01 loss: 3.9899e+01 grad: 5.1911e+01
+26-09-04 23:39:57.022 - INFO: <step: 17580, lr:4.394e-06> cud_total: 1.7487e+01 mcud_total: 1.9920e-01 loss: 1.7686e+01 grad: 1.0831e+02
+26-09-04 23:40:03.058 - INFO: <step: 17600, lr:4.323e-06> cud_total: 3.5744e+01 mcud_total: 2.3439e-01 loss: 3.5979e+01 grad: 4.7817e+01
+26-09-04 23:40:09.533 - INFO: <step: 17620, lr:4.252e-06> cud_total: 2.9711e+01 mcud_total: 2.6282e-01 loss: 2.9974e+01 grad: 6.5627e+01
+26-09-04 23:40:15.840 - INFO: <step: 17640, lr:4.182e-06> cud_total: 2.6547e+01 mcud_total: 4.0774e-01 loss: 2.6954e+01 grad: 3.3921e+02
+26-09-04 23:40:22.355 - INFO: <step: 17660, lr:4.112e-06> cud_total: 3.4643e+01 mcud_total: 2.9440e-01 loss: 3.4937e+01 grad: 4.5832e+01
+26-09-04 23:40:27.389 - INFO: <step: 17680, lr:4.043e-06> cud_total: 4.4516e+01 mcud_total: 2.9679e-01 loss: 4.4813e+01 grad: 7.7138e+01
+26-09-04 23:40:32.878 - INFO: <step: 17700, lr:3.975e-06> cud_total: 1.2253e+01 mcud_total: 1.9804e-01 loss: 1.2451e+01 grad: 1.2630e+02
+26-09-04 23:40:39.184 - INFO: <step: 17720, lr:3.907e-06> cud_total: 3.0199e+01 mcud_total: 3.4890e-01 loss: 3.0548e+01 grad: 2.8447e+02
+26-09-04 23:40:47.600 - INFO: <step: 17740, lr:3.839e-06> cud_total: 2.7229e+01 mcud_total: 3.0294e-01 loss: 2.7532e+01 grad: 3.7328e+01
+26-09-04 23:40:53.445 - INFO: <step: 17760, lr:3.773e-06> cud_total: 2.5712e+01 mcud_total: 3.4928e-01 loss: 2.6061e+01 grad: 5.4422e+01
+26-09-04 23:40:59.704 - INFO: <step: 17780, lr:3.706e-06> cud_total: 2.2913e+01 mcud_total: 3.5528e-01 loss: 2.3269e+01 grad: 9.5807e+01
+26-09-04 23:41:07.476 - INFO: <step: 17800, lr:3.641e-06> cud_total: 4.1332e+01 mcud_total: 2.2168e-01 loss: 4.1553e+01 grad: 2.8735e+01
+26-09-04 23:41:15.693 - INFO: <step: 17820, lr:3.576e-06> cud_total: 3.8327e+01 mcud_total: 3.2040e-01 loss: 3.8647e+01 grad: 9.1622e+01
+26-09-04 23:41:21.155 - INFO: <step: 17840, lr:3.511e-06> cud_total: 4.4810e+01 mcud_total: 3.3401e-01 loss: 4.5144e+01 grad: 7.4582e+01
+26-09-04 23:41:27.431 - INFO: <step: 17860, lr:3.447e-06> cud_total: 5.6889e+01 mcud_total: 2.8964e-01 loss: 5.7179e+01 grad: 5.6725e+01
+26-09-04 23:41:35.343 - INFO: <step: 17880, lr:3.384e-06> cud_total: 3.5899e+01 mcud_total: 3.4169e-01 loss: 3.6241e+01 grad: 3.4597e+01
+26-09-04 23:41:41.879 - INFO: <step: 17900, lr:3.321e-06> cud_total: 2.6458e+01 mcud_total: 2.2915e-01 loss: 2.6687e+01 grad: 1.0611e+02
+26-09-04 23:41:46.942 - INFO: <step: 17920, lr:3.259e-06> cud_total: 2.1501e+01 mcud_total: 2.5550e-01 loss: 2.1757e+01 grad: 3.7067e+01
+26-09-04 23:41:54.128 - INFO: <step: 17940, lr:3.197e-06> cud_total: 3.9670e+01 mcud_total: 2.4310e-01 loss: 3.9913e+01 grad: 5.2364e+01
+26-09-04 23:42:00.166 - INFO: <step: 17960, lr:3.136e-06> cud_total: 4.5546e+01 mcud_total: 2.7012e-01 loss: 4.5816e+01 grad: 5.2563e+01
+26-09-04 23:42:08.187 - INFO: <step: 17980, lr:3.075e-06> cud_total: 3.0868e+01 mcud_total: 2.7292e-01 loss: 3.1140e+01 grad: 5.5099e+01
+26-09-04 23:42:15.642 - INFO: <step: 18000, lr:3.015e-06> cud_total: 2.7697e+01 mcud_total: 2.1545e-01 loss: 2.7912e+01 grad: 5.9603e+01
+26-09-04 23:42:23.001 - INFO: <step: 18020, lr:2.956e-06> cud_total: 2.2177e+01 mcud_total: 3.1479e-01 loss: 2.2492e+01 grad: 4.5433e+01
+26-09-04 23:42:28.975 - INFO: <step: 18040, lr:2.897e-06> cud_total: 3.2768e+01 mcud_total: 2.2809e-01 loss: 3.2996e+01 grad: 3.7652e+01
+26-09-04 23:42:35.573 - INFO: <step: 18060, lr:2.839e-06> cud_total: 3.1317e+01 mcud_total: 2.8558e-01 loss: 3.1603e+01 grad: 7.4638e+01
+26-09-04 23:42:42.752 - INFO: <step: 18080, lr:2.781e-06> cud_total: 3.7489e+01 mcud_total: 2.8915e-01 loss: 3.7778e+01 grad: 4.7378e+01
+26-09-04 23:42:49.953 - INFO: <step: 18100, lr:2.724e-06> cud_total: 4.1056e+01 mcud_total: 2.4360e-01 loss: 4.1300e+01 grad: 4.5404e+01
+26-09-04 23:42:56.616 - INFO: <step: 18120, lr:2.668e-06> cud_total: 2.9678e+01 mcud_total: 3.1177e-01 loss: 2.9989e+01 grad: 4.1995e+01
+26-09-04 23:43:05.372 - INFO: <step: 18140, lr:2.612e-06> cud_total: 1.7565e+01 mcud_total: 3.4699e-01 loss: 1.7912e+01 grad: 5.8504e+01
+26-09-04 23:43:11.266 - INFO: <step: 18160, lr:2.556e-06> cud_total: 3.9798e+01 mcud_total: 3.0726e-01 loss: 4.0105e+01 grad: 3.9041e+01
+26-09-04 23:43:19.406 - INFO: <step: 18180, lr:2.501e-06> cud_total: 2.1448e+01 mcud_total: 2.7631e-01 loss: 2.1724e+01 grad: 3.6086e+01
+26-09-04 23:43:26.337 - INFO: <step: 18200, lr:2.447e-06> cud_total: 3.8638e+01 mcud_total: 2.9655e-01 loss: 3.8934e+01 grad: 4.9789e+01
+26-09-04 23:43:33.316 - INFO: <step: 18220, lr:2.394e-06> cud_total: 4.3398e+01 mcud_total: 2.8724e-01 loss: 4.3685e+01 grad: 3.8273e+01
+26-09-04 23:43:39.668 - INFO: <step: 18240, lr:2.340e-06> cud_total: 3.0675e+01 mcud_total: 2.6983e-01 loss: 3.0944e+01 grad: 5.1819e+01
+26-09-04 23:43:46.755 - INFO: <step: 18260, lr:2.288e-06> cud_total: 3.1754e+01 mcud_total: 2.6318e-01 loss: 3.2017e+01 grad: 4.9271e+01
+26-09-04 23:43:51.290 - INFO: <step: 18280, lr:2.236e-06> cud_total: 4.9953e+01 mcud_total: 3.3892e-01 loss: 5.0292e+01 grad: 4.8003e+01
+26-09-04 23:43:58.847 - INFO: <step: 18300, lr:2.185e-06> cud_total: 3.3883e+01 mcud_total: 2.3705e-01 loss: 3.4120e+01 grad: 5.9095e+01
+26-09-04 23:44:07.249 - INFO: <step: 18320, lr:2.134e-06> cud_total: 2.8968e+01 mcud_total: 3.0896e-01 loss: 2.9277e+01 grad: 4.7540e+01
+26-09-04 23:44:17.890 - INFO: <step: 18340, lr:2.084e-06> cud_total: 1.9896e+01 mcud_total: 2.9659e-01 loss: 2.0193e+01 grad: 5.3456e+01
+26-09-04 23:44:26.325 - INFO: <step: 18360, lr:2.034e-06> cud_total: 5.0766e+01 mcud_total: 2.9300e-01 loss: 5.1059e+01 grad: 4.1337e+01
+26-09-04 23:44:34.682 - INFO: <step: 18380, lr:1.985e-06> cud_total: 4.3760e+01 mcud_total: 3.2356e-01 loss: 4.4083e+01 grad: 4.4212e+01
+26-09-04 23:44:44.683 - INFO: <step: 18400, lr:1.937e-06> cud_total: 4.0612e+01 mcud_total: 2.5694e-01 loss: 4.0868e+01 grad: 5.0880e+01
+26-09-04 23:44:51.679 - INFO: <step: 18420, lr:1.889e-06> cud_total: 3.0894e+01 mcud_total: 2.5453e-01 loss: 3.1148e+01 grad: 6.6125e+01
+26-09-04 23:44:59.370 - INFO: <step: 18440, lr:1.842e-06> cud_total: 3.0965e+01 mcud_total: 3.0136e-01 loss: 3.1266e+01 grad: 2.8547e+01
+26-09-04 23:45:09.230 - INFO: <step: 18460, lr:1.795e-06> cud_total: 2.2007e+01 mcud_total: 4.4333e-01 loss: 2.2450e+01 grad: 3.7552e+01
+26-09-04 23:45:15.366 - INFO: <step: 18480, lr:1.749e-06> cud_total: 3.0546e+01 mcud_total: 2.9312e-01 loss: 3.0839e+01 grad: 7.1979e+01
+26-09-04 23:45:20.513 - INFO: <step: 18500, lr:1.704e-06> cud_total: 2.7954e+01 mcud_total: 3.0735e-01 loss: 2.8261e+01 grad: 3.8959e+01
+26-09-04 23:45:26.170 - INFO: <step: 18520, lr:1.659e-06> cud_total: 3.7355e+01 mcud_total: 2.6184e-01 loss: 3.7617e+01 grad: 6.0518e+01
+26-09-04 23:45:33.053 - INFO: <step: 18540, lr:1.615e-06> cud_total: 3.3165e+01 mcud_total: 3.3981e-01 loss: 3.3505e+01 grad: 7.5492e+01
+26-09-04 23:45:39.211 - INFO: <step: 18560, lr:1.571e-06> cud_total: 4.0455e+01 mcud_total: 2.2771e-01 loss: 4.0683e+01 grad: 4.6681e+01
+26-09-04 23:45:44.471 - INFO: <step: 18580, lr:1.528e-06> cud_total: 2.7945e+01 mcud_total: 2.9257e-01 loss: 2.8238e+01 grad: 4.2171e+01
+26-09-04 23:45:50.342 - INFO: <step: 18600, lr:1.485e-06> cud_total: 5.3556e+01 mcud_total: 2.8263e-01 loss: 5.3839e+01 grad: 4.1603e+01
+26-09-04 23:45:56.691 - INFO: <step: 18620, lr:1.443e-06> cud_total: 5.5634e+01 mcud_total: 2.9464e-01 loss: 5.5929e+01 grad: 4.6380e+01
+26-09-04 23:46:01.933 - INFO: <step: 18640, lr:1.402e-06> cud_total: 2.1941e+01 mcud_total: 2.7648e-01 loss: 2.2218e+01 grad: 4.0196e+01
+26-09-04 23:46:08.696 - INFO: <step: 18660, lr:1.361e-06> cud_total: 4.6893e+01 mcud_total: 3.2084e-01 loss: 4.7214e+01 grad: 6.9022e+01
+26-09-04 23:46:15.060 - INFO: <step: 18680, lr:1.321e-06> cud_total: 5.4008e+01 mcud_total: 2.9754e-01 loss: 5.4305e+01 grad: 3.5326e+01
+26-09-04 23:46:23.395 - INFO: <step: 18700, lr:1.281e-06> cud_total: 2.9113e+01 mcud_total: 3.5654e-01 loss: 2.9469e+01 grad: 5.0654e+01
+26-09-04 23:46:31.624 - INFO: <step: 18720, lr:1.243e-06> cud_total: 4.5152e+01 mcud_total: 2.4715e-01 loss: 4.5399e+01 grad: 5.6722e+01
+26-09-04 23:46:38.716 - INFO: <step: 18740, lr:1.204e-06> cud_total: 1.9838e+01 mcud_total: 2.7878e-01 loss: 2.0117e+01 grad: 3.5524e+01
+26-09-04 23:46:44.701 - INFO: <step: 18760, lr:1.166e-06> cud_total: 3.2056e+01 mcud_total: 3.2145e-01 loss: 3.2377e+01 grad: 3.1241e+01
+26-09-04 23:46:49.526 - INFO: <step: 18780, lr:1.129e-06> cud_total: 5.3810e+01 mcud_total: 3.1431e-01 loss: 5.4124e+01 grad: 2.7180e+01
+26-09-04 23:46:54.102 - INFO: <step: 18800, lr:1.093e-06> cud_total: 4.6104e+01 mcud_total: 2.2248e-01 loss: 4.6327e+01 grad: 5.0301e+01
+26-09-04 23:46:58.956 - INFO: <step: 18820, lr:1.057e-06> cud_total: 2.7273e+01 mcud_total: 3.1683e-01 loss: 2.7590e+01 grad: 9.6565e+01
+26-09-04 23:47:03.255 - INFO: <step: 18840, lr:1.021e-06> cud_total: 4.5966e+01 mcud_total: 2.9400e-01 loss: 4.6260e+01 grad: 3.1537e+01
+26-09-04 23:47:07.434 - INFO: <step: 18860, lr:9.864e-07> cud_total: 4.1984e+01 mcud_total: 2.4932e-01 loss: 4.2233e+01 grad: 6.4297e+01
+26-09-04 23:47:12.350 - INFO: <step: 18880, lr:9.522e-07> cud_total: 2.9194e+01 mcud_total: 2.6544e-01 loss: 2.9459e+01 grad: 1.2686e+02
+26-09-04 23:47:18.038 - INFO: <step: 18900, lr:9.186e-07> cud_total: 2.5987e+01 mcud_total: 2.9593e-01 loss: 2.6283e+01 grad: 3.7691e+01
+26-09-04 23:47:26.164 - INFO: <step: 18920, lr:8.856e-07> cud_total: 5.1488e+01 mcud_total: 2.5388e-01 loss: 5.1741e+01 grad: 4.4288e+01
+26-09-04 23:47:33.169 - INFO: <step: 18940, lr:8.532e-07> cud_total: 5.5304e+01 mcud_total: 3.6391e-01 loss: 5.5668e+01 grad: 2.9487e+01
+26-09-04 23:47:41.219 - INFO: <step: 18960, lr:8.214e-07> cud_total: 1.8528e+01 mcud_total: 2.3162e-01 loss: 1.8759e+01 grad: 3.4882e+01
+26-09-04 23:47:48.400 - INFO: <step: 18980, lr:7.902e-07> cud_total: 1.0215e+01 mcud_total: 2.7195e-01 loss: 1.0487e+01 grad: 1.5298e+02
+26-09-04 23:47:54.668 - INFO: <step: 19000, lr:7.596e-07> cud_total: 2.6811e+01 mcud_total: 2.9060e-01 loss: 2.7102e+01 grad: 3.7708e+01
+26-09-04 23:48:00.449 - INFO: <step: 19020, lr:7.296e-07> cud_total: 1.9065e+01 mcud_total: 2.8114e-01 loss: 1.9346e+01 grad: 5.1731e+01
+26-09-04 23:48:08.538 - INFO: <step: 19040, lr:7.002e-07> cud_total: 4.8681e+01 mcud_total: 2.8534e-01 loss: 4.8967e+01 grad: 5.6374e+01
+26-09-04 23:48:15.090 - INFO: <step: 19060, lr:6.714e-07> cud_total: 4.8140e+01 mcud_total: 1.9924e-01 loss: 4.8339e+01 grad: 3.6873e+01
+26-09-04 23:48:21.386 - INFO: <step: 19080, lr:6.432e-07> cud_total: 2.9552e+01 mcud_total: 2.6108e-01 loss: 2.9813e+01 grad: 7.7894e+01
+26-09-04 23:48:27.013 - INFO: <step: 19100, lr:6.156e-07> cud_total: 3.5699e+01 mcud_total: 2.8100e-01 loss: 3.5980e+01 grad: 4.8482e+01
+26-09-04 23:48:33.221 - INFO: <step: 19120, lr:5.886e-07> cud_total: 3.9635e+01 mcud_total: 2.5373e-01 loss: 3.9889e+01 grad: 3.4713e+01
+26-09-04 23:48:39.511 - INFO: <step: 19140, lr:5.622e-07> cud_total: 2.4016e+01 mcud_total: 2.9776e-01 loss: 2.4314e+01 grad: 1.3461e+02
+26-09-04 23:48:46.802 - INFO: <step: 19160, lr:5.364e-07> cud_total: 3.9322e+01 mcud_total: 2.6790e-01 loss: 3.9590e+01 grad: 8.3188e+01
+26-09-04 23:48:52.359 - INFO: <step: 19180, lr:5.112e-07> cud_total: 2.9233e+01 mcud_total: 2.7319e-01 loss: 2.9507e+01 grad: 4.0073e+01
+26-09-04 23:48:57.642 - INFO: <step: 19200, lr:4.866e-07> cud_total: 2.8994e+01 mcud_total: 2.4153e-01 loss: 2.9236e+01 grad: 5.0248e+01
+26-09-04 23:49:05.200 - INFO: <step: 19220, lr:4.626e-07> cud_total: 2.4424e+01 mcud_total: 2.9309e-01 loss: 2.4717e+01 grad: 4.8606e+01
+26-09-04 23:49:12.646 - INFO: <step: 19240, lr:4.392e-07> cud_total: 3.0608e+01 mcud_total: 2.3437e-01 loss: 3.0842e+01 grad: 5.3179e+01
+26-09-04 23:49:20.127 - INFO: <step: 19260, lr:4.164e-07> cud_total: 3.2385e+01 mcud_total: 2.9335e-01 loss: 3.2678e+01 grad: 4.2289e+01
+26-09-04 23:49:28.220 - INFO: <step: 19280, lr:3.943e-07> cud_total: 4.5935e+01 mcud_total: 3.0789e-01 loss: 4.6243e+01 grad: 7.3513e+01
+26-09-04 23:49:37.197 - INFO: <step: 19300, lr:3.727e-07> cud_total: 3.4461e+01 mcud_total: 3.0733e-01 loss: 3.4769e+01 grad: 3.6082e+01
+26-09-04 23:49:45.378 - INFO: <step: 19320, lr:3.517e-07> cud_total: 2.0161e+01 mcud_total: 2.9808e-01 loss: 2.0459e+01 grad: 4.9607e+01
+26-09-04 23:49:52.497 - INFO: <step: 19340, lr:3.314e-07> cud_total: 2.7659e+01 mcud_total: 3.6195e-01 loss: 2.8021e+01 grad: 4.1687e+01
+26-09-04 23:49:58.696 - INFO: <step: 19360, lr:3.116e-07> cud_total: 2.0572e+01 mcud_total: 2.5305e-01 loss: 2.0825e+01 grad: 2.8992e+01
+26-09-04 23:50:05.134 - INFO: <step: 19380, lr:2.925e-07> cud_total: 1.3394e+01 mcud_total: 3.0395e-01 loss: 1.3698e+01 grad: 5.8031e+01
+26-09-04 23:50:11.544 - INFO: <step: 19400, lr:2.739e-07> cud_total: 2.4369e+01 mcud_total: 2.5004e-01 loss: 2.4619e+01 grad: 3.0646e+01
+26-09-04 23:50:18.347 - INFO: <step: 19420, lr:2.560e-07> cud_total: 4.5214e+01 mcud_total: 2.5195e-01 loss: 4.5466e+01 grad: 9.4694e+01
+26-09-04 23:50:24.387 - INFO: <step: 19440, lr:2.386e-07> cud_total: 1.7893e+01 mcud_total: 2.7977e-01 loss: 1.8173e+01 grad: 5.5832e+01
+26-09-04 23:50:29.869 - INFO: <step: 19460, lr:2.219e-07> cud_total: 4.8684e+01 mcud_total: 2.9315e-01 loss: 4.8977e+01 grad: 3.7030e+01
+26-09-04 23:50:35.474 - INFO: <step: 19480, lr:2.058e-07> cud_total: 2.7199e+01 mcud_total: 2.9256e-01 loss: 2.7491e+01 grad: 4.4815e+01
+26-09-04 23:50:40.949 - INFO: <step: 19500, lr:1.903e-07> cud_total: 5.5349e+01 mcud_total: 3.7359e-01 loss: 5.5723e+01 grad: 3.8078e+01
+26-09-04 23:50:46.785 - INFO: <step: 19520, lr:1.754e-07> cud_total: 2.3164e+01 mcud_total: 2.6657e-01 loss: 2.3431e+01 grad: 3.6099e+01
+26-09-04 23:50:52.395 - INFO: <step: 19540, lr:1.611e-07> cud_total: 3.6394e+01 mcud_total: 3.4494e-01 loss: 3.6739e+01 grad: 5.2475e+01
+26-09-04 23:50:59.336 - INFO: <step: 19560, lr:1.474e-07> cud_total: 5.2531e+01 mcud_total: 2.5104e-01 loss: 5.2782e+01 grad: 4.5577e+01
+26-09-04 23:51:09.144 - INFO: <step: 19580, lr:1.343e-07> cud_total: 4.0397e+01 mcud_total: 2.8644e-01 loss: 4.0683e+01 grad: 4.1580e+01
+26-09-04 23:51:19.586 - INFO: <step: 19600, lr:1.218e-07> cud_total: 1.8692e+01 mcud_total: 2.5637e-01 loss: 1.8948e+01 grad: 3.1425e+01
+26-09-04 23:51:26.204 - INFO: <step: 19620, lr:1.099e-07> cud_total: 3.6372e+01 mcud_total: 2.4157e-01 loss: 3.6614e+01 grad: 2.6277e+01
+26-09-04 23:51:36.687 - INFO: <step: 19640, lr:9.866e-08> cud_total: 2.3930e+01 mcud_total: 2.1765e-01 loss: 2.4148e+01 grad: 4.9980e+01
+26-09-04 23:51:45.888 - INFO: <step: 19660, lr:8.801e-08> cud_total: 3.6837e+01 mcud_total: 3.0099e-01 loss: 3.7138e+01 grad: 3.6876e+01
+26-09-04 23:51:53.096 - INFO: <step: 19680, lr:7.796e-08> cud_total: 3.2491e+01 mcud_total: 2.7323e-01 loss: 3.2764e+01 grad: 4.0774e+01
+26-09-04 23:52:02.209 - INFO: <step: 19700, lr:6.852e-08> cud_total: 3.0825e+01 mcud_total: 2.9355e-01 loss: 3.1118e+01 grad: 3.3868e+01
+26-09-04 23:52:10.891 - INFO: <step: 19720, lr:5.969e-08> cud_total: 3.9682e+01 mcud_total: 3.4138e-01 loss: 4.0024e+01 grad: 1.4295e+02
+26-09-04 23:52:18.105 - INFO: <step: 19740, lr:5.147e-08> cud_total: 4.0545e+01 mcud_total: 2.9315e-01 loss: 4.0838e+01 grad: 2.9423e+01
+26-09-04 23:52:26.542 - INFO: <step: 19760, lr:4.386e-08> cud_total: 3.0399e+01 mcud_total: 2.1412e-01 loss: 3.0613e+01 grad: 4.5757e+01
+26-09-04 23:52:35.275 - INFO: <step: 19780, lr:3.685e-08> cud_total: 1.8248e+01 mcud_total: 3.2835e-01 loss: 1.8577e+01 grad: 3.4340e+01
+26-09-04 23:52:42.721 - INFO: <step: 19800, lr:3.046e-08> cud_total: 2.3582e+01 mcud_total: 2.7152e-01 loss: 2.3854e+01 grad: 3.0897e+01
+26-09-04 23:52:48.670 - INFO: <step: 19820, lr:2.467e-08> cud_total: 2.6810e+01 mcud_total: 3.3310e-01 loss: 2.7143e+01 grad: 3.6536e+01
+26-09-04 23:52:53.942 - INFO: <step: 19840, lr:1.949e-08> cud_total: 3.1726e+01 mcud_total: 3.1388e-01 loss: 3.2040e+01 grad: 5.0784e+01
+26-09-04 23:52:59.408 - INFO: <step: 19860, lr:1.493e-08> cud_total: 3.4765e+01 mcud_total: 2.5286e-01 loss: 3.5018e+01 grad: 5.3352e+01
+26-09-04 23:53:04.946 - INFO: <step: 19880, lr:1.097e-08> cud_total: 5.1993e+01 mcud_total: 3.4455e-01 loss: 5.2338e+01 grad: 3.4264e+01
+26-09-04 23:53:10.333 - INFO: <step: 19900, lr:7.615e-09> cud_total: 3.6444e+01 mcud_total: 2.5710e-01 loss: 3.6702e+01 grad: 2.4558e+01
+26-09-04 23:53:15.872 - INFO: <step: 19920, lr:4.874e-09> cud_total: 2.6690e+01 mcud_total: 2.6564e-01 loss: 2.6956e+01 grad: 4.9725e+01
+26-09-04 23:53:21.321 - INFO: <step: 19940, lr:2.742e-09> cud_total: 3.0329e+01 mcud_total: 2.7973e-01 loss: 3.0608e+01 grad: 3.6958e+01
+26-09-04 23:53:26.752 - INFO: <step: 19960, lr:1.218e-09> cud_total: 2.5225e+01 mcud_total: 4.0478e-01 loss: 2.5630e+01 grad: 3.9932e+01
+26-09-04 23:53:32.040 - INFO: <step: 19980, lr:3.046e-10> cud_total: 2.8366e+01 mcud_total: 3.1319e-01 loss: 2.8680e+01 grad: 4.3965e+01
+26-09-04 23:53:37.501 - INFO: <step: 20000, lr:0.000e+00> cud_total: 2.7205e+01 mcud_total: 3.3541e-01 loss: 2.7541e+01 grad: 4.2022e+01
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/torchvision/transforms/functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+/data2/student1_ly/miniconda3/envs/Defusion-plusplus/lib/python3.9/site-packages/torchvision/transforms/functional.py:1603: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  warnings.warn(
+26-09-04 23:53:44.972 - INFO: [step 20000] val loss: 27.9500
+26-09-04 23:54:53.478 - INFO: Saved checkpoint: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/experiments/COCO_MSRS_MCUD_demo/models/checkpoint-Defusion-plusplus-20260904_235337-step20000-loss27.5408-valloss27.9500.pth
+26-09-04 23:56:32.343 - INFO: Saved final checkpoint: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/experiments/COCO_MSRS_MCUD_demo/models/checkpoint-last.pth
+26-09-04 23:56:32.344 - INFO: End of training. Total time 8125.1s
+[step 20000] val loss: 27.9500
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mCOCO_MSRS_MCUD_demo[0m at: [34mhttps://wandb.ai/3222703726-huazhong-university-of-science-and-technology/defusion-plusplus/runs/z9fjf9h3[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20260904_214103-z9fjf9h3/logs[0m

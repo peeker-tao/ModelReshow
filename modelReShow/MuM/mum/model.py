@@ -1,3 +1,4 @@
+import os
 from functools import partial
 from typing import Any, Sequence, Tuple, Union, Optional
 
@@ -465,11 +466,18 @@ def vit_huge(patch_size=16, **kwargs):
     return model
 
 
-def mum_vitl16_decoderb(pretrained=True, **kwargs) -> MuMAutoEncoder:
+def mum_vitl16_decoderb(pretrained=True, weights_path=None, **kwargs) -> MuMAutoEncoder:
     model = vit_large(**kwargs)
     if pretrained:
-        weights = torch.hub.load_state_dict_from_url(
-            "https://github.com/davnords/mum/releases/download/weights/MuM_ViTLarge_BaseDecoder.pth"
-        )
-        msg = model.load_state_dict(weights, strict=True)
+        if weights_path and os.path.exists(weights_path):
+            print(f"  从本地加载权重: {weights_path}")
+            weights = torch.load(weights_path, map_location="cpu", weights_only=True)
+            if "model" in weights:
+                weights = weights["model"]
+            msg = model.load_state_dict(weights, strict=True)
+        else:
+            weights = torch.hub.load_state_dict_from_url(
+                "https://github.com/davnords/mum/releases/download/weights/MuM_ViTLarge_BaseDecoder.pth"
+            )
+            msg = model.load_state_dict(weights, strict=True)
     return model

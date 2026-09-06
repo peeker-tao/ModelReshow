@@ -10,6 +10,7 @@ import argparse
 from pathlib import Path
 from omegaconf import OmegaConf, DictConfig
 
+import numpy as np
 import torch
 import torch.backends.cudnn as cudnn
 
@@ -46,6 +47,8 @@ def get_args_parser(add_help: bool = True):
     )
 
     parser.add_argument("--name", type=str, required=True, help="Name of the training run. Used for logging and checkpointing.")
+    parser.add_argument("--resume-from", type=str, default=None, help="Checkpoint path to resume training from")
+    parser.add_argument("--wandb-resume-id", type=str, default=None, help="wandb run id to resume logging into (same run)")
 
     return parser
 
@@ -62,7 +65,8 @@ def launch_evals(
             print(f"Launching eval: {eval_name}")
             eval_ckpt_dir = output_dir / f"eval/training_{iteration}"
             eval_ckpt_dir.mkdir(parents=True, exist_ok=True)
-            ckpt_path = (eval_ckpt_dir / f"checkpoint-{iteration}.pth").resolve()
+            timestamp = time.strftime("%Y%m%d_%H%M%S")
+            ckpt_path = (eval_ckpt_dir / f"checkpoint-{iteration}-{timestamp}.pth").resolve()
             eval_dir = eval_ckpt_dir / eval_name
         
             if dist.is_main_process():
@@ -82,6 +86,45 @@ def launch_evals(
 
                 logger.info(f"Launched eval {eval_name}")
             torch.cuda.synchronize()
+
+def build_val_dataloader(cfg):
+    """构建验证集数据加载器 (把 config 里所有数据集切到 SPLIT=val)."""
+    val_datasets = []
+    for ds_str in cfg.data.datasets:
+        parts = ds_str.split(":")
+        new_parts = [p for p in parts if not p.upper().startswith("SPLIT")]
+        new_parts.append("SPLIT=val")
+        val_datasets.append(":".join(new_parts))
+    image_aug = DataAugmentationMAE(img_size=cfg.train.img_size)
+    return build_dynamic_dataloader(
+        datasets=val_datasets,
+        common_config=cfg.data.common_config,
+        image_aug=image_aug,
+        num_workers=cfg.train.get("eval_val_workers", 4),
+        shuffle=False,
+        pin_memory=False,
+        max_img_per_gpu=cfg.data.max_img_per_gpu,
+    )
+
+
+def evaluate_val(model, cfg, val_loader, num_batches):
+    """在验证集上计算平均掩码重建 loss (只在主进程调用).
+
+    返回: 平均 val loss (float)
+    """
+    model.eval()
+    losses = []
+    with torch.no_grad():
+        for i, batch in enumerate(val_loader):
+            if i >= num_batches:
+                break
+            samples = batch["images"].to("cuda", non_blocking=True)
+            with torch.amp.autocast('cuda', dtype=dtype_dict[cfg.dtype]):
+                loss, _, _ = model(samples, mask_ratio=cfg.loss.mask_ratio)
+            losses.append(loss.item())
+    model.train()
+    return float(np.mean(losses))
+
 
 def do_train(cfg, args, model):
 
@@ -122,7 +165,7 @@ def do_train(cfg, args, model):
     loss_scaler = misc.NativeScalerWithGradNormCount()
 
     if cfg.checkpoint:
-        start_iter = misc.load_model(args=args, model_without_ddp=model_without_ddp, optimizer=optimizer, loss_scaler=loss_scaler)
+        start_iter = misc.load_model(cfg=cfg, model_without_ddp=model_without_ddp, optimizer=optimizer, loss_scaler=loss_scaler)
     else:
         start_iter = 0
 
@@ -186,9 +229,28 @@ def do_train(cfg, args, model):
 
         if step % cfg.train.checkpoint_steps == 0 and step != 0:
             timestamp = time.strftime("%Y%m%d_%H%M%S")
-            checkpoint_path = args.output_dir + f"/checkpoint-step{step}-{timestamp}.pth"
+            model_name = cfg.model.name
+
+            # 每次保存 checkpoint 时, 在验证集上评估一次重建 loss
+            val_loss = float('nan')
+            if dist.is_main_process():
+                val_loader = build_val_dataloader(cfg)
+                num_val_batches = cfg.train.get("eval_val_batches", 100)
+                val_loss = evaluate_val(model_without_ddp, cfg, val_loader, num_val_batches)
+                print(f"[step {step}] val loss: {val_loss:.4f}")
+                wandb.log({"val_loss": val_loss, "val_step": step})
+                # 关闭 dataloader 的 worker 进程 (避免占用 CPU/内存)
+                try:
+                    if val_loader._iterator is not None:
+                        val_loader._iterator._shutdown_workers()
+                except Exception:
+                    pass
+            if dist.get_global_size() > 1:
+                dist.barrier()  # 等主进程评估完再继续训练
+
+            checkpoint_path = args.output_dir + f"/checkpoint-{model_name}-{timestamp}-step{step}-loss{loss_value:.4f}-valloss{val_loss:.4f}.pth"
             misc.save_model(step=step, model=model, model_without_ddp=model_without_ddp, optimizer=optimizer, loss_scaler=loss_scaler, checkpoint_path=checkpoint_path)
-            # Also save as latest for easy resume
+            # Also save as latest for easy resume (fixed name)
             misc.save_model(step=step, model=model, model_without_ddp=model_without_ddp, optimizer=optimizer, loss_scaler=loss_scaler, checkpoint_path=args.output_dir + "/checkpoint-last.pth")
 
         launch_evals(cfg, 
@@ -204,8 +266,20 @@ def do_train(cfg, args, model):
 def main(args):
     cfg = setup(args)
 
+    if args.resume_from:
+        cfg.checkpoint = args.resume_from
+
     wandb_mode = "online" if args.track_wandb and dist.is_main_process() else "disabled"
-    wandb.init(name=args.name or cfg.model.name, project="mum", entity="3222703726-huazhong-university-of-science-and-technology", config=cfg, reinit=False, mode = wandb_mode)
+    wandb.init(
+        name=args.name or cfg.model.name,
+        project="mum",
+        entity="3222703726-huazhong-university-of-science-and-technology",
+        config=cfg,
+        reinit=False,
+        mode=wandb_mode,
+        id=args.wandb_resume_id,
+        resume="allow" if args.wandb_resume_id else None,
+    )
     cudnn.benchmark = True
     torch.backends.cuda.matmul.allow_tf32 = True  # PyTorch 1.12 sets this to False by default
         

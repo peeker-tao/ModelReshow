@@ -1,0 +1,97 @@
+# DeFusion++ Stage-2 (MCUD) demo training — MuM 风格
+# 每步同时跑 CUD 分支(COCO) + MCUD 分支(MSRS)，共 20000 step。
+# wandb log / warmup+cosine / 每 5000 步存 checkpoint + 测试集验证。
+# Run:  python selftrain_multimodal.py -opt option/train/COCO_MSRS_MCUD_demo.yaml
+name: COCO_MSRS_MCUD_demo
+model: MUCMTransformer
+track_wandb: true
+wandb_project: DeFusion-plusplus
+wandb_entity: 3222703726-huazhong-university-of-science-and-technology
+use_tb_logger: false
+
+dataset:
+  train:
+    name: train
+    # CUD 分支：单模态 grid-mask 自监督（COCO train2017）
+    noise_dataroot: /data1/Taohy/dataset/COCO
+    noise_trainpairs: data/coco_train2017_train_data.txt
+    train_name: train2017
+    batch_size: 4
+    image_size: 224
+    max_iter: 40
+    iter_size: 1
+    workers: 2
+
+    # MCUD 分支：成对 IR/VI（MSRS train）
+    irvis_dataroot: /data1/Taohy/dataset/MSRS
+    infrare_name: train/ir
+    visible_name: train/vi
+
+    # 冻结 MAE 教师权重
+    # teacher2 (VI)：ImageNet 预训练 MAE ViT-Base（Facebook 官方）
+    # teacher1 (IR)：FLIR 红外域适应预训练 MAE（ImageNet init + FLIR 200 epoch）
+    teacher1_pth: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/pretrained/mae_flir_vit_base.pth
+    teacher2_pth: /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/pretrained/mae_pretrain_vit_base.pth
+
+  val:
+    name: val
+    # CUD 验证分支：MSRS test/ir 单模态 grid-mask 自监督
+    noise_dataroot: /data1/Taohy/dataset/MSRS
+    noise_trainpairs: data/msrs_test_ir_val_data.txt
+    train_name: test/ir
+    batch_size: 4
+    image_size: 224
+    iter_size: 1
+    max_iter: 40
+    workers: 2
+    val_batches: 50
+
+    # MCUD 验证分支：MSRS test（IR/VI 成对）
+    irvis_dataroot: /data1/Taohy/dataset/MSRS
+    infrare_name: test/ir
+    visible_name: test/vi
+
+network_G:
+  in_nc: 3
+  block_num: 2
+  init: xavier
+  hidden_channels: 128
+  K: 4
+
+path:
+  pretrain_model_G: ~
+  strict_load: true
+  resume_state: ~
+
+logger:
+  print_freq: 20
+  save_checkpoint_freq: 5000
+
+train:
+  lr: !!float 1e-4
+  min_lr: 0.0
+  warmup_steps: 2000
+  steps: 20000
+  checkpoint_steps: 5000
+  log_steps: 20
+  beta1: 0.9
+  beta2: 0.999
+  max_grad_norm: 20
+  manual_seed: 1
+
+  # ============ loss 加权（可自行修改） ============
+  # 两大分支总体权重：total_loss = cud_loss_weight * CUD_total + mcud_loss_weight * MCUD_total
+  # CUD 分支总权重（相对 MCUD 分支）
+  cud_loss_weight: 1.0
+  # MCUD 分支总权重（默认 8，使 CUD:MCUD ≈ 1.9:1，CUD 多一点）
+  mcud_loss_weight: 8.0
+  # CUD 分支内部各项权重（SelfTrainLoss），基于 COCO 实测量级均衡：
+  #   common≈0.038 upper≈0.038 lower≈0.037 recon≈0.072 fusion_l1≈0.024 fusion_ssim≈0.101
+  # 每项加权后目标 ≈ 1.0。
+  loss_weights:
+    common: 26.0        # 共享区域重建 L1
+    upper: 26.0         # IR 独有区域重建 L1
+    lower: 26.0         # VI 独有区域重建 L1
+    recon: 14.0         # 双图整体重建 L1（rec1+rec2，原始值约为单项 2 倍）
+    fusion_l1: 25.0     # 融合图 L1（对照原图 gt_img1）
+    fusion_ssim: 4.0    # 融合图 SSIM（波动大，权重取小）

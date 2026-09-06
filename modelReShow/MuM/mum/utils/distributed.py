@@ -66,6 +66,15 @@ def is_main_process() -> bool:
     return get_global_rank() == 0
 
 
+def barrier() -> None:
+    """
+    Synchronizes all processes in the process group.
+    No-op when distributed is not initialized.
+    """
+    if is_enabled():
+        dist.barrier()
+
+
 def _restrict_print_to_main_process() -> None:
     """
     This function disables printing when not in the main process

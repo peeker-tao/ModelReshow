@@ -1,0 +1,30 @@
+# Inference with the Stage-1 (CUD) small-experiment weights.
+# Run:  python test.py -opt option/test/MSRS_cud_trained.yaml
+name: VisibleInfrareFusion_MSRS_cud_trained
+use_tb_logger: false
+model: FusionModel
+
+dataset:
+  test:
+    name: MSRS_test
+    dataroot: /data1/Taohy/dataset/MSRS
+    datashell: IVF
+    infrare_name: test/ir
+    visible_name: test/vi
+    workers: 1
+
+network_G:
+  in_nc: 3
+  block_num: 2
+  init: xavier
+  hidden_channels: 128
+  K: 4
+
+path:
+  pretrain_model_G: ~
+  resume_state: pretrained/msrs_cud_demo.pth
+  strict_load: true
+
+logger:
+  print_freq: 10
+  save_checkpoint_freq: 20

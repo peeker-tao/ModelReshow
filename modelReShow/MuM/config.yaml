@@ -1,91 +1,116 @@
+# ============================================================
+# MuM 训练配置 (TravelUAV 数据集)
+# 用法: python mum/train.py --config-file config.yaml --name traveluav
+# ============================================================
+
+# 恢复训练: 填 checkpoint 文件路径(如 checkpoint-last.pth); null 表示从头训练
 checkpoint: null
+
+# 训练精度: bf16(推荐,省显存) / fp16 / fp32
 dtype: bf16
+
 train:
-  steps: 60000
-  warmup_steps: 4000
-  checkpoint_steps: 2000
-  visualization_steps: 10000
-  img_size: 224
-  lr: 0.01
-  blr: 0.00015
-  min_lr: 0.0
-  seed: 1337
-  weight_decay: 0.05
-  optimizer: adamw
-  output_dir: /data/data_taohy/modelReShow/MuM
-  clip_grad_norm: 1.0
+  steps: 60000 # 总训练步数 (iteration 数量)
+  warmup_steps: 2000 # 学习率预热步数 (前 N 步 lr 从 0 线性升到目标值)
+  checkpoint_steps: 6000 # 每多少步保存一次权重 (越小存得越频繁, 占磁盘越多)
+  eval_val_batches: 100 # 每次保存时在验证集评估多少个 batch (每个 batch 16 样本, 100个≈1600样本; 越大越准越慢)
+  visualization_steps: 10000 # 可视化/日志间隔步数
+  img_size: 256 # 输入图像分辨率 (原始数据就是 256×256, 信息无损)
+  lr: null # 手动指定学习率; null 时用 blr 自动缩放
+  blr: 0.00006 # 基础学习率 (实际 lr = blr × 总batch / 256; 4卡batch≈120时 lr≈2.8e-5, 与原单卡训练一致)
+  min_lr: 0.0 # 训练末期 lr 衰减到的最小值 (cosine 调度)
+  seed: 1337 # 随机种子 (保证可复现)
+  weight_decay: 0.1 # 权重衰减 (AdamW 的 L2 正则强度, 防过拟合)
+  optimizer: adamw # 优化器 (adamw 标准)
+  output_dir: /data1/Taohy/ModelReshow/modelReShow/MuM/checkpoints_traveluav_256 # 权重保存目录 (256分辨率, 不覆盖旧 checkpoint)
+  clip_grad_norm: 1.0 # 梯度裁剪阈值 (防梯度爆炸)
+
 loss:
-  mask_ratio: 0.75
+  mask_ratio: 0.75 # 掩码比例: 每张图随机遮住 75% 的 patch 让模型重建
+
 model:
-  name: vit_small
-  patch_embed: conv
-  patch_size: 16
-  norm_pix_loss: true
-  drop_path_rate: 0.0
-  layerscale: null
-  ffn_layer: mlp
-  ffn_ratio: 4.0
-  qkv_bias: true
-  proj_bias: true
-  ffn_bias: true
-  norm_layer: layernormbf16
-  n_storage_tokens: 0
-  in_chans: 3
-  pos_embed_type: rope
-  pos_embed_rope_base: 100.0
-  pos_embed_rope_min_period: null
-  pos_embed_rope_max_period: null
-  pos_embed_rope_normalize_coords: separate
-  pos_embed_rope_shift_coords: null
-  pos_embed_rope_jitter_coords: null
-  pos_embed_rope_rescale_coords: null
-  pos_embed_rope_dtype: ${dtype}
-  fp8_enabled: false
-  fp8_filter: blocks
+  name: vit_large # 模型规模: vit_small / vit_base / vit_large (越大越慢越准)
+  patch_embed: conv # patch 嵌入方式: conv(卷积) / linear(线性)
+  patch_size: 16 # patch 大小: 256/16 = 16x16 = 256 个 patch
+  norm_pix_loss: true # 是否按像素归一化计算重建损失 (MAE 标准做法)
+  drop_path_rate: 0.0 # DropPath 概率 (随机深度, 0=关闭, 越大正则越强)
+  layerscale: null # LayerScale 系数 (null=关闭; 数值如 1e-5 时启用)
+  ffn_layer: mlp # FFN 类型: mlp / swiglu
+  ffn_ratio: 4.0 # FFN 隐藏层扩张倍数 (hidden = dim × 4)
+  qkv_bias: true # attention 的 Q/K/V 投影是否加 bias
+  proj_bias: true # attention 输出投影是否加 bias
+  ffn_bias: true # FFN 是否加 bias
+  norm_layer: layernormbf16 # 归一化层: layernormbf16(bf16 版 LayerNorm, 省显存) / layernorm
+  n_storage_tokens: 0 # 额外存储 token 数 (0=不使用)
+  in_chans: 3 # 输入通道数 (RGB=3)
+  pos_embed_type: rope # 位置编码: rope(RoPE 旋转位置编码) / learnable(可学习) / none
+  pos_embed_rope_base: 100.0 # RoPE 基础频率
+  pos_embed_rope_min_period: null # RoPE 最小周期 (null=默认)
+  pos_embed_rope_max_period: null # RoPE 最大周期 (null=默认)
+  pos_embed_rope_normalize_coords: separate # 坐标归一化方式: separate(行列独立) / combined
+  pos_embed_rope_shift_coords: null # 坐标平移 (null=不移动)
+  pos_embed_rope_jitter_coords: null # 坐标抖动 (训练时扰动位置, 增强泛化; null=关闭)
+  pos_embed_rope_rescale_coords: null # 坐标缩放 (null=不缩放)
+  pos_embed_rope_dtype: ${dtype} # RoPE 计算的精度 (跟随 dtype: bf16)
+  fp8_enabled: false # 是否启用 FP8 训练 (需 H100 等支持; 4090 不支持)
+  fp8_filter: blocks # FP8 作用范围: blocks(仅 Transformer 块) / all
 data:
+  # 数据集列表: "类名:参数=值" 格式, 可写多个(自动混合采样)
+  # 可选参数:
+  #   SPLIT=train|val    场景拆分 (默认 train)
+  #   SPLIT_RATIO=0.95   train 占比 (默认 0.95, 其余 5% 给 val)
+  #   SPLIT_SEED=42      拆分随机种子 (固定后 train/val 不重叠且可复现)
+  # 验证集用法: 把 SPLIT 改成 val 即可单独实例化 (如写个 val 评估脚本):
+  #   TravelUAVDataset:DATA_DIR=...:SPLIT=val:SPLIT_RATIO=0.95
   datasets:
-  - BlendedMVSDataset:DATA_DIR=/data/data_taohy/datasets/BlendedMVS
+    - TravelUAVDataset:DATA_DIR=/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset:SPLIT=train:SPLIT_RATIO=0.95
   common_config:
+    # 图像宽高比采样范围 [min, max]; 训练时随机取一个比例做 resize
+    # 当前 [1.0, 1.0] = 固定正方形
     aspects:
-    - 0.5
-    - 1.0
+      - 1.0
+      - 1.0
+    # 每个样本取几帧 [min, max]; 训练时随机取帧数
+    # 当前 [3, 3] = 固定 3 帧 (TravelUAV 锚点±5帧取3张)
     img_nums:
-    - 3
-    - 5
-    img_size: ${train.img_size}
-    patch_size: ${model.patch_size}
-    rescale: true
-    rescale_aug: true
-    landscape_check: true
-    debug: false
-    training: true
-    inside_random: true
-    aug_scale:
-    - 0.8
-    - 1.2
-    fix_img_num: false
-    fix_aspect_ratio: false
-  num_workers: 8
-  shuffle: true
-  pin_memory: true
-  drop_last: true
-  max_img_per_gpu: 8
+      - 3
+      - 3
+    img_size: ${train.img_size} # 引用 train.img_size (256)
+    patch_size: ${model.patch_size} # 引用 model.patch_size (16)
+    rescale: true # 是否随机缩放图像 (数据增强)
+    rescale_aug: true # 缩放增强 (结合 aug_scale)
+    landscape_check: true # 是否检查横向图像 (过滤过窄/过高的图)
+    debug: false # 调试模式 (打印更多信息, 训练时保持 false)
+    training: true # 训练模式 (开数据增强; false 则关增强用于测试)
+    inside_random: true # 随机裁剪时是否保证裁剪区域在图像内部
+    aug_scale: # 随机缩放范围 [min, max] (0.8~1.2 倍)
+      - 0.8
+      - 1.2
+    fix_img_num: true # 固定帧数 (true=严格用 img_nums, false=范围内随机)
+    fix_aspect_ratio: true # 固定宽高比 (true=严格用 aspects, false=范围内随机)
+  num_workers: 8 # 数据加载进程数 (越大 CPU 预处理越快, 别超过 CPU 核数)
+  shuffle: true # 是否打乱数据顺序
+  pin_memory: true # 锁页内存 (加速 GPU 传输, 建议 true)
+  drop_last: true # 最后一个不完整 batch 是否丢弃
+  max_img_per_gpu: 32 # 每卡"图像预算"= 实际 batch × 帧数; 3帧时 batch = 32/3 ≈ 10 (256分辨率 patch 多31%, 从48降到32)
   imagenet:
-    prob: 0.0
-    dataset_path: ImageNet:split=TRAIN:root=data/imagenet:extra=./extra
+    prob: 0.0 # 混合 ImageNet 数据的概率 (0.0=纯数据集; 0.2=20% 用 ImageNet)
+    dataset_path: ImageNet:split=TRAIN:root=data/imagenet:extra=./extra # ImageNet 路径(prob=0 时不使用)
+
 evals:
+  # 训练中定期评估 (本地无 megadepth 数据, 仅保存权重不真正评估)
   fast:
-    period: 25000
-    final: true
+    period: 25000 # 每 25000 步触发一次
+    final: true # 训练结束时是否触发
     model_setup_script: model_loader.py
     eval_config:
       matchbench:
         file: eval_matchbench.py
         dataset: megadepth
         dataset_path: data/megadepth
-        matcher: knn
+        matcher: knn # 匹配方式: knn(快速) / linear(线性,更准)
   slow:
-    period: 50000
+    period: 50000 # 每 50000 步触发一次
     final: true
     model_setup_script: model_loader.py
     eval_config:
@@ -94,5 +119,6 @@ evals:
         dataset: megadepth
         dataset_path: data/megadepth
         matcher: linear
+
 launcher:
-  partition: alvis
+  partition: alvis # 集群分区名 (单机训练可忽略)

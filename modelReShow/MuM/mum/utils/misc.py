@@ -297,7 +297,7 @@ def save_model(step, model, model_without_ddp, optimizer, loss_scaler, checkpoin
 def load_model(cfg, model_without_ddp, optimizer, loss_scaler):
     checkpoint = torch.load(cfg.checkpoint, map_location='cpu', weights_only=False)
     model_without_ddp.load_state_dict(checkpoint['model'])
-    print("Resume checkpoint %s" % cfg.checkpoint.resume)
+    print("Resume checkpoint %s" % cfg.checkpoint)
     if 'optimizer' in checkpoint and 'step' in checkpoint:
         optimizer.load_state_dict(checkpoint['optimizer'])
         start_iter = checkpoint['step'] + 1

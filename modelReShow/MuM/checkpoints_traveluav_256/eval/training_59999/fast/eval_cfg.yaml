@@ -1,0 +1,5 @@
+matchbench:
+  file: eval_matchbench.py
+  dataset: megadepth
+  dataset_path: data/megadepth
+  matcher: knn

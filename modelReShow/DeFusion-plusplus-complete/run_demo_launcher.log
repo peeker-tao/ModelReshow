@@ -1,0 +1,5 @@
+nohup: ignoring input
+使用 GPU: 1
+训练已后台启动，PID: 2497568
+日志文件: run_demo_20260905_122808.log
+查看日志: tail -f /data1/Taohy/ModelReshow/modelReShow/DeFusion-plusplus-complete/run_demo_20260905_122808.log

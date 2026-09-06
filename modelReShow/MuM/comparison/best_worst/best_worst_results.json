@@ -1,0 +1,74 @@
+{
+  "config": {
+    "ckpt": "/data1/Taohy/ModelReshow/modelReShow/MuM/checkpoints_traveluav/checkpoint-last.pth",
+    "mask_ratio": 0.75,
+    "stride": 3,
+    "max_scenes": null
+  },
+  "total_sequences": 13037,
+  "total_time_s": 493.20116996765137,
+  "best": [
+    {
+      "rank": 1,
+      "loss": 0.0016251805936917663,
+      "scene": "TravelUAV_Train_15086",
+      "images": [
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_15086/00070.png",
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_15086/00071.png",
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_15086/00072.png"
+      ]
+    },
+    {
+      "rank": 2,
+      "loss": 0.0017972037894651294,
+      "scene": "TravelUAV_Train_15086",
+      "images": [
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_15086/00064.png",
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_15086/00065.png",
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_15086/00066.png"
+      ]
+    },
+    {
+      "rank": 3,
+      "loss": 0.0018330123275518417,
+      "scene": "TravelUAV_Train_15086",
+      "images": [
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_15086/00058.png",
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_15086/00059.png",
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_15086/00060.png"
+      ]
+    }
+  ],
+  "worst": [
+    {
+      "rank": 1,
+      "loss": 0.7567706108093262,
+      "scene": "TravelUAV_Train_13571",
+      "images": [
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_13571/00049.png",
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_13571/00050.png",
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_13571/00051.png"
+      ]
+    },
+    {
+      "rank": 2,
+      "loss": 0.7631628513336182,
+      "scene": "TravelUAV_Train_13571",
+      "images": [
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_13571/00043.png",
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_13571/00044.png",
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_13571/00045.png"
+      ]
+    },
+    {
+      "rank": 3,
+      "loss": 0.797726035118103,
+      "scene": "TravelUAV_Train_13571",
+      "images": [
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_13571/00046.png",
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_13571/00047.png",
+        "/data2/student1_ly/datasets/OpenUAV-QA/TravelUAV_dataset/TravelUAV_Train_13571/00048.png"
+      ]
+    }
+  ]
+}

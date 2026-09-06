@@ -1,0 +1,80 @@
+# ============================================================
+# DeFusion++ 两阶段训练 —— 阶段 1：纯 CUD（单模态 grid-mask 自监督）
+# 目标：让模型先学会「分解 common/upper/lower + 融合重建」能力
+# 数据：COCO train2017（50000 张，单模态）
+# 总步数：50000 步 ≈ COCO 4 epoch（batch=4 → 12500 步/epoch）
+# 特点：mode='cud' → 不创建冻结 MAE 教师（省 ~700MB 显存）
+# 产物：experiments/COCO_CUD_phase1/models/checkpoint-last.pth（供阶段 2 init_from）
+# Run:  python selftrain_multimodal.py -opt option/train/COCO_CUD_phase1.yaml
+# ============================================================
+name: COCO_CUD_phase1
+model: MUCMTransformer
+track_wandb: true
+wandb_project: DeFusion-plusplus
+wandb_entity: 3222703726-huazhong-university-of-science-and-technology
+use_tb_logger: false
+
+dataset:
+  train:
+    name: train
+    # CUD 分支数据：COCO train2017 单模态 grid-mask 自监督
+    noise_dataroot: /data1/Taohy/dataset/COCO
+    noise_trainpairs: data/coco_train2017_train_data.txt   # 不存在时会自动扫描目录生成
+    train_name: train2017
+    batch_size: 4                 # 单卡 batch（约 12500 步/epoch）
+    image_size: 224
+    max_iter: 40
+    iter_size: 1
+    workers: 2
+    # 注意：纯 CUD 阶段不需要 teacher1_pth / teacher2_pth
+
+  val:
+    name: val
+    # CUD 验证：MSRS test/ir 单模态 grid-mask 自监督
+    noise_dataroot: /data1/Taohy/dataset/MSRS
+    noise_trainpairs: data/msrs_test_ir_val_data.txt
+    train_name: test/ir
+    batch_size: 4
+    image_size: 224
+    iter_size: 1
+    max_iter: 40
+    workers: 2
+    val_batches: 50              # 验证用多少 batch（50×4=200 张）
+
+path:
+  pretrain_model_G: ~
+  strict_load: true
+  resume_state: ~               # 断点续训填 checkpoint-last.pth 绝对路径
+  init_from: ~                  # 阶段 1 用不到（冷启动源）
+
+logger:
+  print_freq: 20
+  save_checkpoint_freq: 5000
+
+train:
+  # ============ 训练模式 ============
+  mode: cud                     # 'cud' = 纯 CUD 阶段1；'mcud' = 联合阶段2
+
+  lr: !!float 1e-4              # 峰值学习率（AdamW）
+  min_lr: 0.0                   # cosine 衰减下界
+  warmup_steps: 2000            # 线性 warmup 步数
+  steps: 50000                  # 总步数（50000 ≈ COCO 4 epoch，约半天~1天）
+  checkpoint_steps: 5000        # 每多少步存一次 checkpoint + 验证
+  log_steps: 20                 # 每多少步打一条 MuM 风格训练日志
+  beta1: 0.9                    # AdamW beta1
+  beta2: 0.999                  # AdamW beta2
+  max_grad_norm: 20             # 梯度裁剪
+  manual_seed: 1
+
+  # ============ loss 加权（可自行修改） ============
+  # 纯 CUD 阶段只有 CUD 分支：total_loss = cud_loss_weight * CUD_total
+  cud_loss_weight: 1.0
+  mcud_loss_weight: 8.0         # 阶段 1 不使用（联合阶段才生效）
+  # CUD 内部各项权重（SelfTrainLoss），基于 COCO 实测量级均衡（各项加权后 ≈1.0）
+  loss_weights:
+    common: 26.0        # 共享区域重建 L1
+    upper: 26.0         # IR 独有区域重建 L1
+    lower: 26.0         # VI 独有区域重建 L1
+    recon: 14.0         # 双图整体重建 L1（rec1+rec2，原始值约为单项 2 倍）
+    fusion_l1: 25.0     # 融合图 L1（对照原图 gt_img1）
+    fusion_ssim: 4.0    # 融合图 SSIM（波动大，权重取小）
